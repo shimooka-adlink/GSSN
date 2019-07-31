@@ -1,0 +1,316 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V7.80.4.12462/W32 for ARM       17/May/2019  13:32:01
+# Copyright 1999-2017 IAR Systems AB.
+#
+#    Cpu mode     =  thumb
+#    Endian       =  little
+#    Source file  =  C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\hal\ctrl_GPIO.c
+#    Command line =  
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\hal\ctrl_GPIO.c -D
+#        __TARGET_ARCH_7_M -D S1C31W74 -D GNSS_GW_SIDE_B -lCN
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\List
+#        -lA
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\List
+#        --diag_suppress Pe177,Pe111,Pa082 -o
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj
+#        --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa
+#        --no_clustering --no_scheduling --debug --endian=little
+#        --cpu=Cortex-M0+ -e --fpu=None --dlib_config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench
+#        7.5\arm\INC\c\DLib_Config_Normal.h" -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\ -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\
+#        -I "C:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        7.5\arm\CMSIS\Include\" -I "C:\Program Files (x86)\IAR
+#        Systems\Embedded Workbench 7.5\arm\inc\Epson\" -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\CMSIS\Device\S1C31W74\Include\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\CMSIS\Driver\Include\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\sePeriphLibrary\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\board\S5U1C31W74T1\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\USBStack\INC\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\include\
+#        -Ol
+#    Locale       =  Japanese_Japan.932
+#    List file    =  
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\List\ctrl_GPIO.lst
+#    Object file  =  
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\ctrl_GPIO.o
+#
+###############################################################################
+
+C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\hal\ctrl_GPIO.c
+      1          
+      2          /**
+      3            ******************************************************************************
+      4            * @file    ctrl_GPIO.c
+      5            * @author  コア
+      6            * @version V1.0
+      7            * @date    2017.10.2
+      8            * @brief   このファイルはGPIOを制御するソフトウェアです。
+      9            ******************************************************************************
+     10            $Id: ctrl_GPIO.c 160 2018-05-16 04:14:16Z y-suyama $
+     11            * @attention
+     12            *
+     13            *****************************************************************************
+     14          */ 
+     15          
+     16          
+     17          #include <string.h>
+     18          #include <stdio.h>
+     19          #include <stdlib.h>
+     20          #include "board.h"
+     21          
+     22          #include "drv_gpio.h"
+     23          #include "ctrl_GPIO.h"
+     24          #include "gnss_gw_common.h"
+     25          
+     26          
+     27          #pragma section = "CTRL_PRG_BLOCK"
+     28          
+     29          
+     30          /************************************************************************/
+     31          /* declaration of structure                                             */
+     32          /************************************************************************/
+     33          
+     34          
+     35          
+     36          //************************************************************************/
+     37          /* definition of variables                                              */
+     38          /************************************************************************/
+     39          
+     40          
+     41          // 出力ポートのID
+
+   \                                 In section .rodata, align 4
+     42          static const sePPORT_Id out_port_tbl[] = {
+   \                     out_port_tbl:
+   \   00000000   0x36 0x3B          DC8 54, 59, 33, 53, 36, 60, 44, 61, 55, 56, 57, 58, 21, 62, 0, 0
+   \              0x21 0x35    
+   \              0x24 0x3C    
+   \              0x2C 0x3D    
+   \              0x37 0x38    
+   \              0x39 0x3A    
+   \              0x15 0x3E    
+   \              0x00 0x00    
+     43          	OUTPORT1,				// OUT_PORT1  : GPS_NRST
+     44          	OUTPORT2,				// OUT_PORT2  : GPS_VDD
+     45          	OUTPORT3,				// OUT_PORT3  : LTE_DTR
+     46          	OUTPORT4,				// OUT_PORT4  : LTE_RST
+     47          	OUTPORT5,				// OUT_PORT5  : LTE_FMODE
+     48          	OUTPORT6,				// OUT_PORT6  : LTE_VDD
+     49          	OUTPORT7,				// OUT_PORT7  : GYRO_CS
+     50          	OUTPORT8,				// OUT_PORT8  : CHARGE_CD
+     51          	OUTPORT9,				// OUT_PORT9  : LED_LTE
+     52          	OUTPORT10,				// OUT_PORT10 : LED_BAT
+     53          	OUTPORT11,				// OUT_PORT11 : LED_POW
+     54          	OUTPORT12,				// OUT_PORT12 : LED_GNS
+     55          	OUTPORT13,				// OUT_PORT13 : LTE_PWR
+     56          	OUTPORT14,				// OUT_PORT14 : 3V3_EN
+     57          };
+     58          
+     59          // 入力ポートのID
+
+   \                                 In section .rodata, align 4
+     60          static const sePPORT_Id in_port_tbl[] = {
+   \                     in_port_tbl:
+   \   00000000   0x20 0x28          DC8 32, 40, 41, 42, 4, 48, 49, 50, 51, 46, 61, 72, 8, 11, 12, 20, 65, 5
+   \              0x29 0x2A    
+   \              0x04 0x30    
+   \              0x31 0x32    
+   \              0x33 0x2E    
+   \              0x3D 0x48    
+   \              0x08 0x0B    
+   \              0x0C 0x14    
+   \              0x41 0x05    
+   \   00000012   0x00 0x00          DC8 0, 0
+     61          	INPORT1,				// IN_PORT1  : LTE_RI
+     62          	INPORT2,				// IN_PORT2  : PRESS_INT1
+     63          	INPORT3,				// IN_PORT3  : PRESS_INT2
+     64          	INPORT4,				// IN_PORT4  : GYRO_INT1
+     65          	INPORT5,				// IN_PORT5  : DC_DET
+     66          	INPORT6,				// IN_PORT6  : SWITCH_DIR
+     67          	INPORT7,				// IN_PORT7  : SWITCH_BAT
+     68          	INPORT8,				// IN_PORT8  : SWITCH_EXT
+     69          	INPORT9,				// IN_PORT9  : SWITCH_OFF
+     70          	INPORT10,				// IN_PORT10 : USB_OTG_ID
+     71          	INPORT11,				// IN_PORT11 : CHARGE_CD
+     72          	INPORT12,				// IN_PORT12 : USB VBUS
+     73          	INPORT13,				// IN_PORT13 : GNSS_GPIO0
+     74          	INPORT14,				// IN_PORT14 : C_STAT
+     75          	INPORT15,				// IN_PORT15 : C_INT
+     76          	INPORT16,				// IN_PORT16 : LTE_STATUS
+     77          	INPORT17,				// IN_PORT17 : 3.3V_MCU
+     78          	INPORT18,				// IN_PORT18 : VBUS_DET
+     79          };
+     80          
+     81          /********************************************************************/
+     82          /*	static関数                                                      */
+     83          /********************************************************************/
+     84          
+     85          
+     86          
+     87          /********************************************************************/
+     88          /*	extern関数                                                      */
+     89          /********************************************************************/
+     90          
+     91          
+     92          /********************************************************************/
+     93          /*!
+     94           * \name	ctrl_GPIO_init
+     95           * \brief	USB初期化処理
+     96           * \param	なし
+     97           * \return  なし
+     98           * \note	起動時に、呼ばれること
+     99           */
+    100          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    101          void ctrl_GPIO_init(void)
+    102          {
+   \                     ctrl_GPIO_init: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    103          	// GPIO Driver初期化処理
+    104          	gpio_init();
+   \   00000002   0x.... 0x....      BL       gpio_init
+    105          
+    106          }
+   \   00000006   0xBD01             POP      {R0,PC}          ;; return
+    107          
+    108          
+    109          /********************************************************************/
+    110          /*!
+    111           * \name	ctrl_get_port
+    112           * \brief	指定入力ポートの状態を取得する。
+    113           * \param	port
+    114           * \return  PORTの状態(1:ON, 0:OFF)
+    115           * \note	必要時、呼ばれること
+    116           */
+    117          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    118          uint8_t ctrl_get_port(int32_t port)
+    119          {
+   \                     ctrl_get_port: (+1)
+   \   00000000   0xB510             PUSH     {R4,LR}
+    120          	uint8_t		inport=0;
+   \   00000002   0x2400             MOVS     R4,#+0
+    121          	int32_t		data;
+    122          
+    123          	data = gpio_get_port(in_port_tbl[port]);
+   \   00000004   0x....             LDR      R1,??DataTable2
+   \   00000006   0x5C08             LDRB     R0,[R1, R0]
+   \   00000008   0x.... 0x....      BL       gpio_get_port
+    124          	if (data != 0) {
+   \   0000000C   0x2800             CMP      R0,#+0
+   \   0000000E   0xD000             BEQ      ??ctrl_get_port_0
+    125          		inport = 0x01;
+   \   00000010   0x2401             MOVS     R4,#+1
+    126          	}
+    127          
+    128          	return inport;
+   \                     ??ctrl_get_port_0: (+1)
+   \   00000012   0x0020             MOVS     R0,R4
+   \   00000014   0xB2C0             UXTB     R0,R0
+   \   00000016   0xBD10             POP      {R4,PC}          ;; return
+    129          }
+    130          
+    131          
+    132          /********************************************************************/
+    133          /*!
+    134           * \name	ctrl_set_port_high
+    135           * \brief	指定ポートにHighを出力する
+    136           * \param	port
+    137           * \return  
+    138           * \note	必要時、呼ばれること
+    139           */
+    140          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    141          void ctrl_set_port_high(int32_t port)
+    142          {
+   \                     ctrl_set_port_high: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    143          	gpio_set_port(out_port_tbl[port], 1);
+   \   00000002   0x2101             MOVS     R1,#+1
+   \   00000004   0x....             LDR      R2,??DataTable2_1
+   \   00000006   0x5C10             LDRB     R0,[R2, R0]
+   \   00000008   0x.... 0x....      BL       gpio_set_port
+    144          }
+   \   0000000C   0xBD01             POP      {R0,PC}          ;; return
+    145          
+    146          
+    147          /********************************************************************/
+    148          /*!
+    149           * \name	ctrl_set_port_low
+    150           * \brief	指定ポートにlowを出力する
+    151           * \param	port
+    152           * \return  
+    153           * \note	必要時、呼ばれること
+    154           */
+    155          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    156          void ctrl_set_port_low(int32_t port)
+    157          {
+   \                     ctrl_set_port_low: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    158          	gpio_set_port(out_port_tbl[port], 0);
+   \   00000002   0x2100             MOVS     R1,#+0
+   \   00000004   0x....             LDR      R2,??DataTable2_1
+   \   00000006   0x5C10             LDRB     R0,[R2, R0]
+   \   00000008   0x.... 0x....      BL       gpio_set_port
+    159          }
+   \   0000000C   0xBD01             POP      {R0,PC}          ;; return
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable2:
+   \   00000000   0x........         DC32     in_port_tbl
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable2_1:
+   \   00000000   0x........         DC32     out_port_tbl
+    160          
+    161          
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       8   ctrl_GPIO_init
+         8   -> gpio_init
+       8   ctrl_get_port
+         8   -> gpio_get_port
+       8   ctrl_set_port_high
+         8   -> gpio_set_port
+       8   ctrl_set_port_low
+         8   -> gpio_set_port
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable2
+       4  ??DataTable2_1
+       8  ctrl_GPIO_init
+      24  ctrl_get_port
+      14  ctrl_set_port_high
+      14  ctrl_set_port_low
+      20  in_port_tbl
+      16  out_port_tbl
+
+ 
+ 36 bytes in section .rodata
+ 68 bytes in section .text
+ 
+ 68 bytes of CODE  memory
+ 36 bytes of CONST memory
+
+Errors: none
+Warnings: none

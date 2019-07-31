@@ -1,0 +1,394 @@
+###############################################################################
+#                                                                             #
+#     IAR Assembler V7.80.4.12462/W32 for ARM 21/May/2019  17:00:53           #
+#     Copyright 1999-2017 IAR Systems AB.                                     #
+#                                                                             #
+#           Source file   =  C:\GNSS\Software\rJ105\CMSIS\Device\S1C31W74\Source\IAR\startup_S1C31W74.s#
+#           List file     =  C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\List\startup_S1C31W74.lst#
+#           Object file   =  C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\Obj\startup_S1C31W74.o#
+#           Command line  =  C:\GNSS\Software\rJ105\CMSIS\Device\S1C31W74\Source\IAR\startup_S1C31W74.s #
+#                            -OC:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\Obj #
+#                            -s+ -M<> -w+ -r                                  #
+#                            -LC:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\List #
+#                            -cAO -i -t8 --cpu Cortex-M0+ --fpu None          #
+#                                                                             #
+###############################################################################
+
+    1                           ;/********************************************
+                                ******************************//**
+    2                           ; * @file     startup_C31W74.s
+    3                           ; * @brief    CMSIS Cortex-M0P Core Device
+                                 Startup File for
+    4                           ; *           Device C31W74
+    5                           ; * @version V1.0
+    6                           ; * @date     21-November-2015
+    7                           ; *
+    8                           ; * @note
+    9                           ; *
+   10                           ; ********************************************
+                                **********************************/
+   11                           ;/* Copyright (c) 2012 ARM LIMITED
+   12                           ;
+   13                           ;   All rights reserved.
+   14                           ;   Redistribution and use in source and
+                                 binary forms, with or without
+   15                           ;   modification, are permitted provided that
+                                 the following conditions are met:
+   16                           ;   - Redistributions of source code must
+                                 retain the above copyright
+   17                           ;     notice, this list of conditions and the
+                                 following disclaimer.
+   18                           ;   - Redistributions in binary form must
+                                 reproduce the above copyright
+   19                           ;     notice, this list of conditions and the
+                                 following disclaimer in the
+   20                           ;     documentation and/or other materials
+                                 provided with the distribution.
+   21                           ;   - Neither the name of ARM nor the names of
+                                 its contributors may be used
+   22                           ;     to endorse or promote products derived
+                                 from this software without
+   23                           ;     specific prior written permission.
+   24                           ;   *
+   25                           ;   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT
+                                 HOLDERS AND CONTRIBUTORS "AS IS"
+   26                           ;   AND ANY EXPRESS OR IMPLIED WARRANTIES,
+                                 INCLUDING, BUT NOT LIMITED TO, THE
+   27                           ;   IMPLIED WARRANTIES OF MERCHANTABILITY AND
+                                 FITNESS FOR A PARTICULAR PURPOSE
+   28                           ;   ARE DISCLAIMED. IN NO EVENT SHALL
+                                 COPYRIGHT HOLDERS AND CONTRIBUTORS BE
+   29                           ;   LIABLE FOR ANY DIRECT, INDIRECT,
+                                 INCIDENTAL, SPECIAL, EXEMPLARY, OR
+   30                           ;   CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+                                 LIMITED TO, PROCUREMENT OF
+   31                           ;   SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+                                 DATA, OR PROFITS; OR BUSINESS
+   32                           ;   INTERRUPTION) HOWEVER CAUSED AND ON ANY
+                                 THEORY OF LIABILITY, WHETHER IN
+   33                           ;   CONTRACT, STRICT LIABILITY, OR TORT
+                                 (INCLUDING NEGLIGENCE OR OTHERWISE)
+   34                           ;   ARISING IN ANY WAY OUT OF THE USE OF THIS
+                                 SOFTWARE, EVEN IF ADVISED OF THE
+   35                           ;   POSSIBILITY OF SUCH DAMAGE.
+   36                           ;   ------------------------------------------
+                                ---------------------------------*/
+   37                           
+   38                           
+   39                           ;
+   40                           ; The modules in this file are included in the
+                                 libraries, and may be replaced
+   41                           ; by any user-defined modules that define the
+                                 PUBLIC symbol _program_start or
+   42                           ; a user defined start symbol.
+   43                           ; To override the cstartup defined in the
+                                 library, simply add your modified
+   44                           ; version to the workbench project.
+   45                           ;
+   46                           ; The vector table is normally located at
+                                 address 0.
+   47                           ; When debugging in RAM, it can be located in
+                                 RAM, aligned to at least 2^6.
+   48                           ; The name "__vector_table" has special
+                                 meaning for C-SPY:
+   49                           ; it is where the SP start value is found, and
+                                 the NVIC vector
+   50                           ; table register (VTOR) is initialized to this
+                                 address if != 0.
+   51                           ;
+   52                           ; Cortex-M version
+   53                           ;
+   54                           
+   55                                   MODULE  ?cstartup
+   56                           
+   57                                   ;; Forward declaration of sections.
+   58                                   SECTION CSTACK:DATA:NOROOT(3)
+   59                           
+   60                                   SECTION .intvec:CODE:NOROOT(2)
+   61                           
+   62                                   EXTERN  __iar_program_start
+   63                                   EXTERN  SystemInit
+   64                                   PUBLIC  __vector_table
+   65                                   PUBLIC  __vector_table_0x1c
+   66                                   PUBLIC  __Vectors
+   67                                   PUBLIC  __Vectors_End
+   68                                   PUBLIC  __Vectors_Size
+   69                           
+   70                                   DATA
+   71                           
+   72                           __vector_table
+   73    00000000 ........              DCD     sfe(CSTACK)
+   74    00000004 ........              DCD     Reset_Handler
+   75                           
+   76    00000008 ........              DCD     NMI_Handler
+   77    0000000C ........              DCD     HardFault_Handler
+   78    00000010 ........              DCD     MemManage_Handler
+   79    00000014 ........              DCD     BusFault_Handler
+   80    00000018 ........              DCD     UsageFault_Handler
+   81                           __vector_table_0x1c
+   82    0000001C 00000000              DCD     0
+   83    00000020 00000000              DCD     0
+   84    00000024 00000000              DCD     0
+   85    00000028 00000000              DCD     0
+   86    0000002C ........              DCD     SVC_Handler
+   87    00000030 ........              DCD     DebugMon_Handler
+   88    00000034 00000000              DCD     0
+   89    00000038 ........              DCD     PendSV_Handler
+   90    0000003C ........              DCD     SysTick_Handler
+   91                           
+   92                                   ; External Interrupts
+   93                           
+   94    00000040 ........              DCD     DMAC_IRQHandler                
+  ;16 
+   95    00000044 ........              DCD     SVD2_0_IRQHandler              
+  ;17 
+   96    00000048 ........              DCD     PORT_IRQHandler                
+  ;18 
+   97    0000004C ........              DCD     CLG_IRQHandler                 
+  ;19 
+   98    00000050 ........              DCD     RTCA_IRQHandler                
+  ;20 
+   99    00000054 ........              DCD     T16_0_IRQHandler               
+  ;21 
+  100    00000058 ........              DCD     UART2_0_IRQHandler             
+  ;22 
+  101    0000005C ........              DCD     T16_1_IRQHandler               
+  ;23 
+  102    00000060 ........              DCD     SPIA_0_IRQHandler              
+  ;24 
+  103    00000064 ........              DCD     I2C_0_IRQHandler               
+  ;25 
+  104    00000068 ........              DCD     T16B_0_IRQHandler              
+  ;26 
+  105    0000006C ........              DCD     T16B_1_IRQHandler              
+  ;27 
+  106    00000070 ........              DCD     UART2_1_IRQHandler             
+  ;28 
+  107    00000074 ........              DCD     T16_2_IRQHandler               
+  ;29 
+  108    00000078 ........              DCD     QSPI_0_IRQHandler              
+  ;30 
+  109    0000007C ........              DCD     I2C_1_IRQHandler               
+  ;31 
+  110    00000080 ........              DCD     REMC2_IRQHandler               
+  ;32 
+  111    00000084 ........              DCD     LCD32B_IRQHandler              
+  ;33 
+  112    00000088 ........              DCD     T16_3_IRQHandler               
+  ;34 
+  113    0000008C ........              DCD     USB_IRQHandler                 
+  ;35 
+  114    00000090 ........              DCD     SVD2_1_IRQHandler              
+  ;36 
+  115    00000094 ........              DCD     SNDA_IRQHandler                
+  ;37
+  116    00000098 ........              DCD     RFC_0_IRQHandler               
+  ;38
+  117                           __Vectors_End
+  118                           
+  119                           __Vectors       EQU   __vector_table
+  120                           __Vectors_Size  EQU   __Vectors_End -
+                                 __Vectors
+  121                           
+  122                           
+  123                           ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                                ;;;;;;
+  124                           ;;
+  125                           ;; Default interrupt handlers.
+  126                           ;;
+  127                                   THUMB
+  128                           
+  129                                   PUBWEAK Reset_Handler
+  130                                 
+  131                                   SECTION .text:CODE:REORDER:NOROOT(2)
+  132                           Reset_Handler
+  133    00000000 0148                  LDR     R0, =SystemInit
+  134    00000002 8047                  BLX     R0
+  135    00000004 0148                  LDR     R0, =__iar_program_start
+  136    00000006 0047                  BX      R0
+  137                           
+  138                                   PUBWEAK NMI_Handler
+  138.1                                  TABLE
+  138.2  00000008 ........              Reference on line 133
+  138.3  0000000C ........              Reference on line 135
+  139                                   SECTION .text:CODE:REORDER:NOROOT(1)
+  140                           NMI_Handler
+  141    00000000 ....                  B NMI_Handler
+  142                           
+  143                                   PUBWEAK HardFault_Handler
+  144                                   SECTION .text:CODE:REORDER:NOROOT(1)
+  145                           HardFault_Handler
+  146    00000000 ....                  B HardFault_Handler
+  147                           
+  148                                   PUBWEAK MemManage_Handler
+  149                                   SECTION .text:CODE:REORDER:NOROOT(1)
+  150                           MemManage_Handler
+  151    00000000 ....                  B MemManage_Handler
+  152                           
+  153                                   PUBWEAK BusFault_Handler
+  154                                   SECTION .text:CODE:REORDER:NOROOT(1)
+  155                           BusFault_Handler
+  156    00000000 ....                  B BusFault_Handler
+  157                           
+  158                                   PUBWEAK UsageFault_Handler
+  159                                   SECTION .text:CODE:REORDER:NOROOT(1)
+  160                           UsageFault_Handler
+  161    00000000 ....                  B UsageFault_Handler
+  162                           
+  163                                   PUBWEAK SVC_Handler
+  164                                   SECTION .text:CODE:REORDER:NOROOT(1)
+  165                           SVC_Handler
+  166    00000000 ....                  B SVC_Handler
+  167                           
+  168                                   PUBWEAK DebugMon_Handler
+  169                                   SECTION .text:CODE:REORDER:NOROOT(1)
+  170                           DebugMon_Handler
+  171    00000000 ....                  B DebugMon_Handler
+  172                           
+  173                                   PUBWEAK PendSV_Handler
+  174                                   SECTION .text:CODE:REORDER:NOROOT(1)
+  175                           PendSV_Handler
+  176    00000000 ....                  B PendSV_Handler
+  177                           
+  178                                   PUBWEAK SysTick_Handler
+  179                                   SECTION .text:CODE:REORDER:NOROOT(1)
+  180                           SysTick_Handler
+  181    00000000 ....                  B SysTick_Handler
+  182                           
+  183                                   PUBWEAK SVD2_0_IRQHandler
+  184                                   SECTION .text:CODE:REORDER:NOROOT(1)
+  185                           SVD2_0_IRQHandler
+  186    00000000 ....                  B SVD2_0_IRQHandler
+  187                           
+  188                                   PUBWEAK PORT_IRQHandler
+  189                                   SECTION .text:CODE:REORDER:NOROOT(1)
+  190                           PORT_IRQHandler
+  191    00000000 ....                  B PORT_IRQHandler
+  192                           
+  193                                   PUBWEAK DMAC_IRQHandler
+  194                                   SECTION .text:CODE:REORDER:NOROOT(1)
+  195                           DMAC_IRQHandler
+  196    00000000 ....                  B DMAC_IRQHandler
+  197                           
+  198                                   PUBWEAK CLG_IRQHandler
+  199                                   SECTION .text:CODE:REORDER:NOROOT(1)
+  200                           CLG_IRQHandler
+  201    00000000 ....                  B CLG_IRQHandler
+  202                           
+  203                                   PUBWEAK RTCA_IRQHandler
+  204                                   SECTION .text:CODE:REORDER:NOROOT(1)
+  205                           RTCA_IRQHandler
+  206    00000000 ....                  B RTCA_IRQHandler
+  207                           
+  208                                   PUBWEAK T16_0_IRQHandler
+  209                                   SECTION .text:CODE:REORDER:NOROOT(1)
+  210                           T16_0_IRQHandler
+  211    00000000 ....                  B T16_0_IRQHandler
+  212                           
+  213                                   PUBWEAK UART2_0_IRQHandler
+  214                                   SECTION .text:CODE:REORDER:NOROOT(1)
+  215                           UART2_0_IRQHandler
+  216    00000000 ....                  B UART2_0_IRQHandler
+  217                           
+  218                                   PUBWEAK T16_1_IRQHandler
+  219                                   SECTION .text:CODE:REORDER:NOROOT(1)
+  220                           T16_1_IRQHandler
+  221    00000000 ....                  B T16_1_IRQHandler
+  222                           
+  223                                   PUBWEAK SPIA_0_IRQHandler
+  224                                   SECTION .text:CODE:REORDER:NOROOT(1)
+  225                           SPIA_0_IRQHandler
+  226    00000000 ....                  B SPIA_0_IRQHandler
+  227                           
+  228                                   PUBWEAK I2C_0_IRQHandler
+  229                                   SECTION .text:CODE:REORDER:NOROOT(1)
+  230                           I2C_0_IRQHandler
+  231    00000000 ....                  B I2C_0_IRQHandler
+  232                           
+  233                                   PUBWEAK T16B_0_IRQHandler
+  234                                   SECTION .text:CODE:REORDER:NOROOT(1)
+  235                           T16B_0_IRQHandler
+  236    00000000 ....                  B T16B_0_IRQHandler
+  237                           
+  238                                   PUBWEAK T16B_1_IRQHandler
+  239                                   SECTION .text:CODE:REORDER:NOROOT(1)
+  240                           T16B_1_IRQHandler
+  241    00000000 ....                  B T16B_1_IRQHandler
+  242                           
+  243                                   PUBWEAK UART2_1_IRQHandler
+  244                                   SECTION .text:CODE:REORDER:NOROOT(1)
+  245                           UART2_1_IRQHandler
+  246    00000000 ....                  B UART2_1_IRQHandler
+  247                           
+  248                                   PUBWEAK T16_2_IRQHandler
+  249                                   SECTION .text:CODE:REORDER:NOROOT(1)
+  250                           T16_2_IRQHandler
+  251    00000000 ....                  B T16_2_IRQHandler
+  252                           
+  253                                   PUBWEAK QSPI_0_IRQHandler
+  254                                   SECTION .text:CODE:REORDER:NOROOT(1)
+  255                           QSPI_0_IRQHandler
+  256    00000000 ....                  B QSPI_0_IRQHandler
+  257                           
+  258                                   PUBWEAK I2C_1_IRQHandler
+  259                                   SECTION .text:CODE:REORDER:NOROOT(1)
+  260                           I2C_1_IRQHandler
+  261    00000000 ....                  B I2C_1_IRQHandler
+  262                           
+  263                                   PUBWEAK REMC2_IRQHandler              
+                                          
+  264                                   SECTION .text:CODE:REORDER:NOROOT(1)
+  265                           REMC2_IRQHandler
+  266    00000000 ....                  B REMC2_IRQHandler
+  267                                   
+  268                            
+  269                                   PUBWEAK LCD32B_IRQHandler             
+                                          
+  270                                   SECTION .text:CODE:REORDER:NOROOT:NORO
+                                OT(1)
+  271                           LCD32B_IRQHandler
+  272    00000000 ....                  B LCD32B_IRQHandler
+  273                           
+  274                            
+  275                                   PUBWEAK T16_3_IRQHandler              
+                                          
+  276                                   SECTION .text:CODE:REORDER:NOROOT(1)
+  277                           T16_3_IRQHandler
+  278    00000000 ....                  B T16_3_IRQHandler
+  279                           
+  280                           
+  281                                   PUBWEAK USB_IRQHandler                
+                                  
+  282                                   SECTION .text:CODE:REORDER:NOROOT(1)
+  283                           USB_IRQHandler
+  284    00000000 ....                  B USB_IRQHandler
+  285                           
+  286                                   PUBWEAK SVD2_1_IRQHandler             
+                                          
+  287                                   SECTION .text:CODE:REORDER:NOROOT(1)
+  288                           SVD2_1_IRQHandler
+  289    00000000 ....                  B SVD2_1_IRQHandler
+  290                                   
+  291                                   PUBWEAK SNDA_IRQHandler               
+                                  
+  292                                   SECTION .text:CODE:REORDER:NOROOT(1)
+  293                           SNDA_IRQHandler
+  294    00000000 ....                  B SNDA_IRQHandler
+  295                           
+  296                                   PUBWEAK RFC_0_IRQHandler              
+                                          
+  297                                   SECTION .text:CODE:REORDER:NOROOT(1)
+  298                           RFC_0_IRQHandler
+  299    00000000 ....                  B RFC_0_IRQHandler
+  300                           
+  301                                   END
+##############################
+#           CRC:0            #
+#        Errors:   0         #
+#        Warnings: 0         #
+#         Bytes: 236         #
+##############################
+
+
+
+

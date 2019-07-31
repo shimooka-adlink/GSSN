@@ -1,0 +1,850 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V7.80.4.12462/W32 for ARM       17/May/2019  13:31:40
+# Copyright 1999-2017 IAR Systems AB.
+#
+#    Cpu mode     =  thumb
+#    Endian       =  little
+#    Source file  =  C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\hal\ctrl_W25Q.c
+#    Command line =  
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\hal\ctrl_W25Q.c -D
+#        __TARGET_ARCH_7_M -D S1C31W74 -D GNSS_GW_SIDE_A -lCN
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\List
+#        -lA
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\List
+#        --diag_suppress Pe177,Pe111,Pa082 -o
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\Obj
+#        --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa
+#        --no_clustering --no_scheduling --debug --endian=little
+#        --cpu=Cortex-M0+ -e --fpu=None --dlib_config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench
+#        7.5\arm\INC\c\DLib_Config_Normal.h" -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\ -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\
+#        -I "C:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        7.5\arm\CMSIS\Include\" -I "C:\Program Files (x86)\IAR
+#        Systems\Embedded Workbench 7.5\arm\inc\Epson\" -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\CMSIS\Device\S1C31W74\Include\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\CMSIS\Driver\Include\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\sePeriphLibrary\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\board\S5U1C31W74T1\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\USBStack\INC\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\include\
+#        -Ol
+#    Locale       =  Japanese_Japan.932
+#    List file    =  
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\List\ctrl_W25Q.lst
+#    Object file  =  
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\Obj\ctrl_W25Q.o
+#
+###############################################################################
+
+C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\hal\ctrl_W25Q.c
+      1          
+      2          /**
+      3            ******************************************************************************
+      4            * @file    ctrl_W25Q.c
+      5            * @author  コア
+      6            * @version V1.0
+      7            * @date    2018.3.19
+      8            * @brief   このファイルはW25Qを制御するソフトウェアです。
+      9            ******************************************************************************
+     10            * @attention
+     11            *
+     12            *****************************************************************************
+     13          */ 
+     14          
+     15          
+     16          #include <string.h>
+     17          #include <stdio.h>
+     18          #include <stdlib.h>
+     19          #include "board.h"
+     20          #include "se_spia.h" 
+     21          
+     22          #include "drv_spi.h"
+     23          #include "ctrl_GPIO.h"
+     24          #include "gnss_gw_common.h"
+     25          #include "ctrl_W25Q.h"
+     26          
+     27          
+     28          #pragma section = "CTRL_PRG_BLOCK"
+     29          
+     30          
+     31          /************************************************************************/
+     32          /* declaration of structure                                             */
+     33          /************************************************************************/
+     34          
+     35          
+     36          #define	W25Q_PAGE_SIZE			256		// PAGEサイズ
+     37          
+     38          
+     39          #define MAX_BLOCKSIZE        128    // ブロック総数
+     40          #define MAX_SECTORSIZE       2048   // 総セクタ数
+     41          #define CMD_WRIRE_ENABLE      0x06
+     42          #define CMD_WRITE_DISABLE     0x04
+     43          #define CMD_READ_STATUS_R1    0x05
+     44          #define CMD_READ_STATUS_R2    0x35
+     45          #define CMD_READ_STATUS_R3    0x15
+     46          #define CMD_WRITE_STATUS_R    0x01 // 未実装
+     47          #define CMD_PAGE_PROGRAM      0x02
+     48          #define CMD_QUAD_PAGE_PROGRAM 0x32 // 未実装
+     49          #define CMD_BLOCK_ERASE64KB   0xd8
+     50          #define CMD_BLOCK_ERASE32KB   0x52
+     51          #define CMD_SECTOR_ERASE      0x20
+     52          #define CMD_CHIP_ERASE        0xC7
+     53          #define CMD_ERASE_SUPPEND     0x75 // 未実装
+     54          #define CMD_ERASE_RESUME      0x7A // 未実装
+     55          #define CMD_POWER_DOWN        0xB9
+     56          #define CMD_HIGH_PERFORM_MODE 0xA3 // 未実装
+     57          #define CMD_CNT_READ_MODE_RST 0xFF // 未実装
+     58          #define CMD_RELEASE_PDOWN_ID  0xAB // 未実装
+     59          #define CMD_MANUFACURER_ID    0x90
+     60          #define CMD_READ_UNIQUE_ID    0x4B
+     61          #define CMD_JEDEC_ID          0x9f
+     62          
+     63          #define CMD_READ_DATA         0x03
+     64          #define CMD_FAST_READ         0x0B
+     65          #define CMD_READ_DUAL_OUTPUT  0x3B // 未実装
+     66          #define CMD_READ_DUAL_IO      0xBB // 未実装
+     67          #define CMD_READ_QUAD_OUTPUT  0x6B // 未実装
+     68          #define CMD_READ_QUAD_IO      0xEB // 未実装
+     69          #define CMD_WORD_READ         0xE3 // 未実装
+     70          
+     71          
+     72          
+     73          #define SR1_BUSY_MASK	0x01
+     74          #define SR1_WEN_MASK	0x02
+     75          
+     76          
+     77          
+     78          //************************************************************************/
+     79          /* definition of variables                                              */
+     80          /************************************************************************/
+     81          
+     82          /********************************************************************/
+     83          /*	static関数                                                      */
+     84          /********************************************************************/
+     85          
+     86          
+     87          /********************************************************************/
+     88          /*!
+     89           * \name	ctrl_W25Q_readStatusReg1
+     90           * \brief	FLASHのステータスレジスタ1の値取得
+     91           * \param	なし
+     92           * \return  ステータスレジスタ１の値
+     93           * \note	
+     94           */
+     95          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+     96          static uint8_t ctrl_W25Q_readStatusReg1( void ) 
+     97          {
+   \                     ctrl_W25Q_readStatusReg1: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+     98          	uint8_t		rc;
+     99          	uint8_t		sbuf[1];
+    100          
+    101          
+    102          	spia_ASSERT_MST_CS();
+   \   00000002   0x.... 0x....      BL       spia_ASSERT_MST_CS
+    103          
+    104          	// ステータスレジスタ2の値取得コマンド送信
+    105          	sbuf[0] = CMD_READ_STATUS_R1;
+   \   00000006   0x2005             MOVS     R0,#+5
+   \   00000008   0x4669             MOV      R1,SP
+   \   0000000A   0x7008             STRB     R0,[R1, #+0]
+    106          	spia_SendData(sbuf, 1);
+   \   0000000C   0x2101             MOVS     R1,#+1
+   \   0000000E   0x4668             MOV      R0,SP
+   \   00000010   0x.... 0x....      BL       spia_SendData
+    107          
+    108          	// ステータスレジスタ1の受信
+    109          	spia_ReceiveData(&rc ,1);
+   \   00000014   0x2101             MOVS     R1,#+1
+   \   00000016   0xA800             ADD      R0,SP,#+0
+   \   00000018   0x1C40             ADDS     R0,R0,#+1
+   \   0000001A   0x.... 0x....      BL       spia_ReceiveData
+    110          	spia_NEGATE_MST_CS();
+   \   0000001E   0x.... 0x....      BL       spia_NEGATE_MST_CS
+    111          	return rc;
+   \   00000022   0x4668             MOV      R0,SP
+   \   00000024   0x7840             LDRB     R0,[R0, #+1]
+   \   00000026   0xBD02             POP      {R1,PC}          ;; return
+    112          }
+    113          
+    114          
+    115          
+    116          /********************************************************************/
+    117          /*	extern関数                                                      */
+    118          /********************************************************************/
+    119          
+    120          /********************************************************************/
+    121          /*!
+    122           * \name	ctrl_W25Q_init
+    123           * \brief	USB初期化処理
+    124           * \param	なし
+    125           * \return  なし
+    126           * \note	起動時に、呼ばれること
+    127           */
+    128          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    129          void ctrl_W25Q_init(void)
+    130          {
+   \                     ctrl_W25Q_init: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    131          	// FLASH Driver初期化処理
+    132          	spi_init();
+   \   00000002   0x.... 0x....      BL       spi_init
+    133          }
+   \   00000006   0xBD01             POP      {R0,PC}          ;; return
+    134          
+    135          
+    136          
+    137          /********************************************************************/
+    138          /*!
+    139           * \name	ctrl_W25Q_erase_all_req
+    140           * \brief	FLASH 全消去コマンドの発行処理
+    141           * \param	なし
+    142           * \return   0: 成功
+    143           *          -1: 失敗
+    144           * \note	全消去コマンドを発行します
+    145           */
+    146          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    147          int32_t  ctrl_W25Q_erase_all_req( void )
+    148          {
+   \                     ctrl_W25Q_erase_all_req: (+1)
+   \   00000000   0xB510             PUSH     {R4,LR}
+   \   00000002   0xB082             SUB      SP,SP,#+8
+    149          	int32_t		ret;
+    150          	uint8_t		sbuf[1];
+    151          
+    152          	spia_ASSERT_MST_CS();
+   \   00000004   0x.... 0x....      BL       spia_ASSERT_MST_CS
+    153          	sbuf[0] = CMD_CHIP_ERASE;
+   \   00000008   0x20C7             MOVS     R0,#+199
+   \   0000000A   0x4669             MOV      R1,SP
+   \   0000000C   0x7008             STRB     R0,[R1, #+0]
+    154          	ret = spia_SendData(sbuf, 1);
+   \   0000000E   0x2101             MOVS     R1,#+1
+   \   00000010   0x4668             MOV      R0,SP
+   \   00000012   0x.... 0x....      BL       spia_SendData
+   \   00000016   0x0004             MOVS     R4,R0
+    155          	spia_NEGATE_MST_CS();
+   \   00000018   0x.... 0x....      BL       spia_NEGATE_MST_CS
+    156          
+    157          	return ret;
+   \   0000001C   0x0020             MOVS     R0,R4
+   \   0000001E   0xBD16             POP      {R1,R2,R4,PC}    ;; return
+    158          }
+    159          
+    160          
+    161          /********************************************************************/
+    162          /*!
+    163           * \name	ctrl_W25Q_erase_sector_req
+    164           * \brief	FLASH sector消去コマンドの発行処理
+    165           * \param	addr  : sector消去する先頭アドレス
+    166           * \return   0: 成功
+    167           *          -1: 失敗
+    168           * \note	sector(256バイト)消去コマンドを発行します
+    169           */
+    170          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    171          int32_t  ctrl_W25Q_erase_sector_req( uint32_t addr )
+    172          {
+   \                     ctrl_W25Q_erase_sector_req: (+1)
+   \   00000000   0xB510             PUSH     {R4,LR}
+   \   00000002   0xB082             SUB      SP,SP,#+8
+   \   00000004   0x0004             MOVS     R4,R0
+    173          	int32_t		ret;
+    174          	uint8_t		sbuf[4];
+    175          
+    176          	spia_ASSERT_MST_CS();
+   \   00000006   0x.... 0x....      BL       spia_ASSERT_MST_CS
+    177          	sbuf[0] = CMD_SECTOR_ERASE;
+   \   0000000A   0x2020             MOVS     R0,#+32
+   \   0000000C   0x4669             MOV      R1,SP
+   \   0000000E   0x7008             STRB     R0,[R1, #+0]
+    178          	sbuf[1] = ((addr>>16) & 0xff);			// A23-A16
+   \   00000010   0x0020             MOVS     R0,R4
+   \   00000012   0x0C00             LSRS     R0,R0,#+16
+   \   00000014   0x4669             MOV      R1,SP
+   \   00000016   0x7048             STRB     R0,[R1, #+1]
+    179          	sbuf[2] = ((addr>>8) & 0xff);			// A15-A08
+   \   00000018   0x0A20             LSRS     R0,R4,#+8
+   \   0000001A   0x4669             MOV      R1,SP
+   \   0000001C   0x7088             STRB     R0,[R1, #+2]
+    180          	sbuf[3] = (addr & 0xff);				// A07-A00
+   \   0000001E   0x4668             MOV      R0,SP
+   \   00000020   0x70C4             STRB     R4,[R0, #+3]
+    181          	ret = spia_SendData(sbuf, 4);
+   \   00000022   0x2104             MOVS     R1,#+4
+   \   00000024   0x4668             MOV      R0,SP
+   \   00000026   0x.... 0x....      BL       spia_SendData
+   \   0000002A   0x0004             MOVS     R4,R0
+    182          	spia_NEGATE_MST_CS();
+   \   0000002C   0x.... 0x....      BL       spia_NEGATE_MST_CS
+    183          
+    184          	return ret;
+   \   00000030   0x0020             MOVS     R0,R4
+   \   00000032   0xBD16             POP      {R1,R2,R4,PC}    ;; return
+    185          }
+    186          
+    187          
+    188          /********************************************************************/
+    189          /*!
+    190           * \name	ctrl_W25Q_erase_32k_block_req
+    191           * \brief	FLASH 32kB block消去コマンドの発行処理
+    192           * \param	addr  : block消去する先頭アドレス
+    193           * \return   0: 成功
+    194           *          -1: 失敗
+    195           * \note	block(32kバイト)消去コマンドを発行します
+    196           */
+    197          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    198          int32_t  ctrl_W25Q_erase_32k_block_req( uint32_t addr )
+    199          {
+   \                     ctrl_W25Q_erase_32k_block_req: (+1)
+   \   00000000   0xB510             PUSH     {R4,LR}
+   \   00000002   0xB082             SUB      SP,SP,#+8
+   \   00000004   0x0004             MOVS     R4,R0
+    200          	int32_t		ret;
+    201          	uint8_t		sbuf[4];
+    202          
+    203          	spia_ASSERT_MST_CS();
+   \   00000006   0x.... 0x....      BL       spia_ASSERT_MST_CS
+    204          	sbuf[0] = CMD_BLOCK_ERASE32KB;
+   \   0000000A   0x2052             MOVS     R0,#+82
+   \   0000000C   0x4669             MOV      R1,SP
+   \   0000000E   0x7008             STRB     R0,[R1, #+0]
+    205          	sbuf[1] = ((addr>>16) & 0xff);			// A23-A16
+   \   00000010   0x0020             MOVS     R0,R4
+   \   00000012   0x0C00             LSRS     R0,R0,#+16
+   \   00000014   0x4669             MOV      R1,SP
+   \   00000016   0x7048             STRB     R0,[R1, #+1]
+    206          	sbuf[2] = ((addr>>8) & 0xff);			// A15-A08
+   \   00000018   0x0A20             LSRS     R0,R4,#+8
+   \   0000001A   0x4669             MOV      R1,SP
+   \   0000001C   0x7088             STRB     R0,[R1, #+2]
+    207          	sbuf[3] = (addr & 0xff);				// A07-A00
+   \   0000001E   0x4668             MOV      R0,SP
+   \   00000020   0x70C4             STRB     R4,[R0, #+3]
+    208          	ret = spia_SendData(sbuf, 4);
+   \   00000022   0x2104             MOVS     R1,#+4
+   \   00000024   0x4668             MOV      R0,SP
+   \   00000026   0x.... 0x....      BL       spia_SendData
+   \   0000002A   0x0004             MOVS     R4,R0
+    209          	spia_NEGATE_MST_CS();
+   \   0000002C   0x.... 0x....      BL       spia_NEGATE_MST_CS
+    210          
+    211          	return ret;
+   \   00000030   0x0020             MOVS     R0,R4
+   \   00000032   0xBD16             POP      {R1,R2,R4,PC}    ;; return
+    212          }
+    213          
+    214          
+    215          /********************************************************************/
+    216          /*!
+    217           * \name	ctrl_W25Q_erase_64k_block_req
+    218           * \brief	FLASH 64kB block消去コマンドの発行処理
+    219           * \param	addr  : block消去する先頭アドレス
+    220           * \return   0: 成功
+    221           *          -1: 失敗
+    222           * \note	block(64kバイト)消去コマンドを発行します
+    223           */
+    224          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    225          int32_t  ctrl_W25Q_erase_64k_block_req( uint32_t addr )
+    226          {
+   \                     ctrl_W25Q_erase_64k_block_req: (+1)
+   \   00000000   0xB510             PUSH     {R4,LR}
+   \   00000002   0xB082             SUB      SP,SP,#+8
+   \   00000004   0x0004             MOVS     R4,R0
+    227          	int32_t		ret;
+    228          	uint8_t		sbuf[4];
+    229          
+    230          	spia_ASSERT_MST_CS();
+   \   00000006   0x.... 0x....      BL       spia_ASSERT_MST_CS
+    231          	sbuf[0] = CMD_BLOCK_ERASE64KB;
+   \   0000000A   0x20D8             MOVS     R0,#+216
+   \   0000000C   0x4669             MOV      R1,SP
+   \   0000000E   0x7008             STRB     R0,[R1, #+0]
+    232          	sbuf[1] = ((addr>>16) & 0xff);			// A23-A16
+   \   00000010   0x0020             MOVS     R0,R4
+   \   00000012   0x0C00             LSRS     R0,R0,#+16
+   \   00000014   0x4669             MOV      R1,SP
+   \   00000016   0x7048             STRB     R0,[R1, #+1]
+    233          	sbuf[2] = ((addr>>8) & 0xff);			// A15-A08
+   \   00000018   0x0A20             LSRS     R0,R4,#+8
+   \   0000001A   0x4669             MOV      R1,SP
+   \   0000001C   0x7088             STRB     R0,[R1, #+2]
+    234          	sbuf[3] = (addr & 0xff);				// A07-A00
+   \   0000001E   0x4668             MOV      R0,SP
+   \   00000020   0x70C4             STRB     R4,[R0, #+3]
+    235          	ret = spia_SendData(sbuf, 4);
+   \   00000022   0x2104             MOVS     R1,#+4
+   \   00000024   0x4668             MOV      R0,SP
+   \   00000026   0x.... 0x....      BL       spia_SendData
+   \   0000002A   0x0004             MOVS     R4,R0
+    236          	spia_NEGATE_MST_CS();
+   \   0000002C   0x.... 0x....      BL       spia_NEGATE_MST_CS
+    237          
+    238          	return ret;
+   \   00000030   0x0020             MOVS     R0,R4
+   \   00000032   0xBD16             POP      {R1,R2,R4,PC}    ;; return
+    239          }
+    240          
+    241          
+    242          /********************************************************************/
+    243          /*!
+    244           * \name	ctrl_W25Q_write_page
+    245           * \brief	FLASH PAGE(512Byte)書き込み処理
+    246           * \param	addr   : flash 書き込みアドレス
+    247           *          data   : flash 書き込みデータ
+    248           *          length : データ長
+    249           * \return  0: 成功  -1:失敗
+    250           * \note	
+    251           */
+    252          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    253          int32_t   ctrl_W25Q_write_page(uint32_t addr , uint8_t *data, int32_t length)
+    254          {
+   \                     ctrl_W25Q_write_page: (+1)
+   \   00000000   0xB5F2             PUSH     {R1,R4-R7,LR}
+   \   00000002   0xB0C2             SUB      SP,SP,#+264
+   \   00000004   0x0007             MOVS     R7,R0
+   \   00000006   0x0014             MOVS     R4,R2
+    255          	uint8_t		sbuf[W25Q_PAGE_SIZE+5];
+    256          	int			i;
+    257          	int32_t		ret = -1;
+   \   00000008   0x2600             MOVS     R6,#+0
+   \   0000000A   0x43F6             MVNS     R6,R6            ;; #-1
+    258          	uint32_t	Timer = 1000;		// 正常時は10程度
+   \   0000000C   0x25FA             MOVS     R5,#+250
+   \   0000000E   0x00AD             LSLS     R5,R5,#+2        ;; #+1000
+    259          
+    260          
+    261          	if ( (0 < length) && (length <= W25Q_PAGE_SIZE) ) {
+   \   00000010   0x0020             MOVS     R0,R4
+   \   00000012   0x1E40             SUBS     R0,R0,#+1
+   \   00000014   0x28FF             CMP      R0,#+255
+   \   00000016   0xD837             BHI      ??ctrl_W25Q_write_page_0
+    262          
+    263          		// 書込み許可コマンド送信
+    264          		ret = clrl_W25Q_WriteEnable();
+   \   00000018   0x.... 0x....      BL       clrl_W25Q_WriteEnable
+   \   0000001C   0x0006             MOVS     R6,R0
+    265          
+    266          		if (ret >= 0) {
+   \   0000001E   0x2E00             CMP      R6,#+0
+   \   00000020   0xD405             BMI      ??ctrl_W25Q_write_page_1
+    267          			// BUSY待ち
+    268          			if (ctrl_W25Q_IsBusy() == 0) {
+   \   00000022   0x.... 0x....      BL       ctrl_W25Q_IsBusy
+   \   00000026   0x2800             CMP      R0,#+0
+   \   00000028   0xD101             BNE      ??ctrl_W25Q_write_page_1
+    269          				ret = -1;
+   \   0000002A   0x2600             MOVS     R6,#+0
+   \   0000002C   0x43F6             MVNS     R6,R6            ;; #-1
+    270          			}
+    271          		}
+    272          
+    273          		if (ret >= 0) {
+   \                     ??ctrl_W25Q_write_page_1: (+1)
+   \   0000002E   0x2E00             CMP      R6,#+0
+   \   00000030   0xD42A             BMI      ??ctrl_W25Q_write_page_0
+    274          			// PAGE WRITEコマンド送信
+    275          			spia_ASSERT_MST_CS();
+   \   00000032   0x.... 0x....      BL       spia_ASSERT_MST_CS
+    276          			sbuf[0] = CMD_PAGE_PROGRAM;
+   \   00000036   0x2002             MOVS     R0,#+2
+   \   00000038   0x4669             MOV      R1,SP
+   \   0000003A   0x7008             STRB     R0,[R1, #+0]
+    277          			sbuf[1] = ((addr>>16) & 0xff);
+   \   0000003C   0x0038             MOVS     R0,R7
+   \   0000003E   0x0C00             LSRS     R0,R0,#+16
+   \   00000040   0x4669             MOV      R1,SP
+   \   00000042   0x7048             STRB     R0,[R1, #+1]
+    278          			sbuf[2] = ((addr>>8) & 0xff); 
+   \   00000044   0x0A38             LSRS     R0,R7,#+8
+   \   00000046   0x4669             MOV      R1,SP
+   \   00000048   0x7088             STRB     R0,[R1, #+2]
+    279          			sbuf[3] = (addr & 0xff);
+   \   0000004A   0x4668             MOV      R0,SP
+   \   0000004C   0x70C7             STRB     R7,[R0, #+3]
+    280          			// 書き込みデータセット
+    281          			for ( i=0; i < length; i++) {
+   \   0000004E   0x2000             MOVS     R0,#+0
+   \   00000050   0xE005             B        ??ctrl_W25Q_write_page_2
+    282          				sbuf[4+i] = data[i];
+   \                     ??ctrl_W25Q_write_page_3: (+1)
+   \   00000052   0x9942             LDR      R1,[SP, #+264]
+   \   00000054   0x5C09             LDRB     R1,[R1, R0]
+   \   00000056   0x466A             MOV      R2,SP
+   \   00000058   0x1812             ADDS     R2,R2,R0
+   \   0000005A   0x7111             STRB     R1,[R2, #+4]
+    283          			}
+   \   0000005C   0x1C40             ADDS     R0,R0,#+1
+   \                     ??ctrl_W25Q_write_page_2: (+1)
+   \   0000005E   0x42A0             CMP      R0,R4
+   \   00000060   0xDBF7             BLT      ??ctrl_W25Q_write_page_3
+    284          			ret = spia_SendData(sbuf, length + 4);
+   \   00000062   0x1D24             ADDS     R4,R4,#+4
+   \   00000064   0x0021             MOVS     R1,R4
+   \   00000066   0x4668             MOV      R0,SP
+   \   00000068   0x.... 0x....      BL       spia_SendData
+   \   0000006C   0x0006             MOVS     R6,R0
+    285          			spia_NEGATE_MST_CS();
+   \   0000006E   0x.... 0x....      BL       spia_NEGATE_MST_CS
+    286          
+    287          			if (ret >= 0) {
+   \   00000072   0x2E00             CMP      R6,#+0
+   \   00000074   0xD408             BMI      ??ctrl_W25Q_write_page_0
+    288          				// 完了待ち
+    289          				while (ctrl_W25Q_IsBusy() == 0) {
+   \                     ??ctrl_W25Q_write_page_4: (+1)
+   \   00000076   0x.... 0x....      BL       ctrl_W25Q_IsBusy
+   \   0000007A   0x2800             CMP      R0,#+0
+   \   0000007C   0xD104             BNE      ??ctrl_W25Q_write_page_0
+    290          					if (--Timer == 0) {
+   \   0000007E   0x1E6D             SUBS     R5,R5,#+1
+   \   00000080   0x2D00             CMP      R5,#+0
+   \   00000082   0xD1F8             BNE      ??ctrl_W25Q_write_page_4
+    291          						ret = -1;
+   \   00000084   0x2600             MOVS     R6,#+0
+   \   00000086   0x43F6             MVNS     R6,R6            ;; #-1
+    292          						break;
+    293          					}
+    294          				}
+    295          			}
+    296          		}
+    297          	}
+    298          	return ret;
+   \                     ??ctrl_W25Q_write_page_0: (+1)
+   \   00000088   0x0030             MOVS     R0,R6
+   \   0000008A   0xB043             ADD      SP,SP,#+268
+   \   0000008C   0xBDF0             POP      {R4-R7,PC}       ;; return
+    299          }
+    300          
+    301          
+    302          
+    303          /********************************************************************/
+    304          /*!
+    305           * \name	ctrl_W25Q_read
+    306           * \brief	FLASH 読み込み処理
+    307           * \param	addr    :: 読み出しアドレス
+    308           *          data    :: 格納アドレス
+    309           *          nBytes  :: 読み出しサイズ
+    310           * \return   0: 成功
+    311           *          -1: 失敗
+    312           * \note	
+    313           */
+    314          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    315          int32_t ctrl_W25Q_read(uint32_t addr ,  uint8_t *data ,  uint32_t nBytes )
+    316          {
+   \                     ctrl_W25Q_read: (+1)
+   \   00000000   0xB5F0             PUSH     {R4-R7,LR}
+   \   00000002   0xB083             SUB      SP,SP,#+12
+   \   00000004   0x0004             MOVS     R4,R0
+   \   00000006   0x000D             MOVS     R5,R1
+   \   00000008   0x0017             MOVS     R7,R2
+    317          	int32_t		ret=0;
+   \   0000000A   0x2600             MOVS     R6,#+0
+    318          	uint8_t		sbuf[5];
+    319          
+    320          
+    321          	spia_ASSERT_MST_CS();
+   \   0000000C   0x.... 0x....      BL       spia_ASSERT_MST_CS
+    322          
+    323          	// READコマンド設定
+    324          	sbuf[0] = CMD_READ_DATA;				// READコマンド
+   \   00000010   0x2003             MOVS     R0,#+3
+   \   00000012   0x4669             MOV      R1,SP
+   \   00000014   0x7008             STRB     R0,[R1, #+0]
+    325          	sbuf[1] = ((addr>>16) & 0xff);			// A23-A16
+   \   00000016   0x0020             MOVS     R0,R4
+   \   00000018   0x0C00             LSRS     R0,R0,#+16
+   \   0000001A   0x4669             MOV      R1,SP
+   \   0000001C   0x7048             STRB     R0,[R1, #+1]
+    326          	sbuf[2] = ((addr>>8) & 0xff);			// A15-A08
+   \   0000001E   0x0A20             LSRS     R0,R4,#+8
+   \   00000020   0x4669             MOV      R1,SP
+   \   00000022   0x7088             STRB     R0,[R1, #+2]
+    327          	sbuf[3] = (addr & 0xff);				// A07-A00
+   \   00000024   0x4668             MOV      R0,SP
+   \   00000026   0x70C4             STRB     R4,[R0, #+3]
+    328          
+    329          	// READコマンド送信
+    330          	spia_SendData(sbuf, 4);
+   \   00000028   0x2104             MOVS     R1,#+4
+   \   0000002A   0x4668             MOV      R0,SP
+   \   0000002C   0x.... 0x....      BL       spia_SendData
+    331          
+    332          	// データ取得
+    333          	ret = spia_ReceiveData(data, nBytes);
+   \   00000030   0x0039             MOVS     R1,R7
+   \   00000032   0x0028             MOVS     R0,R5
+   \   00000034   0x.... 0x....      BL       spia_ReceiveData
+   \   00000038   0x0006             MOVS     R6,R0
+    334            
+    335          	spia_NEGATE_MST_CS();
+   \   0000003A   0x.... 0x....      BL       spia_NEGATE_MST_CS
+    336          
+    337          	return ret;
+   \   0000003E   0x0030             MOVS     R0,R6
+   \   00000040   0xBDFE             POP      {R1-R7,PC}       ;; return
+    338          }
+    339          
+    340          
+    341          
+    342          /********************************************************************/
+    343          /*!
+    344           * \name	clrl_W25Q_WriteEnable
+    345           * \brief	FLASH 書込み許可コマンド送信処理
+    346           * \param	なし
+    347           * \return   0: 成功
+    348           *          -1: 失敗
+    349           * \note	ERASE, WRITE実行前に呼び出す必要があります。
+    350           */
+    351          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    352          int32_t clrl_W25Q_WriteEnable( void )
+    353          {
+   \                     clrl_W25Q_WriteEnable: (+1)
+   \   00000000   0xB510             PUSH     {R4,LR}
+   \   00000002   0xB082             SUB      SP,SP,#+8
+    354          	int32_t		ret=-1;
+   \   00000004   0x2000             MOVS     R0,#+0
+   \   00000006   0x43C0             MVNS     R0,R0            ;; #-1
+    355          	uint8_t		r1=0;
+   \   00000008   0x2000             MOVS     R0,#+0
+    356          	uint8_t		sbuf[1];
+    357          	uint32_t	Timer = 1000;		// 正常時は0程度
+   \   0000000A   0x24FA             MOVS     R4,#+250
+   \   0000000C   0x00A4             LSLS     R4,R4,#+2        ;; #+1000
+    358          
+    359          
+    360          	// WRITE ENABLEコマンド送信
+    361          	spia_ASSERT_MST_CS();
+   \   0000000E   0x.... 0x....      BL       spia_ASSERT_MST_CS
+    362          	sbuf[0] = CMD_WRIRE_ENABLE;
+   \   00000012   0x2006             MOVS     R0,#+6
+   \   00000014   0x4669             MOV      R1,SP
+   \   00000016   0x7008             STRB     R0,[R1, #+0]
+    363          	spia_SendData(sbuf, 1);
+   \   00000018   0x2101             MOVS     R1,#+1
+   \   0000001A   0x4668             MOV      R0,SP
+   \   0000001C   0x.... 0x....      BL       spia_SendData
+    364          	spia_NEGATE_MST_CS();
+   \   00000020   0x.... 0x....      BL       spia_NEGATE_MST_CS
+    365          
+    366          	// WRITE ENABLE完了待ち
+    367          	while(1) {
+    368          		r1 = ctrl_W25Q_readStatusReg1();
+   \                     ??clrl_W25Q_WriteEnable_0: (+1)
+   \   00000024   0x.... 0x....      BL       ctrl_W25Q_readStatusReg1
+    369          		if (r1 & SR1_WEN_MASK) {
+   \   00000028   0x0780             LSLS     R0,R0,#+30
+   \   0000002A   0xD501             BPL      ??clrl_W25Q_WriteEnable_1
+    370          			ret = 0;
+   \   0000002C   0x2000             MOVS     R0,#+0
+    371          			break;
+   \   0000002E   0xE004             B        ??clrl_W25Q_WriteEnable_2
+    372          		}
+    373          		if (--Timer == 0) {
+   \                     ??clrl_W25Q_WriteEnable_1: (+1)
+   \   00000030   0x1E64             SUBS     R4,R4,#+1
+   \   00000032   0x2C00             CMP      R4,#+0
+   \   00000034   0xD1F6             BNE      ??clrl_W25Q_WriteEnable_0
+    374          			ret = -1;
+   \   00000036   0x2000             MOVS     R0,#+0
+   \   00000038   0x43C0             MVNS     R0,R0            ;; #-1
+    375          			break;
+    376          		}
+    377          	}
+    378          
+    379          	return ret;
+   \                     ??clrl_W25Q_WriteEnable_2: (+1)
+   \   0000003A   0xBD16             POP      {R1,R2,R4,PC}    ;; return
+    380          }
+    381          
+    382          
+    383          /********************************************************************/
+    384          /*!
+    385           * \name	ctrl_W25Q_IsBusy
+    386           * \brief	FLASH 書込み等の処理中チェック
+    387           * \param	なし
+    388           * \return  0 : 作業中, -1 : アイドル中
+    389           * \note	ERASE, WRITEの書き込みの終了が確認できます。
+    390           */
+    391          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    392          int32_t ctrl_W25Q_IsBusy( void )
+    393          {
+   \                     ctrl_W25Q_IsBusy: (+1)
+   \   00000000   0xB510             PUSH     {R4,LR}
+    394          	int32_t		ret=-1;
+   \   00000002   0x2400             MOVS     R4,#+0
+   \   00000004   0x43E4             MVNS     R4,R4            ;; #-1
+    395          	uint8_t		r1;
+    396          
+    397          	// レジスタ１取得
+    398          	r1 = ctrl_W25Q_readStatusReg1();
+   \   00000006   0x.... 0x....      BL       ctrl_W25Q_readStatusReg1
+    399          
+    400          	if ( (r1 != 0xff) && (r1 & SR1_BUSY_MASK) ) {
+   \   0000000A   0xB2C0             UXTB     R0,R0
+   \   0000000C   0x28FF             CMP      R0,#+255
+   \   0000000E   0xD002             BEQ      ??ctrl_W25Q_IsBusy_0
+   \   00000010   0x07C0             LSLS     R0,R0,#+31
+   \   00000012   0xD500             BPL      ??ctrl_W25Q_IsBusy_0
+    401          		ret = 0;
+   \   00000014   0x2400             MOVS     R4,#+0
+    402          	}
+    403          
+    404          	return ret;
+   \                     ??ctrl_W25Q_IsBusy_0: (+1)
+   \   00000016   0x0020             MOVS     R0,R4
+   \   00000018   0xBD10             POP      {R4,PC}          ;; return
+    405          }
+    406          
+    407          
+    408          /********************************************************************/
+    409          /*!
+    410           * \name	ctrl_SPIA_end
+    411           * \brief	SPIA Ch0 の使用を中止する
+    412           *          CS, SDI, SDO, CLK端子をHi-Z stateとする
+    413           * \param	なし
+    414           * \return  なし
+    415           * \note	必要時に、呼ばれること
+    416           */
+    417          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    418          void ctrl_SPIA_end(void)
+    419          {
+   \                     ctrl_SPIA_end: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    420          	spia_Stop();
+   \   00000002   0x.... 0x....      BL       spia_Stop
+    421          	spia_end();
+   \   00000006   0x.... 0x....      BL       spia_end
+    422          }
+   \   0000000A   0xBD01             POP      {R0,PC}          ;; return
+    423          
+    424          /********************************************************************/
+    425          /*!
+    426           * \name	ctrl_SPIA_re_start
+    427           * \brief	SPIA Ch0 の使用を再開する
+    428           *          CS, SDI, SDO, CLK端子を再設定する
+    429           * \param	なし
+    430           * \return  なし
+    431           * \note	ctrl_SPIA_endの復活時に、呼ばれること
+    432           */
+    433          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    434          void ctrl_SPIA_re_start(void)
+    435          {
+   \                     ctrl_SPIA_re_start: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    436          	spia_re_start();
+   \   00000002   0x.... 0x....      BL       spia_re_start
+    437          	spia_Start();
+   \   00000006   0x.... 0x....      BL       spia_Start
+    438          }
+   \   0000000A   0xBD01             POP      {R0,PC}          ;; return
+    439          
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+      16   clrl_W25Q_WriteEnable
+        16   -> ctrl_W25Q_readStatusReg1
+        16   -> spia_ASSERT_MST_CS
+        16   -> spia_NEGATE_MST_CS
+        16   -> spia_SendData
+       8   ctrl_SPIA_end
+         8   -> spia_Stop
+         8   -> spia_end
+       8   ctrl_SPIA_re_start
+         8   -> spia_Start
+         8   -> spia_re_start
+       8   ctrl_W25Q_IsBusy
+         8   -> ctrl_W25Q_readStatusReg1
+      16   ctrl_W25Q_erase_32k_block_req
+        16   -> spia_ASSERT_MST_CS
+        16   -> spia_NEGATE_MST_CS
+        16   -> spia_SendData
+      16   ctrl_W25Q_erase_64k_block_req
+        16   -> spia_ASSERT_MST_CS
+        16   -> spia_NEGATE_MST_CS
+        16   -> spia_SendData
+      16   ctrl_W25Q_erase_all_req
+        16   -> spia_ASSERT_MST_CS
+        16   -> spia_NEGATE_MST_CS
+        16   -> spia_SendData
+      16   ctrl_W25Q_erase_sector_req
+        16   -> spia_ASSERT_MST_CS
+        16   -> spia_NEGATE_MST_CS
+        16   -> spia_SendData
+       8   ctrl_W25Q_init
+         8   -> spi_init
+      32   ctrl_W25Q_read
+        32   -> spia_ASSERT_MST_CS
+        32   -> spia_NEGATE_MST_CS
+        32   -> spia_ReceiveData
+        32   -> spia_SendData
+       8   ctrl_W25Q_readStatusReg1
+         8   -> spia_ASSERT_MST_CS
+         8   -> spia_NEGATE_MST_CS
+         8   -> spia_ReceiveData
+         8   -> spia_SendData
+     288   ctrl_W25Q_write_page
+       288   -> clrl_W25Q_WriteEnable
+       288   -> ctrl_W25Q_IsBusy
+       288   -> spia_ASSERT_MST_CS
+       288   -> spia_NEGATE_MST_CS
+       288   -> spia_SendData
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+      60  clrl_W25Q_WriteEnable
+      12  ctrl_SPIA_end
+      12  ctrl_SPIA_re_start
+      26  ctrl_W25Q_IsBusy
+      52  ctrl_W25Q_erase_32k_block_req
+      52  ctrl_W25Q_erase_64k_block_req
+      32  ctrl_W25Q_erase_all_req
+      52  ctrl_W25Q_erase_sector_req
+       8  ctrl_W25Q_init
+      66  ctrl_W25Q_read
+      40  ctrl_W25Q_readStatusReg1
+     142  ctrl_W25Q_write_page
+
+ 
+ 554 bytes in section .text
+ 
+ 554 bytes of CODE memory
+
+Errors: none
+Warnings: none

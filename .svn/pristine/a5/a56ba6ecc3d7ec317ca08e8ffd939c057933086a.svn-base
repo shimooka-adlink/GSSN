@@ -1,0 +1,493 @@
+///////////////////////////////////////////////////////////////////////////////
+//
+// IAR ANSI C/C++ Compiler V7.80.4.12462/W32 for ARM      17/May/2019  13:31:50
+// Copyright 1999-2017 IAR Systems AB.
+//
+//    Cpu mode     =  thumb
+//    Endian       =  little
+//    Source file  =  C:\GNSS\Software\rJ104_rc2\USBStack\SRC\usbd_core_cdc.c
+//    Command line =  
+//        C:\GNSS\Software\rJ104_rc2\USBStack\SRC\usbd_core_cdc.c -D
+//        __TARGET_ARCH_7_M -D S1C31W74 -D GNSS_GW_SIDE_A -lCN
+//        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\List
+//        -lA
+//        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\List
+//        --diag_suppress Pe177,Pe111,Pa082 -o
+//        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\Obj
+//        --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa
+//        --no_clustering --no_scheduling --debug --endian=little
+//        --cpu=Cortex-M0+ -e --fpu=None --dlib_config "C:\Program Files
+//        (x86)\IAR Systems\Embedded Workbench
+//        7.5\arm\INC\c\DLib_Config_Normal.h" -I
+//        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\ -I
+//        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\
+//        -I "C:\Program Files (x86)\IAR Systems\Embedded Workbench
+//        7.5\arm\CMSIS\Include\" -I "C:\Program Files (x86)\IAR
+//        Systems\Embedded Workbench 7.5\arm\inc\Epson\" -I
+//        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\CMSIS\Device\S1C31W74\Include\
+//        -I
+//        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\CMSIS\Driver\Include\
+//        -I
+//        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\sePeriphLibrary\
+//        -I
+//        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\board\S5U1C31W74T1\
+//        -I
+//        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\USBStack\INC\
+//        -I
+//        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\include\
+//        -Ol
+//    Locale       =  Japanese_Japan.932
+//    List file    =  
+//        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\List\usbd_core_cdc.s
+//
+///////////////////////////////////////////////////////////////////////////////
+
+        RTMODEL "__SystemLibrary", "DLib"
+        AAPCS BASE,INTERWORK
+        PRESERVE8
+        REQUIRE8
+
+        #define SHT_PROGBITS 0x1
+
+        EXTERN USBD_CDC_ACM_ClearCommFeature
+        EXTERN USBD_CDC_ACM_GetCommFeature
+        EXTERN USBD_CDC_ACM_GetEncapsulatedResponse
+        EXTERN USBD_CDC_ACM_GetLineCoding
+        EXTERN USBD_CDC_ACM_SendBreak
+        EXTERN USBD_CDC_ACM_SendEncapsulatedCommand
+        EXTERN USBD_CDC_ACM_SetCommFeature
+        EXTERN USBD_CDC_ACM_SetControlLineState
+        EXTERN USBD_CDC_ACM_SetLineCoding
+        EXTERN USBD_DataInStage
+        EXTERN USBD_EP0Buf
+        EXTERN USBD_EP0Data
+        EXTERN USBD_SetupPacket
+        EXTERN USBD_StatusInStage
+        EXTERN usbd_cdc_acm_cif_num
+        EXTERN usbd_cdc_acm_dif_num
+
+        PUBWEAK USBD_EndPoint0_Out_CDC_ReqToIF
+        PUBWEAK USBD_EndPoint0_Setup_CDC_ReqToIF
+        
+          CFI Names cfiNames0
+          CFI StackFrame CFA R13 DATA
+          CFI Resource R0:32, R1:32, R2:32, R3:32, R4:32, R5:32, R6:32, R7:32
+          CFI Resource R8:32, R9:32, R10:32, R11:32, R12:32, R13:32, R14:32
+          CFI EndNames cfiNames0
+        
+          CFI Common cfiCommon0 Using cfiNames0
+          CFI CodeAlign 2
+          CFI DataAlign 4
+          CFI ReturnAddress R14 CODE
+          CFI CFA R13+0
+          CFI R0 Undefined
+          CFI R1 Undefined
+          CFI R2 Undefined
+          CFI R3 Undefined
+          CFI R4 SameValue
+          CFI R5 SameValue
+          CFI R6 SameValue
+          CFI R7 SameValue
+          CFI R8 SameValue
+          CFI R9 SameValue
+          CFI R10 SameValue
+          CFI R11 SameValue
+          CFI R12 Undefined
+          CFI R14 SameValue
+          CFI EndCommon cfiCommon0
+        
+// C:\GNSS\Software\rJ104_rc2\USBStack\SRC\usbd_core_cdc.c
+//    1 /* CMSIS-DAP Interface Firmware
+//    2  * Copyright (c) 2009-2013 ARM Limited
+//    3  *
+//    4  * Licensed under the Apache License, Version 2.0 (the "License");
+//    5  * you may not use this file except in compliance with the License.
+//    6  * You may obtain a copy of the License at
+//    7  *
+//    8  *     http://www.apache.org/licenses/LICENSE-2.0
+//    9  *
+//   10  * Unless required by applicable law or agreed to in writing, software
+//   11  * distributed under the License is distributed on an "AS IS" BASIS,
+//   12  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   13  * See the License for the specific language governing permissions and
+//   14  * limitations under the License.
+//   15  */
+//   16 #include <RTL.h>
+//   17 #include <rl_usb.h>
+//   18 #include <string.h>
+//   19 #include "usb_for_lib.h"
+//   20 
+//   21 
+//   22 /*
+//   23  *  USB Device Endpoint 0 Event Callback - CDC specific handling (Setup Request To Interface)
+//   24  *    Parameters:      none
+//   25  *    Return Value:    TRUE - Setup class request ok, FALSE - Setup class request not supported
+//   26  */
+//   27 
+
+        SECTION `.text`:CODE:REORDER:NOROOT(2)
+          CFI Block cfiBlock0 Using cfiCommon0
+          CFI Function USBD_EndPoint0_Setup_CDC_ReqToIF
+        THUMB
+//   28 __weak BOOL USBD_EndPoint0_Setup_CDC_ReqToIF (void) {
+USBD_EndPoint0_Setup_CDC_ReqToIF:
+        PUSH     {R7,LR}
+          CFI R14 Frame(CFA, -4)
+          CFI CFA R13+8
+//   29   if ((USBD_SetupPacket.wIndexL == usbd_cdc_acm_cif_num)  || /* IF number correct? */
+//   30       (USBD_SetupPacket.wIndexL == usbd_cdc_acm_dif_num)) {
+        LDR      R0,??USBD_EndPoint0_Setup_CDC_ReqToIF_0
+        LDRB     R0,[R0, #+4]
+        LDR      R1,??USBD_EndPoint0_Setup_CDC_ReqToIF_0+0x4
+        LDRB     R1,[R1, #+0]
+        CMP      R0,R1
+        BEQ      ??USBD_EndPoint0_Setup_CDC_ReqToIF_1
+        LDR      R0,??USBD_EndPoint0_Setup_CDC_ReqToIF_0
+        LDRB     R0,[R0, #+4]
+        LDR      R1,??USBD_EndPoint0_Setup_CDC_ReqToIF_0+0x8
+        LDRB     R1,[R1, #+0]
+        CMP      R0,R1
+        BNE      ??USBD_EndPoint0_Setup_CDC_ReqToIF_2
+//   31     switch (USBD_SetupPacket.bRequest) {
+??USBD_EndPoint0_Setup_CDC_ReqToIF_1:
+        LDR      R0,??USBD_EndPoint0_Setup_CDC_ReqToIF_0
+        LDRB     R0,[R0, #+1]
+        CMP      R0,#+0
+        BEQ      ??USBD_EndPoint0_Setup_CDC_ReqToIF_3
+        CMP      R0,#+1
+        BEQ      ??USBD_EndPoint0_Setup_CDC_ReqToIF_4
+        CMP      R0,#+2
+        BEQ      ??USBD_EndPoint0_Setup_CDC_ReqToIF_5
+        CMP      R0,#+3
+        BEQ      ??USBD_EndPoint0_Setup_CDC_ReqToIF_6
+        CMP      R0,#+4
+        BEQ      ??USBD_EndPoint0_Setup_CDC_ReqToIF_7
+        CMP      R0,#+32
+        BEQ      ??USBD_EndPoint0_Setup_CDC_ReqToIF_8
+        CMP      R0,#+33
+        BEQ      ??USBD_EndPoint0_Setup_CDC_ReqToIF_9
+        CMP      R0,#+34
+        BEQ      ??USBD_EndPoint0_Setup_CDC_ReqToIF_10
+        CMP      R0,#+35
+        BEQ      ??USBD_EndPoint0_Setup_CDC_ReqToIF_11
+        B        ??USBD_EndPoint0_Setup_CDC_ReqToIF_2
+//   32       case CDC_SEND_ENCAPSULATED_COMMAND:
+//   33         USBD_EP0Data.pData = USBD_EP0Buf;                    /* data to be received, see USBD_EVT_OUT */
+??USBD_EndPoint0_Setup_CDC_ReqToIF_3:
+        LDR      R0,??USBD_EndPoint0_Setup_CDC_ReqToIF_0+0xC
+        LDR      R1,??USBD_EndPoint0_Setup_CDC_ReqToIF_0+0x10
+        STR      R0,[R1, #+0]
+//   34         return (__TRUE);
+        MOVS     R0,#+1
+        B        ??USBD_EndPoint0_Setup_CDC_ReqToIF_12
+//   35       case CDC_GET_ENCAPSULATED_RESPONSE:
+//   36         if (USBD_CDC_ACM_GetEncapsulatedResponse()) {
+??USBD_EndPoint0_Setup_CDC_ReqToIF_4:
+          CFI FunCall USBD_CDC_ACM_GetEncapsulatedResponse
+        BL       USBD_CDC_ACM_GetEncapsulatedResponse
+        CMP      R0,#+0
+        BEQ      ??USBD_EndPoint0_Setup_CDC_ReqToIF_13
+//   37           USBD_EP0Data.pData = USBD_EP0Buf;                  /* point to data to be sent */
+        LDR      R0,??USBD_EndPoint0_Setup_CDC_ReqToIF_0+0xC
+        LDR      R1,??USBD_EndPoint0_Setup_CDC_ReqToIF_0+0x10
+        STR      R0,[R1, #+0]
+//   38           USBD_DataInStage();                                /* send requested data */
+          CFI FunCall USBD_DataInStage
+        BL       USBD_DataInStage
+//   39           return (__TRUE);
+        MOVS     R0,#+1
+        B        ??USBD_EndPoint0_Setup_CDC_ReqToIF_12
+//   40         }
+//   41         break;
+??USBD_EndPoint0_Setup_CDC_ReqToIF_13:
+        B        ??USBD_EndPoint0_Setup_CDC_ReqToIF_2
+//   42       case CDC_SET_COMM_FEATURE:
+//   43         USBD_EP0Data.pData = USBD_EP0Buf;                    /* data to be received, see USBD_EVT_OUT */
+??USBD_EndPoint0_Setup_CDC_ReqToIF_5:
+        LDR      R0,??USBD_EndPoint0_Setup_CDC_ReqToIF_0+0xC
+        LDR      R1,??USBD_EndPoint0_Setup_CDC_ReqToIF_0+0x10
+        STR      R0,[R1, #+0]
+//   44         return (__TRUE);
+        MOVS     R0,#+1
+        B        ??USBD_EndPoint0_Setup_CDC_ReqToIF_12
+//   45       case CDC_GET_COMM_FEATURE:
+//   46         if (USBD_CDC_ACM_GetCommFeature(USBD_SetupPacket.wValue)) {
+??USBD_EndPoint0_Setup_CDC_ReqToIF_6:
+        LDR      R1,??USBD_EndPoint0_Setup_CDC_ReqToIF_0
+        LDRB     R0,[R1, #+2]
+        LDRB     R2,[R1, #+3]
+        LSLS     R2,R2,#+24       ;; ZeroExtS R2,R2,#+24,#+16
+        LSRS     R2,R2,#+16
+        ORRS     R0,R0,R2
+        UXTH     R0,R0
+          CFI FunCall USBD_CDC_ACM_GetCommFeature
+        BL       USBD_CDC_ACM_GetCommFeature
+        CMP      R0,#+0
+        BEQ      ??USBD_EndPoint0_Setup_CDC_ReqToIF_14
+//   47           USBD_EP0Data.pData = USBD_EP0Buf;                  /* point to data to be sent */
+        LDR      R0,??USBD_EndPoint0_Setup_CDC_ReqToIF_0+0xC
+        LDR      R1,??USBD_EndPoint0_Setup_CDC_ReqToIF_0+0x10
+        STR      R0,[R1, #+0]
+//   48           USBD_DataInStage();                                /* send requested data */
+          CFI FunCall USBD_DataInStage
+        BL       USBD_DataInStage
+//   49           return (__TRUE);
+        MOVS     R0,#+1
+        B        ??USBD_EndPoint0_Setup_CDC_ReqToIF_12
+//   50         }
+//   51         break;
+??USBD_EndPoint0_Setup_CDC_ReqToIF_14:
+        B        ??USBD_EndPoint0_Setup_CDC_ReqToIF_2
+//   52       case CDC_CLEAR_COMM_FEATURE:
+//   53         if (USBD_CDC_ACM_ClearCommFeature(USBD_SetupPacket.wValue)) {
+??USBD_EndPoint0_Setup_CDC_ReqToIF_7:
+        LDR      R1,??USBD_EndPoint0_Setup_CDC_ReqToIF_0
+        LDRB     R0,[R1, #+2]
+        LDRB     R2,[R1, #+3]
+        LSLS     R2,R2,#+24       ;; ZeroExtS R2,R2,#+24,#+16
+        LSRS     R2,R2,#+16
+        ORRS     R0,R0,R2
+        UXTH     R0,R0
+          CFI FunCall USBD_CDC_ACM_ClearCommFeature
+        BL       USBD_CDC_ACM_ClearCommFeature
+        CMP      R0,#+0
+        BEQ      ??USBD_EndPoint0_Setup_CDC_ReqToIF_15
+//   54           USBD_StatusInStage();                              /* send Acknowledge */
+          CFI FunCall USBD_StatusInStage
+        BL       USBD_StatusInStage
+//   55           return (__TRUE);
+        MOVS     R0,#+1
+        B        ??USBD_EndPoint0_Setup_CDC_ReqToIF_12
+//   56         }
+//   57         break;
+??USBD_EndPoint0_Setup_CDC_ReqToIF_15:
+        B        ??USBD_EndPoint0_Setup_CDC_ReqToIF_2
+//   58       case CDC_SET_LINE_CODING:
+//   59         USBD_EP0Data.pData = USBD_EP0Buf;                    /* data to be received, see USBD_EVT_OUT */
+??USBD_EndPoint0_Setup_CDC_ReqToIF_8:
+        LDR      R0,??USBD_EndPoint0_Setup_CDC_ReqToIF_0+0xC
+        LDR      R1,??USBD_EndPoint0_Setup_CDC_ReqToIF_0+0x10
+        STR      R0,[R1, #+0]
+//   60         return (__TRUE);
+        MOVS     R0,#+1
+        B        ??USBD_EndPoint0_Setup_CDC_ReqToIF_12
+//   61       case CDC_GET_LINE_CODING:
+//   62         if (USBD_CDC_ACM_GetLineCoding()) {
+??USBD_EndPoint0_Setup_CDC_ReqToIF_9:
+          CFI FunCall USBD_CDC_ACM_GetLineCoding
+        BL       USBD_CDC_ACM_GetLineCoding
+        CMP      R0,#+0
+        BEQ      ??USBD_EndPoint0_Setup_CDC_ReqToIF_16
+//   63           USBD_EP0Data.pData = USBD_EP0Buf;                  /* point to data to be sent */
+        LDR      R0,??USBD_EndPoint0_Setup_CDC_ReqToIF_0+0xC
+        LDR      R1,??USBD_EndPoint0_Setup_CDC_ReqToIF_0+0x10
+        STR      R0,[R1, #+0]
+//   64           USBD_DataInStage();                                /* send requested data */
+          CFI FunCall USBD_DataInStage
+        BL       USBD_DataInStage
+//   65           return (__TRUE);
+        MOVS     R0,#+1
+        B        ??USBD_EndPoint0_Setup_CDC_ReqToIF_12
+//   66         }
+//   67         break;
+??USBD_EndPoint0_Setup_CDC_ReqToIF_16:
+        B        ??USBD_EndPoint0_Setup_CDC_ReqToIF_2
+//   68       case CDC_SET_CONTROL_LINE_STATE:
+//   69         if (USBD_CDC_ACM_SetControlLineState(USBD_SetupPacket.wValue)) {
+??USBD_EndPoint0_Setup_CDC_ReqToIF_10:
+        LDR      R1,??USBD_EndPoint0_Setup_CDC_ReqToIF_0
+        LDRB     R0,[R1, #+2]
+        LDRB     R2,[R1, #+3]
+        LSLS     R2,R2,#+24       ;; ZeroExtS R2,R2,#+24,#+16
+        LSRS     R2,R2,#+16
+        ORRS     R0,R0,R2
+        UXTH     R0,R0
+          CFI FunCall USBD_CDC_ACM_SetControlLineState
+        BL       USBD_CDC_ACM_SetControlLineState
+        CMP      R0,#+0
+        BEQ      ??USBD_EndPoint0_Setup_CDC_ReqToIF_17
+//   70           USBD_StatusInStage();                              /* send Acknowledge */
+          CFI FunCall USBD_StatusInStage
+        BL       USBD_StatusInStage
+//   71           return (__TRUE);
+        MOVS     R0,#+1
+        B        ??USBD_EndPoint0_Setup_CDC_ReqToIF_12
+//   72         }
+//   73         break;
+??USBD_EndPoint0_Setup_CDC_ReqToIF_17:
+        B        ??USBD_EndPoint0_Setup_CDC_ReqToIF_2
+//   74       case CDC_SEND_BREAK:
+//   75         if (USBD_CDC_ACM_SendBreak(USBD_SetupPacket.wValue)) {
+??USBD_EndPoint0_Setup_CDC_ReqToIF_11:
+        LDR      R1,??USBD_EndPoint0_Setup_CDC_ReqToIF_0
+        LDRB     R0,[R1, #+2]
+        LDRB     R2,[R1, #+3]
+        LSLS     R2,R2,#+24       ;; ZeroExtS R2,R2,#+24,#+16
+        LSRS     R2,R2,#+16
+        ORRS     R0,R0,R2
+        UXTH     R0,R0
+          CFI FunCall USBD_CDC_ACM_SendBreak
+        BL       USBD_CDC_ACM_SendBreak
+        CMP      R0,#+0
+        BEQ      ??USBD_EndPoint0_Setup_CDC_ReqToIF_18
+//   76           USBD_StatusInStage();                              /* send Acknowledge */
+          CFI FunCall USBD_StatusInStage
+        BL       USBD_StatusInStage
+//   77           return (__TRUE);
+        MOVS     R0,#+1
+        B        ??USBD_EndPoint0_Setup_CDC_ReqToIF_12
+//   78         }
+//   79         break;
+//   80     }
+//   81   }
+//   82   return (__FALSE);
+??USBD_EndPoint0_Setup_CDC_ReqToIF_18:
+??USBD_EndPoint0_Setup_CDC_ReqToIF_2:
+        MOVS     R0,#+0
+??USBD_EndPoint0_Setup_CDC_ReqToIF_12:
+        POP      {R1,PC}          ;; return
+        Nop      
+        DATA
+??USBD_EndPoint0_Setup_CDC_ReqToIF_0:
+        DC32     USBD_SetupPacket
+        DC32     usbd_cdc_acm_cif_num
+        DC32     usbd_cdc_acm_dif_num
+        DC32     USBD_EP0Buf
+        DC32     USBD_EP0Data
+//   83 }
+          CFI EndBlock cfiBlock0
+//   84 
+//   85 
+//   86 /*
+//   87  *  USB Device Endpoint 0 Event Callback - CDC specific handling (Out Request To Interface)
+//   88  *    Parameters:      none
+//   89  *    Return Value:    TRUE - Out class request ok, FALSE - Out class request not supported
+//   90  */
+//   91 
+
+        SECTION `.text`:CODE:REORDER:NOROOT(2)
+          CFI Block cfiBlock1 Using cfiCommon0
+          CFI Function USBD_EndPoint0_Out_CDC_ReqToIF
+        THUMB
+//   92 __weak BOOL USBD_EndPoint0_Out_CDC_ReqToIF (void) {
+USBD_EndPoint0_Out_CDC_ReqToIF:
+        PUSH     {R7,LR}
+          CFI R14 Frame(CFA, -4)
+          CFI CFA R13+8
+//   93   if ((USBD_SetupPacket.wIndexL == usbd_cdc_acm_cif_num) || /* IF number correct? */
+//   94       (USBD_SetupPacket.wIndexL == usbd_cdc_acm_dif_num)) {
+        LDR      R0,??USBD_EndPoint0_Out_CDC_ReqToIF_0
+        LDRB     R0,[R0, #+4]
+        LDR      R1,??USBD_EndPoint0_Out_CDC_ReqToIF_0+0x4
+        LDRB     R1,[R1, #+0]
+        CMP      R0,R1
+        BEQ      ??USBD_EndPoint0_Out_CDC_ReqToIF_1
+        LDR      R0,??USBD_EndPoint0_Out_CDC_ReqToIF_0
+        LDRB     R0,[R0, #+4]
+        LDR      R1,??USBD_EndPoint0_Out_CDC_ReqToIF_0+0x8
+        LDRB     R1,[R1, #+0]
+        CMP      R0,R1
+        BNE      ??USBD_EndPoint0_Out_CDC_ReqToIF_2
+//   95     switch (USBD_SetupPacket.bRequest) {
+??USBD_EndPoint0_Out_CDC_ReqToIF_1:
+        LDR      R0,??USBD_EndPoint0_Out_CDC_ReqToIF_0
+        LDRB     R0,[R0, #+1]
+        CMP      R0,#+0
+        BEQ      ??USBD_EndPoint0_Out_CDC_ReqToIF_3
+        CMP      R0,#+2
+        BEQ      ??USBD_EndPoint0_Out_CDC_ReqToIF_4
+        CMP      R0,#+32
+        BEQ      ??USBD_EndPoint0_Out_CDC_ReqToIF_5
+        B        ??USBD_EndPoint0_Out_CDC_ReqToIF_2
+//   96       case CDC_SEND_ENCAPSULATED_COMMAND:
+//   97         if (USBD_CDC_ACM_SendEncapsulatedCommand()) {
+??USBD_EndPoint0_Out_CDC_ReqToIF_3:
+          CFI FunCall USBD_CDC_ACM_SendEncapsulatedCommand
+        BL       USBD_CDC_ACM_SendEncapsulatedCommand
+        CMP      R0,#+0
+        BEQ      ??USBD_EndPoint0_Out_CDC_ReqToIF_6
+//   98           USBD_StatusInStage();                        /* send Acknowledge */
+          CFI FunCall USBD_StatusInStage
+        BL       USBD_StatusInStage
+//   99           return (__TRUE);
+        MOVS     R0,#+1
+        B        ??USBD_EndPoint0_Out_CDC_ReqToIF_7
+//  100         }
+//  101         break;
+??USBD_EndPoint0_Out_CDC_ReqToIF_6:
+        B        ??USBD_EndPoint0_Out_CDC_ReqToIF_2
+//  102       case CDC_SET_COMM_FEATURE:
+//  103         if (USBD_CDC_ACM_SetCommFeature(USBD_SetupPacket.wValue)) {
+??USBD_EndPoint0_Out_CDC_ReqToIF_4:
+        LDR      R1,??USBD_EndPoint0_Out_CDC_ReqToIF_0
+        LDRB     R0,[R1, #+2]
+        LDRB     R2,[R1, #+3]
+        LSLS     R2,R2,#+24       ;; ZeroExtS R2,R2,#+24,#+16
+        LSRS     R2,R2,#+16
+        ORRS     R0,R0,R2
+        UXTH     R0,R0
+          CFI FunCall USBD_CDC_ACM_SetCommFeature
+        BL       USBD_CDC_ACM_SetCommFeature
+        CMP      R0,#+0
+        BEQ      ??USBD_EndPoint0_Out_CDC_ReqToIF_8
+//  104           USBD_StatusInStage();                        /* send Acknowledge */
+          CFI FunCall USBD_StatusInStage
+        BL       USBD_StatusInStage
+//  105           return (__TRUE);
+        MOVS     R0,#+1
+        B        ??USBD_EndPoint0_Out_CDC_ReqToIF_7
+//  106         }
+//  107         break;
+??USBD_EndPoint0_Out_CDC_ReqToIF_8:
+        B        ??USBD_EndPoint0_Out_CDC_ReqToIF_2
+//  108       case CDC_SET_LINE_CODING:
+//  109         if (USBD_CDC_ACM_SetLineCoding()) {
+??USBD_EndPoint0_Out_CDC_ReqToIF_5:
+          CFI FunCall USBD_CDC_ACM_SetLineCoding
+        BL       USBD_CDC_ACM_SetLineCoding
+        CMP      R0,#+0
+        BEQ      ??USBD_EndPoint0_Out_CDC_ReqToIF_9
+//  110           USBD_StatusInStage();                        /* send Acknowledge */
+          CFI FunCall USBD_StatusInStage
+        BL       USBD_StatusInStage
+//  111           return (__TRUE);
+        MOVS     R0,#+1
+        B        ??USBD_EndPoint0_Out_CDC_ReqToIF_7
+//  112         }
+//  113         break;
+//  114     }
+//  115   }
+//  116   return (__FALSE);
+??USBD_EndPoint0_Out_CDC_ReqToIF_9:
+??USBD_EndPoint0_Out_CDC_ReqToIF_2:
+        MOVS     R0,#+0
+??USBD_EndPoint0_Out_CDC_ReqToIF_7:
+        POP      {R1,PC}          ;; return
+        Nop      
+        DATA
+??USBD_EndPoint0_Out_CDC_ReqToIF_0:
+        DC32     USBD_SetupPacket
+        DC32     usbd_cdc_acm_cif_num
+        DC32     usbd_cdc_acm_dif_num
+//  117 }
+          CFI EndBlock cfiBlock1
+
+        SECTION `.iar_vfe_header`:DATA:NOALLOC:NOROOT(2)
+        SECTION_TYPE SHT_PROGBITS, 0
+        DATA
+        DC32 0
+
+        SECTION __DLIB_PERTHREAD:DATA:REORDER:NOROOT(0)
+        SECTION_TYPE SHT_PROGBITS, 0
+
+        SECTION __DLIB_PERTHREAD_init:DATA:REORDER:NOROOT(0)
+        SECTION_TYPE SHT_PROGBITS, 0
+
+        END
+// 
+// 432 bytes in section .text
+// 
+// 0 bytes of CODE memory (+ 432 bytes shared)
+//
+//Errors: none
+//Warnings: none

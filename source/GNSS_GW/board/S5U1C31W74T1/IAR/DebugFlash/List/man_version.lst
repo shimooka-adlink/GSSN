@@ -1,0 +1,205 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V7.80.4.12462/W32 for ARM       21/May/2019  17:01:04
+# Copyright 1999-2017 IAR Systems AB.
+#
+#    Cpu mode     =  thumb
+#    Endian       =  little
+#    Source file  =  C:\GNSS\Software\rJ105\source\GNSS_GW\apl\man_version.c
+#    Command line =  
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\apl\man_version.c -D
+#        __TARGET_ARCH_7_M -D S1C31W74 -D GNSS_GW_SIDE_A -lCN
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\List
+#        -lA
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\List
+#        --diag_suppress Pe177,Pe111,Pa082 -o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\Obj
+#        --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa
+#        --no_clustering --no_scheduling --debug --endian=little
+#        --cpu=Cortex-M0+ -e --fpu=None --dlib_config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench
+#        7.5\arm\INC\c\DLib_Config_Normal.h" -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\ -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\
+#        -I "C:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        7.5\arm\CMSIS\Include\" -I "C:\Program Files (x86)\IAR
+#        Systems\Embedded Workbench 7.5\arm\inc\Epson\" -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\CMSIS\Device\S1C31W74\Include\
+#        -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\CMSIS\Driver\Include\
+#        -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\sePeriphLibrary\
+#        -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\board\S5U1C31W74T1\
+#        -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\USBStack\INC\
+#        -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\include\
+#        -Ol
+#    Locale       =  Japanese_Japan.932
+#    List file    =  
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\List\man_version.lst
+#    Object file  =  
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\Obj\man_version.o
+#
+###############################################################################
+
+C:\GNSS\Software\rJ105\source\GNSS_GW\apl\man_version.c
+      1          
+      2          /**
+      3            ******************************************************************************
+      4            * @file    man_version.c
+      5            * @author  コア
+      6            * @version V1.0
+      7            * @date    2017.10.2
+      8            * @brief   versionを管理する
+      9            ******************************************************************************
+     10            $Id: man_version.c 259 2018-08-02 06:16:48Z shitaoka $
+     11            * @attention
+     12            *
+     13            *****************************************************************************
+     14          */
+     15          
+     16          #include <string.h>
+     17          #include <stdio.h>
+     18          #include <stdlib.h>
+     19          
+     20          #include "board.h"
+     21          #include "gnss_gw_common.h"
+     22          
+     23          #pragma section = "APL_PRG_BLOCK"
+     24          
+     25          
+     26          /************************************************************************/
+     27          /* declaration of structure                                             */
+     28          /************************************************************************/
+     29          
+
+   \                                 In section .rodata, align 4
+     30          const uint8_t Version_number[] =  "V1.04";
+   \                     Version_number:
+   \   00000000   0x56 0x31          DC8 "V1.04"
+   \              0x2E 0x30    
+   \              0x34 0x00    
+   \   00000006   0x00 0x00          DC8 0, 0
+
+   \                                 In section .rodata, align 4
+     31          const uint8_t Revision_number[] = "rJ105";
+   \                     Revision_number:
+   \   00000000   0x72 0x4A          DC8 "rJ105"
+   \              0x31 0x30    
+   \              0x35 0x00    
+   \   00000006   0x00 0x00          DC8 0, 0
+
+   \                                 In section .rodata, align 4
+     32          const uint8_t Version_date[] =__DATE__;
+   \                     Version_date:
+   \   00000000   0x4D 0x61          DC8 "May 21 2019"
+   \              0x79 0x20    
+   \              0x32 0x31    
+   \              0x20 0x32    
+   \              0x30 0x31    
+   \              0x39 0x00    
+
+   \                                 In section .rodata, align 4
+     33          const uint8_t Version_time[] =__TIME__;
+   \                     Version_time:
+   \   00000000   0x31 0x37          DC8 "17:01:04"
+   \              0x3A 0x30    
+   \              0x31 0x3A    
+   \              0x30 0x34    
+   \              0x00         
+   \   00000009   0x00 0x00          DC8 0, 0, 0
+   \              0x00         
+     34          
+     35          
+     36          
+     37          /********************************************************************/
+     38          /*!
+     39           * \name	man_version_get_data
+     40           * \brief	version情報を取得する処理
+     41           * \param	なし
+     42           * \return  なし
+     43           * \note	必要時に呼ばれること
+     44           *          GNSS_GW_V1.00_B1.00_
+     45           */
+     46          /********************************************************************/
+
+   \                                 In section .text, align 4, keep-with-next
+     47          void man_version_get_data( int8_t *data )
+     48          {
+   \                     man_version_get_data: (+1)
+   \   00000000   0xB500             PUSH     {LR}
+   \   00000002   0xB083             SUB      SP,SP,#+12
+     49          	if (data != NULL) {
+   \   00000004   0x2800             CMP      R0,#+0
+   \   00000006   0xD008             BEQ      ??man_version_get_data_0
+     50          #ifdef GNSS_GW_SIDE_A
+     51          		sprintf((char *)data, "GNSS_GW_A_%s_%s_%s_%s", Version_number, Revision_number, Version_date, Version_time);
+   \   00000008   0x4904             LDR      R1,??man_version_get_data_1
+   \   0000000A   0x9101             STR      R1,[SP, #+4]
+   \   0000000C   0x4904             LDR      R1,??man_version_get_data_1+0x4
+   \   0000000E   0x9100             STR      R1,[SP, #+0]
+   \   00000010   0x4B04             LDR      R3,??man_version_get_data_1+0x8
+   \   00000012   0x4A05             LDR      R2,??man_version_get_data_1+0xC
+   \   00000014   0x4905             LDR      R1,??man_version_get_data_1+0x10
+   \   00000016   0x.... 0x....      BL       sprintf
+     52          #else
+     53          		sprintf((char *)data, "GNSS_GW_B_%s_%s_%s_%s", Version_number, Revision_number, Version_date, Version_time);
+     54          #endif
+     55          	}
+     56          
+     57          }
+   \                     ??man_version_get_data_0: (+1)
+   \   0000001A   0xBD07             POP      {R0-R2,PC}       ;; return
+   \                     ??man_version_get_data_1:
+   \   0000001C   0x........         DC32     Version_time
+   \   00000020   0x........         DC32     Version_date
+   \   00000024   0x........         DC32     Revision_number
+   \   00000028   0x........         DC32     Version_number
+   \   0000002C   0x........         DC32     ?_0
+
+   \                                 In section .rodata, align 4
+   \                     ?_0:
+   \   00000000   0x47 0x4E          DC8 "GNSS_GW_A_%s_%s_%s_%s"
+   \              0x53 0x53    
+   \              0x5F 0x47    
+   \              0x57 0x5F    
+   \              0x41 0x5F    
+   \              0x25 0x73    
+   \              0x5F 0x25    
+   \              0x73 0x5F    
+   \              0x25 0x73    
+   \              0x5F 0x25    
+   \              0x73 0x00    
+   \   00000016   0x00 0x00          DC8 0, 0
+     58          
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+      16   man_version_get_data
+        16   -> sprintf
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+      24  ?_0
+       8  Revision_number
+      12  Version_date
+       8  Version_number
+      12  Version_time
+      48  man_version_get_data
+
+ 
+ 64 bytes in section .rodata
+ 48 bytes in section .text
+ 
+ 48 bytes of CODE  memory
+ 64 bytes of CONST memory
+
+Errors: none
+Warnings: none

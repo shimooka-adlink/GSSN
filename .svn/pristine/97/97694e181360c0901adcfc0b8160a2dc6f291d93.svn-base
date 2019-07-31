@@ -1,0 +1,391 @@
+///////////////////////////////////////////////////////////////////////////////
+//
+// IAR ANSI C/C++ Compiler V7.80.4.12462/W32 for ARM      17/May/2019  13:31:41
+// Copyright 1999-2017 IAR Systems AB.
+//
+//    Cpu mode     =  thumb
+//    Endian       =  little
+//    Source file  =  
+//        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\driver\usb\drv_usbd_user_cdc_acm.c
+//    Command line =  
+//        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\driver\usb\drv_usbd_user_cdc_acm.c
+//        -D __TARGET_ARCH_7_M -D S1C31W74 -D GNSS_GW_SIDE_A -lCN
+//        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\List
+//        -lA
+//        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\List
+//        --diag_suppress Pe177,Pe111,Pa082 -o
+//        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\Obj
+//        --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa
+//        --no_clustering --no_scheduling --debug --endian=little
+//        --cpu=Cortex-M0+ -e --fpu=None --dlib_config "C:\Program Files
+//        (x86)\IAR Systems\Embedded Workbench
+//        7.5\arm\INC\c\DLib_Config_Normal.h" -I
+//        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\ -I
+//        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\
+//        -I "C:\Program Files (x86)\IAR Systems\Embedded Workbench
+//        7.5\arm\CMSIS\Include\" -I "C:\Program Files (x86)\IAR
+//        Systems\Embedded Workbench 7.5\arm\inc\Epson\" -I
+//        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\CMSIS\Device\S1C31W74\Include\
+//        -I
+//        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\CMSIS\Driver\Include\
+//        -I
+//        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\sePeriphLibrary\
+//        -I
+//        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\board\S5U1C31W74T1\
+//        -I
+//        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\USBStack\INC\
+//        -I
+//        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\include\
+//        -Ol
+//    Locale       =  Japanese_Japan.932
+//    List file    =  
+//        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\List\drv_usbd_user_cdc_acm.s
+//
+///////////////////////////////////////////////////////////////////////////////
+
+        RTMODEL "__SystemLibrary", "DLib"
+        AAPCS BASE,INTERWORK
+        PRESERVE8
+        REQUIRE8
+
+        #define SHT_PROGBITS 0x1
+
+        EXTERN __aeabi_uread4
+        EXTERN __aeabi_uwrite4
+
+        PUBLIC UART_Config
+        PUBLIC USBD_CDC_ACM_PortGetLineCoding
+        PUBLIC USBD_CDC_ACM_PortInitialize
+        PUBLIC USBD_CDC_ACM_PortReset
+        PUBLIC USBD_CDC_ACM_PortSetControlLineState
+        PUBLIC USBD_CDC_ACM_PortSetLineCoding
+        PUBLIC USBD_CDC_ACM_PortUninitialize
+        
+          CFI Names cfiNames0
+          CFI StackFrame CFA R13 DATA
+          CFI Resource R0:32, R1:32, R2:32, R3:32, R4:32, R5:32, R6:32, R7:32
+          CFI Resource R8:32, R9:32, R10:32, R11:32, R12:32, R13:32, R14:32
+          CFI EndNames cfiNames0
+        
+          CFI Common cfiCommon0 Using cfiNames0
+          CFI CodeAlign 2
+          CFI DataAlign 4
+          CFI ReturnAddress R14 CODE
+          CFI CFA R13+0
+          CFI R0 Undefined
+          CFI R1 Undefined
+          CFI R2 Undefined
+          CFI R3 Undefined
+          CFI R4 SameValue
+          CFI R5 SameValue
+          CFI R6 SameValue
+          CFI R7 SameValue
+          CFI R8 SameValue
+          CFI R9 SameValue
+          CFI R10 SameValue
+          CFI R11 SameValue
+          CFI R12 Undefined
+          CFI R14 SameValue
+          CFI EndCommon cfiCommon0
+        
+// C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\driver\usb\drv_usbd_user_cdc_acm.c
+//    1 /* CMSIS-DAP Interface Firmware
+//    2  * Copyright (c) 2009-2013 ARM Limited
+//    3  *
+//    4  * Licensed under the Apache License, Version 2.0 (the "License");
+//    5  * you may not use this file except in compliance with the License.
+//    6  * You may obtain a copy of the License at
+//    7  *
+//    8  *     http://www.apache.org/licenses/LICENSE-2.0
+//    9  *
+//   10  * Unless required by applicable law or agreed to in writing, software
+//   11  * distributed under the License is distributed on an "AS IS" BASIS,
+//   12  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   13  * See the License for the specific language governing permissions and
+//   14  * limitations under the License.
+//   15  */
+//   16 #include <RTL.h>
+//   17 #include "rl_usb.h"
+//   18 
+//   19 #include "uart.h"
+//   20 
+//   21 
+//   22 #pragma section = "DRV_PRG_BLOCK"
+//   23 
+//   24 
+
+        SECTION `.bss`:DATA:REORDER:NOROOT(2)
+        DATA
+//   25 UART_Configuration UART_Config;
+UART_Config:
+        DS8 8
+//   26 
+//   27 
+//   28 /** \brief  Vitual COM Port initialization
+//   29 
+//   30     The function inititalizes the hardware resources of the port used as
+//   31     the Virtual COM Port.
+//   32     この関数は、仮想COMポートとして使用されるポートのハードウェアリソースを初期化します。
+//   33 
+//   34     \return             0        Function failed.
+//   35     \return             1        Function succeeded.
+//   36  */
+
+        SECTION `.text`:CODE:NOROOT(1)
+          CFI Block cfiBlock0 Using cfiCommon0
+          CFI Function USBD_CDC_ACM_PortInitialize
+          CFI NoCalls
+        THUMB
+//   37 int32_t USBD_CDC_ACM_PortInitialize (void) 
+//   38 {
+//   39 
+//   40   UART_Config.Baudrate    = 96000;
+USBD_CDC_ACM_PortInitialize:
+        LDR      R0,??DataTable2  ;; 0x17700
+        LDR      R1,??DataTable2_1
+        STR      R0,[R1, #+0]
+//   41   UART_Config.DataBits    = (UART_DataBits) UART_DATA_BITS_7;
+        MOVS     R0,#+7
+        LDR      R1,??DataTable2_1
+        STRB     R0,[R1, #+4]
+//   42   UART_Config.Parity      = (UART_Parity)   UART_PARITY_NONE;
+        MOVS     R0,#+0
+        LDR      R1,??DataTable2_1
+        STRB     R0,[R1, #+5]
+//   43   UART_Config.StopBits    = (UART_StopBits) UART_STOP_BITS_1;
+        MOVS     R0,#+0
+        LDR      R1,??DataTable2_1
+        STRB     R0,[R1, #+6]
+//   44   UART_Config.FlowControl = UART_FLOW_CONTROL_NONE;  
+        MOVS     R0,#+0
+        LDR      R1,??DataTable2_1
+        STRB     R0,[R1, #+7]
+//   45 
+//   46   return 1;
+        MOVS     R0,#+1
+        BX       LR               ;; return
+//   47 }
+          CFI EndBlock cfiBlock0
+//   48 
+//   49 
+//   50 /** \brief  Vitual COM Port uninitialization
+//   51 
+//   52     The function uninititalizes/releases the hardware resources of the port used
+//   53     as the Virtual COM Port.
+//   54     この機能は、仮想COMポートとして使用されるポートのハードウェアリソースを初期化/解除します。
+//   55 
+//   56     \return             0        Function failed.
+//   57     \return             1        Function succeeded.
+//   58  */
+
+        SECTION `.text`:CODE:NOROOT(1)
+          CFI Block cfiBlock1 Using cfiCommon0
+          CFI Function USBD_CDC_ACM_PortUninitialize
+          CFI NoCalls
+        THUMB
+//   59 int32_t USBD_CDC_ACM_PortUninitialize (void) 
+//   60 {
+//   61     
+//   62   return 1;
+USBD_CDC_ACM_PortUninitialize:
+        MOVS     R0,#+1
+        BX       LR               ;; return
+//   63 }
+          CFI EndBlock cfiBlock1
+//   64 
+//   65 
+//   66 /** \brief  Vitual COM Port reset
+//   67 
+//   68     The function resets the internal states of the port used
+//   69     as the Virtual COM Port.
+//   70     この関数は、仮想COMポートとして使用されるポートの内部状態をリセットします。
+//   71 
+//   72     \return             0        Function failed.
+//   73     \return             1        Function succeeded.
+//   74  */
+
+        SECTION `.text`:CODE:NOROOT(1)
+          CFI Block cfiBlock2 Using cfiCommon0
+          CFI Function USBD_CDC_ACM_PortReset
+          CFI NoCalls
+        THUMB
+//   75 int32_t USBD_CDC_ACM_PortReset (void) 
+//   76 {
+//   77     //return (serial_reset ());
+//   78   return 1;
+USBD_CDC_ACM_PortReset:
+        MOVS     R0,#+1
+        BX       LR               ;; return
+//   79 }
+          CFI EndBlock cfiBlock2
+//   80 
+//   81 
+//   82 /** \brief  Virtual COM Port change communication settings
+//   83 
+//   84     The function changes communication settings of the port used as the
+//   85     Virtual COM Port.
+//   86     この機能は、仮想COMポートとして使用されるポートの通信設定を変更します。
+//   87 
+//   88     \param [in]         line_coding  Pointer to the loaded CDC_LINE_CODING structure.
+//   89     \return             0        Function failed.
+//   90     \return             1        Function succeeded.
+//   91  */
+
+        SECTION `.text`:CODE:NOROOT(1)
+          CFI Block cfiBlock3 Using cfiCommon0
+          CFI Function USBD_CDC_ACM_PortSetLineCoding
+        THUMB
+//   92 int32_t USBD_CDC_ACM_PortSetLineCoding (CDC_LINE_CODING *line_coding) 
+//   93 {
+USBD_CDC_ACM_PortSetLineCoding:
+        PUSH     {R4,LR}
+          CFI R14 Frame(CFA, -4)
+          CFI R4 Frame(CFA, -8)
+          CFI CFA R13+8
+        MOVS     R4,R0
+//   94     UART_Config.Baudrate    = line_coding->dwDTERate;
+        MOVS     R0,R4
+          CFI FunCall __aeabi_uread4
+        BL       __aeabi_uread4
+        LDR      R1,??DataTable2_1
+        STR      R0,[R1, #+0]
+//   95     UART_Config.DataBits    = (UART_DataBits) line_coding->bDataBits;
+        LDRB     R0,[R4, #+6]
+        LDR      R1,??DataTable2_1
+        STRB     R0,[R1, #+4]
+//   96     UART_Config.Parity      = (UART_Parity)   line_coding->bParityType;
+        LDRB     R0,[R4, #+5]
+        LDR      R1,??DataTable2_1
+        STRB     R0,[R1, #+5]
+//   97     UART_Config.StopBits    = (UART_StopBits) line_coding->bCharFormat;
+        LDRB     R0,[R4, #+4]
+        LDR      R1,??DataTable2_1
+        STRB     R0,[R1, #+6]
+//   98     UART_Config.FlowControl = UART_FLOW_CONTROL_NONE;
+        MOVS     R0,#+0
+        LDR      R1,??DataTable2_1
+        STRB     R0,[R1, #+7]
+//   99 
+//  100     //return (serial_set_configuration (&UART_Config));
+//  101     return 1;
+        MOVS     R0,#+1
+        POP      {R4,PC}          ;; return
+//  102 }
+          CFI EndBlock cfiBlock3
+//  103 
+//  104 
+//  105 /** \brief  Vitual COM Port retrieve communication settings
+//  106 
+//  107     The function retrieves communication settings of the port used as the
+//  108     Virtual COM Port.
+//  109     この関数は、仮想COMポートとして使用されるポートの通信設定を取得します。
+//  110 
+//  111     \param [in]         line_coding  Pointer to the CDC_LINE_CODING structure.
+//  112     \return             0        Function failed.
+//  113     \return             1        Function succeeded.
+//  114  */
+
+        SECTION `.text`:CODE:NOROOT(1)
+          CFI Block cfiBlock4 Using cfiCommon0
+          CFI Function USBD_CDC_ACM_PortGetLineCoding
+        THUMB
+//  115 int32_t USBD_CDC_ACM_PortGetLineCoding (CDC_LINE_CODING *line_coding) 
+//  116 {
+USBD_CDC_ACM_PortGetLineCoding:
+        PUSH     {R4,LR}
+          CFI R14 Frame(CFA, -4)
+          CFI R4 Frame(CFA, -8)
+          CFI CFA R13+8
+        MOVS     R4,R0
+//  117     //if (serial_get_configuration (&UART_Config)) {
+//  118     if (1) {
+//  119         line_coding->dwDTERate   = UART_Config.Baudrate;
+        MOVS     R1,R4
+        LDR      R0,??DataTable2_1
+        LDR      R0,[R0, #+0]
+          CFI FunCall __aeabi_uwrite4
+        BL       __aeabi_uwrite4
+//  120         line_coding->bDataBits   = UART_Config.DataBits;
+        LDR      R0,??DataTable2_1
+        LDRB     R0,[R0, #+4]
+        STRB     R0,[R4, #+6]
+//  121         line_coding->bParityType = UART_Config.Parity;
+        LDR      R0,??DataTable2_1
+        LDRB     R0,[R0, #+5]
+        STRB     R0,[R4, #+5]
+//  122         line_coding->bCharFormat = UART_Config.StopBits;
+        LDR      R0,??DataTable2_1
+        LDRB     R0,[R0, #+6]
+        STRB     R0,[R4, #+4]
+//  123         return (1);
+        MOVS     R0,#+1
+        POP      {R4,PC}          ;; return
+//  124     }
+//  125 
+//  126     return (0);
+//  127 }
+          CFI EndBlock cfiBlock4
+
+        SECTION `.text`:CODE:NOROOT(2)
+        SECTION_TYPE SHT_PROGBITS, 0
+        DATA
+??DataTable2:
+        DC32     0x17700
+
+        SECTION `.text`:CODE:NOROOT(2)
+        SECTION_TYPE SHT_PROGBITS, 0
+        DATA
+??DataTable2_1:
+        DC32     UART_Config
+//  128 
+//  129 /** \brief  Virtual COM Port set control line state
+//  130 
+//  131     The function sets control line state on the port used as the
+//  132     Virtual COM Port.
+//  133 	この機能は、仮想COMポートとして使用されるポートの制御回線状態を設定します。
+//  134 
+//  135     \param [in]         ctrl_bmp Control line settings bitmap (
+//  136                           0. bit - DTR state,
+//  137                           1. bit - RTS state).
+//  138     \return             0        Function failed.
+//  139     \return             1        Function succeeded.
+//  140  */
+
+        SECTION `.text`:CODE:NOROOT(1)
+          CFI Block cfiBlock5 Using cfiCommon0
+          CFI Function USBD_CDC_ACM_PortSetControlLineState
+          CFI NoCalls
+        THUMB
+//  141 int32_t USBD_CDC_ACM_PortSetControlLineState (uint16_t ctrl_bmp) 
+//  142 {
+//  143     return (1);
+USBD_CDC_ACM_PortSetControlLineState:
+        MOVS     R0,#+1
+        BX       LR               ;; return
+//  144 }
+          CFI EndBlock cfiBlock5
+
+        SECTION `.iar_vfe_header`:DATA:NOALLOC:NOROOT(2)
+        SECTION_TYPE SHT_PROGBITS, 0
+        DATA
+        DC32 0
+
+        SECTION DRV_PRG_BLOCK:DATA:REORDER:NOROOT(0)
+        SECTION_TYPE SHT_PROGBITS, 0
+
+        SECTION __DLIB_PERTHREAD:DATA:REORDER:NOROOT(0)
+        SECTION_TYPE SHT_PROGBITS, 0
+
+        SECTION __DLIB_PERTHREAD_init:DATA:REORDER:NOROOT(0)
+        SECTION_TYPE SHT_PROGBITS, 0
+
+        END
+// 
+//   8 bytes in section .bss
+// 132 bytes in section .text
+// 
+// 132 bytes of CODE memory
+//   8 bytes of DATA memory
+//
+//Errors: none
+//Warnings: none

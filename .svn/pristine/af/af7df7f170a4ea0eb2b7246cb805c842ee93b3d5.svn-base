@@ -1,0 +1,13 @@
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\arm\bin\armproc.dll" 
+
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\arm\bin\armJET.dll" 
+
+"C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\Exe\GNSS_GW_FW_SIDE_A.out" 
+
+--plugin "C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\arm\bin\armbat.dll" 
+
+--flash_loader "C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\arm\config\flashloader\Epson\S1C31W74_int.board" 
+
+
+
+

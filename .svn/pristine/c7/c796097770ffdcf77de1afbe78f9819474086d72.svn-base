@@ -1,0 +1,797 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V7.80.4.12462/W32 for ARM       21/May/2019  17:01:27
+# Copyright 1999-2017 IAR Systems AB.
+#
+#    Cpu mode     =  thumb
+#    Endian       =  little
+#    Source file  =  
+#        C:\GNSS\Software\rJ105\CMSIS\Device\S1C31W74\Source\system_S1C31W74.c
+#    Command line =  
+#        C:\GNSS\Software\rJ105\CMSIS\Device\S1C31W74\Source\system_S1C31W74.c
+#        -D __TARGET_ARCH_7_M -D S1C31W74 -D GNSS_GW_SIDE_B -lCN
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\List
+#        -lA
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\List
+#        --diag_suppress Pe177,Pe111,Pa082 -o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj
+#        --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa
+#        --no_clustering --no_scheduling --debug --endian=little
+#        --cpu=Cortex-M0+ -e --fpu=None --dlib_config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench
+#        7.5\arm\INC\c\DLib_Config_Normal.h" -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\ -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\
+#        -I "C:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        7.5\arm\CMSIS\Include\" -I "C:\Program Files (x86)\IAR
+#        Systems\Embedded Workbench 7.5\arm\inc\Epson\" -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\CMSIS\Device\S1C31W74\Include\
+#        -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\CMSIS\Driver\Include\
+#        -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\sePeriphLibrary\
+#        -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\board\S5U1C31W74T1\
+#        -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\USBStack\INC\
+#        -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\include\
+#        -Ol
+#    Locale       =  Japanese_Japan.932
+#    List file    =  
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\List\system_S1C31W74.lst
+#    Object file  =  
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\system_S1C31W74.o
+#
+###############################################################################
+
+C:\GNSS\Software\rJ105\CMSIS\Device\S1C31W74\Source\system_S1C31W74.c
+      1          /**************************************************************************//**
+      2           * @file     system_C31W74.c
+      3           * @brief    CMSIS Cortex-M0P Device Peripheral Access Layer Source File for
+      4           *           Device C31W74
+      5           * @version  V1.1
+      6           * @date     22-December-2015
+      7           *
+      8           * @note
+      9           *
+     10           ******************************************************************************/
+     11          /* Copyright (c) 2012 ARM LIMITED
+     12          
+     13             All rights reserved.
+     14             Redistribution and use in source and binary forms, with or without
+     15             modification, are permitted provided that the following conditions are met:
+     16             - Redistributions of source code must retain the above copyright
+     17               notice, this list of conditions and the following disclaimer.
+     18             - Redistributions in binary form must reproduce the above copyright
+     19               notice, this list of conditions and the following disclaimer in the
+     20               documentation and/or other materials provided with the distribution.
+     21             - Neither the name of ARM nor the names of its contributors may be used
+     22               to endorse or promote products derived from this software without
+     23               specific prior written permission.
+     24             *
+     25             THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+     26             AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+     27             IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+     28             ARE DISCLAIMED. IN NO EVENT SHALL COPYRIGHT HOLDERS AND CONTRIBUTORS BE
+     29             LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+     30             CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+     31             SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+     32             INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+     33             CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+     34             ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+     35             POSSIBILITY OF SUCH DAMAGE.
+     36             ---------------------------------------------------------------------------*/
+     37          
+     38          
+     39          #include <stdint.h>
+     40          #include <S1C31W74.h>
+     41          #include "se_clg.h"
+     42          #include "se_i2c.h"
+     43          #include "se_qspi.h"
+     44          #include "se_remc2.h"
+     45          #include "se_rfc.h"
+     46          #include "se_snda.h"
+     47          #include "se_spia.h"
+     48          #include "se_svd2.h"
+     49          #include "se_t16b.h"
+     50          #include "se_uart2.h"
+     51          #include "system_S1C31W74.h"
+     52          
+     53          #include <board.h>
+     54          #include <settings.h>
+     55          
+
+   \                                 In section .bss, align 4
+     56          volatile unsigned g1msSysTicks;        // Timer tick 
+   \                     g1msSysTicks:
+   \   00000000                      DS8 4
+     57          /*----------------------------------------------------------------------------
+     58            DEFINES
+     59           *----------------------------------------------------------------------------*/
+     60          
+     61          /*----------------------------------------------------------------------------
+     62            Define clocks
+     63           *----------------------------------------------------------------------------*/
+     64          
+     65          #define __SYSTEM_CLOCK    (8000000UL)
+     66          
+     67          
+     68          /*----------------------------------------------------------------------------
+     69            Clock Variable definitions
+     70           *----------------------------------------------------------------------------*/
+     71          
+
+   \                                 In section .data, align 4
+     72          uint32_t SystemCoreClock = __SYSTEM_CLOCK;  /*!< System Clock Frequency (Core Clock)*/
+   \                     SystemCoreClock:
+   \   00000000   0x007A1200         DC32 8000000
+     73          
+     74          
+     75          /*----------------------------------------------------------------------------
+     76            Clock functions
+     77           *----------------------------------------------------------------------------*/
+
+   \                                 In section .text, align 2, keep-with-next
+     78          void SystemCoreClockUpdate (void)            /* Get Core Clock Frequency      */
+     79          {
+   \                     SystemCoreClockUpdate: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+     80            SystemCoreClock = seCLG_GetSysClk();       
+   \   00000002   0x.... 0x....      BL       seCLG_GetSysClk
+   \   00000006   0x....             LDR      R1,??DataTable9
+   \   00000008   0x6008             STR      R0,[R1, #+0]
+     81          }
+   \   0000000A   0xBD01             POP      {R0,PC}          ;; return
+     82          
+     83          /**
+     84           * Initialize the system
+     85           *
+     86           * @brief  Setup the microcontroller system.
+     87           *         Initialize the System.
+     88           */
+
+   \                                 In section .text, align 2, keep-with-next
+     89          void SystemInit (void)
+     90          {
+   \                     SystemInit: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+     91          
+     92            SystemCoreClock = __SYSTEM_CLOCK;
+   \   00000002   0x....             LDR      R0,??DataTable9_1  ;; 0x7a1200
+   \   00000004   0x....             LDR      R1,??DataTable9
+   \   00000006   0x6008             STR      R0,[R1, #+0]
+     93            BoardInit();
+   \   00000008   0x.... 0x....      BL       BoardInit
+     94            
+     95          }
+   \   0000000C   0xBD01             POP      {R0,PC}          ;; return
+     96          
+     97          /**
+     98           * @brief  Sets the sleep state.       
+     99           */
+
+   \                                 In section .text, align 2, keep-with-next
+    100          void setSleep( void )
+    101          {
+    102          #ifndef TICKLESS_ENABLED
+    103            seSysTickStop();
+    104          #endif    
+    105            
+    106            SCB->SCR |= SCB_SCR_SLEEPDEEP_Msk;
+   \                     setSleep: (+1)
+   \   00000000   0x....             LDR      R0,??DataTable9_2  ;; 0xe000ed10
+   \   00000002   0x6800             LDR      R0,[R0, #+0]
+   \   00000004   0x2104             MOVS     R1,#+4
+   \   00000006   0x4301             ORRS     R1,R1,R0
+   \   00000008   0x....             LDR      R0,??DataTable9_2  ;; 0xe000ed10
+   \   0000000A   0x6001             STR      R1,[R0, #+0]
+    107          
+    108            __WFI();
+   \   0000000C   0xBF30             WFI      
+    109          
+    110          #ifndef TICKLESS_ENABLED
+    111            seSysTickStart();
+    112          #endif    
+    113          }
+   \   0000000E   0x4770             BX       LR               ;; return
+    114          
+    115          /**
+    116           * @brief  Sets the halt state.        
+    117           */
+
+   \                                 In section .text, align 2, keep-with-next
+    118          void setHalt( void )
+    119          {
+    120          #ifndef TICKLESS_ENABLED
+    121            seSysTickStop();
+    122          #endif    
+    123            
+    124            SCB->SCR &= ~SCB_SCR_SLEEPDEEP_Msk;
+   \                     setHalt: (+1)
+   \   00000000   0x....             LDR      R0,??DataTable9_2  ;; 0xe000ed10
+   \   00000002   0x6800             LDR      R0,[R0, #+0]
+   \   00000004   0x2104             MOVS     R1,#+4
+   \   00000006   0x4388             BICS     R0,R0,R1
+   \   00000008   0x....             LDR      R1,??DataTable9_2  ;; 0xe000ed10
+   \   0000000A   0x6008             STR      R0,[R1, #+0]
+    125          
+    126            __WFI();
+   \   0000000C   0xBF30             WFI      
+    127          
+    128          #ifndef TICKLESS_ENABLED
+    129            seSysTickStart();
+    130          #endif    
+    131          }
+   \   0000000E   0x4770             BX       LR               ;; return
+    132          
+    133          /**
+    134           * @brief  Sets Event Wait state.        
+    135           */
+
+   \                                 In section .text, align 2, keep-with-next
+    136          void setEventWait( void )
+    137          {
+    138          #ifdef TICKLESS_ENABLED 
+    139            __NOP();
+   \                     setEventWait: (+1)
+   \   00000000   0xBF00             Nop      
+    140          #else
+    141            __WFE();
+    142          #endif
+    143          }
+   \   00000002   0x4770             BX       LR               ;; return
+    144          
+
+   \                                 In section .text, align 2, keep-with-next
+    145          void seSysTickStart( void ) {
+    146          
+    147            SysTick->CTRL |= SysTick_CTRL_ENABLE_Msk;
+   \                     seSysTickStart: (+1)
+   \   00000000   0x....             LDR      R0,??DataTable9_3  ;; 0xe000e010
+   \   00000002   0x6800             LDR      R0,[R0, #+0]
+   \   00000004   0x2101             MOVS     R1,#+1
+   \   00000006   0x4301             ORRS     R1,R1,R0
+   \   00000008   0x....             LDR      R0,??DataTable9_3  ;; 0xe000e010
+   \   0000000A   0x6001             STR      R1,[R0, #+0]
+    148          
+    149          }
+   \   0000000C   0x4770             BX       LR               ;; return
+    150          
+
+   \                                 In section .text, align 2, keep-with-next
+    151          void seSysTickStop( void ) {
+    152            
+    153           SysTick->CTRL &= ~SysTick_CTRL_ENABLE_Msk;
+   \                     seSysTickStop: (+1)
+   \   00000000   0x....             LDR      R0,??DataTable9_3  ;; 0xe000e010
+   \   00000002   0x6800             LDR      R0,[R0, #+0]
+   \   00000004   0x2101             MOVS     R1,#+1
+   \   00000006   0x4388             BICS     R0,R0,R1
+   \   00000008   0x....             LDR      R1,??DataTable9_3  ;; 0xe000e010
+   \   0000000A   0x6008             STR      R0,[R1, #+0]
+    154          
+    155          }
+   \   0000000C   0x4770             BX       LR               ;; return
+    156          
+
+   \                                 In section .text, align 2, keep-with-next
+    157          uint32_t seSysTickInit( uint32_t ticks, uint32_t enableint ){
+   \                     seSysTickInit: (+1)
+   \   00000000   0xB510             PUSH     {R4,LR}
+   \   00000002   0x0002             MOVS     R2,R0
+    158            uint32_t RetVal = seSTATUS_OK;
+   \   00000004   0x2001             MOVS     R0,#+1
+    159            
+    160            if ((ticks - 1UL) > SysTick_LOAD_RELOAD_Msk) {
+   \   00000006   0x1E53             SUBS     R3,R2,#+1
+   \   00000008   0x2480             MOVS     R4,#+128
+   \   0000000A   0x0464             LSLS     R4,R4,#+17       ;; #+16777216
+   \   0000000C   0x42A3             CMP      R3,R4
+   \   0000000E   0xD301             BCC      ??seSysTickInit_0
+    161              RetVal = seSTATUS_NG;                                              
+   \   00000010   0x2000             MOVS     R0,#+0
+   \   00000012   0xE00A             B        ??seSysTickInit_1
+    162            }
+    163            else {
+    164              SysTick->LOAD  = (uint32_t)(ticks - 1UL);                         
+   \                     ??seSysTickInit_0: (+1)
+   \   00000014   0x1E52             SUBS     R2,R2,#+1
+   \   00000016   0x....             LDR      R3,??DataTable9_4  ;; 0xe000e014
+   \   00000018   0x601A             STR      R2,[R3, #+0]
+    165              SysTick->VAL   = 0UL;                                            
+   \   0000001A   0x2200             MOVS     R2,#+0
+   \   0000001C   0x....             LDR      R3,??DataTable9_5  ;; 0xe000e018
+   \   0000001E   0x601A             STR      R2,[R3, #+0]
+    166              SysTick->CTRL  = SysTick_CTRL_CLKSOURCE_Msk | (enableint << SysTick_CTRL_TICKINT_Pos);                     
+   \   00000020   0x0049             LSLS     R1,R1,#+1
+   \   00000022   0x2204             MOVS     R2,#+4
+   \   00000024   0x430A             ORRS     R2,R2,R1
+   \   00000026   0x....             LDR      R1,??DataTable9_3  ;; 0xe000e010
+   \   00000028   0x600A             STR      R2,[R1, #+0]
+    167            }
+    168            return RetVal;
+   \                     ??seSysTickInit_1: (+1)
+   \   0000002A   0xBD10             POP      {R4,PC}          ;; return
+    169          }
+    170          
+    171          #ifdef TICKLESS_ENABLED 
+
+   \                                 In section .text, align 2, keep-with-next
+    172          uint32_t seSysGetTimeMS( void ) {
+   \                     seSysGetTimeMS: (+1)
+   \   00000000   0xB510             PUSH     {R4,LR}
+    173          
+    174            SystemCoreClockUpdate();
+   \   00000002   0x.... 0x....      BL       SystemCoreClockUpdate
+    175            seSysTickInit( SystemCoreClock / TICK_PERSECOND, seDISABLE );
+   \   00000006   0x2100             MOVS     R1,#+0
+   \   00000008   0x000C             MOVS     R4,R1
+   \   0000000A   0x....             LDR      R0,??DataTable9
+   \   0000000C   0x6800             LDR      R0,[R0, #+0]
+   \   0000000E   0x21FA             MOVS     R1,#+250
+   \   00000010   0x0089             LSLS     R1,R1,#+2        ;; #+1000
+   \   00000012   0x.... 0x....      BL       __aeabi_uidiv
+   \   00000016   0x0021             MOVS     R1,R4
+   \   00000018   0x.... 0x....      BL       seSysTickInit
+    176            seSysTickStart();
+   \   0000001C   0x.... 0x....      BL       seSysTickStart
+    177            while( !( SysTick->CTRL & SysTick_CTRL_COUNTFLAG_Msk )){}  
+   \                     ??seSysGetTimeMS_0: (+1)
+   \   00000020   0x....             LDR      R0,??DataTable9_3  ;; 0xe000e010
+   \   00000022   0x6800             LDR      R0,[R0, #+0]
+   \   00000024   0x03C0             LSLS     R0,R0,#+15
+   \   00000026   0xD5FB             BPL      ??seSysGetTimeMS_0
+    178            g1msSysTicks += 1000UL/TICK_PERSECOND;
+   \   00000028   0x....             LDR      R0,??DataTable9_6
+   \   0000002A   0x6800             LDR      R0,[R0, #+0]
+   \   0000002C   0x1C40             ADDS     R0,R0,#+1
+   \   0000002E   0x....             LDR      R1,??DataTable9_6
+   \   00000030   0x6008             STR      R0,[R1, #+0]
+    179            seSysTickStop();
+   \   00000032   0x.... 0x....      BL       seSysTickStop
+    180          
+    181            return g1msSysTicks;
+   \   00000036   0x....             LDR      R0,??DataTable9_6
+   \   00000038   0x6800             LDR      R0,[R0, #+0]
+   \   0000003A   0xBD10             POP      {R4,PC}          ;; return
+    182          
+    183          }
+
+   \                                 In section .text, align 2, keep-with-next
+    184          void seSysSleepMS( uint32_t Milliseconds ) {
+   \                     seSysSleepMS: (+1)
+   \   00000000   0xB538             PUSH     {R3-R5,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+    185           
+    186            SystemCoreClockUpdate();
+   \   00000004   0x.... 0x....      BL       SystemCoreClockUpdate
+    187            seSysTickInit( SystemCoreClock / TICK_PERSECOND, seDISABLE );
+   \   00000008   0x2100             MOVS     R1,#+0
+   \   0000000A   0x000D             MOVS     R5,R1
+   \   0000000C   0x....             LDR      R0,??DataTable9
+   \   0000000E   0x6800             LDR      R0,[R0, #+0]
+   \   00000010   0x21FA             MOVS     R1,#+250
+   \   00000012   0x0089             LSLS     R1,R1,#+2        ;; #+1000
+   \   00000014   0x.... 0x....      BL       __aeabi_uidiv
+   \   00000018   0x0029             MOVS     R1,R5
+   \   0000001A   0x.... 0x....      BL       seSysTickInit
+    188            seSysTickStart();
+   \   0000001E   0x.... 0x....      BL       seSysTickStart
+   \   00000022   0xE005             B        ??seSysSleepMS_0
+    189            do {
+    190              while( !( SysTick->CTRL & SysTick_CTRL_COUNTFLAG_Msk )){
+    191              	if ( (SysTick->CTRL & SysTick_CTRL_ENABLE_Msk) == 0 ) {
+   \                     ??seSysSleepMS_1: (+1)
+   \   00000024   0x....             LDR      R0,??DataTable9_3  ;; 0xe000e010
+   \   00000026   0x6800             LDR      R0,[R0, #+0]
+   \   00000028   0x07C0             LSLS     R0,R0,#+31
+   \   0000002A   0xD401             BMI      ??seSysSleepMS_0
+    192              		seSysTickStart();
+   \   0000002C   0x.... 0x....      BL       seSysTickStart
+    193              	}
+    194              }
+   \                     ??seSysSleepMS_0: (+1)
+   \   00000030   0x....             LDR      R0,??DataTable9_3  ;; 0xe000e010
+   \   00000032   0x6800             LDR      R0,[R0, #+0]
+   \   00000034   0x03C0             LSLS     R0,R0,#+15
+   \   00000036   0xD5F5             BPL      ??seSysSleepMS_1
+    195              Milliseconds -= 1000UL/TICK_PERSECOND;
+   \   00000038   0x1E64             SUBS     R4,R4,#+1
+    196              g1msSysTicks += 1000UL/TICK_PERSECOND;
+   \   0000003A   0x....             LDR      R0,??DataTable9_6
+   \   0000003C   0x6800             LDR      R0,[R0, #+0]
+   \   0000003E   0x1C40             ADDS     R0,R0,#+1
+   \   00000040   0x....             LDR      R1,??DataTable9_6
+   \   00000042   0x6008             STR      R0,[R1, #+0]
+    197            }while ( Milliseconds > 0 );
+   \   00000044   0x2C00             CMP      R4,#+0
+   \   00000046   0xD1F3             BNE      ??seSysSleepMS_0
+    198            seSysTickStop();  
+   \   00000048   0x.... 0x....      BL       seSysTickStop
+    199          }
+   \   0000004C   0xBD31             POP      {R0,R4,R5,PC}    ;; return
+    200          
+    201          #else // TICKLESS_ENABLED
+    202          
+    203          uint32_t seSysGetTimeMS( void ) {
+    204            
+    205            return g1msSysTicks;
+    206          
+    207          }
+    208          
+    209          void seSysSleepMS( uint32_t Milliseconds ) {
+    210          
+    211            uint32_t newticks, cticks = seSysGetTimeMS();
+    212            do {
+    213              newticks = seSysGetTimeMS();
+    214              if ( newticks < cticks ) {
+    215                  cticks = newticks;
+    216              }
+    217            } while ( ( newticks - cticks ) < Milliseconds );  
+    218          
+    219          } // TICKLESS_ENABLED
+    220          #endif
+    221          
+    222          // 1ms clock. Just update the tick count.   
+    223          void SysTick_Handler(void);
+
+   \                                 In section .text, align 2, keep-with-next
+    224          void SysTick_Handler(void) {
+    225            g1msSysTicks += 1000UL/TICK_PERSECOND;
+   \                     SysTick_Handler: (+1)
+   \   00000000   0x....             LDR      R0,??DataTable9_6
+   \   00000002   0x6800             LDR      R0,[R0, #+0]
+   \   00000004   0x1C40             ADDS     R0,R0,#+1
+   \   00000006   0x....             LDR      R1,??DataTable9_6
+   \   00000008   0x6008             STR      R0,[R1, #+0]
+    226          }
+   \   0000000A   0x4770             BX       LR               ;; return
+    227          
+    228          
+    229          
+    230          /*----------------------------------------------------------------------------
+    231            Peripherals and ports definitions
+    232            周辺機器とポートの定義
+    233           *----------------------------------------------------------------------------*/
+    234          
+    235          //-------------- Valid PPORT pins --------------------------------------------
+    236          //               有効なPORTピン
+
+   \                                 In section .rodata, align 4
+    237          const uint8_t ValidPortTable[14] =
+   \                     ValidPortTable:
+   \   00000000   0xFF 0xFF          DC8 255, 255, 255, 255, 255, 255, 255, 255, 3, 1, 0, 0, 0, 15, 0, 0
+   \              0xFF 0xFF    
+   \              0xFF 0xFF    
+   \              0xFF 0xFF    
+   \              0x03 0x01    
+   \              0x00 0x00    
+   \              0x00 0x0F    
+   \              0x00 0x00    
+    238          {
+    239            0xFF,            // Ports P07 - P00
+    240            0xFF,            // Ports P17 - P10
+    241            0xFF,            // Ports P27 - P20
+    242            0xFF,            // Ports P37 - P30
+    243            0xFF,            // Ports P47 - P40
+    244            0xFF,            // Ports P57 - P50
+    245            0xFF,            // Ports P67 - P60
+    246            0xFF,            // Ports P77 - P70
+    247            0x03,            // Ports P87 - P80
+    248            0x01,            // Ports P97 - P90
+    249            0x00,            // Ports PA7 - PA0
+    250            0x00,            // Ports PB7 - PB0
+    251            0x00,            // Ports PC7 - PC0
+    252            0x0F             // Ports PD7 - PD0
+    253          };
+    254          
+    255          
+    256          //-------------- Valid PPORT alternate functions -----------------------------
+    257          //               有効なPPORT兼用機能
+    258          // Define valid alternate function settings for each PPort pin
+    259          // PPortピンごとに有効な代替機能設定を定義する
+    260          // These values are descrete bits only for the table not for the register
+    261          // これらの値は、レジスタのテーブルではない離散ビットのみです
+    262          #define altfunc0   0x01			///< 周辺入出力機能0
+    263          #define altfunc1   0x02			///< 周辺入出力機能1
+    264          #define altfunc2   0x04			///< 周辺入出力機能2
+    265          #define altfunc3   0x08			///< 周辺入出力機能3
+
+   \                                 In section .rodata, align 4
+    266          const uint8_t ValidAltFunctionTable[88] = 
+   \                     ValidAltFunctionTable:
+   \   00000000   0x03 0x03          DC8 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 3, 3, 1
+   \              0x03 0x03    
+   \              0x03 0x03    
+   \              0x03 0x03    
+   \              0x03 0x03    
+   \              0x03 0x03    
+   \              0x03 0x03    
+   \              0x03 0x03    
+   \              0x02 0x02    
+   \              0x02 0x02    
+   \              0x03 0x03    
+   \              0x01         
+   \   00000017   0x04 0x0B          DC8 4, 11, 11, 10, 10, 10, 10, 10, 10, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+   \              0x0B 0x0A    
+   \              0x0A 0x0A    
+   \              0x0A 0x0A    
+   \              0x0A 0x08    
+   \              0x08 0x08    
+   \              0x08 0x08    
+   \              0x08 0x08    
+   \              0x08 0x08    
+   \              0x08 0x08    
+   \   0000002B   0x08 0x08          DC8 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
+   \              0x08 0x08    
+   \              0x08 0x08    
+   \              0x08 0x08    
+   \              0x08 0x08    
+   \              0x08 0x08    
+   \              0x08 0x08    
+   \              0x08 0x08    
+   \              0x08 0x08    
+   \              0x08 0x08    
+   \              0x08 0x08    
+   \              0x08         
+   \   00000042   0x00 0x00          DC8 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 1, 1, 4, 4, 0, 0, 0, 0
+   \              0x00 0x00    
+   \              0x00 0x00    
+   \              0x04 0x00    
+   \              0x00 0x00    
+   \              0x00 0x00    
+   \              0x00 0x00    
+   \              0x01 0x01    
+   \              0x04 0x04    
+   \              0x00 0x00    
+   \              0x00 0x00    
+    267          { // Port0
+    268            ( altfunc0 | altfunc1 ), // P00 :: P0yMUX = 0x0, P0yMUX = 0x1
+    269            ( altfunc0 | altfunc1 ), // P01 
+    270            ( altfunc0 | altfunc1 ), // P02
+    271            ( altfunc0 | altfunc1 ), // P03
+    272            ( altfunc0 | altfunc1 ), // P04
+    273            ( altfunc0 | altfunc1 ), // P05
+    274            ( altfunc0 | altfunc1 ), // P06
+    275            ( altfunc0 | altfunc1 ), // P07
+    276            ( altfunc0 | altfunc1 ), // P10 :: P1yMUX = 0x0, P1yMUX = 0x1
+    277            ( altfunc0 | altfunc1 ), // P11
+    278            ( altfunc0 | altfunc1 ), // P12
+    279            ( altfunc0 | altfunc1 ), // P13
+    280            ( altfunc0 | altfunc1 ), // P14
+    281            ( altfunc0 | altfunc1 ), // P15
+    282            ( altfunc0 | altfunc1 ), // P16
+    283            ( altfunc0 | altfunc1 ), // P17
+    284            ( altfunc1 ), // P20
+    285            ( altfunc1 ), // P21
+    286            ( altfunc1 ), // P22
+    287            ( altfunc1 ), // P23
+    288            ( altfunc0 | altfunc1 ), // P24
+    289            ( altfunc0 | altfunc1 ), // P25
+    290            ( altfunc0 ), // P26
+    291            ( altfunc2 ), // P27
+    292            ( altfunc0 | altfunc1 | altfunc3 ), // P30
+    293            ( altfunc0 | altfunc1 | altfunc3 ), // P31
+    294            ( altfunc1 | altfunc3 ), // P32
+    295            ( altfunc1 | altfunc3 ), // P33
+    296            ( altfunc1 | altfunc3 ), // P34
+    297            ( altfunc1 | altfunc3 ), // P35
+    298            ( altfunc1 | altfunc3 ), // P36
+    299            ( altfunc1 | altfunc3 ), // P37
+    300            ( altfunc3 ), // P40
+    301            ( altfunc3 ), // P41
+    302            ( altfunc3 ), // P42
+    303            ( altfunc3 ), // P43
+    304            ( altfunc3 ), // P44
+    305            ( altfunc3 ), // P45
+    306            ( altfunc3 ), // P46
+    307            ( altfunc3 ), // P47
+    308            ( altfunc3 ), // P50
+    309            ( altfunc3 ), // P51
+    310            ( altfunc3 ), // P52
+    311            ( altfunc3 ), // P53
+    312            ( altfunc3 ), // P54
+    313            ( altfunc3 ), // P55
+    314            ( altfunc3 ), // P56
+    315            ( altfunc3 ), // P57
+    316            ( altfunc3 ), // P60
+    317            ( altfunc3 ), // P61
+    318            ( altfunc3 ), // P62
+    319            ( altfunc3 ), // P63
+    320            ( altfunc3 ), // P64
+    321            ( altfunc3 ), // P65
+    322            ( altfunc3 ), // P66
+    323            ( altfunc3 ), // P67
+    324            ( altfunc3 ), // P70
+    325            ( altfunc3 ), // P71
+    326            ( altfunc3 ), // P72
+    327            ( altfunc3 ), // P73
+    328            ( altfunc3 ), // P74
+    329            ( altfunc3 ), // P75
+    330            ( altfunc3 ), // P76
+    331            ( altfunc3 ), // P77
+    332            ( altfunc3 ), // P80
+    333            ( altfunc3 ), // P81
+    334            ( 0 ), // P82
+    335            ( 0 ), // P83
+    336            ( 0 ), // P84
+    337            ( 0 ), // P85
+    338            ( 0 ), // P86
+    339            ( 0 ), // P87
+    340            ( altfunc2 ), // P90
+    341            ( 0 ), // P91
+    342            ( 0 ), // P92
+    343            ( 0 ), // P93
+    344            ( 0 ), // P94
+    345            ( 0 ), // P95
+    346            ( 0 ), // P96
+    347            ( 0 ), // P97
+    348            ( altfunc0 ), // Pd0
+    349            ( altfunc0 ), // Pd1
+    350            ( altfunc2 ), // Pd2
+    351            ( altfunc2 ), // Pd3
+    352            ( 0 ), // Pd4
+    353            ( 0 ), // Pd5
+    354            ( 0 ), // Pd6
+    355            ( 0 ), // Pd7
+    356          };
+    357          
+    358          
+    359          //-------------- Valid UPMUX parameters tables -------------------------------
+    360          //               有効なUPMUXパラメータテーブル
+
+   \                                 In section .rodata, align 4
+    361          const uint8_t ValidUpMuxPortTbl[] = {          // Valid UPMUX port pins (P00 to P37)
+   \                     ValidUpMuxPortTbl:
+   \   00000000   0xFF 0xFF          DC8 255, 255, 0, 255
+   \              0x00 0xFF    
+    362            0xFF,      // P07 - P00
+    363            0xFF,      // P17 - P10
+    364            0x00,      // P27 - P20 (invalid)
+    365            0xFF       // P37 - P30
+    366          };
+    367          
+
+   \                                 In section .rodata, align 1
+    368          const uint8_t ValidUpMuxPeriph = 0x1B;         // invalid, invalid, invalid, T16B, UART, invalid, I2C, None
+   \                     ValidUpMuxPeriph:
+   \   00000000   0x1B               DC8 27
+    369          
+
+   \                                 In section .rodata, align 4
+    370          const uint8_t ValidUpMuxChannelTbl[] = {       // Valid channels for each peripheral(各周辺機器に有効なチャネル)
+   \                     ValidUpMuxChannelTbl:
+   \   00000000   0xFF 0x03          DC8 255, 3, 0, 3, 3, 0, 0, 0
+   \              0x00 0x03    
+   \              0x03 0x00    
+   \              0x00 0x00    
+    371            0xFF,      // "None" peripheral
+    372            0x03,      // I2C CH 0 and 1 are valid
+    373            0x00,      // Reserved
+    374            0x03,      // UART3 CH 0 and 1 are valid
+    375            0x03,      // T16B CH 0 and 1 are valid
+    376            0x00,      // Reserved
+    377            0x00,      // Reserved
+    378            0x00       // Reserved
+    379          };
+    380          
+
+   \                                 In section .rodata, align 4
+    381          const uint8_t ValidUpMuxPinFuncTbl[] = {       // Valid peripheral pin functions(有効な周辺ピン機能)
+   \                     ValidUpMuxPinFuncTbl:
+   \   00000000   0xFF 0x07          DC8 255, 7, 0, 7, 7, 0, 0, 0
+   \              0x00 0x07    
+   \              0x07 0x00    
+   \              0x00 0x00    
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable9:
+   \   00000000   0x........         DC32     SystemCoreClock
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable9_1:
+   \   00000000   0x007A1200         DC32     0x7a1200
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable9_2:
+   \   00000000   0xE000ED10         DC32     0xe000ed10
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable9_3:
+   \   00000000   0xE000E010         DC32     0xe000e010
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable9_4:
+   \   00000000   0xE000E014         DC32     0xe000e014
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable9_5:
+   \   00000000   0xE000E018         DC32     0xe000e018
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable9_6:
+   \   00000000   0x........         DC32     g1msSysTicks
+    382            0xFF,      // "None" peripheral
+    383            0x07,      // I2C has 3 pins valid
+    384            0x00,      // Reserved
+    385            0x07,      // UART has 3 pins valid
+    386            0x07,      // T16B has 3 pins valid
+    387            0x00,      // Reserved
+    388            0x00,      // Reserved
+    389            0x00       // Reserved
+    390          };
+    391          
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       0   SysTick_Handler
+       8   SystemCoreClockUpdate
+         8   -> seCLG_GetSysClk
+       8   SystemInit
+         8   -> BoardInit
+       8   seSysGetTimeMS
+         8   -> SystemCoreClockUpdate
+         8   -> seSysTickInit
+         8   -> seSysTickStart
+         8   -> seSysTickStop
+         8 __aeabi_uidiv
+      16   seSysSleepMS
+        16   -> SystemCoreClockUpdate
+        16   -> seSysTickInit
+        16   -> seSysTickStart
+        16   -> seSysTickStop
+        16 __aeabi_uidiv
+       8   seSysTickInit
+       0   seSysTickStart
+       0   seSysTickStop
+       0   setEventWait
+       0   setHalt
+       0   setSleep
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable9
+       4  ??DataTable9_1
+       4  ??DataTable9_2
+       4  ??DataTable9_3
+       4  ??DataTable9_4
+       4  ??DataTable9_5
+       4  ??DataTable9_6
+      12  SysTick_Handler
+       4  SystemCoreClock
+      12  SystemCoreClockUpdate
+      14  SystemInit
+      88  ValidAltFunctionTable
+      16  ValidPortTable
+       8  ValidUpMuxChannelTbl
+       1  ValidUpMuxPeriph
+       8  ValidUpMuxPinFuncTbl
+       4  ValidUpMuxPortTbl
+       4  g1msSysTicks
+      60  seSysGetTimeMS
+      78  seSysSleepMS
+      44  seSysTickInit
+      14  seSysTickStart
+      14  seSysTickStop
+       4  setEventWait
+      16  setHalt
+      16  setSleep
+
+ 
+   4 bytes in section .bss
+   4 bytes in section .data
+ 125 bytes in section .rodata
+ 312 bytes in section .text
+ 
+ 312 bytes of CODE  memory
+ 125 bytes of CONST memory
+   8 bytes of DATA  memory
+
+Errors: none
+Warnings: none

@@ -1,0 +1,758 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V7.80.4.12462/W32 for ARM       21/May/2019  17:00:56
+# Copyright 1999-2017 IAR Systems AB.
+#
+#    Cpu mode     =  thumb
+#    Endian       =  little
+#    Source file  =  
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\driver\t16\drv_t16_3.c
+#    Command line =  
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\driver\t16\drv_t16_3.c -D
+#        __TARGET_ARCH_7_M -D S1C31W74 -D GNSS_GW_SIDE_A -lCN
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\List
+#        -lA
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\List
+#        --diag_suppress Pe177,Pe111,Pa082 -o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\Obj
+#        --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa
+#        --no_clustering --no_scheduling --debug --endian=little
+#        --cpu=Cortex-M0+ -e --fpu=None --dlib_config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench
+#        7.5\arm\INC\c\DLib_Config_Normal.h" -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\ -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\
+#        -I "C:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        7.5\arm\CMSIS\Include\" -I "C:\Program Files (x86)\IAR
+#        Systems\Embedded Workbench 7.5\arm\inc\Epson\" -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\CMSIS\Device\S1C31W74\Include\
+#        -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\CMSIS\Driver\Include\
+#        -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\sePeriphLibrary\
+#        -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\board\S5U1C31W74T1\
+#        -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\USBStack\INC\
+#        -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\include\
+#        -Ol
+#    Locale       =  Japanese_Japan.932
+#    List file    =  
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\List\drv_t16_3.lst
+#    Object file  =  
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\Obj\drv_t16_3.o
+#
+###############################################################################
+
+C:\GNSS\Software\rJ105\source\GNSS_GW\driver\t16\drv_t16_3.c
+      1          
+      2          /**
+      3            ******************************************************************************
+      4            * @file    drv_t16_1.c
+      5            * @author  コア
+      6            * @version V1.1
+      7            * @date    05-August-2016
+      8            * @brief   T16 CH0を使用して1msタイマを動作させる
+      9            ******************************************************************************
+     10            $Id: drv_t16_3.c 57 2018-03-30 05:54:51Z shitaoka $
+     11            * @attention
+     12            *
+     13            *    1. t16_0_init()                  : 初期化
+     14            *    2. t16_0_start()                 : 開始
+     15            *    3. time1 = t16_0_get_counter()   : 
+     16            *    4. time2 = t16_0_get_counter()   : 
+     17            *    5. time2 - time1 が経過時間      : time1からtime2までの経過時間
+     18            *    6. t16_0_stop()                  : 終了
+     19            *****************************************************************************
+     20          */
+     21          
+     22          #include <string.h>
+     23          #include <stdio.h>
+     24          #include <stdlib.h>
+     25          #include "board.h"
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void NVIC_EnableIRQ(IRQn_Type)
+   \                     NVIC_EnableIRQ: (+1)
+   \   00000000   0xB500             PUSH     {LR}
+   \   00000002   0xB240             SXTB     R0,R0
+   \   00000004   0x2800             CMP      R0,#+0
+   \   00000006   0xD405             BMI      ??NVIC_EnableIRQ_0
+   \   00000008   0x2101             MOVS     R1,#+1
+   \   0000000A   0x06C0             LSLS     R0,R0,#+27       ;; ZeroExtS R0,R0,#+27,#+27
+   \   0000000C   0x0EC0             LSRS     R0,R0,#+27
+   \   0000000E   0x4081             LSLS     R1,R1,R0
+   \   00000010   0x....             LDR      R0,??DataTable12  ;; 0xe000e100
+   \   00000012   0x6001             STR      R1,[R0, #+0]
+   \                     ??NVIC_EnableIRQ_0: (+1)
+   \   00000014   0xBD00             POP      {PC}             ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void NVIC_SetPriority(IRQn_Type, uint32_t)
+   \                     NVIC_SetPriority: (+1)
+   \   00000000   0xB5F0             PUSH     {R4-R7,LR}
+   \   00000002   0xB240             SXTB     R0,R0
+   \   00000004   0x2800             CMP      R0,#+0
+   \   00000006   0xD41B             BMI      ??NVIC_SetPriority_0
+   \   00000008   0x....             LDR      R2,??DataTable12_1  ;; 0xe000e400
+   \   0000000A   0xB240             SXTB     R0,R0
+   \   0000000C   0x0883             LSRS     R3,R0,#+2
+   \   0000000E   0x2404             MOVS     R4,#+4
+   \   00000010   0x4363             MULS     R3,R4,R3
+   \   00000012   0x58D2             LDR      R2,[R2, R3]
+   \   00000014   0x23FF             MOVS     R3,#+255
+   \   00000016   0x0784             LSLS     R4,R0,#+30       ;; ZeroExtS R4,R0,#+30,#+30
+   \   00000018   0x0FA4             LSRS     R4,R4,#+30
+   \   0000001A   0x2508             MOVS     R5,#+8
+   \   0000001C   0x436C             MULS     R4,R5,R4
+   \   0000001E   0x40A3             LSLS     R3,R3,R4
+   \   00000020   0x439A             BICS     R2,R2,R3
+   \   00000022   0x0189             LSLS     R1,R1,#+6
+   \   00000024   0xB2C9             UXTB     R1,R1
+   \   00000026   0x0783             LSLS     R3,R0,#+30       ;; ZeroExtS R3,R0,#+30,#+30
+   \   00000028   0x0F9B             LSRS     R3,R3,#+30
+   \   0000002A   0x2408             MOVS     R4,#+8
+   \   0000002C   0x4363             MULS     R3,R4,R3
+   \   0000002E   0x4099             LSLS     R1,R1,R3
+   \   00000030   0x4311             ORRS     R1,R1,R2
+   \   00000032   0x....             LDR      R2,??DataTable12_1  ;; 0xe000e400
+   \   00000034   0xB240             SXTB     R0,R0
+   \   00000036   0x0880             LSRS     R0,R0,#+2
+   \   00000038   0x2304             MOVS     R3,#+4
+   \   0000003A   0x4358             MULS     R0,R3,R0
+   \   0000003C   0x5011             STR      R1,[R2, R0]
+   \   0000003E   0xE020             B        ??NVIC_SetPriority_1
+   \                     ??NVIC_SetPriority_0: (+1)
+   \   00000040   0x....             LDR      R3,??DataTable12_2  ;; 0xe000ed1c
+   \   00000042   0xB240             SXTB     R0,R0
+   \   00000044   0x0702             LSLS     R2,R0,#+28       ;; ZeroExtS R2,R0,#+28,#+28
+   \   00000046   0x0F12             LSRS     R2,R2,#+28
+   \   00000048   0x3A08             SUBS     R2,R2,#+8
+   \   0000004A   0x0892             LSRS     R2,R2,#+2
+   \   0000004C   0x2404             MOVS     R4,#+4
+   \   0000004E   0x4362             MULS     R2,R4,R2
+   \   00000050   0x....             LDR      R4,??DataTable12_2  ;; 0xe000ed1c
+   \   00000052   0xB240             SXTB     R0,R0
+   \   00000054   0x0705             LSLS     R5,R0,#+28       ;; ZeroExtS R5,R0,#+28,#+28
+   \   00000056   0x0F2D             LSRS     R5,R5,#+28
+   \   00000058   0x3D08             SUBS     R5,R5,#+8
+   \   0000005A   0x08AD             LSRS     R5,R5,#+2
+   \   0000005C   0x2604             MOVS     R6,#+4
+   \   0000005E   0x4375             MULS     R5,R6,R5
+   \   00000060   0x5964             LDR      R4,[R4, R5]
+   \   00000062   0x25FF             MOVS     R5,#+255
+   \   00000064   0x0786             LSLS     R6,R0,#+30       ;; ZeroExtS R6,R0,#+30,#+30
+   \   00000066   0x0FB6             LSRS     R6,R6,#+30
+   \   00000068   0x2708             MOVS     R7,#+8
+   \   0000006A   0x437E             MULS     R6,R7,R6
+   \   0000006C   0x40B5             LSLS     R5,R5,R6
+   \   0000006E   0x43AC             BICS     R4,R4,R5
+   \   00000070   0x0189             LSLS     R1,R1,#+6
+   \   00000072   0xB2C9             UXTB     R1,R1
+   \   00000074   0x0780             LSLS     R0,R0,#+30       ;; ZeroExtS R0,R0,#+30,#+30
+   \   00000076   0x0F80             LSRS     R0,R0,#+30
+   \   00000078   0x2508             MOVS     R5,#+8
+   \   0000007A   0x4368             MULS     R0,R5,R0
+   \   0000007C   0x4081             LSLS     R1,R1,R0
+   \   0000007E   0x4321             ORRS     R1,R1,R4
+   \   00000080   0x5099             STR      R1,[R3, R2]
+   \                     ??NVIC_SetPriority_1: (+1)
+   \   00000082   0xBDF0             POP      {R4-R7,PC}       ;; return
+     26          #include "system_manager.h"
+     27          #include "settings.h"
+     28          #include "se_clg.h"
+     29          #include "se_t16.h"
+     30          #include "se_common.h"
+     31          #include "drv_t16_3.h"
+     32          
+     33          
+     34          
+     35          #pragma section = "DRV_PRG_BLOCK"
+     36          
+     37          typedef struct _drv_t16_3_work_t {
+     38          	uint32_t		t16_3_1ms_count;				// 1msカウンタ
+     39          	uint32_t		t16_3_1s_timer;					// 1秒タイマ用
+     40          	uint32_t		t16_3_10ms_flag;				// 10ms経過フラグ
+     41          	uint32_t		t16_3_100ms_flag;				// 100ms経過フラグ
+     42          	uint32_t		t16_3_500ms_flag;				// 500ms経過フラグ
+     43          	uint32_t		t16_3_1000ms_flag;				// 1000ms経過フラグ
+     44          	func_drv_t16_3	hdl_500ms;						// 500ms毎に呼ばれる割り込み処理
+     45          } drv_t16_3_work_t;
+     46          
+
+   \                                 In section .bss, align 4
+     47          static seT16_InitTypeDef	T16_InitStruct;
+   \                     T16_InitStruct:
+   \   00000000                      DS8 8
+
+   \                                 In section .bss, align 4
+     48          static drv_t16_3_work_t		drv_t16_3_work;		// T16 CH3用変数
+   \                     drv_t16_3_work:
+   \   00000000                      DS8 28
+     49          
+     50          
+     51          /********************************************************************/
+     52          /*!
+     53           * \name	t16_3_init
+     54           * \brief	T16 Ch3 Timer(1ms)の初期化
+     55           * \param	なし
+     56           * \return  なし
+     57           * \note	1msタイマー
+     58           */
+     59          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+     60          void t16_3_init( void )
+     61          {
+   \                     t16_3_init: (+1)
+   \   00000000   0xB538             PUSH     {R3-R5,LR}
+     62          	T16_0_Type* T16x = T16_3; 
+   \   00000002   0x....             LDR      R4,??DataTable12_3  ;; 0x40000480
+     63          	seStatus fStatus;
+     64          
+     65          	memset(&T16_InitStruct, 0, sizeof(seT16_InitTypeDef));
+   \   00000004   0x2108             MOVS     R1,#+8
+   \   00000006   0x2200             MOVS     R2,#+0
+   \   00000008   0x....             LDR      R5,??DataTable12_4
+   \   0000000A   0x0028             MOVS     R0,R5
+   \   0000000C   0x.... 0x....      BL       __aeabi_memset
+     66          	// T16_3初期化
+     67          	seT16_InitStruct( &T16_InitStruct );
+   \   00000010   0x....             LDR      R0,??DataTable12_4
+   \   00000012   0x.... 0x....      BL       seT16_InitStruct
+     68            
+     69          #ifdef OSC3_ENABLE
+     70          	T16_InitStruct.ClkSrc			= seCLG_OSC3;
+   \   00000016   0x2002             MOVS     R0,#+2
+   \   00000018   0x....             LDR      R1,??DataTable12_4
+   \   0000001A   0x7008             STRB     R0,[R1, #+0]
+     71          	T16_InitStruct.ClkDivider		= seT16_OSC3_CLKDIV_1;  
+   \   0000001C   0x2000             MOVS     R0,#+0
+   \   0000001E   0x....             LDR      R1,??DataTable12_4
+   \   00000020   0x8048             STRH     R0,[R1, #+2]
+     72          	T16_InitStruct.Period			= 12001;					// 12MHz(0.000083ms) * 12001 = 1.000ms
+   \   00000022   0x....             LDR      R0,??DataTable12_5  ;; 0x2ee1
+   \   00000024   0x....             LDR      R1,??DataTable12_4
+   \   00000026   0x80C8             STRH     R0,[R1, #+6]
+     73          #else
+     74          	T16_InitStruct.ClkSrc			= seCLG_IOSC;
+     75          	T16_InitStruct.ClkDivider		= seT16_IOSC_CLKDIV_1;  
+     76          	T16_InitStruct.Period			= 20000;					// 20MHz(0.00005ms) * 20000 = 1.000ms
+     77          #endif
+     78          	T16_InitStruct.CounterMode		= seT16_RepeatMode;
+   \   00000028   0x2000             MOVS     R0,#+0
+   \   0000002A   0x....             LDR      R1,??DataTable12_4
+   \   0000002C   0x7108             STRB     R0,[R1, #+4]
+     79          
+     80          	// T16_3割り込みを設定
+     81          	seT16_Init( T16x, &T16_InitStruct );
+   \   0000002E   0x....             LDR      R1,??DataTable12_4
+   \   00000030   0x0020             MOVS     R0,R4
+   \   00000032   0x.... 0x....      BL       seT16_Init
+     82          	seT16_EnableInt( T16x );
+   \   00000036   0x0020             MOVS     R0,R4
+   \   00000038   0x.... 0x....      BL       seT16_EnableInt
+     83          
+     84          	// T16_3割り込みを許可する。
+     85          	NVIC_SetPriority( T16_3_IRQn, 190 );  //  Set interrupt level
+   \   0000003C   0x21BE             MOVS     R1,#+190
+   \   0000003E   0x2012             MOVS     R0,#+18
+   \   00000040   0x.... 0x....      BL       NVIC_SetPriority
+     86          	NVIC_EnableIRQ( T16_3_IRQn );
+   \   00000044   0x2012             MOVS     R0,#+18
+   \   00000046   0x.... 0x....      BL       NVIC_EnableIRQ
+     87          
+     88          	// 使用変数の初期化
+     89          	memset(&drv_t16_3_work, 0, sizeof(drv_t16_3_work_t));
+   \   0000004A   0x211C             MOVS     R1,#+28
+   \   0000004C   0x2200             MOVS     R2,#+0
+   \   0000004E   0x....             LDR      R4,??DataTable12_6
+   \   00000050   0x0020             MOVS     R0,R4
+   \   00000052   0x.... 0x....      BL       __aeabi_memset
+     90          }
+   \   00000056   0xBD31             POP      {R0,R4,R5,PC}    ;; return
+     91          
+     92          
+     93          
+     94          /********************************************************************/
+     95          /*!
+     96           * \name	t16_3_start
+     97           * \brief	T16 Ch3 Timer 開始
+     98           * \param	なし
+     99           * \return  なし
+    100           * \note	1msタイマー
+    101           */
+    102          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    103          void t16_3_start( void )
+    104          {
+   \                     t16_3_start: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    105          	seT16_Start(  T16_3 );
+   \   00000002   0x....             LDR      R0,??DataTable12_3  ;; 0x40000480
+   \   00000004   0x.... 0x....      BL       seT16_Start
+    106          }
+   \   00000008   0xBD01             POP      {R0,PC}          ;; return
+    107          
+    108          
+    109          /********************************************************************/
+    110          /*!
+    111           * \name	t16_3_start
+    112           * \brief	T16 Ch3 Timer 停止
+    113           * \param	なし
+    114           * \return  なし
+    115           * \note	1msタイマー
+    116           */
+    117          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    118          void t16_3_stop( void )
+    119          {
+   \                     t16_3_stop: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    120          	seT16_Stop(  T16_3 );
+   \   00000002   0x....             LDR      R0,??DataTable12_3  ;; 0x40000480
+   \   00000004   0x.... 0x....      BL       seT16_Stop
+    121          }
+   \   00000008   0xBD01             POP      {R0,PC}          ;; return
+    122          
+    123          
+    124          /********************************************************************/
+    125          /*!
+    126           * \name	t16_3_get_counter
+    127           * \brief	T16 Ch3 Timer のカウンタ値を取得
+    128           * \param	なし
+    129           * \return  1msフリーカウンタ値
+    130           * \note	
+    131           */
+    132          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    133          uint32_t t16_3_get_counter(void)
+    134          {
+    135          	return drv_t16_3_work.t16_3_1ms_count;
+   \                     t16_3_get_counter: (+1)
+   \   00000000   0x....             LDR      R0,??DataTable12_6
+   \   00000002   0x6800             LDR      R0,[R0, #+0]
+   \   00000004   0x4770             BX       LR               ;; return
+    136          }
+    137          
+    138          
+    139          /********************************************************************/
+    140          /*!
+    141           * \name	t16_3_init_check
+    142           * \brief	T16 Ch3 経過判定 初期化
+    143           * \param	なし
+    144           * \return  なし
+    145           * \note	
+    146           */
+    147          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    148          void t16_3_init_check(void)
+    149          {
+    150          	drv_t16_3_work.t16_3_1s_timer = 0;
+   \                     t16_3_init_check: (+1)
+   \   00000000   0x2000             MOVS     R0,#+0
+   \   00000002   0x....             LDR      R1,??DataTable12_6
+   \   00000004   0x6048             STR      R0,[R1, #+4]
+    151          	drv_t16_3_work.t16_3_10ms_flag = 0;
+   \   00000006   0x2000             MOVS     R0,#+0
+   \   00000008   0x....             LDR      R1,??DataTable12_6
+   \   0000000A   0x6088             STR      R0,[R1, #+8]
+    152          	drv_t16_3_work.t16_3_100ms_flag = 0;
+   \   0000000C   0x2000             MOVS     R0,#+0
+   \   0000000E   0x....             LDR      R1,??DataTable12_6
+   \   00000010   0x60C8             STR      R0,[R1, #+12]
+    153          	drv_t16_3_work.t16_3_500ms_flag = 0;
+   \   00000012   0x2000             MOVS     R0,#+0
+   \   00000014   0x....             LDR      R1,??DataTable12_6
+   \   00000016   0x6108             STR      R0,[R1, #+16]
+    154          	drv_t16_3_work.t16_3_1000ms_flag = 0;
+   \   00000018   0x2000             MOVS     R0,#+0
+   \   0000001A   0x....             LDR      R1,??DataTable12_6
+   \   0000001C   0x6148             STR      R0,[R1, #+20]
+    155          }
+   \   0000001E   0x4770             BX       LR               ;; return
+    156          
+    157          
+    158          /********************************************************************/
+    159          /*!
+    160           * \name	t16_3_check_10ms
+    161           * \brief	T16 Ch3 10m経過判定
+    162           * \param	なし
+    163           * \return  0: 時間未経過
+    164           *          1: 時間経過
+    165           * \note	
+    166           */
+    167          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    168          uint32_t t16_3_check_10ms(void)
+    169          {
+   \                     t16_3_check_10ms: (+1)
+   \   00000000   0xB500             PUSH     {LR}
+    170          	uint32_t	ret=0;
+   \   00000002   0x2000             MOVS     R0,#+0
+    171          	if (drv_t16_3_work.t16_3_10ms_flag != 0) {
+   \   00000004   0x....             LDR      R1,??DataTable12_6
+   \   00000006   0x6889             LDR      R1,[R1, #+8]
+   \   00000008   0x2900             CMP      R1,#+0
+   \   0000000A   0xD003             BEQ      ??t16_3_check_10ms_0
+    172          		drv_t16_3_work.t16_3_10ms_flag = 0;
+   \   0000000C   0x2000             MOVS     R0,#+0
+   \   0000000E   0x....             LDR      R1,??DataTable12_6
+   \   00000010   0x6088             STR      R0,[R1, #+8]
+    173          		ret=1;
+   \   00000012   0x2001             MOVS     R0,#+1
+    174          	}
+    175          	
+    176          	return ret;
+   \                     ??t16_3_check_10ms_0: (+1)
+   \   00000014   0xBD00             POP      {PC}             ;; return
+    177          }
+    178          
+    179          
+    180          /********************************************************************/
+    181          /*!
+    182           * \name	t16_3_check_100ms
+    183           * \brief	T16 Ch3 100m経過判定
+    184           * \param	なし
+    185           * \return  0: 時間未経過
+    186           *          1: 時間経過
+    187           * \note	
+    188           */
+    189          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    190          uint32_t t16_3_check_100ms(void)
+    191          {
+   \                     t16_3_check_100ms: (+1)
+   \   00000000   0xB500             PUSH     {LR}
+    192          	uint32_t	ret=0;
+   \   00000002   0x2000             MOVS     R0,#+0
+    193          	if (drv_t16_3_work.t16_3_100ms_flag != 0) {
+   \   00000004   0x....             LDR      R1,??DataTable12_6
+   \   00000006   0x68C9             LDR      R1,[R1, #+12]
+   \   00000008   0x2900             CMP      R1,#+0
+   \   0000000A   0xD003             BEQ      ??t16_3_check_100ms_0
+    194          		drv_t16_3_work.t16_3_100ms_flag = 0;
+   \   0000000C   0x2000             MOVS     R0,#+0
+   \   0000000E   0x....             LDR      R1,??DataTable12_6
+   \   00000010   0x60C8             STR      R0,[R1, #+12]
+    195          		ret=1;
+   \   00000012   0x2001             MOVS     R0,#+1
+    196          	}
+    197          	
+    198          	return ret;
+   \                     ??t16_3_check_100ms_0: (+1)
+   \   00000014   0xBD00             POP      {PC}             ;; return
+    199          }
+    200          
+    201          
+    202          
+    203          /********************************************************************/
+    204          /*!
+    205           * \name	t16_3_check_500ms
+    206           * \brief	T16 Ch3 500m経過判定
+    207           * \param	なし
+    208           * \return  0: 時間未経過
+    209           *          1: 時間経過
+    210           * \note	
+    211           */
+    212          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    213          uint32_t t16_3_check_500ms(void)
+    214          {
+   \                     t16_3_check_500ms: (+1)
+   \   00000000   0xB500             PUSH     {LR}
+    215          	uint32_t	ret=0;
+   \   00000002   0x2000             MOVS     R0,#+0
+    216          	if (drv_t16_3_work.t16_3_500ms_flag != 0) {
+   \   00000004   0x....             LDR      R1,??DataTable12_6
+   \   00000006   0x6909             LDR      R1,[R1, #+16]
+   \   00000008   0x2900             CMP      R1,#+0
+   \   0000000A   0xD003             BEQ      ??t16_3_check_500ms_0
+    217          		drv_t16_3_work.t16_3_500ms_flag = 0;
+   \   0000000C   0x2000             MOVS     R0,#+0
+   \   0000000E   0x....             LDR      R1,??DataTable12_6
+   \   00000010   0x6108             STR      R0,[R1, #+16]
+    218          		ret=1;
+   \   00000012   0x2001             MOVS     R0,#+1
+    219          	}
+    220          	
+    221          	return ret;
+   \                     ??t16_3_check_500ms_0: (+1)
+   \   00000014   0xBD00             POP      {PC}             ;; return
+    222          }
+    223          
+    224          
+    225          /********************************************************************/
+    226          /*!
+    227           * \name	t16_3_check_1000ms
+    228           * \brief	T16 Ch3 1000m経過判定
+    229           * \param	なし
+    230           * \return  0: 時間未経過
+    231           *          1: 時間経過
+    232           * \note	
+    233           */
+    234          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    235          uint32_t t16_3_check_1000ms(void)
+    236          {
+   \                     t16_3_check_1000ms: (+1)
+   \   00000000   0xB500             PUSH     {LR}
+    237          	uint32_t	ret=0;
+   \   00000002   0x2000             MOVS     R0,#+0
+    238          	if (drv_t16_3_work.t16_3_1000ms_flag != 0) {
+   \   00000004   0x....             LDR      R1,??DataTable12_6
+   \   00000006   0x6949             LDR      R1,[R1, #+20]
+   \   00000008   0x2900             CMP      R1,#+0
+   \   0000000A   0xD003             BEQ      ??t16_3_check_1000ms_0
+    239          		drv_t16_3_work.t16_3_1000ms_flag = 0;
+   \   0000000C   0x2000             MOVS     R0,#+0
+   \   0000000E   0x....             LDR      R1,??DataTable12_6
+   \   00000010   0x6148             STR      R0,[R1, #+20]
+    240          		ret=1;
+   \   00000012   0x2001             MOVS     R0,#+1
+    241          	}
+    242          	
+    243          	return ret;
+   \                     ??t16_3_check_1000ms_0: (+1)
+   \   00000014   0xBD00             POP      {PC}             ;; return
+    244          }
+    245          
+    246          
+    247          /********************************************************************/
+    248          /*!
+    249           * \name	t16_3_set_500ms_hdl
+    250           * \brief	500ms毎に呼ばれる割り込み関数を登録する処理
+    251           * \param	hdl_500ms  : 500ms毎に呼ばれる割り込み関数
+    252           * \return  なし
+    253           * \note	処理時間を短くすること
+    254           */
+    255          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    256          void t16_3_set_500ms_hdl( func_drv_t16_3 hdl_500ms )
+    257          {
+    258          	drv_t16_3_work.hdl_500ms = hdl_500ms;
+   \                     t16_3_set_500ms_hdl: (+1)
+   \   00000000   0x....             LDR      R1,??DataTable12_6
+   \   00000002   0x6188             STR      R0,[R1, #+24]
+    259          }
+   \   00000004   0x4770             BX       LR               ;; return
+    260          
+    261          /********************************************************************/
+    262          /*!
+    263           * \name	PRG_T16_3_IRQHandler
+    264           * \brief	T16 Ch3 割り込み処理
+    265           * \param	なし
+    266           * \return  なし
+    267           * \note	
+    268           */
+    269          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    270          void T16_3_IRQHandler( void )
+    271          {
+   \                     T16_3_IRQHandler: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    272          	drv_t16_3_work.t16_3_1ms_count++;
+   \   00000002   0x....             LDR      R0,??DataTable12_6
+   \   00000004   0x6800             LDR      R0,[R0, #+0]
+   \   00000006   0x1C40             ADDS     R0,R0,#+1
+   \   00000008   0x....             LDR      R1,??DataTable12_6
+   \   0000000A   0x6008             STR      R0,[R1, #+0]
+    273          	drv_t16_3_work.t16_3_1ms_count &= T16_3_MAX_COUNT;
+   \   0000000C   0x....             LDR      R0,??DataTable12_6
+   \   0000000E   0x6800             LDR      R0,[R0, #+0]
+   \   00000010   0x0080             LSLS     R0,R0,#+2        ;; ZeroExtS R0,R0,#+2,#+2
+   \   00000012   0x0880             LSRS     R0,R0,#+2
+   \   00000014   0x....             LDR      R1,??DataTable12_6
+   \   00000016   0x6008             STR      R0,[R1, #+0]
+    274          
+    275          	if (drv_t16_3_work.t16_3_1s_timer >= 999) {
+   \   00000018   0x....             LDR      R0,??DataTable12_6
+   \   0000001A   0x6840             LDR      R0,[R0, #+4]
+   \   0000001C   0x....             LDR      R1,??DataTable12_7  ;; 0x3e7
+   \   0000001E   0x4288             CMP      R0,R1
+   \   00000020   0xD306             BCC      ??T16_3_IRQHandler_0
+    276          		drv_t16_3_work.t16_3_1s_timer = 0;
+   \   00000022   0x2000             MOVS     R0,#+0
+   \   00000024   0x....             LDR      R1,??DataTable12_6
+   \   00000026   0x6048             STR      R0,[R1, #+4]
+    277          		drv_t16_3_work.t16_3_1000ms_flag=1;
+   \   00000028   0x2001             MOVS     R0,#+1
+   \   0000002A   0x....             LDR      R1,??DataTable12_6
+   \   0000002C   0x6148             STR      R0,[R1, #+20]
+   \   0000002E   0xE004             B        ??T16_3_IRQHandler_1
+    278          	}
+    279          	else {
+    280          		drv_t16_3_work.t16_3_1s_timer++;
+   \                     ??T16_3_IRQHandler_0: (+1)
+   \   00000030   0x....             LDR      R0,??DataTable12_6
+   \   00000032   0x6840             LDR      R0,[R0, #+4]
+   \   00000034   0x1C40             ADDS     R0,R0,#+1
+   \   00000036   0x....             LDR      R1,??DataTable12_6
+   \   00000038   0x6048             STR      R0,[R1, #+4]
+    281          	}
+    282          
+    283          	if ( (drv_t16_3_work.t16_3_1s_timer % 10) == 2) {
+   \                     ??T16_3_IRQHandler_1: (+1)
+   \   0000003A   0x....             LDR      R0,??DataTable12_6
+   \   0000003C   0x6840             LDR      R0,[R0, #+4]
+   \   0000003E   0x210A             MOVS     R1,#+10
+   \   00000040   0x.... 0x....      BL       __aeabi_uidivmod
+   \   00000044   0x2902             CMP      R1,#+2
+   \   00000046   0xD102             BNE      ??T16_3_IRQHandler_2
+    284          		drv_t16_3_work.t16_3_10ms_flag=1;
+   \   00000048   0x2001             MOVS     R0,#+1
+   \   0000004A   0x....             LDR      R1,??DataTable12_6
+   \   0000004C   0x6088             STR      R0,[R1, #+8]
+    285          	}
+    286          
+    287          	if ( (drv_t16_3_work.t16_3_1s_timer % 100) == 24) {
+   \                     ??T16_3_IRQHandler_2: (+1)
+   \   0000004E   0x....             LDR      R0,??DataTable12_6
+   \   00000050   0x6840             LDR      R0,[R0, #+4]
+   \   00000052   0x2164             MOVS     R1,#+100
+   \   00000054   0x.... 0x....      BL       __aeabi_uidivmod
+   \   00000058   0x2918             CMP      R1,#+24
+   \   0000005A   0xD102             BNE      ??T16_3_IRQHandler_3
+    288          		drv_t16_3_work.t16_3_100ms_flag=1;
+   \   0000005C   0x2001             MOVS     R0,#+1
+   \   0000005E   0x....             LDR      R1,??DataTable12_6
+   \   00000060   0x60C8             STR      R0,[R1, #+12]
+    289          	}
+    290          
+    291          	if ( (drv_t16_3_work.t16_3_1s_timer % 500) == 46) {
+   \                     ??T16_3_IRQHandler_3: (+1)
+   \   00000062   0x....             LDR      R0,??DataTable12_6
+   \   00000064   0x6840             LDR      R0,[R0, #+4]
+   \   00000066   0x21FA             MOVS     R1,#+250
+   \   00000068   0x0049             LSLS     R1,R1,#+1        ;; #+500
+   \   0000006A   0x.... 0x....      BL       __aeabi_uidivmod
+   \   0000006E   0x292E             CMP      R1,#+46
+   \   00000070   0xD102             BNE      ??T16_3_IRQHandler_4
+    292          		drv_t16_3_work.t16_3_500ms_flag=1;
+   \   00000072   0x2001             MOVS     R0,#+1
+   \   00000074   0x....             LDR      R1,??DataTable12_6
+   \   00000076   0x6108             STR      R0,[R1, #+16]
+    293          //		if (drv_t16_3_work.hdl_500ms != NULL) {
+    294          //			drv_t16_3_work.hdl_500ms();
+    295          //		}
+    296          	}
+    297          
+    298          	seT16_ClearIntFlag( T16_3 ); 
+   \                     ??T16_3_IRQHandler_4: (+1)
+   \   00000078   0x....             LDR      R0,??DataTable12_3  ;; 0x40000480
+   \   0000007A   0x.... 0x....      BL       seT16_ClearIntFlag
+    299          }
+   \   0000007E   0xBD01             POP      {R0,PC}          ;; return
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable12:
+   \   00000000   0xE000E100         DC32     0xe000e100
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable12_1:
+   \   00000000   0xE000E400         DC32     0xe000e400
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable12_2:
+   \   00000000   0xE000ED1C         DC32     0xe000ed1c
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable12_3:
+   \   00000000   0x40000480         DC32     0x40000480
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable12_4:
+   \   00000000   0x........         DC32     T16_InitStruct
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable12_5:
+   \   00000000   0x00002EE1         DC32     0x2ee1
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable12_6:
+   \   00000000   0x........         DC32     drv_t16_3_work
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable12_7:
+   \   00000000   0x000003E7         DC32     0x3e7
+    300          
+    301          
+    302          
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       4   NVIC_EnableIRQ
+      20   NVIC_SetPriority
+       8   T16_3_IRQHandler
+         8   -> seT16_ClearIntFlag
+         8 __aeabi_uidivmod
+       4   t16_3_check_1000ms
+       4   t16_3_check_100ms
+       4   t16_3_check_10ms
+       4   t16_3_check_500ms
+       0   t16_3_get_counter
+      16   t16_3_init
+        16   -> NVIC_EnableIRQ
+        16   -> NVIC_SetPriority
+        16   -> __aeabi_memset
+        16   -> seT16_EnableInt
+        16   -> seT16_Init
+        16   -> seT16_InitStruct
+       0   t16_3_init_check
+       0   t16_3_set_500ms_hdl
+       8   t16_3_start
+         8   -> seT16_Start
+       8   t16_3_stop
+         8   -> seT16_Stop
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable12
+       4  ??DataTable12_1
+       4  ??DataTable12_2
+       4  ??DataTable12_3
+       4  ??DataTable12_4
+       4  ??DataTable12_5
+       4  ??DataTable12_6
+       4  ??DataTable12_7
+      22  NVIC_EnableIRQ
+     132  NVIC_SetPriority
+     128  T16_3_IRQHandler
+       8  T16_InitStruct
+      28  drv_t16_3_work
+      22  t16_3_check_1000ms
+      22  t16_3_check_100ms
+      22  t16_3_check_10ms
+      22  t16_3_check_500ms
+       6  t16_3_get_counter
+      88  t16_3_init
+      32  t16_3_init_check
+       6  t16_3_set_500ms_hdl
+      10  t16_3_start
+      10  t16_3_stop
+
+ 
+  36 bytes in section .bss
+ 554 bytes in section .text
+ 
+ 554 bytes of CODE memory
+  36 bytes of DATA memory
+
+Errors: none
+Warnings: none

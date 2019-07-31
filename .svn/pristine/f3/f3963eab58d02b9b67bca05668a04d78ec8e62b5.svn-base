@@ -1,0 +1,179 @@
+/*###ICF### Section handled by ICF editor, don't touch! ****/
+/*-Editor annotation file-*/
+/* IcfEditorFile="$TOOLKIT_DIR$\config\ide\IcfEditor\cortex_v1_0.xml" */
+/*-Specials-*/
+define symbol __ICFEDIT_intvec_start__ = 0x00000000;
+/*-Memory Regions-*/
+define symbol __ICFEDIT_region_ROM_TBL1_start__ = 0x00010000;
+define symbol __ICFEDIT_region_ROM_TBL1_end__   = 0x0001010B;
+define symbol __ICFEDIT_region_ROM_PRG1_start__ = 0x0001010C;
+define symbol __ICFEDIT_region_ROM_PRG1_end__   = 0x00037FFF;
+define symbol __ICFEDIT_region_ROM_BOOT_start__ = 0x00038000;
+define symbol __ICFEDIT_region_ROM_BOOT_end__   = 0x0003FFFF;
+
+define symbol __ICFEDIT_region_ROM_TBL2_start__ = 0x00040000;
+define symbol __ICFEDIT_region_ROM_TBL2_end__   = 0x0004010B;
+define symbol __ICFEDIT_region_ROM_PRG2_start__ = 0x0004010C;
+define symbol __ICFEDIT_region_ROM_PRG2_end__   = 0x0006FFFF;
+
+define symbol __ICFEDIT_region_RAM_BOOT_start__ = 0x20000020;
+define symbol __ICFEDIT_region_RAM_BOOT_end__   = 0x20001FFF;
+define symbol __ICFEDIT_region_RAM_USER_start__ = 0x20002000;
+define symbol __ICFEDIT_region_RAM_USER_end__   = 0x2001EBFF;
+define symbol __ICFEDIT_region_RAM_STACK_start__= 0x2001EC00;
+define symbol __ICFEDIT_region_RAM_STACK_end__  = 0x2001FDFF;
+/*-Sizes-*/
+define symbol __ICFEDIT_size_cstack__ = 0x1000;
+define symbol __ICFEDIT_size_heap__   = 0x200;
+/**** End of ICF editor section. ###ICF###*/
+
+
+define memory mem with size = 4G;
+define region ROM_BOOT_region   = mem:[from __ICFEDIT_region_ROM_BOOT_start__   to __ICFEDIT_region_ROM_BOOT_end__];
+define region ROM_TBL_region    = mem:[from __ICFEDIT_region_ROM_TBL1_start__   to __ICFEDIT_region_ROM_TBL1_end__];
+define region ROM_PRG_region    = mem:[from __ICFEDIT_region_ROM_PRG1_start__   to __ICFEDIT_region_ROM_PRG1_end__];
+define region RAM_BOOT_region   = mem:[from __ICFEDIT_region_RAM_BOOT_start__   to __ICFEDIT_region_RAM_BOOT_end__];
+define region RAM_USER_region   = mem:[from __ICFEDIT_region_RAM_USER_start__   to __ICFEDIT_region_RAM_USER_end__];
+define region RAM_STACK_region  = mem:[from __ICFEDIT_region_RAM_STACK_start__  to __ICFEDIT_region_RAM_STACK_end__];
+
+define block CSTACK    with alignment = 8, size = __ICFEDIT_size_cstack__   { };
+define block HEAP      with alignment = 8, size = __ICFEDIT_size_heap__     { };
+
+define block BOOT_BLOCK  { ro code object board.o };
+
+define block TBL_BLOCK   { ro code object fixed.o,
+                           ro code object cstartup_M.o };
+
+define block PRG_BLOCK   { ro code object main.o,
+                           ro code object sePeriphLibrary.a,
+                           ro data object sePeriphLibrary.a,
+                           ro code object read.o,
+                           ro data object read.o,
+                           ro code object write.o,
+                           ro data object write.o,
+                           ro code object system_S1C31W74.o,
+//                           ro code object board.o,
+                           ro code object FlashS1C31W74.o,
+                           ro data object FlashS1C31W74.o,
+                           ro code object Driver_Flash.o,
+                           ro data object Driver_Flash.o,
+                           ro code object ctrl_CXD5600GF.o,
+                           ro data object ctrl_CXD5600GF.o,
+                           ro code object ctrl_GPIO.o,
+                           ro data object ctrl_GPIO.o,
+                           ro code object ctrl_LSM6DSL.o,
+                           ro data object ctrl_LSM6DSL.o,
+                           ro code object ctrl_MPL3115A2.o,
+                           ro data object ctrl_MPL3115A2.o,
+                           ro code object ctrl_SM7500JE.o,
+                           ro data object ctrl_SM7500JE.o,
+                           ro code object ctrl_USB.o,
+                           ro data object ctrl_USB.o,
+                           ro code object drv_clg.o,
+                           ro data object drv_clg.o,
+                           ro code object drv_flash.o,
+                           ro data object drv_flash.o,
+                           ro code object drv_gpio.o,
+                           ro data object drv_gpio.o,
+                           ro code object drv_i2c_0.o,
+                           ro data object drv_i2c_0.o,
+                           ro code object drv_i2c_1.o,
+                           ro data object drv_i2c_1.o,
+                           ro code object drv_rtc.o,
+                           ro data object drv_rtc.o,
+                           ro code object drv_t16_3.o,
+                           ro data object drv_t16_3.o,
+                           ro code object drv_uart2_0.o,
+                           ro data object drv_uart2_0.o,
+                           ro code object drv_uart2_1.o,
+                           ro data object drv_uart2_1.o,
+                           ro code object drv_usb_main.o,
+                           ro data object drv_usb_main.o,
+                           ro code object drv_usbd_user_cdc_acm.o,
+                           ro data object drv_usbd_user_cdc_acm.o,
+                           ro code object drv_wdt.o,
+                           ro data object drv_wdt.o,
+                           ro code object gnss_gw_common.o,
+                           ro data object gnss_gw_common.o,
+                           ro code object man_cmd.o,
+                           ro data object man_cmd.o,
+                           ro code object man_data.o,
+                           ro data object man_data.o,
+                           ro code object man_error.o,
+                           ro data object man_error.o,
+                           ro code object man_gps.o,
+                           ro data object man_gps.o,
+                           ro code object man_gyro.o,
+                           ro data object man_gyro.o,
+                           ro code object man_http.o,
+                           ro data object man_http.o,
+                           ro code object man_lte.o,
+                           ro data object man_lte.o,
+                           ro code object man_memory.o,
+                           ro data object man_memory.o,
+                           ro code object man_msg.o,
+                           ro data object man_msg.o,
+                           ro code object man_net.o,
+                           ro data object man_net.o,
+                           ro code object man_ope.o,
+                           ro data object man_ope.o,
+                           ro code object man_press.o,
+                           ro data object man_press.o,
+                           ro code object man_rpt.o,
+                           ro data object man_rpt.o,
+                           ro code object man_rtc.o,
+                           ro data object man_rtc.o,
+                           ro code object man_timer.o,
+                           ro data object man_timer.o,
+                           ro code object man_usb.o,
+                           ro data object man_usb.o,
+                           ro code object man_version.o,
+                           ro data object man_version.o,
+                           ro code object man_ota.o,
+                           ro data object man_ota.o,
+                           ro code object man_gpio.o,
+                           ro data object man_gpio.o,
+                           ro code object mid_GPS.o,
+                           ro data object mid_GPS.o,
+                           ro code object mid_HTTP.o,
+                           ro data object mid_HTTP.o,
+                           ro code object usbd_cdc_acm.o,
+                           ro data object usbd_cdc_acm.o,
+                           ro code object usbd_core.o,
+                           ro data object usbd_core.o,
+                           ro code object usbd_core_cdc.o,
+                           ro data object usbd_core_cdc.o,
+                           ro code object usbd_S1C31W74.o,
+                           ro data object usbd_S1C31W74.o,
+                           ro code object usbd_core.o,
+                           ro data object usbd_core.o };
+
+
+initialize by copy { readwrite };
+
+initialize manually with packing = none { section .flash_common_text};
+
+//initialize by copy with packing = none { section __DLIB_PERTHREAD }; // Required in a multi-threaded application
+do not initialize  { section .noinit };
+
+place at address mem:__ICFEDIT_intvec_start__ { readonly section .intvec };
+
+place in ROM_BOOT_region   { readonly, block BOOT_BLOCK };
+place in ROM_TBL_region    { block TBL_BLOCK };
+place in ROM_PRG_region    { block PRG_BLOCK };
+place in ROM_PRG_region    { section .flash_common_text_init};
+
+place in RAM_USER_region   { readwrite,
+                             block HEAP };
+place in RAM_BOOT_region   { section .flash_common_text };
+place in RAM_BOOT_region   { rw data object system_S1C31W74.o,
+                             rw data object board.o,
+                             rw data object sePeriphLibrary.a,
+                             rw data object dl6M_tln.a,
+                             rw data object usbd_S1C31W74.o,
+                             rw data object usbd_cdc_acm.o,
+                             rw data object usbd_core.o,
+                             rw data object usbd_cdc_acm.o,
+                             rw data object usbd_core.o };
+place in RAM_STACK_region   { block CSTACK };
+

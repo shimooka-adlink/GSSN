@@ -1,0 +1,127 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V7.80.4.12462/W32 for ARM       21/May/2019  17:01:20
+# Copyright 1999-2017 IAR Systems AB.
+#
+#    Cpu mode     =  thumb
+#    Endian       =  little
+#    Source file  =  C:\GNSS\Software\rJ105\source\GNSS_GW\fixed.c
+#    Command line =  
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\fixed.c -D __TARGET_ARCH_7_M -D
+#        S1C31W74 -D GNSS_GW_SIDE_B -lCN
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\List
+#        -lA
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\List
+#        --diag_suppress Pe177,Pe111,Pa082 -o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj
+#        --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa
+#        --no_clustering --no_scheduling --debug --endian=little
+#        --cpu=Cortex-M0+ -e --fpu=None --dlib_config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench
+#        7.5\arm\INC\c\DLib_Config_Normal.h" -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\ -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\
+#        -I "C:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        7.5\arm\CMSIS\Include\" -I "C:\Program Files (x86)\IAR
+#        Systems\Embedded Workbench 7.5\arm\inc\Epson\" -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\CMSIS\Device\S1C31W74\Include\
+#        -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\CMSIS\Driver\Include\
+#        -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\sePeriphLibrary\
+#        -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\board\S5U1C31W74T1\
+#        -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\USBStack\INC\
+#        -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\include\
+#        -Ol
+#    Locale       =  Japanese_Japan.932
+#    List file    =  
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\List\fixed.lst
+#    Object file  =  
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\fixed.o
+#
+###############################################################################
+
+C:\GNSS\Software\rJ105\source\GNSS_GW\fixed.c
+      1          
+      2          /**
+      3            ******************************************************************************
+      4            * @file    fixed.c
+      5            * @author  コア
+      6            * @version V1.0
+      7            * @date    2017.10.2
+      8            * @brief   JMPテーブル
+      9            ******************************************************************************
+     10            $Id: fixed.c 57 2018-03-30 05:54:51Z shitaoka $
+     11            * @attention
+     12            *
+     13            *****************************************************************************
+     14          */
+     15          
+     16          #include <S1C31W74.h>
+     17          #include "system_S1C31W74.h"
+     18          #include <board.h>
+     19          
+     20          #include "handler_id.h"
+     21          
+     22          
+     23          extern uint32_t __Vectors;        // Vector table
+     24          extern int PRG_main( void );
+     25          
+     26          
+     27          //void PRG1_main( void )  {
+
+   \                                 In section .text, align 4, keep-with-next
+     28          void main( void ) {
+   \                     main: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+     29            /* relocate vector table */    
+     30            __disable_irq(); 
+   \   00000002   0xB672             CPSID    I
+     31            if ( (uint32_t) &__Vectors != 0 ) {
+   \   00000004   0x4805             LDR      R0,??main_0
+   \   00000006   0x2800             CMP      R0,#+0
+   \   00000008   0xD004             BEQ      ??main_1
+     32              SCB->VTOR = (uint32_t)&__Vectors;  
+   \   0000000A   0x4804             LDR      R0,??main_0
+   \   0000000C   0x4904             LDR      R1,??main_0+0x4  ;; 0xe000ed08
+   \   0000000E   0x6008             STR      R0,[R1, #+0]
+     33              __DSB();
+   \   00000010   0xF3BF 0x8F4F      DSB      
+     34            }
+     35            __enable_irq();
+   \                     ??main_1: (+1)
+   \   00000014   0xB662             CPSIE    I
+     36          
+     37            /* JUMP main */
+     38            PRG_main();
+   \   00000016   0x.... 0x....      BL       PRG_main
+     39          }
+   \   0000001A   0xBD01             POP      {R0,PC}          ;; return
+   \                     ??main_0:
+   \   0000001C   0x........         DC32     __Vectors
+   \   00000020   0xE000ED08         DC32     0xe000ed08
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       8   main
+         8   -> PRG_main
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+      36  main
+
+ 
+ 36 bytes in section .text
+ 
+ 36 bytes of CODE memory
+
+Errors: none
+Warnings: none

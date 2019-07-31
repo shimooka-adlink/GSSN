@@ -1,0 +1,195 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V7.80.4.12462/W32 for ARM       17/May/2019  13:31:38
+# Copyright 1999-2017 IAR Systems AB.
+#
+#    Cpu mode     =  thumb
+#    Endian       =  little
+#    Source file  =  C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\hal\ctrl_I2C0.c
+#    Command line =  
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\hal\ctrl_I2C0.c -D
+#        __TARGET_ARCH_7_M -D S1C31W74 -D GNSS_GW_SIDE_A -lCN
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\List
+#        -lA
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\List
+#        --diag_suppress Pe177,Pe111,Pa082 -o
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\Obj
+#        --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa
+#        --no_clustering --no_scheduling --debug --endian=little
+#        --cpu=Cortex-M0+ -e --fpu=None --dlib_config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench
+#        7.5\arm\INC\c\DLib_Config_Normal.h" -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\ -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\
+#        -I "C:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        7.5\arm\CMSIS\Include\" -I "C:\Program Files (x86)\IAR
+#        Systems\Embedded Workbench 7.5\arm\inc\Epson\" -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\CMSIS\Device\S1C31W74\Include\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\CMSIS\Driver\Include\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\sePeriphLibrary\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\board\S5U1C31W74T1\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\USBStack\INC\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\include\
+#        -Ol
+#    Locale       =  Japanese_Japan.932
+#    List file    =  
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\List\ctrl_I2C0.lst
+#    Object file  =  
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\Obj\ctrl_I2C0.o
+#
+###############################################################################
+
+C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\hal\ctrl_I2C0.c
+      1          
+      2          /**
+      3            ******************************************************************************
+      4            * @file    ctrl_I2C0.c
+      5            * @author  コア
+      6            * @version V1.0
+      7            * @date    2017.10.2
+      8            * @brief   このファイルはI2C Ch0を制御するソフトウェアです。
+      9            ******************************************************************************
+     10            $Id: ctrl_GPIO.c 160 2018-05-16 04:14:16Z y-suyama $
+     11            * @attention
+     12            *
+     13            *****************************************************************************
+     14          */ 
+     15          
+     16          
+     17          #include <string.h>
+     18          #include <stdio.h>
+     19          #include <stdlib.h>
+     20          #include "board.h"
+     21          
+     22          #include "drv_i2c_0.h"
+     23          #include "gnss_gw_common.h"
+     24          
+     25          
+     26          #pragma section = "CTRL_PRG_BLOCK"
+     27          
+     28          
+     29          /************************************************************************/
+     30          /* declaration of structure                                             */
+     31          /************************************************************************/
+     32          
+     33          //************************************************************************/
+     34          /* definition of variables                                              */
+     35          /************************************************************************/
+     36          
+     37          /********************************************************************/
+     38          /*	static関数                                                      */
+     39          /********************************************************************/
+     40          
+     41          /********************************************************************/
+     42          /*	extern関数                                                      */
+     43          /********************************************************************/
+     44          
+     45          /********************************************************************/
+     46          /*!
+     47           * \name	ctrl_I2C0_init
+     48           * \brief	I2C Ch0 初期化 & 使用開始
+     49           * \param	なし
+     50           * \return  なし
+     51           * \note	起動時に、呼ばれること
+     52           */
+     53          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+     54          void ctrl_I2C0_init(void)
+     55          {
+   \                     ctrl_I2C0_init: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+     56          	// I2C Ch0 初期化
+     57          	i2c0_init();
+   \   00000002   0x.... 0x....      BL       i2c0_init
+     58          
+     59          	// I2C CH0 Driverを許可する
+     60          	i2c0_Enable();
+   \   00000006   0x.... 0x....      BL       i2c0_Enable
+     61          }
+   \   0000000A   0xBD01             POP      {R0,PC}          ;; return
+     62          
+     63          
+     64          /********************************************************************/
+     65          /*!
+     66           * \name	ctrl_I2C0_end
+     67           * \brief	I2C Ch0 の使用を中止する
+     68           *          SCL, SDA端子をHi-Z stateとする
+     69           * \param	なし
+     70           * \return  なし
+     71           * \note	必要時に、呼ばれること
+     72           */
+     73          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+     74          void ctrl_I2C0_end(void)
+     75          {
+   \                     ctrl_I2C0_end: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+     76          	i2c0_Disable();
+   \   00000002   0x.... 0x....      BL       i2c0_Disable
+     77          	i2c0_end();
+   \   00000006   0x.... 0x....      BL       i2c0_end
+     78          }
+   \   0000000A   0xBD01             POP      {R0,PC}          ;; return
+     79          
+     80          /********************************************************************/
+     81          /*!
+     82           * \name	ctrl_I2C0_re_start
+     83           * \brief	I2C Ch0 の使用を再開する
+     84           *          SCL, SDA端子を再設定する
+     85           * \param	なし
+     86           * \return  なし
+     87           * \note	ctrl_I2C0_endの復活時に、呼ばれること
+     88           */
+     89          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+     90          void ctrl_I2C0_re_start(void)
+     91          {
+   \                     ctrl_I2C0_re_start: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+     92          	i2c0_re_start();
+   \   00000002   0x.... 0x....      BL       i2c0_re_start
+     93          	i2c0_Enable();
+   \   00000006   0x.... 0x....      BL       i2c0_Enable
+     94          }
+   \   0000000A   0xBD01             POP      {R0,PC}          ;; return
+     95          
+     96          
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       8   ctrl_I2C0_end
+         8   -> i2c0_Disable
+         8   -> i2c0_end
+       8   ctrl_I2C0_init
+         8   -> i2c0_Enable
+         8   -> i2c0_init
+       8   ctrl_I2C0_re_start
+         8   -> i2c0_Enable
+         8   -> i2c0_re_start
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+      12  ctrl_I2C0_end
+      12  ctrl_I2C0_init
+      12  ctrl_I2C0_re_start
+
+ 
+ 36 bytes in section .text
+ 
+ 36 bytes of CODE memory
+
+Errors: none
+Warnings: none

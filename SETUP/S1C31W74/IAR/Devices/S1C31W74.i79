@@ -1,0 +1,31 @@
+[FILEFORMAT]
+rev=1.6
+
+[CHIP]
+name=S1C31W74
+endiansupport=le
+thumbsupport=true
+armsupport=false
+fpu=None
+SIMD=false
+
+MtbRegBase=0xf0200000
+
+JTAG=false
+SWD=true
+SWO_TraceD0=false
+
+[CORE]
+name=Cortex-M0+
+
+[DDF FILE]
+name=Epson\S1C31W74.ddf
+
+[LINKER FILE]
+name=$TOOLKIT_DIR$\config\linker\Epson\S1C31W74.icf
+
+[FLASH LOADER]
+
+little=$TOOLKIT_DIR$\config\flashloader\Epson\S1C31W74_int.board
+
+

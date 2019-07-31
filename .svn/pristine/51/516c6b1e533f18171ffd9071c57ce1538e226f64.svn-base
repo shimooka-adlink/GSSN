@@ -1,0 +1,631 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<project>
+  <fileVersion>2</fileVersion>
+  <fileChecksum>355603054</fileChecksum>
+  <configuration>
+    <name>Debug</name>
+    <outputs>
+      <file>$PROJ_DIR$\Debug\Obj\se_common.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_lcd32b.pbi</file>
+      <file>$PROJ_DIR$\..\..\..\se_clg.c</file>
+      <file>$PROJ_DIR$\..\..\..\se_clg.h</file>
+      <file>$PROJ_DIR$\..\..\..\se_common.c</file>
+      <file>$PROJ_DIR$\..\..\..\se_common.h</file>
+      <file>$PROJ_DIR$\..\..\..\se_dmac.c</file>
+      <file>$PROJ_DIR$\..\..\..\se_dmac.h</file>
+      <file>$PROJ_DIR$\..\..\..\se_i2c.c</file>
+      <file>$PROJ_DIR$\..\..\..\se_i2c.h</file>
+      <file>$PROJ_DIR$\..\..\..\se_lcd32b.c</file>
+      <file>$PROJ_DIR$\..\..\..\se_lcd32b.h</file>
+      <file>$PROJ_DIR$\..\..\..\se_pport.c</file>
+      <file>$PROJ_DIR$\..\..\..\se_pport.h</file>
+      <file>$PROJ_DIR$\..\..\..\se_qspi.c</file>
+      <file>$PROJ_DIR$\..\..\..\se_qspi.h</file>
+      <file>$PROJ_DIR$\..\..\..\se_remc2.c</file>
+      <file>$PROJ_DIR$\..\..\..\se_remc2.h</file>
+      <file>$PROJ_DIR$\..\..\..\se_rfc.c</file>
+      <file>$PROJ_DIR$\..\..\..\se_rfc.h</file>
+      <file>$PROJ_DIR$\..\..\..\se_rtca.c</file>
+      <file>$PROJ_DIR$\..\..\..\se_rtca.h</file>
+      <file>$PROJ_DIR$\..\..\..\se_snda.c</file>
+      <file>$PROJ_DIR$\..\..\..\se_snda.h</file>
+      <file>$PROJ_DIR$\..\..\..\se_spia.c</file>
+      <file>$PROJ_DIR$\..\..\..\se_spia.h</file>
+      <file>$PROJ_DIR$\..\..\..\se_svd2.c</file>
+      <file>$PROJ_DIR$\..\..\..\se_svd2.h</file>
+      <file>$PROJ_DIR$\..\..\..\se_t16.c</file>
+      <file>$PROJ_DIR$\..\..\..\se_t16.h</file>
+      <file>$PROJ_DIR$\..\..\..\se_t16b.c</file>
+      <file>$PROJ_DIR$\..\..\..\se_t16b.h</file>
+      <file>$PROJ_DIR$\..\..\..\se_uart2.c</file>
+      <file>$PROJ_DIR$\..\..\..\se_uart2.h</file>
+      <file>$PROJ_DIR$\..\..\..\se_usb.c</file>
+      <file>$PROJ_DIR$\..\..\..\se_usb.h</file>
+      <file>$PROJ_DIR$\..\..\..\se_wdt2.c</file>
+      <file>$PROJ_DIR$\..\..\..\se_wdt2.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\ystdio.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_i2c.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_svd2.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_wdt2.__cstat.et</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Threads.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\stdint.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_t16.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_uart2.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_remc2.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_pport.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_uart2.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_dmac.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_wdt2.o</file>
+      <file>$TOOLKIT_DIR$\inc\c\xencoding_limits.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_i2c.pbi</file>
+      <file>$TOOLKIT_DIR$\CMSIS\Include\core_cm0plus.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_t16.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_pport.pbi</file>
+      <file>$PROJ_DIR$\Debug\Exe\sePeriphLibrary.a</file>
+      <file>$PROJ_DIR$\..\..\..\..\CMSIS\Device\S1C31W74\Include\system_S1C31W74.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_usb.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_t16.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_usb.o</file>
+      <file>$TOOLKIT_DIR$\inc\c\intrinsics.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\ysizet.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_common.__cstat.et</file>
+      <file>$PROJ_DIR$\..\..\..\datatypes.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_qspi.pbi</file>
+      <file>$PROJ_DIR$\..\..\..\..\CMSIS\Device\S1C31W74\Include\system_S1C31.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_svd2.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_lcd32b.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_pport.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_remc2.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_rfc.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_snda.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_t16b.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_rtca.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_rfc.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_rfc.__cstat.et</file>
+      <file>$TOOLKIT_DIR$\inc\c\string.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_spia.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_wdt2.pbi</file>
+      <file>$PROJ_DIR$\..\..\..\usb_def.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_lcd32b.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_i2c.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_qspi.o</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Product.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\CMSIS\Device\S1C31W74\Include\S1C31.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_rtca.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_common.o</file>
+      <file>$TOOLKIT_DIR$\inc\c\stdio.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_svd2.__cstat.et</file>
+      <file>$TOOLKIT_DIR$\inc\c\cmsis_iar.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_t16b.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_rtca.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_dmac.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_remc2.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_t16b.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_uart2.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_dmac.pbi</file>
+      <file>$PROJ_DIR$\..\..\..\..\CMSIS\Device\S1C31W74\Include\S1C31W74.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\ycheck.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\yvals.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_qspi.__cstat.et</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Product_string.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_usb.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_spia.o</file>
+      <file>$TOOLKIT_DIR$\CMSIS\Include\cmsis_compiler.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_snda.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_clg.__cstat.et</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Config_Normal.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_clg.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_clg.pbi</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Defaults.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_spia.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\se_snda.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\sePeriphLibrary.pbd</file>
+    </outputs>
+    <file>
+      <name>[ROOT_NODE]</name>
+      <outputs>
+        <tool>
+          <name>IARCHIVE</name>
+          <file> 56</file>
+        </tool>
+      </outputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\se_clg.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 109</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 110</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 107</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 3 5 85 98 53 43 99 100 111 108 84 51 42 105 90 61 57 13</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 43 3 85 53 84 98 111 99 13 5 57 105 51 108 90 100 42 61</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\se_common.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 87</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 0</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 63</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 88 99 100 111 108 84 51 42 62 38 5 85 98 53 43 105 90 61 57</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 100 51 42 38 111 43 5 99 62 108 84 85 53 88 98 57 105 90 61</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\se_dmac.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 49</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 97</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 93</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 77 99 100 111 108 84 51 42 62 102 7 5 85 98 53 43 105 90 61 57</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 100 42 99 85 53 98 105 90 7 62 102 111 51 108 84 5 57 43 77 61</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\se_i2c.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 82</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 52</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 39</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 9 5 85 98 53 43 99 100 111 108 84 51 42 105 90 61 57 3 13</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 13 3 85 53 5 98 42 100 43 57 99 61 9 105 111 51 108 84 90</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\se_lcd32b.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 81</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 1</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 68</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 77 99 100 111 108 84 51 42 62 102 11 5 85 98 53 43 105 90 61 57 3 13</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 42 100 99 3 57 13 43 11 62 102 111 51 61 5 77 108 84 85 98 53 105 90</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\se_pport.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 47</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 55</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 69</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 13 5 85 98 53 43 99 100 111 108 84 51 42 105 90 61 57 3 77 62 102</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 3 43 100 99 5 61 57 77 85 98 53 42 13 105 111 51 108 84 90 62 102</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\se_qspi.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 83</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 65</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 101</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 77 99 100 111 108 84 51 42 62 102 15 5 85 98 53 43 105 90 61 57 3 29 7 13</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 99 43 3 7 57 100 42 61 5 15 62 102 111 51 108 84 29 13 85 98 53 105 90 77</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\se_remc2.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 94</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 46</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 70</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 17 5 85 98 53 43 99 100 111 108 84 51 42 105 90 61 57 3 13</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 13 98 3 5 85 53 42 100 43 57 99 61 17 105 111 51 108 84 90</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\se_rfc.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 75</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 71</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 76</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 19 5 85 98 53 43 99 100 111 108 84 51 42 105 90 61 57 3 13</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 5 3 85 53 13 98 42 100 43 57 99 61 19 105 111 51 108 84 90</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\se_rtca.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 74</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 92</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 86</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 21 5 85 98 53 43 99 100 111 108 84 51 42 105 90 61 57 3</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 43 100 99 5 61 3 57 85 98 53 42 21 105 111 51 108 84 90</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\se_snda.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 113</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 106</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 72</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 23 5 85 98 53 43 99 100 111 108 84 51 42 105 90 61 57 3 7 13</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 7 3 98 5 85 53 42 100 43 13 57 99 61 23 105 111 51 108 84 90</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\se_spia.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 104</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 112</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 78</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 77 99 100 111 108 84 51 42 62 102 25 5 85 98 53 43 105 90 61 57 3 29 7 13</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 100 3 42 99 98 105 90 25 7 85 53 43 5 77 62 102 111 51 108 84 29 13 57 61</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\se_svd2.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 67</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 40</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 89</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 77 99 100 111 108 84 51 42 62 102 27 5 85 98 53 43 105 90 61 57 3 13</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 102 57 5 84 3 99 111 62 51 108 100 13 43 27 42 85 98 53 61 77 105 90</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\se_t16.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 44</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 54</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 59</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 29 5 85 98 53 43 99 100 111 108 84 51 42 105 90 61 57 3</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 85 53 43 100 99 5 3 61 98 57 42 29 105 111 51 108 84 90</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\se_t16b.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 95</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 73</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 91</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 31 5 85 98 53 43 99 100 111 108 84 51 42 105 90 61 57 3 13</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 3 98 85 53 42 100 43 13 5 57 99 61 31 105 111 51 108 84 90</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\se_uart2.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 45</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 96</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 48</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 77 99 100 111 108 84 51 42 62 102 33 5 85 98 53 43 105 90 61 57 3 7 13</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 57 102 3 99 111 62 51 42 100 43 33 13 61 5 77 108 84 7 85 98 53 105 90</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\se_usb.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 60</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 58</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 103</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 88 99 100 111 108 84 51 42 62 38 85 98 53 43 105 90 61 57 66 35 5 3 64 80</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 5 62 51 108 100 57 43 80 66 99 111 84 61 85 35 3 38 42 98 53 88 105 90 64</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\se_wdt2.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 50</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 79</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 41</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 37 5 85 98 53 43 99 100 111 108 84 51 42 105 90 61 57 3</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 5 98 43 100 99 61 85 53 3 57 42 37 105 111 51 108 84 90</file>
+        </tool>
+      </inputs>
+    </file>
+  </configuration>
+  <configuration>
+    <name>Release</name>
+    <outputs/>
+    <forcedrebuild>
+      <name>[MULTI_TOOL]</name>
+      <tool>IARCHIVE</tool>
+    </forcedrebuild>
+  </configuration>
+</project>
+
+

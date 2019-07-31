@@ -1,0 +1,269 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V7.80.4.12462/W32 for ARM       21/May/2019  17:01:17
+# Copyright 1999-2017 IAR Systems AB.
+#
+#    Cpu mode     =  thumb
+#    Endian       =  little
+#    Source file  =  C:\GNSS\Software\rJ105\source\GNSS_GW\hal\ctrl_SLEEP.c
+#    Command line =  
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\hal\ctrl_SLEEP.c -D
+#        __TARGET_ARCH_7_M -D S1C31W74 -D GNSS_GW_SIDE_B -lCN
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\List
+#        -lA
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\List
+#        --diag_suppress Pe177,Pe111,Pa082 -o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj
+#        --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa
+#        --no_clustering --no_scheduling --debug --endian=little
+#        --cpu=Cortex-M0+ -e --fpu=None --dlib_config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench
+#        7.5\arm\INC\c\DLib_Config_Normal.h" -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\ -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\
+#        -I "C:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        7.5\arm\CMSIS\Include\" -I "C:\Program Files (x86)\IAR
+#        Systems\Embedded Workbench 7.5\arm\inc\Epson\" -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\CMSIS\Device\S1C31W74\Include\
+#        -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\CMSIS\Driver\Include\
+#        -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\sePeriphLibrary\
+#        -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\board\S5U1C31W74T1\
+#        -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\USBStack\INC\
+#        -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\include\
+#        -Ol
+#    Locale       =  Japanese_Japan.932
+#    List file    =  
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\List\ctrl_SLEEP.lst
+#    Object file  =  
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\ctrl_SLEEP.o
+#
+###############################################################################
+
+C:\GNSS\Software\rJ105\source\GNSS_GW\hal\ctrl_SLEEP.c
+      1          
+      2          /**
+      3            ******************************************************************************
+      4            * @file    ctrl_SLEEP.c
+      5            * @author  コア
+      6            * @version V1.0
+      7            * @date    2017.10.2
+      8            * @brief   このファイルはSLEEPを制御するソフトウェアです。
+      9            ******************************************************************************
+     10            $Id$
+     11            * @attention
+     12            *
+     13            *****************************************************************************
+     14          */ 
+     15          
+     16          
+     17          #include <string.h>
+     18          #include <stdio.h>
+     19          #include <stdlib.h>
+     20          #include "board.h"
+     21          
+     22          #include "drv_clg.h"
+     23          #include "gnss_gw_common.h"
+     24          
+     25          
+     26          #pragma section = "CTRL_PRG_BLOCK"
+     27          
+     28          /************************************************************************/
+     29          /* declaration of structure                                             */
+     30          /************************************************************************/
+     31          
+     32          
+     33          
+     34          /************************************************************************/
+     35          /* definition of variables                                              */
+     36          /************************************************************************/
+     37          
+     38          
+     39          /********************************************************************/
+     40          /*	static関数                                                      */
+     41          /********************************************************************/
+     42          
+     43          
+     44          
+     45          /********************************************************************/
+     46          /*	extern関数                                                      */
+     47          /********************************************************************/
+     48          
+     49          
+     50          /********************************************************************/
+     51          /*!
+     52           * \name	ctrl_SLEEP_init
+     53           * \brief	SLEEP初期化処理
+     54           * \param	なし
+     55           * \return   0: 正常
+     56           * \note	起動時に、呼ばれること
+     57           */
+     58          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+     59          int32_t ctrl_SLEEP_init(void)
+     60          {
+   \                     ctrl_SLEEP_init: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+     61          	// SLEEP Driver初期化処理
+     62          	drv_clg_init();
+   \   00000002   0x.... 0x....      BL       drv_clg_init
+     63          	
+     64          	return 0;
+   \   00000006   0x2000             MOVS     R0,#+0
+   \   00000008   0xBD02             POP      {R1,PC}          ;; return
+     65          }
+     66          
+     67          
+     68          /********************************************************************/
+     69          /*!
+     70           * \name	ctrl_SLEEP_extsw
+     71           * \brief	SLEEPモードに入ります
+     72           *             起床条件 :: OFF MODE SW OFF
+     73           *             起床条件 :: 外部電源ON信号 ON
+     74           *             起床条件 :: 外部電源(USB)ON信号 ON
+     75           * \param	なし
+     76           * \return  1: OFF MODE SW OFF
+     77           *          2: 外部電源ON/OFF信号ON, 外部電源(USB)ON信号 ON
+     78           * \note	なし
+     79           */
+     80          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+     81          int32_t ctrl_SLEEP_extsw(void)
+     82          {
+   \                     ctrl_SLEEP_extsw: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+     83          	int32_t		ret;
+     84          	
+     85          	ret = sleep_mode();
+   \   00000002   0x.... 0x....      BL       sleep_mode
+     86          	return ret;
+   \   00000006   0xBD02             POP      {R1,PC}          ;; return
+     87          }
+     88          
+     89          
+     90          /********************************************************************/
+     91          /*!
+     92           * \name	ctrl_SLEEP_extsw_exton
+     93           * \brief	SLEEPモードに入ります
+     94           *             起床条件 :: POWER EXT MODE SW OFF
+     95           *             起床条件 :: 外部電源ON信号 ON
+     96           *             起床条件 :: 外部電源(USB)ON信号 ON
+     97           * \param	なし
+     98           * \return  1: POWER EXT MODE SW OFF
+     99           *          2: 外部電源ON/OFF信号ON, 外部電源(USB)ON信号ON
+    100           * \note	なし
+    101           */
+    102          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    103          int32_t ctrl_SLEEP_extsw_exton(void)
+    104          {
+   \                     ctrl_SLEEP_extsw_exton: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    105          	int32_t		ret;
+    106          
+    107          	ret = sleep_mode_exton();
+   \   00000002   0x.... 0x....      BL       sleep_mode_exton
+    108          	return ret;
+   \   00000006   0xBD02             POP      {R1,PC}          ;; return
+    109          }
+    110          
+    111          
+    112          /********************************************************************/
+    113          /*!
+    114           * \name	ctrl_SLEEP_extsw_exton_alarm
+    115           * \brief	SLEEPモードに入ります
+    116           *             起床条件 :: POWER EXT MODE SW OFF
+    117           *             起床条件 :: 外部電源ON信号 ON
+    118           *             起床条件 :: 外部電源(USB)ON信号 ON
+    119           *             起床条件 :: alarm ON
+    120           * \param	hour : アラーム時間(時)
+    121           *          min  : アラーム時間(分)
+    122           *          sec  : アラーム時間(秒)
+    123           * \return  1: POWER EXT MODE SW OFF
+    124           *          2: 外部電源ON/OFF信号ON, 外部電源(USB)ON信号ON
+    125           *          3: alarm ON
+    126           * \note	なし
+    127           */
+    128          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    129          int32_t ctrl_SLEEP_extsw_exton_alarm(uint8_t hour, uint8_t min , uint8_t sec)
+    130          {
+   \                     ctrl_SLEEP_extsw_exton_alarm: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    131          	int32_t		ret;
+    132          	ret = sleep_mode_alarm(hour, min, sec);
+   \   00000002   0xB2D2             UXTB     R2,R2
+   \   00000004   0xB2C9             UXTB     R1,R1
+   \   00000006   0xB2C0             UXTB     R0,R0
+   \   00000008   0x.... 0x....      BL       sleep_mode_alarm
+    133          	
+    134          	return ret;
+   \   0000000C   0xBD02             POP      {R1,PC}          ;; return
+    135          }
+    136          
+    137          
+    138          /********************************************************************/
+    139          /*!
+    140           * \name	ctrl_SLEEP_system_error
+    141           * \brief	SLEEPモードに入ります
+    142           *             起床条件 :: POWER EXT MODE SW OFF
+    143           * \param	なし
+    144           * \return  1: POWER EXT MODE SW OFF
+    145           * \note	なし
+    146           */
+    147          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    148          int32_t ctrl_SLEEP_system_error(void)
+    149          {
+   \                     ctrl_SLEEP_system_error: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    150          	int32_t		ret;
+    151          
+    152          	ret = sleep_mode_system_error();
+   \   00000002   0x.... 0x....      BL       sleep_mode_system_error
+    153          	return ret;
+   \   00000006   0xBD02             POP      {R1,PC}          ;; return
+    154          }
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       8   ctrl_SLEEP_extsw
+         8   -> sleep_mode
+       8   ctrl_SLEEP_extsw_exton
+         8   -> sleep_mode_exton
+       8   ctrl_SLEEP_extsw_exton_alarm
+         8   -> sleep_mode_alarm
+       8   ctrl_SLEEP_init
+         8   -> drv_clg_init
+       8   ctrl_SLEEP_system_error
+         8   -> sleep_mode_system_error
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       8  ctrl_SLEEP_extsw
+       8  ctrl_SLEEP_extsw_exton
+      14  ctrl_SLEEP_extsw_exton_alarm
+      10  ctrl_SLEEP_init
+       8  ctrl_SLEEP_system_error
+
+ 
+ 48 bytes in section .text
+ 
+ 48 bytes of CODE memory
+
+Errors: none
+Warnings: 1

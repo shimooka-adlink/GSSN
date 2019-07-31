@@ -1,0 +1,2855 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V7.80.4.12462/W32 for ARM       17/May/2019  13:32:13
+# Copyright 1999-2017 IAR Systems AB.
+#
+#    Cpu mode     =  thumb
+#    Endian       =  little
+#    Source file  =  C:\GNSS\Software\rJ104_rc2\USBStack\SRC\usbd_core.c
+#    Command line =  
+#        C:\GNSS\Software\rJ104_rc2\USBStack\SRC\usbd_core.c -D
+#        __TARGET_ARCH_7_M -D S1C31W74 -D GNSS_GW_SIDE_B -lCN
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\List
+#        -lA
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\List
+#        --diag_suppress Pe177,Pe111,Pa082 -o
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj
+#        --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa
+#        --no_clustering --no_scheduling --debug --endian=little
+#        --cpu=Cortex-M0+ -e --fpu=None --dlib_config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench
+#        7.5\arm\INC\c\DLib_Config_Normal.h" -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\ -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\
+#        -I "C:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        7.5\arm\CMSIS\Include\" -I "C:\Program Files (x86)\IAR
+#        Systems\Embedded Workbench 7.5\arm\inc\Epson\" -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\CMSIS\Device\S1C31W74\Include\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\CMSIS\Driver\Include\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\sePeriphLibrary\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\board\S5U1C31W74T1\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\USBStack\INC\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\include\
+#        -Ol
+#    Locale       =  Japanese_Japan.932
+#    List file    =  
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\List\usbd_core.lst
+#    Object file  =  
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\usbd_core.o
+#
+###############################################################################
+
+C:\GNSS\Software\rJ104_rc2\USBStack\SRC\usbd_core.c
+      1          /* CMSIS-DAP Interface Firmware
+      2           * Copyright (c) 2009-2013 ARM Limited
+      3           *
+      4           * Licensed under the Apache License, Version 2.0 (the "License");
+      5           * you may not use this file except in compliance with the License.
+      6           * You may obtain a copy of the License at
+      7           *
+      8           *     http://www.apache.org/licenses/LICENSE-2.0
+      9           *
+     10           * Unless required by applicable law or agreed to in writing, software
+     11           * distributed under the License is distributed on an "AS IS" BASIS,
+     12           * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     13           * See the License for the specific language governing permissions and
+     14           * limitations under the License.
+     15           */
+     16          #include "RTL.h"
+     17          #include <rl_usb.h>
+     18          #include <string.h>
+     19          #include "usb_for_lib.h"
+     20          #include "version.h"
+     21          
+
+   \                                 In section .bss, align 2
+     22          U16               USBD_DeviceStatus;
+   \                     USBD_DeviceStatus:
+   \   00000000                      DS8 2
+
+   \                                 In section .bss, align 1
+     23          U8                USBD_DeviceAddress;
+   \                     USBD_DeviceAddress:
+   \   00000000                      DS8 1
+
+   \                                 In section .bss, align 1
+     24          U8                USBD_Configuration;
+   \                     USBD_Configuration:
+   \   00000000                      DS8 1
+
+   \                                 In section .bss, align 4
+     25          U32               USBD_EndPointMask;
+   \                     USBD_EndPointMask:
+   \   00000000                      DS8 4
+
+   \                                 In section .bss, align 4
+     26          U32               USBD_EndPointHalt;
+   \                     USBD_EndPointHalt:
+   \   00000000                      DS8 4
+
+   \                                 In section .bss, align 4
+     27          U32               USBD_EndPointStall;          /* EP must stay stalled */
+   \                     USBD_EndPointStall:
+   \   00000000                      DS8 4
+
+   \                                 In section .bss, align 1
+     28          U8                USBD_NumInterfaces;
+   \                     USBD_NumInterfaces:
+   \   00000000                      DS8 1
+
+   \                                 In section .bss, align 1
+     29          U8                USBD_HighSpeed;
+   \                     USBD_HighSpeed:
+   \   00000000                      DS8 1
+
+   \                                 In section .bss, align 1
+     30          U8                USBD_ZLP;
+   \                     USBD_ZLP:
+   \   00000000                      DS8 1
+     31          
+
+   \                                 In section .bss, align 4
+     32          USBD_EP_DATA      USBD_EP0Data;
+   \                     USBD_EP0Data:
+   \   00000000                      DS8 8
+
+   \                                 In section .bss, align 4
+     33          USB_SETUP_PACKET  USBD_SetupPacket;
+   \                     USBD_SetupPacket:
+   \   00000000                      DS8 8
+     34          
+     35          #ifdef __RTX
+     36          OS_TID            USBD_RTX_DevTask;            /* USB Device Task ID */
+     37          OS_TID            USBD_RTX_EPTask[16];         /* USB Endpoint Task ID's */
+     38          OS_TID            USBD_RTX_CoreTask;           /* USB Core Task ID */
+     39          #endif
+     40          
+     41          #if __ARM_ASM   ///< port to IAR- modified from original MBED 
+     42          __asm void $$USBD$$version (void) {
+     43             /* Export a version number symbol for a version control. */
+     44          
+     45                          EXPORT  __RL_USBD_VER
+     46          
+     47          __RL_USBD_VER   EQU     0x470
+     48          }
+     49          #else
+     50          #define __RL_USBD_VER 0x470
+     51          #endif
+     52          /*
+     53           *  Init USB Device Core and Hardware
+     54           *    Parameters:      None
+     55           *    Return Value:    None
+     56           */
+     57          
+
+   \                                 In section .text, align 2, keep-with-next
+     58          void usbd_init (void) {
+   \                     usbd_init: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+     59            USBD_HighSpeed     = __FALSE;
+   \   00000002   0x2000             MOVS     R0,#+0
+   \   00000004   0x....             LDR      R1,??DataTable9
+   \   00000006   0x7008             STRB     R0,[R1, #+0]
+     60          
+     61            usbd_class_init();
+   \   00000008   0x.... 0x....      BL       usbd_class_init
+     62            USBD_RTX_TaskInit();
+   \   0000000C   0x.... 0x....      BL       USBD_RTX_TaskInit
+     63          
+     64            USBD_Init();
+   \   00000010   0x.... 0x....      BL       USBD_Init
+     65          }
+   \   00000014   0xBD01             POP      {R0,PC}          ;; return
+     66          
+     67          
+     68          /*
+     69           *  USB Device Connect/Disconnect Function
+     70           *   Called by the User to Connect/Disconnect USB Device
+     71           *    Parameters:      con:   Connect/Disconnect
+     72           *    Return Value:    None
+     73           */
+     74          
+
+   \                                 In section .text, align 2, keep-with-next
+     75          void usbd_connect (BOOL con) {
+   \                     usbd_connect: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+     76          
+     77            USBD_Connect (con);
+   \   00000002   0x.... 0x....      BL       USBD_Connect
+     78          }
+   \   00000006   0xBD01             POP      {R0,PC}          ;; return
+     79          
+     80          
+     81          /*
+     82           *  Reset USB Device Core
+     83           *    Parameters:      None
+     84           *    Return Value:    None
+     85           */
+     86          
+
+   \                                 In section .text, align 2, keep-with-next
+     87          void usbd_reset_core (void) {
+     88          
+     89            USBD_DeviceStatus  = usbd_power;
+   \                     usbd_reset_core: (+1)
+   \   00000000   0x....             LDR      R0,??DataTable7
+   \   00000002   0x7800             LDRB     R0,[R0, #+0]
+   \   00000004   0x....             LDR      R1,??DataTable8
+   \   00000006   0x8008             STRH     R0,[R1, #+0]
+     90            USBD_DeviceAddress = 0;
+   \   00000008   0x2000             MOVS     R0,#+0
+   \   0000000A   0x....             LDR      R1,??DataTable8_1
+   \   0000000C   0x7008             STRB     R0,[R1, #+0]
+     91            USBD_Configuration = 0;
+   \   0000000E   0x2000             MOVS     R0,#+0
+   \   00000010   0x....             LDR      R1,??DataTable8_2
+   \   00000012   0x7008             STRB     R0,[R1, #+0]
+     92            USBD_EndPointMask  = 0x00010001;
+   \   00000014   0x....             LDR      R0,??DataTable8_3  ;; 0x10001
+   \   00000016   0x....             LDR      R1,??DataTable8_4
+   \   00000018   0x6008             STR      R0,[R1, #+0]
+     93            USBD_EndPointHalt  = 0x00000000;
+   \   0000001A   0x2000             MOVS     R0,#+0
+   \   0000001C   0x....             LDR      R1,??DataTable9_1
+   \   0000001E   0x6008             STR      R0,[R1, #+0]
+     94            USBD_EndPointStall = 0x00000000;
+   \   00000020   0x2000             MOVS     R0,#+0
+   \   00000022   0x....             LDR      R1,??DataTable9_2
+   \   00000024   0x6008             STR      R0,[R1, #+0]
+     95          }
+   \   00000026   0x4770             BX       LR               ;; return
+     96          
+     97          
+     98          /*
+     99           *  USB Device Configured Function
+    100           *   Called by the User to check id USB Device is configured
+    101           *    Parameters:
+    102           *    Return Value:    Configurated state (FALSE = unconfigured, TRUE = configured)
+    103           */
+    104          
+
+   \                                 In section .text, align 2, keep-with-next
+    105          BOOL usbd_configured (void) {
+   \                     usbd_configured: (+1)
+   \   00000000   0xB500             PUSH     {LR}
+    106          
+    107            if (USBD_Configuration)
+   \   00000002   0x....             LDR      R0,??DataTable8_2
+   \   00000004   0x7800             LDRB     R0,[R0, #+0]
+   \   00000006   0x2800             CMP      R0,#+0
+   \   00000008   0xD001             BEQ      ??usbd_configured_0
+    108              return (__TRUE);
+   \   0000000A   0x2001             MOVS     R0,#+1
+   \   0000000C   0xE000             B        ??usbd_configured_1
+    109          
+    110            return (__FALSE);
+   \                     ??usbd_configured_0: (+1)
+   \   0000000E   0x2000             MOVS     R0,#+0
+   \                     ??usbd_configured_1: (+1)
+   \   00000010   0xBD00             POP      {PC}             ;; return
+    111          }
+    112          
+    113          
+    114          /*
+    115           *  USB Device Request - Setup Stage
+    116           *    Parameters:      None
+    117           *    Return Value:    None
+    118           */
+    119          
+
+   \                                 In section .text, align 2, keep-with-next
+    120          void USBD_SetupStage (void) {
+   \                     USBD_SetupStage: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    121            USBD_ReadEP(0x00, (U8 *)&USBD_SetupPacket);
+   \   00000002   0x....             LDR      R1,??DataTable9_3
+   \   00000004   0x2000             MOVS     R0,#+0
+   \   00000006   0x.... 0x....      BL       USBD_ReadEP
+    122          }
+   \   0000000A   0xBD01             POP      {R0,PC}          ;; return
+    123          
+    124          
+    125          /*
+    126           *  USB Device Request - Data In Stage
+    127           *    Parameters:      None
+    128           *    Return Value:    None
+    129           */
+    130          
+
+   \                                 In section .text, align 2, keep-with-next
+    131          void USBD_DataInStage (void) {
+   \                     USBD_DataInStage: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    132            U32 cnt;
+    133          
+    134            if (USBD_EP0Data.Count > usbd_max_packet0) {
+   \   00000002   0x....             LDR      R0,??DataTable9_4
+   \   00000004   0x7800             LDRB     R0,[R0, #+0]
+   \   00000006   0x....             LDR      R1,??DataTable9_5
+   \   00000008   0x8889             LDRH     R1,[R1, #+4]
+   \   0000000A   0xB280             UXTH     R0,R0
+   \   0000000C   0x4288             CMP      R0,R1
+   \   0000000E   0xD202             BCS      ??USBD_DataInStage_0
+    135              cnt = usbd_max_packet0;
+   \   00000010   0x....             LDR      R0,??DataTable9_4
+   \   00000012   0x7802             LDRB     R2,[R0, #+0]
+   \   00000014   0xE001             B        ??USBD_DataInStage_1
+    136            } else {
+    137              cnt = USBD_EP0Data.Count;
+   \                     ??USBD_DataInStage_0: (+1)
+   \   00000016   0x....             LDR      R0,??DataTable9_5
+   \   00000018   0x8882             LDRH     R2,[R0, #+4]
+    138            }
+    139            if (!cnt) USBD_ZLP = 0;
+   \                     ??USBD_DataInStage_1: (+1)
+   \   0000001A   0x2A00             CMP      R2,#+0
+   \   0000001C   0xD102             BNE      ??USBD_DataInStage_2
+   \   0000001E   0x2000             MOVS     R0,#+0
+   \   00000020   0x....             LDR      R1,??DataTable9_6
+   \   00000022   0x7008             STRB     R0,[R1, #+0]
+    140            cnt = USBD_WriteEP(0x80, USBD_EP0Data.pData, cnt);
+   \                     ??USBD_DataInStage_2: (+1)
+   \   00000024   0x....             LDR      R0,??DataTable9_5
+   \   00000026   0x6801             LDR      R1,[R0, #+0]
+   \   00000028   0x2080             MOVS     R0,#+128
+   \   0000002A   0x.... 0x....      BL       USBD_WriteEP
+   \   0000002E   0x0002             MOVS     R2,R0
+    141            USBD_EP0Data.pData += cnt;
+   \   00000030   0x....             LDR      R0,??DataTable9_5
+   \   00000032   0x6800             LDR      R0,[R0, #+0]
+   \   00000034   0x1880             ADDS     R0,R0,R2
+   \   00000036   0x....             LDR      R1,??DataTable9_5
+   \   00000038   0x6008             STR      R0,[R1, #+0]
+    142            USBD_EP0Data.Count -= cnt;
+   \   0000003A   0x....             LDR      R0,??DataTable9_5
+   \   0000003C   0x8880             LDRH     R0,[R0, #+4]
+   \   0000003E   0x1A80             SUBS     R0,R0,R2
+   \   00000040   0x....             LDR      R1,??DataTable9_5
+   \   00000042   0x8088             STRH     R0,[R1, #+4]
+    143          }
+   \   00000044   0xBD01             POP      {R0,PC}          ;; return
+    144          
+    145          
+    146          /*
+    147           *  USB Device Request - Data Out Stage
+    148           *    Parameters:      None
+    149           *    Return Value:    None
+    150           */
+    151          
+
+   \                                 In section .text, align 2, keep-with-next
+    152          void USBD_DataOutStage (void) {
+   \                     USBD_DataOutStage: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    153            U32 cnt;
+    154          
+    155            cnt = USBD_ReadEP(0x00, USBD_EP0Data.pData);
+   \   00000002   0x....             LDR      R0,??DataTable9_5
+   \   00000004   0x6801             LDR      R1,[R0, #+0]
+   \   00000006   0x2000             MOVS     R0,#+0
+   \   00000008   0x.... 0x....      BL       USBD_ReadEP
+    156            USBD_EP0Data.pData += cnt;
+   \   0000000C   0x....             LDR      R1,??DataTable9_5
+   \   0000000E   0x6809             LDR      R1,[R1, #+0]
+   \   00000010   0x1809             ADDS     R1,R1,R0
+   \   00000012   0x....             LDR      R2,??DataTable9_5
+   \   00000014   0x6011             STR      R1,[R2, #+0]
+    157            USBD_EP0Data.Count -= cnt;
+   \   00000016   0x....             LDR      R1,??DataTable9_5
+   \   00000018   0x8889             LDRH     R1,[R1, #+4]
+   \   0000001A   0x1A08             SUBS     R0,R1,R0
+   \   0000001C   0x....             LDR      R1,??DataTable9_5
+   \   0000001E   0x8088             STRH     R0,[R1, #+4]
+    158          }
+   \   00000020   0xBD01             POP      {R0,PC}          ;; return
+    159          
+    160          
+    161          /*
+    162           *  USB Device Request - Status In Stage
+    163           *    Parameters:      None
+    164           *    Return Value:    None
+    165           */
+    166          
+
+   \                                 In section .text, align 2, keep-with-next
+    167          void USBD_StatusInStage (void) {
+   \                     USBD_StatusInStage: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    168            USBD_WriteEP(0x80, NULL, 0);
+   \   00000002   0x2200             MOVS     R2,#+0
+   \   00000004   0x2100             MOVS     R1,#+0
+   \   00000006   0x2080             MOVS     R0,#+128
+   \   00000008   0x.... 0x....      BL       USBD_WriteEP
+    169          }
+   \   0000000C   0xBD01             POP      {R0,PC}          ;; return
+    170          
+    171          
+    172          /*
+    173           *  USB Device Request - Status Out Stage
+    174           *    Parameters:      None
+    175           *    Return Value:    None
+    176           */
+    177          
+
+   \                                 In section .text, align 2, keep-with-next
+    178          void USBD_StatusOutStage (void) {
+   \                     USBD_StatusOutStage: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    179            USBD_ReadEP(0x00, USBD_EP0Buf);
+   \   00000002   0x....             LDR      R1,??DataTable9_7
+   \   00000004   0x2000             MOVS     R0,#+0
+   \   00000006   0x.... 0x....      BL       USBD_ReadEP
+    180          }
+   \   0000000A   0xBD01             POP      {R0,PC}          ;; return
+    181          
+    182          
+    183          /*
+    184           *  Get Status USB Device Request
+    185           *    Parameters:      None
+    186           *    Return Value:    TRUE - Success, FALSE - Error
+    187           */
+    188          
+
+   \                                 In section .text, align 2, keep-with-next
+    189          __inline BOOL USBD_ReqGetStatus (void) {
+   \                     USBD_ReqGetStatus: (+1)
+   \   00000000   0xB500             PUSH     {LR}
+    190            U32 n, m;
+    191          
+    192            switch (USBD_SetupPacket.bmRequestType.Recipient) {
+   \   00000002   0x....             LDR      R0,??DataTable9_3
+   \   00000004   0x7800             LDRB     R0,[R0, #+0]
+   \   00000006   0x06C0             LSLS     R0,R0,#+27       ;; ZeroExtS R0,R0,#+27,#+27
+   \   00000008   0x0EC0             LSRS     R0,R0,#+27
+   \   0000000A   0x2800             CMP      R0,#+0
+   \   0000000C   0xD003             BEQ      ??USBD_ReqGetStatus_0
+   \   0000000E   0x2802             CMP      R0,#+2
+   \   00000010   0xD01B             BEQ      ??USBD_ReqGetStatus_1
+   \   00000012   0xD305             BCC      ??USBD_ReqGetStatus_2
+   \   00000014   0xE047             B        ??USBD_ReqGetStatus_3
+    193              case REQUEST_TO_DEVICE:
+    194                USBD_EP0Data.pData = (U8 *)&USBD_DeviceStatus;
+   \                     ??USBD_ReqGetStatus_0: (+1)
+   \   00000016   0x....             LDR      R0,??DataTable8
+   \   00000018   0x....             LDR      R1,??DataTable9_5
+   \   0000001A   0x6008             STR      R0,[R1, #+0]
+    195                break;
+    196              case REQUEST_TO_INTERFACE:
+    197                if ((USBD_Configuration != 0) && (USBD_SetupPacket.wIndexL < USBD_NumInterfaces)) {
+    198                  *((__packed U16 *)USBD_EP0Buf) = 0;
+    199                  USBD_EP0Data.pData = USBD_EP0Buf;
+    200                } else {
+    201                  return (__FALSE);
+    202                }
+    203                break;
+    204              case REQUEST_TO_ENDPOINT:
+    205                n = USBD_SetupPacket.wIndexL & 0x8F;
+    206                m = (n & 0x80) ? ((1 << 16) << (n & 0x0F)) : (1 << n);
+    207                if (((USBD_Configuration != 0) || ((n & 0x0F) == 0)) && (USBD_EndPointMask & m)) {
+    208                  *((__packed U16 *)USBD_EP0Buf) = (USBD_EndPointHalt & m) ? 1 : 0;
+    209                  USBD_EP0Data.pData = USBD_EP0Buf;
+    210                } else {
+    211                  return (__FALSE);
+    212                }
+    213                break;
+    214              default:
+    215                return (__FALSE);
+    216            }
+    217            return (__TRUE);
+   \                     ??USBD_ReqGetStatus_4: (+1)
+   \   0000001C   0x2001             MOVS     R0,#+1
+   \                     ??USBD_ReqGetStatus_5: (+1)
+   \   0000001E   0xBD00             POP      {PC}             ;; return
+   \                     ??USBD_ReqGetStatus_2: (+1)
+   \   00000020   0x....             LDR      R0,??DataTable8_2
+   \   00000022   0x7800             LDRB     R0,[R0, #+0]
+   \   00000024   0x2800             CMP      R0,#+0
+   \   00000026   0xD00E             BEQ      ??USBD_ReqGetStatus_6
+   \   00000028   0x....             LDR      R0,??DataTable9_3
+   \   0000002A   0x7900             LDRB     R0,[R0, #+4]
+   \   0000002C   0x....             LDR      R1,??DataTable9_8
+   \   0000002E   0x7809             LDRB     R1,[R1, #+0]
+   \   00000030   0x4288             CMP      R0,R1
+   \   00000032   0xD208             BCS      ??USBD_ReqGetStatus_6
+   \   00000034   0x....             LDR      R0,??DataTable9_7
+   \   00000036   0x2100             MOVS     R1,#+0
+   \   00000038   0x7001             STRB     R1,[R0, #+0]
+   \   0000003A   0x0A09             LSRS     R1,R1,#+8
+   \   0000003C   0x7041             STRB     R1,[R0, #+1]
+   \   0000003E   0x....             LDR      R0,??DataTable9_7
+   \   00000040   0x....             LDR      R1,??DataTable9_5
+   \   00000042   0x6008             STR      R0,[R1, #+0]
+   \   00000044   0xE7EA             B        ??USBD_ReqGetStatus_4
+   \                     ??USBD_ReqGetStatus_6: (+1)
+   \   00000046   0x2000             MOVS     R0,#+0
+   \   00000048   0xE7E9             B        ??USBD_ReqGetStatus_5
+   \                     ??USBD_ReqGetStatus_1: (+1)
+   \   0000004A   0x....             LDR      R0,??DataTable9_3
+   \   0000004C   0x7900             LDRB     R0,[R0, #+4]
+   \   0000004E   0x218F             MOVS     R1,#+143
+   \   00000050   0x4001             ANDS     R1,R1,R0
+   \   00000052   0x0608             LSLS     R0,R1,#+24
+   \   00000054   0xD506             BPL      ??USBD_ReqGetStatus_7
+   \   00000056   0x2080             MOVS     R0,#+128
+   \   00000058   0x0240             LSLS     R0,R0,#+9        ;; #+65536
+   \   0000005A   0x000A             MOVS     R2,R1
+   \   0000005C   0x0712             LSLS     R2,R2,#+28       ;; ZeroExtS R2,R2,#+28,#+28
+   \   0000005E   0x0F12             LSRS     R2,R2,#+28
+   \   00000060   0x4090             LSLS     R0,R0,R2
+   \   00000062   0xE001             B        ??USBD_ReqGetStatus_8
+   \                     ??USBD_ReqGetStatus_7: (+1)
+   \   00000064   0x2001             MOVS     R0,#+1
+   \   00000066   0x4088             LSLS     R0,R0,R1
+   \                     ??USBD_ReqGetStatus_8: (+1)
+   \   00000068   0x....             LDR      R2,??DataTable8_2
+   \   0000006A   0x7812             LDRB     R2,[R2, #+0]
+   \   0000006C   0x2A00             CMP      R2,#+0
+   \   0000006E   0xD103             BNE      ??USBD_ReqGetStatus_9
+   \   00000070   0x0709             LSLS     R1,R1,#+28       ;; ZeroExtS R1,R1,#+28,#+28
+   \   00000072   0x0F09             LSRS     R1,R1,#+28
+   \   00000074   0x2900             CMP      R1,#+0
+   \   00000076   0xD114             BNE      ??USBD_ReqGetStatus_10
+   \                     ??USBD_ReqGetStatus_9: (+1)
+   \   00000078   0x....             LDR      R1,??DataTable8_4
+   \   0000007A   0x6809             LDR      R1,[R1, #+0]
+   \   0000007C   0x4001             ANDS     R1,R1,R0
+   \   0000007E   0x2900             CMP      R1,#+0
+   \   00000080   0xD00F             BEQ      ??USBD_ReqGetStatus_10
+   \   00000082   0x....             LDR      R1,??DataTable9_1
+   \   00000084   0x6809             LDR      R1,[R1, #+0]
+   \   00000086   0x4008             ANDS     R0,R0,R1
+   \   00000088   0x2800             CMP      R0,#+0
+   \   0000008A   0xD001             BEQ      ??USBD_ReqGetStatus_11
+   \   0000008C   0x2001             MOVS     R0,#+1
+   \   0000008E   0xE000             B        ??USBD_ReqGetStatus_12
+   \                     ??USBD_ReqGetStatus_11: (+1)
+   \   00000090   0x2000             MOVS     R0,#+0
+   \                     ??USBD_ReqGetStatus_12: (+1)
+   \   00000092   0x....             LDR      R1,??DataTable9_7
+   \   00000094   0x7008             STRB     R0,[R1, #+0]
+   \   00000096   0x0A00             LSRS     R0,R0,#+8
+   \   00000098   0x7048             STRB     R0,[R1, #+1]
+   \   0000009A   0x....             LDR      R0,??DataTable9_7
+   \   0000009C   0x....             LDR      R1,??DataTable9_5
+   \   0000009E   0x6008             STR      R0,[R1, #+0]
+   \   000000A0   0xE7BC             B        ??USBD_ReqGetStatus_4
+   \                     ??USBD_ReqGetStatus_10: (+1)
+   \   000000A2   0x2000             MOVS     R0,#+0
+   \   000000A4   0xE7BB             B        ??USBD_ReqGetStatus_5
+   \                     ??USBD_ReqGetStatus_3: (+1)
+   \   000000A6   0x2000             MOVS     R0,#+0
+   \   000000A8   0xE7B9             B        ??USBD_ReqGetStatus_5
+    218          }
+    219          
+    220          
+    221          /*
+    222           *  Set/Clear Feature USB Device Request
+    223           *    Parameters:      sc:    0 - Clear, 1 - Set
+    224           *    Return Value:    TRUE - Success, FALSE - Error
+    225           */
+    226          
+
+   \                                 In section .text, align 2, keep-with-next
+    227          __inline BOOL USBD_ReqSetClrFeature (U32 sc) {
+   \                     USBD_ReqSetClrFeature: (+1)
+   \   00000000   0xB538             PUSH     {R3-R5,LR}
+    228            U32 n, m;
+    229          
+    230            switch (USBD_SetupPacket.bmRequestType.Recipient) {
+   \   00000002   0x....             LDR      R1,??DataTable9_3
+   \   00000004   0x7809             LDRB     R1,[R1, #+0]
+   \   00000006   0x06C9             LSLS     R1,R1,#+27       ;; ZeroExtS R1,R1,#+27,#+27
+   \   00000008   0x0EC9             LSRS     R1,R1,#+27
+   \   0000000A   0x2900             CMP      R1,#+0
+   \   0000000C   0xD003             BEQ      ??USBD_ReqSetClrFeature_0
+   \   0000000E   0x2902             CMP      R1,#+2
+   \   00000010   0xD020             BEQ      ??USBD_ReqSetClrFeature_1
+   \   00000012   0xD31D             BCC      ??USBD_ReqSetClrFeature_2
+   \   00000014   0xE060             B        ??USBD_ReqSetClrFeature_3
+    231              case REQUEST_TO_DEVICE:
+    232                if (USBD_SetupPacket.wValue == USB_FEATURE_REMOTE_WAKEUP) {
+   \                     ??USBD_ReqSetClrFeature_0: (+1)
+   \   00000016   0x....             LDR      R1,??DataTable9_3
+   \   00000018   0x8849             LDRH     R1,[R1, #+2]
+   \   0000001A   0x2901             CMP      R1,#+1
+   \   0000001C   0xD116             BNE      ??USBD_ReqSetClrFeature_4
+    233                  if (sc) {
+   \   0000001E   0x2800             CMP      R0,#+0
+   \   00000020   0xD009             BEQ      ??USBD_ReqSetClrFeature_5
+    234                    USBD_WakeUpCfg(__TRUE);
+   \   00000022   0x2001             MOVS     R0,#+1
+   \   00000024   0x.... 0x....      BL       USBD_WakeUpCfg
+    235                    USBD_DeviceStatus |=  USB_GETSTATUS_REMOTE_WAKEUP;
+   \   00000028   0x....             LDR      R0,??DataTable8
+   \   0000002A   0x8800             LDRH     R0,[R0, #+0]
+   \   0000002C   0x2102             MOVS     R1,#+2
+   \   0000002E   0x4301             ORRS     R1,R1,R0
+   \   00000030   0x....             LDR      R0,??DataTable8
+   \   00000032   0x8001             STRH     R1,[R0, #+0]
+   \   00000034   0xE008             B        ??USBD_ReqSetClrFeature_6
+    236                  } else {
+    237                    USBD_WakeUpCfg(__FALSE);
+   \                     ??USBD_ReqSetClrFeature_5: (+1)
+   \   00000036   0x2000             MOVS     R0,#+0
+   \   00000038   0x.... 0x....      BL       USBD_WakeUpCfg
+    238                    USBD_DeviceStatus &= ~USB_GETSTATUS_REMOTE_WAKEUP;
+   \   0000003C   0x....             LDR      R0,??DataTable8
+   \   0000003E   0x8800             LDRH     R0,[R0, #+0]
+   \   00000040   0x....             LDR      R1,??DataTable9_9  ;; 0xfffd
+   \   00000042   0x4001             ANDS     R1,R1,R0
+   \   00000044   0x....             LDR      R0,??DataTable8
+   \   00000046   0x8001             STRH     R1,[R0, #+0]
+    239                  }
+    240                } else {
+    241                  return (__FALSE);
+    242                }
+    243                break;
+    244              case REQUEST_TO_INTERFACE:
+    245                return (__FALSE);
+    246              case REQUEST_TO_ENDPOINT:
+    247                n = USBD_SetupPacket.wIndexL & 0x8F;
+    248                m = (n & 0x80) ? ((1 << 16) << (n & 0x0F)) : (1 << n);
+    249                if ((USBD_Configuration != 0) && ((n & 0x0F) != 0) && (USBD_EndPointMask & m)) {
+    250                  if (USBD_SetupPacket.wValue == USB_FEATURE_ENDPOINT_STALL) {
+    251                    if (sc) {
+    252                      USBD_SetStallEP(n);
+    253                      USBD_EndPointHalt |=  m;
+    254                    } else {
+    255                      if ((USBD_EndPointStall & m) != 0) {
+    256                        return (__TRUE);
+    257                      }
+    258                      USBD_ClrStallEP(n);
+    259                      USBD_ReqClrFeature_MSC (n);
+    260                      USBD_EndPointHalt &= ~m;
+    261                    }
+    262                  } else {
+    263                    return (__FALSE);
+    264                  }
+    265                } else {
+    266                  return (__FALSE);
+    267                }
+    268                break;
+    269              default:
+    270                return (__FALSE);
+    271            }
+    272            return (__TRUE);
+   \                     ??USBD_ReqSetClrFeature_6: (+1)
+   \                     ??USBD_ReqSetClrFeature_7: (+1)
+   \   00000048   0x2001             MOVS     R0,#+1
+   \                     ??USBD_ReqSetClrFeature_8: (+1)
+   \   0000004A   0xBD32             POP      {R1,R4,R5,PC}    ;; return
+   \                     ??USBD_ReqSetClrFeature_4: (+1)
+   \   0000004C   0x2000             MOVS     R0,#+0
+   \   0000004E   0xE7FC             B        ??USBD_ReqSetClrFeature_8
+   \                     ??USBD_ReqSetClrFeature_2: (+1)
+   \   00000050   0x2000             MOVS     R0,#+0
+   \   00000052   0xE7FA             B        ??USBD_ReqSetClrFeature_8
+   \                     ??USBD_ReqSetClrFeature_1: (+1)
+   \   00000054   0x....             LDR      R1,??DataTable9_3
+   \   00000056   0x7909             LDRB     R1,[R1, #+4]
+   \   00000058   0x248F             MOVS     R4,#+143
+   \   0000005A   0x400C             ANDS     R4,R4,R1
+   \   0000005C   0x0621             LSLS     R1,R4,#+24
+   \   0000005E   0xD506             BPL      ??USBD_ReqSetClrFeature_9
+   \   00000060   0x2580             MOVS     R5,#+128
+   \   00000062   0x026D             LSLS     R5,R5,#+9        ;; #+65536
+   \   00000064   0x0021             MOVS     R1,R4
+   \   00000066   0x0709             LSLS     R1,R1,#+28       ;; ZeroExtS R1,R1,#+28,#+28
+   \   00000068   0x0F09             LSRS     R1,R1,#+28
+   \   0000006A   0x408D             LSLS     R5,R5,R1
+   \   0000006C   0xE001             B        ??USBD_ReqSetClrFeature_10
+   \                     ??USBD_ReqSetClrFeature_9: (+1)
+   \   0000006E   0x2501             MOVS     R5,#+1
+   \   00000070   0x40A5             LSLS     R5,R5,R4
+   \                     ??USBD_ReqSetClrFeature_10: (+1)
+   \   00000072   0x....             LDR      R1,??DataTable8_2
+   \   00000074   0x7809             LDRB     R1,[R1, #+0]
+   \   00000076   0x2900             CMP      R1,#+0
+   \   00000078   0xD02C             BEQ      ??USBD_ReqSetClrFeature_11
+   \   0000007A   0x0721             LSLS     R1,R4,#+28       ;; ZeroExtS R1,R4,#+28,#+28
+   \   0000007C   0x0F09             LSRS     R1,R1,#+28
+   \   0000007E   0x2900             CMP      R1,#+0
+   \   00000080   0xD028             BEQ      ??USBD_ReqSetClrFeature_11
+   \   00000082   0x....             LDR      R1,??DataTable8_4
+   \   00000084   0x6809             LDR      R1,[R1, #+0]
+   \   00000086   0x4029             ANDS     R1,R1,R5
+   \   00000088   0x2900             CMP      R1,#+0
+   \   0000008A   0xD023             BEQ      ??USBD_ReqSetClrFeature_11
+   \   0000008C   0x....             LDR      R1,??DataTable9_3
+   \   0000008E   0x8849             LDRH     R1,[R1, #+2]
+   \   00000090   0x2900             CMP      R1,#+0
+   \   00000092   0xD11D             BNE      ??USBD_ReqSetClrFeature_12
+   \   00000094   0x2800             CMP      R0,#+0
+   \   00000096   0xD008             BEQ      ??USBD_ReqSetClrFeature_13
+   \   00000098   0x0020             MOVS     R0,R4
+   \   0000009A   0x.... 0x....      BL       USBD_SetStallEP
+   \   0000009E   0x....             LDR      R0,??DataTable9_1
+   \   000000A0   0x6800             LDR      R0,[R0, #+0]
+   \   000000A2   0x4305             ORRS     R5,R5,R0
+   \   000000A4   0x....             LDR      R0,??DataTable9_1
+   \   000000A6   0x6005             STR      R5,[R0, #+0]
+   \   000000A8   0xE011             B        ??USBD_ReqSetClrFeature_14
+   \                     ??USBD_ReqSetClrFeature_13: (+1)
+   \   000000AA   0x....             LDR      R0,??DataTable9_2
+   \   000000AC   0x6800             LDR      R0,[R0, #+0]
+   \   000000AE   0x4028             ANDS     R0,R0,R5
+   \   000000B0   0x2800             CMP      R0,#+0
+   \   000000B2   0xD001             BEQ      ??USBD_ReqSetClrFeature_15
+   \   000000B4   0x2001             MOVS     R0,#+1
+   \   000000B6   0xE7C8             B        ??USBD_ReqSetClrFeature_8
+   \                     ??USBD_ReqSetClrFeature_15: (+1)
+   \   000000B8   0x0020             MOVS     R0,R4
+   \   000000BA   0x.... 0x....      BL       USBD_ClrStallEP
+   \   000000BE   0x0020             MOVS     R0,R4
+   \   000000C0   0x.... 0x....      BL       USBD_ReqClrFeature_MSC
+   \   000000C4   0x....             LDR      R0,??DataTable9_1
+   \   000000C6   0x6800             LDR      R0,[R0, #+0]
+   \   000000C8   0x43A8             BICS     R0,R0,R5
+   \   000000CA   0x....             LDR      R1,??DataTable9_1
+   \   000000CC   0x6008             STR      R0,[R1, #+0]
+   \                     ??USBD_ReqSetClrFeature_14: (+1)
+   \   000000CE   0xE7BB             B        ??USBD_ReqSetClrFeature_7
+   \                     ??USBD_ReqSetClrFeature_12: (+1)
+   \   000000D0   0x2000             MOVS     R0,#+0
+   \   000000D2   0xE7BA             B        ??USBD_ReqSetClrFeature_8
+   \                     ??USBD_ReqSetClrFeature_11: (+1)
+   \   000000D4   0x2000             MOVS     R0,#+0
+   \   000000D6   0xE7B8             B        ??USBD_ReqSetClrFeature_8
+   \                     ??USBD_ReqSetClrFeature_3: (+1)
+   \   000000D8   0x2000             MOVS     R0,#+0
+   \   000000DA   0xE7B6             B        ??USBD_ReqSetClrFeature_8
+    273          }
+    274          
+    275          
+    276          /*
+    277           *  Set Address USB Device Request
+    278           *    Parameters:      None
+    279           *    Return Value:    TRUE - Success, FALSE - Error
+    280           */
+    281          
+
+   \                                 In section .text, align 2, keep-with-next
+    282          __inline BOOL USBD_ReqSetAddress (void) {
+   \                     USBD_ReqSetAddress: (+1)
+   \   00000000   0xB500             PUSH     {LR}
+    283          
+    284            switch (USBD_SetupPacket.bmRequestType.Recipient) {
+   \   00000002   0x....             LDR      R0,??DataTable9_3
+   \   00000004   0x7800             LDRB     R0,[R0, #+0]
+   \   00000006   0x06C0             LSLS     R0,R0,#+27       ;; ZeroExtS R0,R0,#+27,#+27
+   \   00000008   0x0EC0             LSRS     R0,R0,#+27
+   \   0000000A   0x2800             CMP      R0,#+0
+   \   0000000C   0xD107             BNE      ??USBD_ReqSetAddress_0
+    285              case REQUEST_TO_DEVICE:
+    286                USBD_DeviceAddress = 0x80 | USBD_SetupPacket.wValueL;
+   \   0000000E   0x....             LDR      R0,??DataTable9_3
+   \   00000010   0x7880             LDRB     R0,[R0, #+2]
+   \   00000012   0x2180             MOVS     R1,#+128
+   \   00000014   0x4301             ORRS     R1,R1,R0
+   \   00000016   0x....             LDR      R0,??DataTable11
+   \   00000018   0x7001             STRB     R1,[R0, #+0]
+    287                break;
+    288              default:
+    289                return (__FALSE);
+    290            }
+    291            return (__TRUE);
+   \   0000001A   0x2001             MOVS     R0,#+1
+   \   0000001C   0xE000             B        ??USBD_ReqSetAddress_1
+   \                     ??USBD_ReqSetAddress_0: (+1)
+   \   0000001E   0x2000             MOVS     R0,#+0
+   \                     ??USBD_ReqSetAddress_1: (+1)
+   \   00000020   0xBD00             POP      {PC}             ;; return
+    292          }
+    293          
+    294          
+    295          /*
+    296           *  Get Descriptor USB Device Request
+    297           *    Parameters:      None
+    298           *    Return Value:    TRUE - Success, FALSE - Error
+    299           */
+    300          
+
+   \                                 In section .text, align 2, keep-with-next
+    301          __inline BOOL USBD_ReqGetDescriptor (void) {
+   \                     USBD_ReqGetDescriptor: (+1)
+   \   00000000   0xB500             PUSH     {LR}
+   \   00000002   0xB083             SUB      SP,SP,#+12
+    302            U8  *pD;
+    303            U32  len, n;
+    304          
+    305            switch (USBD_SetupPacket.bmRequestType.Recipient) {
+   \   00000004   0x....             LDR      R0,??DataTable11_1
+   \   00000006   0x7800             LDRB     R0,[R0, #+0]
+   \   00000008   0x06C0             LSLS     R0,R0,#+27       ;; ZeroExtS R0,R0,#+27,#+27
+   \   0000000A   0x0EC0             LSRS     R0,R0,#+27
+   \   0000000C   0x2800             CMP      R0,#+0
+   \   0000000E   0xD003             BEQ      ??USBD_ReqGetDescriptor_0
+   \   00000010   0x2801             CMP      R0,#+1
+   \   00000012   0xD100             BNE      .+4
+   \   00000014   0xE0CC             B        ??USBD_ReqGetDescriptor_1
+   \   00000016   0xE0D4             B        ??USBD_ReqGetDescriptor_2
+    306              case REQUEST_TO_DEVICE:
+    307                switch (USBD_SetupPacket.wValueH) {
+   \                     ??USBD_ReqGetDescriptor_0: (+1)
+   \   00000018   0x....             LDR      R0,??DataTable11_1
+   \   0000001A   0x78C0             LDRB     R0,[R0, #+3]
+   \   0000001C   0x2801             CMP      R0,#+1
+   \   0000001E   0xD009             BEQ      ??USBD_ReqGetDescriptor_3
+   \   00000020   0x2802             CMP      R0,#+2
+   \   00000022   0xD034             BEQ      ??USBD_ReqGetDescriptor_4
+   \   00000024   0x2803             CMP      R0,#+3
+   \   00000026   0xD100             BNE      .+4
+   \   00000028   0xE0A1             B        ??USBD_ReqGetDescriptor_5
+   \   0000002A   0x2806             CMP      R0,#+6
+   \   0000002C   0xD01B             BEQ      ??USBD_ReqGetDescriptor_6
+   \   0000002E   0x2807             CMP      R0,#+7
+   \   00000030   0xD067             BEQ      ??USBD_ReqGetDescriptor_7
+   \   00000032   0xE0BB             B        ??USBD_ReqGetDescriptor_8
+    308                  case USB_DEVICE_DESCRIPTOR_TYPE:
+    309                    USBD_EP0Data.pData = (U8 *)USBD_DeviceDescriptor;
+   \                     ??USBD_ReqGetDescriptor_3: (+1)
+   \   00000034   0x....             LDR      R0,??DataTable11_2
+   \   00000036   0x....             LDR      R1,??DataTable11_3
+   \   00000038   0x6008             STR      R0,[R1, #+0]
+    310                    len = USB_DEVICE_DESC_SIZE;
+   \   0000003A   0x2012             MOVS     R0,#+18
+   \   0000003C   0x9001             STR      R0,[SP, #+4]
+    311                    break;
+    312                  case USB_DEVICE_QUALIFIER_DESCRIPTOR_TYPE:
+    313                    if (!usbd_hs_enable) {
+    314                      return (__FALSE);  /* High speed not enabled */
+    315                    }
+    316                    if (USBD_HighSpeed == __FALSE) {
+    317                      USBD_EP0Data.pData = (U8 *)USBD_DeviceQualifier;
+    318                    } else {
+    319                      USBD_EP0Data.pData = (U8 *)USBD_DeviceQualifier_HS;
+    320                    }
+    321                    len = USB_DEVICE_QUALI_SIZE;
+    322                    break;
+    323                  case USB_CONFIGURATION_DESCRIPTOR_TYPE:
+    324                    if ((!usbd_hs_enable) && (USBD_HighSpeed == __TRUE)) {
+    325                      return (__FALSE);  /* High speed request but high-speed not enabled */
+    326                    }
+    327                    if (USBD_HighSpeed == __FALSE) {
+    328                      pD = (U8 *)USBD_ConfigDescriptor;
+    329                    } else {
+    330                      pD = (U8 *)USBD_ConfigDescriptor_HS;
+    331                    }
+    332                    for (n = 0; n != USBD_SetupPacket.wValueL; n++) {
+    333                      if (((USB_CONFIGURATION_DESCRIPTOR *)pD)->bLength != 0) {
+    334                        pD += ((USB_CONFIGURATION_DESCRIPTOR *)pD)->wTotalLength;
+    335                      }
+    336                    }
+    337                    if (((USB_CONFIGURATION_DESCRIPTOR *)pD)->bLength == 0) {
+    338                      return (__FALSE);
+    339                    }
+    340                    USBD_EP0Data.pData = pD;
+    341                    len = ((USB_CONFIGURATION_DESCRIPTOR *)pD)->wTotalLength;
+    342                    break;
+    343                  case USB_OTHER_SPEED_CONFIG_DESCRIPTOR_TYPE:
+    344                    if (!usbd_hs_enable) {
+    345                      return (__FALSE);  /* High speed not enabled */
+    346                    }
+    347                    if (USBD_HighSpeed == __FALSE) {
+    348                      pD = (U8 *)USBD_OtherSpeedConfigDescriptor;
+    349                    } else {
+    350                      pD = (U8 *)USBD_OtherSpeedConfigDescriptor_HS;
+    351                    }
+    352                    for (n = 0; n != USBD_SetupPacket.wValueL; n++) {
+    353                      if (((USB_CONFIGURATION_DESCRIPTOR *)pD)->bLength != 0) {
+    354                        pD += ((USB_CONFIGURATION_DESCRIPTOR *)pD)->wTotalLength;
+    355                      }
+    356                    }
+    357                    if (((USB_CONFIGURATION_DESCRIPTOR *)pD)->bLength == 0) {
+    358                      return (__FALSE);
+    359                    }
+    360                    USBD_EP0Data.pData = pD;
+    361                    len = ((USB_CONFIGURATION_DESCRIPTOR *)pD)->wTotalLength;
+    362                    break;
+    363                  case USB_STRING_DESCRIPTOR_TYPE:
+    364                    pD = (U8 *)USBD_StringDescriptor;
+    365                 
+    366                      // added by sam to send unique id string descriptor
+    367          #if 0
+    368                    if (USBD_SetupPacket.wValueL == 3) {
+    369                        USBD_EP0Data.pData = get_uid_string_interface();
+    370                        len = get_len_string_interface();
+    371                        break;
+    372                    }
+    373          #endif
+    374                    for (n = 0; n != USBD_SetupPacket.wValueL; n++) {
+    375                      if (((USB_STRING_DESCRIPTOR *)pD)->bLength != 0) {
+    376                        pD += ((USB_STRING_DESCRIPTOR *)pD)->bLength;
+    377                      }
+    378                    }
+    379                    if (((USB_STRING_DESCRIPTOR *)pD)->bLength == 0) {
+    380                      return (__FALSE);
+    381                    }
+    382                    USBD_EP0Data.pData = pD;
+    383                    len = ((USB_STRING_DESCRIPTOR *)pD)->bLength;
+    384                    break;
+    385                  default:
+    386                    return (__FALSE);
+    387                }
+    388                break;
+    389              case REQUEST_TO_INTERFACE:
+    390                if (!USBD_ReqGetDescriptor_HID(&pD, &len))
+    391                  return (__FALSE);
+    392                break;
+    393              default:
+    394                return (__FALSE);
+    395            }
+    396          
+    397            if (USBD_EP0Data.Count > len) {
+   \                     ??USBD_ReqGetDescriptor_9: (+1)
+   \                     ??USBD_ReqGetDescriptor_10: (+1)
+   \   0000003E   0x9801             LDR      R0,[SP, #+4]
+   \   00000040   0x....             LDR      R1,??DataTable11_3
+   \   00000042   0x8889             LDRH     R1,[R1, #+4]
+   \   00000044   0x4288             CMP      R0,R1
+   \   00000046   0xD20C             BCS      ??USBD_ReqGetDescriptor_11
+    398              USBD_EP0Data.Count = len;
+   \   00000048   0x9801             LDR      R0,[SP, #+4]
+   \   0000004A   0x....             LDR      R1,??DataTable11_3
+   \   0000004C   0x8088             STRH     R0,[R1, #+4]
+    399              if (!(USBD_EP0Data.Count & (usbd_max_packet0 - 1))) USBD_ZLP = 1;
+   \   0000004E   0x....             LDR      R0,??DataTable11_3
+   \   00000050   0x8880             LDRH     R0,[R0, #+4]
+   \   00000052   0x....             LDR      R1,??DataTable11_4
+   \   00000054   0x7809             LDRB     R1,[R1, #+0]
+   \   00000056   0x1E49             SUBS     R1,R1,#+1
+   \   00000058   0x4208             TST      R0,R1
+   \   0000005A   0xD102             BNE      ??USBD_ReqGetDescriptor_11
+   \   0000005C   0x2001             MOVS     R0,#+1
+   \   0000005E   0x....             LDR      R1,??DataTable11_5
+   \   00000060   0x7008             STRB     R0,[R1, #+0]
+    400            }
+    401          
+    402            return (__TRUE);
+   \                     ??USBD_ReqGetDescriptor_11: (+1)
+   \   00000062   0x2001             MOVS     R0,#+1
+   \                     ??USBD_ReqGetDescriptor_12: (+1)
+   \   00000064   0xBD0E             POP      {R1-R3,PC}       ;; return
+   \                     ??USBD_ReqGetDescriptor_6: (+1)
+   \   00000066   0x....             LDR      R0,??DataTable11_6
+   \   00000068   0x7800             LDRB     R0,[R0, #+0]
+   \   0000006A   0x2800             CMP      R0,#+0
+   \   0000006C   0xD101             BNE      ??USBD_ReqGetDescriptor_13
+   \   0000006E   0x2000             MOVS     R0,#+0
+   \   00000070   0xE7F8             B        ??USBD_ReqGetDescriptor_12
+   \                     ??USBD_ReqGetDescriptor_13: (+1)
+   \   00000072   0x....             LDR      R0,??DataTable11_7
+   \   00000074   0x7800             LDRB     R0,[R0, #+0]
+   \   00000076   0x2800             CMP      R0,#+0
+   \   00000078   0xD103             BNE      ??USBD_ReqGetDescriptor_14
+   \   0000007A   0x....             LDR      R0,??DataTable11_8
+   \   0000007C   0x....             LDR      R1,??DataTable11_3
+   \   0000007E   0x6008             STR      R0,[R1, #+0]
+   \   00000080   0xE002             B        ??USBD_ReqGetDescriptor_15
+   \                     ??USBD_ReqGetDescriptor_14: (+1)
+   \   00000082   0x....             LDR      R0,??DataTable11_9
+   \   00000084   0x....             LDR      R1,??DataTable11_3
+   \   00000086   0x6008             STR      R0,[R1, #+0]
+   \                     ??USBD_ReqGetDescriptor_15: (+1)
+   \   00000088   0x200A             MOVS     R0,#+10
+   \   0000008A   0x9001             STR      R0,[SP, #+4]
+   \   0000008C   0xE7D7             B        ??USBD_ReqGetDescriptor_9
+   \                     ??USBD_ReqGetDescriptor_4: (+1)
+   \   0000008E   0x....             LDR      R0,??DataTable11_6
+   \   00000090   0x7800             LDRB     R0,[R0, #+0]
+   \   00000092   0x2800             CMP      R0,#+0
+   \   00000094   0xD105             BNE      ??USBD_ReqGetDescriptor_16
+   \   00000096   0x....             LDR      R0,??DataTable11_7
+   \   00000098   0x7800             LDRB     R0,[R0, #+0]
+   \   0000009A   0x2801             CMP      R0,#+1
+   \   0000009C   0xD101             BNE      ??USBD_ReqGetDescriptor_16
+   \   0000009E   0x2000             MOVS     R0,#+0
+   \   000000A0   0xE7E0             B        ??USBD_ReqGetDescriptor_12
+   \                     ??USBD_ReqGetDescriptor_16: (+1)
+   \   000000A2   0x....             LDR      R0,??DataTable11_7
+   \   000000A4   0x7800             LDRB     R0,[R0, #+0]
+   \   000000A6   0x2800             CMP      R0,#+0
+   \   000000A8   0xD102             BNE      ??USBD_ReqGetDescriptor_17
+   \   000000AA   0x....             LDR      R0,??DataTable11_10
+   \   000000AC   0x9000             STR      R0,[SP, #+0]
+   \   000000AE   0xE001             B        ??USBD_ReqGetDescriptor_18
+   \                     ??USBD_ReqGetDescriptor_17: (+1)
+   \   000000B0   0x....             LDR      R0,??DataTable11_11
+   \   000000B2   0x9000             STR      R0,[SP, #+0]
+   \                     ??USBD_ReqGetDescriptor_18: (+1)
+   \   000000B4   0x2000             MOVS     R0,#+0
+   \   000000B6   0xE00E             B        ??USBD_ReqGetDescriptor_19
+   \                     ??USBD_ReqGetDescriptor_20: (+1)
+   \   000000B8   0x9900             LDR      R1,[SP, #+0]
+   \   000000BA   0x7809             LDRB     R1,[R1, #+0]
+   \   000000BC   0x2900             CMP      R1,#+0
+   \   000000BE   0xD009             BEQ      ??USBD_ReqGetDescriptor_21
+   \   000000C0   0x9A00             LDR      R2,[SP, #+0]
+   \   000000C2   0x7891             LDRB     R1,[R2, #+2]
+   \   000000C4   0x78D3             LDRB     R3,[R2, #+3]
+   \   000000C6   0x061B             LSLS     R3,R3,#+24       ;; ZeroExtS R3,R3,#+24,#+16
+   \   000000C8   0x0C1B             LSRS     R3,R3,#+16
+   \   000000CA   0x4319             ORRS     R1,R1,R3
+   \   000000CC   0x9A00             LDR      R2,[SP, #+0]
+   \   000000CE   0xB289             UXTH     R1,R1
+   \   000000D0   0x1851             ADDS     R1,R2,R1
+   \   000000D2   0x9100             STR      R1,[SP, #+0]
+   \                     ??USBD_ReqGetDescriptor_21: (+1)
+   \   000000D4   0x1C40             ADDS     R0,R0,#+1
+   \                     ??USBD_ReqGetDescriptor_19: (+1)
+   \   000000D6   0x....             LDR      R1,??DataTable11_1
+   \   000000D8   0x7889             LDRB     R1,[R1, #+2]
+   \   000000DA   0x4288             CMP      R0,R1
+   \   000000DC   0xD1EC             BNE      ??USBD_ReqGetDescriptor_20
+   \   000000DE   0x9800             LDR      R0,[SP, #+0]
+   \   000000E0   0x7800             LDRB     R0,[R0, #+0]
+   \   000000E2   0x2800             CMP      R0,#+0
+   \   000000E4   0xD101             BNE      ??USBD_ReqGetDescriptor_22
+   \   000000E6   0x2000             MOVS     R0,#+0
+   \   000000E8   0xE7BC             B        ??USBD_ReqGetDescriptor_12
+   \                     ??USBD_ReqGetDescriptor_22: (+1)
+   \   000000EA   0x9800             LDR      R0,[SP, #+0]
+   \   000000EC   0x....             LDR      R1,??DataTable11_3
+   \   000000EE   0x6008             STR      R0,[R1, #+0]
+   \   000000F0   0x9900             LDR      R1,[SP, #+0]
+   \   000000F2   0x7888             LDRB     R0,[R1, #+2]
+   \   000000F4   0x78CA             LDRB     R2,[R1, #+3]
+   \   000000F6   0x0612             LSLS     R2,R2,#+24       ;; ZeroExtS R2,R2,#+24,#+16
+   \   000000F8   0x0C12             LSRS     R2,R2,#+16
+   \   000000FA   0x4310             ORRS     R0,R0,R2
+   \   000000FC   0xB280             UXTH     R0,R0
+   \   000000FE   0x9001             STR      R0,[SP, #+4]
+   \   00000100   0xE79D             B        ??USBD_ReqGetDescriptor_9
+   \                     ??USBD_ReqGetDescriptor_7: (+1)
+   \   00000102   0x....             LDR      R0,??DataTable11_6
+   \   00000104   0x7800             LDRB     R0,[R0, #+0]
+   \   00000106   0x2800             CMP      R0,#+0
+   \   00000108   0xD101             BNE      ??USBD_ReqGetDescriptor_23
+   \   0000010A   0x2000             MOVS     R0,#+0
+   \   0000010C   0xE7AA             B        ??USBD_ReqGetDescriptor_12
+   \                     ??USBD_ReqGetDescriptor_23: (+1)
+   \   0000010E   0x....             LDR      R0,??DataTable11_7
+   \   00000110   0x7800             LDRB     R0,[R0, #+0]
+   \   00000112   0x2800             CMP      R0,#+0
+   \   00000114   0xD102             BNE      ??USBD_ReqGetDescriptor_24
+   \   00000116   0x....             LDR      R0,??DataTable11_12
+   \   00000118   0x9000             STR      R0,[SP, #+0]
+   \   0000011A   0xE001             B        ??USBD_ReqGetDescriptor_25
+   \                     ??USBD_ReqGetDescriptor_24: (+1)
+   \   0000011C   0x....             LDR      R0,??DataTable11_13
+   \   0000011E   0x9000             STR      R0,[SP, #+0]
+   \                     ??USBD_ReqGetDescriptor_25: (+1)
+   \   00000120   0x2000             MOVS     R0,#+0
+   \   00000122   0xE00E             B        ??USBD_ReqGetDescriptor_26
+   \                     ??USBD_ReqGetDescriptor_27: (+1)
+   \   00000124   0x9900             LDR      R1,[SP, #+0]
+   \   00000126   0x7809             LDRB     R1,[R1, #+0]
+   \   00000128   0x2900             CMP      R1,#+0
+   \   0000012A   0xD009             BEQ      ??USBD_ReqGetDescriptor_28
+   \   0000012C   0x9A00             LDR      R2,[SP, #+0]
+   \   0000012E   0x7891             LDRB     R1,[R2, #+2]
+   \   00000130   0x78D3             LDRB     R3,[R2, #+3]
+   \   00000132   0x061B             LSLS     R3,R3,#+24       ;; ZeroExtS R3,R3,#+24,#+16
+   \   00000134   0x0C1B             LSRS     R3,R3,#+16
+   \   00000136   0x4319             ORRS     R1,R1,R3
+   \   00000138   0x9A00             LDR      R2,[SP, #+0]
+   \   0000013A   0xB289             UXTH     R1,R1
+   \   0000013C   0x1851             ADDS     R1,R2,R1
+   \   0000013E   0x9100             STR      R1,[SP, #+0]
+   \                     ??USBD_ReqGetDescriptor_28: (+1)
+   \   00000140   0x1C40             ADDS     R0,R0,#+1
+   \                     ??USBD_ReqGetDescriptor_26: (+1)
+   \   00000142   0x....             LDR      R1,??DataTable11_1
+   \   00000144   0x7889             LDRB     R1,[R1, #+2]
+   \   00000146   0x4288             CMP      R0,R1
+   \   00000148   0xD1EC             BNE      ??USBD_ReqGetDescriptor_27
+   \   0000014A   0x9800             LDR      R0,[SP, #+0]
+   \   0000014C   0x7800             LDRB     R0,[R0, #+0]
+   \   0000014E   0x2800             CMP      R0,#+0
+   \   00000150   0xD101             BNE      ??USBD_ReqGetDescriptor_29
+   \   00000152   0x2000             MOVS     R0,#+0
+   \   00000154   0xE786             B        ??USBD_ReqGetDescriptor_12
+   \                     ??USBD_ReqGetDescriptor_29: (+1)
+   \   00000156   0x9800             LDR      R0,[SP, #+0]
+   \   00000158   0x....             LDR      R1,??DataTable11_3
+   \   0000015A   0x6008             STR      R0,[R1, #+0]
+   \   0000015C   0x9900             LDR      R1,[SP, #+0]
+   \   0000015E   0x7888             LDRB     R0,[R1, #+2]
+   \   00000160   0x78CA             LDRB     R2,[R1, #+3]
+   \   00000162   0x0612             LSLS     R2,R2,#+24       ;; ZeroExtS R2,R2,#+24,#+16
+   \   00000164   0x0C12             LSRS     R2,R2,#+16
+   \   00000166   0x4310             ORRS     R0,R0,R2
+   \   00000168   0xB280             UXTH     R0,R0
+   \   0000016A   0x9001             STR      R0,[SP, #+4]
+   \   0000016C   0xE767             B        ??USBD_ReqGetDescriptor_9
+   \                     ??USBD_ReqGetDescriptor_5: (+1)
+   \   0000016E   0x....             LDR      R0,??DataTable12
+   \   00000170   0x9000             STR      R0,[SP, #+0]
+   \   00000172   0x2000             MOVS     R0,#+0
+   \   00000174   0xE009             B        ??USBD_ReqGetDescriptor_30
+   \                     ??USBD_ReqGetDescriptor_31: (+1)
+   \   00000176   0x9900             LDR      R1,[SP, #+0]
+   \   00000178   0x7809             LDRB     R1,[R1, #+0]
+   \   0000017A   0x2900             CMP      R1,#+0
+   \   0000017C   0xD004             BEQ      ??USBD_ReqGetDescriptor_32
+   \   0000017E   0x9900             LDR      R1,[SP, #+0]
+   \   00000180   0x9A00             LDR      R2,[SP, #+0]
+   \   00000182   0x7812             LDRB     R2,[R2, #+0]
+   \   00000184   0x1889             ADDS     R1,R1,R2
+   \   00000186   0x9100             STR      R1,[SP, #+0]
+   \                     ??USBD_ReqGetDescriptor_32: (+1)
+   \   00000188   0x1C40             ADDS     R0,R0,#+1
+   \                     ??USBD_ReqGetDescriptor_30: (+1)
+   \   0000018A   0x....             LDR      R1,??DataTable11_1
+   \   0000018C   0x7889             LDRB     R1,[R1, #+2]
+   \   0000018E   0x4288             CMP      R0,R1
+   \   00000190   0xD1F1             BNE      ??USBD_ReqGetDescriptor_31
+   \   00000192   0x9800             LDR      R0,[SP, #+0]
+   \   00000194   0x7800             LDRB     R0,[R0, #+0]
+   \   00000196   0x2800             CMP      R0,#+0
+   \   00000198   0xD101             BNE      ??USBD_ReqGetDescriptor_33
+   \   0000019A   0x2000             MOVS     R0,#+0
+   \   0000019C   0xE762             B        ??USBD_ReqGetDescriptor_12
+   \                     ??USBD_ReqGetDescriptor_33: (+1)
+   \   0000019E   0x9800             LDR      R0,[SP, #+0]
+   \   000001A0   0x....             LDR      R1,??DataTable11_3
+   \   000001A2   0x6008             STR      R0,[R1, #+0]
+   \   000001A4   0x9800             LDR      R0,[SP, #+0]
+   \   000001A6   0x7800             LDRB     R0,[R0, #+0]
+   \   000001A8   0x9001             STR      R0,[SP, #+4]
+   \   000001AA   0xE748             B        ??USBD_ReqGetDescriptor_9
+   \                     ??USBD_ReqGetDescriptor_8: (+1)
+   \   000001AC   0x2000             MOVS     R0,#+0
+   \   000001AE   0xE759             B        ??USBD_ReqGetDescriptor_12
+   \                     ??USBD_ReqGetDescriptor_1: (+1)
+   \   000001B0   0xA901             ADD      R1,SP,#+4
+   \   000001B2   0x4668             MOV      R0,SP
+   \   000001B4   0x.... 0x....      BL       USBD_ReqGetDescriptor_HID
+   \   000001B8   0x2800             CMP      R0,#+0
+   \   000001BA   0xD101             BNE      ??USBD_ReqGetDescriptor_34
+   \   000001BC   0x2000             MOVS     R0,#+0
+   \   000001BE   0xE751             B        ??USBD_ReqGetDescriptor_12
+   \                     ??USBD_ReqGetDescriptor_34: (+1)
+   \   000001C0   0xE73D             B        ??USBD_ReqGetDescriptor_10
+   \                     ??USBD_ReqGetDescriptor_2: (+1)
+   \   000001C2   0x2000             MOVS     R0,#+0
+   \   000001C4   0xE74E             B        ??USBD_ReqGetDescriptor_12
+    403          }
+    404          
+    405          
+    406          /*
+    407           *  Get Configuration USB Device Request
+    408           *    Parameters:      None
+    409           *    Return Value:    TRUE - Success, FALSE - Error
+    410           */
+    411          
+
+   \                                 In section .text, align 2, keep-with-next
+    412          __inline BOOL USBD_ReqGetConfiguration (void) {
+   \                     USBD_ReqGetConfiguration: (+1)
+   \   00000000   0xB500             PUSH     {LR}
+    413          
+    414            switch (USBD_SetupPacket.bmRequestType.Recipient) {
+   \   00000002   0x....             LDR      R0,??DataTable11_1
+   \   00000004   0x7800             LDRB     R0,[R0, #+0]
+   \   00000006   0x06C0             LSLS     R0,R0,#+27       ;; ZeroExtS R0,R0,#+27,#+27
+   \   00000008   0x0EC0             LSRS     R0,R0,#+27
+   \   0000000A   0x2800             CMP      R0,#+0
+   \   0000000C   0xD104             BNE      ??USBD_ReqGetConfiguration_0
+    415              case REQUEST_TO_DEVICE:
+    416                USBD_EP0Data.pData = &USBD_Configuration;
+   \   0000000E   0x....             LDR      R0,??DataTable13
+   \   00000010   0x....             LDR      R1,??DataTable11_3
+   \   00000012   0x6008             STR      R0,[R1, #+0]
+    417                break;
+    418              default:
+    419                return (__FALSE);
+    420            }
+    421            return (__TRUE);
+   \   00000014   0x2001             MOVS     R0,#+1
+   \   00000016   0xE000             B        ??USBD_ReqGetConfiguration_1
+   \                     ??USBD_ReqGetConfiguration_0: (+1)
+   \   00000018   0x2000             MOVS     R0,#+0
+   \                     ??USBD_ReqGetConfiguration_1: (+1)
+   \   0000001A   0xBD00             POP      {PC}             ;; return
+    422          }
+    423          
+    424          
+    425          /*
+    426           *  Set Configuration USB Device Request
+    427           *    Parameters:      None
+    428           *    Return Value:    TRUE - Success, FALSE - Error
+    429           */
+    430          
+
+   \                                 In section .text, align 2, keep-with-next
+    431          __inline BOOL USBD_ReqSetConfiguration (void) {
+   \                     USBD_ReqSetConfiguration: (+1)
+   \   00000000   0xB570             PUSH     {R4-R6,LR}
+    432            USB_CONFIGURATION_DESCRIPTOR *pD;
+    433            U32                           alt = 0;
+   \   00000002   0x2500             MOVS     R5,#+0
+    434            U32                           n, m;
+    435          
+    436            switch (USBD_SetupPacket.bmRequestType.Recipient) {
+   \   00000004   0x....             LDR      R0,??DataTable13_1
+   \   00000006   0x7800             LDRB     R0,[R0, #+0]
+   \   00000008   0x06C0             LSLS     R0,R0,#+27       ;; ZeroExtS R0,R0,#+27,#+27
+   \   0000000A   0x0EC0             LSRS     R0,R0,#+27
+   \   0000000C   0x2800             CMP      R0,#+0
+   \   0000000E   0xD000             BEQ      .+4
+   \   00000010   0xE0CA             B        ??USBD_ReqSetConfiguration_0
+    437              case REQUEST_TO_DEVICE:
+    438          
+    439                if (USBD_SetupPacket.wValueL) {
+   \   00000012   0x....             LDR      R0,??DataTable13_1
+   \   00000014   0x7880             LDRB     R0,[R0, #+2]
+   \   00000016   0x2800             CMP      R0,#+0
+   \   00000018   0xD100             BNE      .+4
+   \   0000001A   0xE093             B        ??USBD_ReqSetConfiguration_1
+    440                  if ((!usbd_hs_enable) && (USBD_HighSpeed == __TRUE)) {
+   \   0000001C   0x....             LDR      R0,??DataTable13_2
+   \   0000001E   0x7800             LDRB     R0,[R0, #+0]
+   \   00000020   0x2800             CMP      R0,#+0
+   \   00000022   0xD105             BNE      ??USBD_ReqSetConfiguration_2
+   \   00000024   0x....             LDR      R0,??DataTable13_3
+   \   00000026   0x7800             LDRB     R0,[R0, #+0]
+   \   00000028   0x2801             CMP      R0,#+1
+   \   0000002A   0xD101             BNE      ??USBD_ReqSetConfiguration_2
+    441                    return (__FALSE);  /* High speed request but high-speed not enabled */
+   \   0000002C   0x2000             MOVS     R0,#+0
+   \   0000002E   0xE0BC             B        ??USBD_ReqSetConfiguration_3
+    442                  }
+    443                  if (USBD_HighSpeed == __FALSE) {
+   \                     ??USBD_ReqSetConfiguration_2: (+1)
+   \   00000030   0x....             LDR      R0,??DataTable13_3
+   \   00000032   0x7800             LDRB     R0,[R0, #+0]
+   \   00000034   0x2800             CMP      R0,#+0
+   \   00000036   0xD101             BNE      ??USBD_ReqSetConfiguration_4
+    444                    pD = (USB_CONFIGURATION_DESCRIPTOR *)USBD_ConfigDescriptor;
+   \   00000038   0x....             LDR      R4,??DataTable13_4
+   \   0000003A   0xE008             B        ??USBD_ReqSetConfiguration_5
+    445                  } else {
+    446                    pD = (USB_CONFIGURATION_DESCRIPTOR *)USBD_ConfigDescriptor_HS;
+   \                     ??USBD_ReqSetConfiguration_4: (+1)
+   \   0000003C   0x....             LDR      R4,??DataTable13_5
+   \   0000003E   0xE006             B        ??USBD_ReqSetConfiguration_5
+    447                  }
+    448                  while (pD->bLength) {
+    449                    switch (pD->bDescriptorType) {
+    450                      case USB_CONFIGURATION_DESCRIPTOR_TYPE:
+    451                        if (((USB_CONFIGURATION_DESCRIPTOR *)pD)->bConfigurationValue == USBD_SetupPacket.wValueL) {
+    452                          USBD_Configuration = USBD_SetupPacket.wValueL;
+    453                          USBD_NumInterfaces = ((USB_CONFIGURATION_DESCRIPTOR *)pD)->bNumInterfaces;
+    454                          for (n = 0; n < usbd_if_num; n++) {
+    455                            USBD_AltSetting[n] = 0;
+    456                          }
+    457                          for (n = 1; n < 16; n++) {
+    458                            if (USBD_EndPointMask & (1 << n)) {
+    459                              USBD_DisableEP(n);
+    460                            }
+    461                            if (USBD_EndPointMask & ((1 << 16) << n)) {
+    462                              USBD_DisableEP(n | 0x80);
+    463                            }
+    464                          }
+    465                          USBD_EndPointMask = 0x00010001;
+    466                          USBD_EndPointHalt = 0x00000000;
+    467                          USBD_EndPointStall= 0x00000000;
+    468                          USBD_Configure(__TRUE);
+    469                          if (((USB_CONFIGURATION_DESCRIPTOR *)pD)->bmAttributes & USB_CONFIG_POWERED_MASK) {
+    470                            USBD_DeviceStatus |=  USB_GETSTATUS_SELF_POWERED;
+    471                          } else {
+    472                            USBD_DeviceStatus &= ~USB_GETSTATUS_SELF_POWERED;
+    473                          }
+    474                        } else {
+    475                          pD = (USB_CONFIGURATION_DESCRIPTOR *)((U8 *)pD + ((USB_CONFIGURATION_DESCRIPTOR *)pD)->wTotalLength);
+   \                     ??USBD_ReqSetConfiguration_6: (+1)
+   \   00000040   0x78A0             LDRB     R0,[R4, #+2]
+   \   00000042   0x78E1             LDRB     R1,[R4, #+3]
+   \   00000044   0x0609             LSLS     R1,R1,#+24       ;; ZeroExtS R1,R1,#+24,#+16
+   \   00000046   0x0C09             LSRS     R1,R1,#+16
+   \   00000048   0x4308             ORRS     R0,R0,R1
+   \   0000004A   0xB280             UXTH     R0,R0
+   \   0000004C   0x1824             ADDS     R4,R4,R0
+    476                          continue;
+    477                        }
+   \                     ??USBD_ReqSetConfiguration_5: (+1)
+   \   0000004E   0x7820             LDRB     R0,[R4, #+0]
+   \   00000050   0x2800             CMP      R0,#+0
+   \   00000052   0xD100             BNE      .+4
+   \   00000054   0xE09E             B        ??USBD_ReqSetConfiguration_7
+   \   00000056   0x7860             LDRB     R0,[R4, #+1]
+   \   00000058   0x2802             CMP      R0,#+2
+   \   0000005A   0xD004             BEQ      ??USBD_ReqSetConfiguration_8
+   \   0000005C   0x2804             CMP      R0,#+4
+   \   0000005E   0xD04E             BEQ      ??USBD_ReqSetConfiguration_9
+   \   00000060   0x2805             CMP      R0,#+5
+   \   00000062   0xD04E             BEQ      ??USBD_ReqSetConfiguration_10
+   \   00000064   0xE06B             B        ??USBD_ReqSetConfiguration_11
+   \                     ??USBD_ReqSetConfiguration_8: (+1)
+   \   00000066   0x7960             LDRB     R0,[R4, #+5]
+   \   00000068   0x....             LDR      R1,??DataTable13_1
+   \   0000006A   0x7889             LDRB     R1,[R1, #+2]
+   \   0000006C   0x4288             CMP      R0,R1
+   \   0000006E   0xD1E7             BNE      ??USBD_ReqSetConfiguration_6
+   \   00000070   0x....             LDR      R0,??DataTable13_1
+   \   00000072   0x7880             LDRB     R0,[R0, #+2]
+   \   00000074   0x....             LDR      R1,??DataTable13
+   \   00000076   0x7008             STRB     R0,[R1, #+0]
+   \   00000078   0x7920             LDRB     R0,[R4, #+4]
+   \   0000007A   0x....             LDR      R1,??DataTable13_6
+   \   0000007C   0x7008             STRB     R0,[R1, #+0]
+   \   0000007E   0x2600             MOVS     R6,#+0
+   \   00000080   0xE003             B        ??USBD_ReqSetConfiguration_12
+   \                     ??USBD_ReqSetConfiguration_13: (+1)
+   \   00000082   0x2000             MOVS     R0,#+0
+   \   00000084   0x....             LDR      R1,??DataTable13_7
+   \   00000086   0x5588             STRB     R0,[R1, R6]
+   \   00000088   0x1C76             ADDS     R6,R6,#+1
+   \                     ??USBD_ReqSetConfiguration_12: (+1)
+   \   0000008A   0x....             LDR      R0,??DataTable13_8
+   \   0000008C   0x8800             LDRH     R0,[R0, #+0]
+   \   0000008E   0x4286             CMP      R6,R0
+   \   00000090   0xD3F7             BCC      ??USBD_ReqSetConfiguration_13
+   \   00000092   0x2601             MOVS     R6,#+1
+   \   00000094   0xE014             B        ??USBD_ReqSetConfiguration_14
+   \                     ??USBD_ReqSetConfiguration_15: (+1)
+   \   00000096   0x....             LDR      R0,??DataTable13_9
+   \   00000098   0x6800             LDR      R0,[R0, #+0]
+   \   0000009A   0x40F0             LSRS     R0,R0,R6
+   \   0000009C   0x07C0             LSLS     R0,R0,#+31
+   \   0000009E   0xD502             BPL      ??USBD_ReqSetConfiguration_16
+   \   000000A0   0x0030             MOVS     R0,R6
+   \   000000A2   0x.... 0x....      BL       USBD_DisableEP
+   \                     ??USBD_ReqSetConfiguration_16: (+1)
+   \   000000A6   0x....             LDR      R0,??DataTable13_9
+   \   000000A8   0x6800             LDR      R0,[R0, #+0]
+   \   000000AA   0x2180             MOVS     R1,#+128
+   \   000000AC   0x0249             LSLS     R1,R1,#+9        ;; #+65536
+   \   000000AE   0x40B1             LSLS     R1,R1,R6
+   \   000000B0   0x4001             ANDS     R1,R1,R0
+   \   000000B2   0x2900             CMP      R1,#+0
+   \   000000B4   0xD003             BEQ      ??USBD_ReqSetConfiguration_17
+   \   000000B6   0x2080             MOVS     R0,#+128
+   \   000000B8   0x4330             ORRS     R0,R0,R6
+   \   000000BA   0x.... 0x....      BL       USBD_DisableEP
+   \                     ??USBD_ReqSetConfiguration_17: (+1)
+   \   000000BE   0x1C76             ADDS     R6,R6,#+1
+   \                     ??USBD_ReqSetConfiguration_14: (+1)
+   \   000000C0   0x2E10             CMP      R6,#+16
+   \   000000C2   0xD3E8             BCC      ??USBD_ReqSetConfiguration_15
+   \   000000C4   0x....             LDR      R0,??DataTable13_10  ;; 0x10001
+   \   000000C6   0x....             LDR      R1,??DataTable13_9
+   \   000000C8   0x6008             STR      R0,[R1, #+0]
+   \   000000CA   0x2000             MOVS     R0,#+0
+   \   000000CC   0x....             LDR      R1,??DataTable14
+   \   000000CE   0x6008             STR      R0,[R1, #+0]
+   \   000000D0   0x2000             MOVS     R0,#+0
+   \   000000D2   0x....             LDR      R1,??DataTable14_1
+   \   000000D4   0x6008             STR      R0,[R1, #+0]
+   \   000000D6   0x2001             MOVS     R0,#+1
+   \   000000D8   0x.... 0x....      BL       USBD_Configure
+   \   000000DC   0x79E0             LDRB     R0,[R4, #+7]
+   \   000000DE   0x0640             LSLS     R0,R0,#+25
+   \   000000E0   0xD506             BPL      ??USBD_ReqSetConfiguration_18
+   \   000000E2   0x....             LDR      R0,??DataTable14_2
+   \   000000E4   0x8800             LDRH     R0,[R0, #+0]
+   \   000000E6   0x2101             MOVS     R1,#+1
+   \   000000E8   0x4301             ORRS     R1,R1,R0
+   \   000000EA   0x....             LDR      R0,??DataTable14_2
+   \   000000EC   0x8001             STRH     R1,[R0, #+0]
+   \   000000EE   0xE005             B        ??USBD_ReqSetConfiguration_19
+   \                     ??USBD_ReqSetConfiguration_18: (+1)
+   \   000000F0   0x....             LDR      R0,??DataTable14_2
+   \   000000F2   0x8800             LDRH     R0,[R0, #+0]
+   \   000000F4   0x....             LDR      R1,??DataTable14_3  ;; 0xfffe
+   \   000000F6   0x4001             ANDS     R1,R1,R0
+   \   000000F8   0x....             LDR      R0,??DataTable14_2
+   \   000000FA   0x8001             STRH     R1,[R0, #+0]
+    478                        break;
+   \                     ??USBD_ReqSetConfiguration_19: (+1)
+   \   000000FC   0xE01F             B        ??USBD_ReqSetConfiguration_11
+    479                      case USB_INTERFACE_DESCRIPTOR_TYPE:
+    480                        alt = ((USB_INTERFACE_DESCRIPTOR *)pD)->bAlternateSetting;
+   \                     ??USBD_ReqSetConfiguration_9: (+1)
+   \   000000FE   0x78E5             LDRB     R5,[R4, #+3]
+    481                        break;
+   \   00000100   0xE01D             B        ??USBD_ReqSetConfiguration_11
+    482                      case USB_ENDPOINT_DESCRIPTOR_TYPE:
+    483                        if (alt == 0) {
+   \                     ??USBD_ReqSetConfiguration_10: (+1)
+   \   00000102   0x2D00             CMP      R5,#+0
+   \   00000104   0xD11B             BNE      ??USBD_ReqSetConfiguration_20
+    484                          n = ((USB_ENDPOINT_DESCRIPTOR *)pD)->bEndpointAddress & 0x8F;
+   \   00000106   0x78A0             LDRB     R0,[R4, #+2]
+   \   00000108   0x268F             MOVS     R6,#+143
+   \   0000010A   0x4006             ANDS     R6,R6,R0
+    485                          m = (n & 0x80) ? ((1 << 16) << (n & 0x0F)) : (1 << n);
+   \   0000010C   0x0630             LSLS     R0,R6,#+24
+   \   0000010E   0xD506             BPL      ??USBD_ReqSetConfiguration_21
+   \   00000110   0x2080             MOVS     R0,#+128
+   \   00000112   0x0240             LSLS     R0,R0,#+9        ;; #+65536
+   \   00000114   0x0031             MOVS     R1,R6
+   \   00000116   0x0709             LSLS     R1,R1,#+28       ;; ZeroExtS R1,R1,#+28,#+28
+   \   00000118   0x0F09             LSRS     R1,R1,#+28
+   \   0000011A   0x4088             LSLS     R0,R0,R1
+   \   0000011C   0xE001             B        ??USBD_ReqSetConfiguration_22
+   \                     ??USBD_ReqSetConfiguration_21: (+1)
+   \   0000011E   0x2001             MOVS     R0,#+1
+   \   00000120   0x40B0             LSLS     R0,R0,R6
+    486                          USBD_EndPointMask |= m;
+   \                     ??USBD_ReqSetConfiguration_22: (+1)
+   \   00000122   0x....             LDR      R1,??DataTable13_9
+   \   00000124   0x6809             LDR      R1,[R1, #+0]
+   \   00000126   0x4308             ORRS     R0,R0,R1
+   \   00000128   0x....             LDR      R1,??DataTable13_9
+   \   0000012A   0x6008             STR      R0,[R1, #+0]
+    487                          USBD_ConfigEP((void *)pD);
+   \   0000012C   0x0020             MOVS     R0,R4
+   \   0000012E   0x.... 0x....      BL       USBD_ConfigEP
+    488                          USBD_EnableEP(n);
+   \   00000132   0x0030             MOVS     R0,R6
+   \   00000134   0x.... 0x....      BL       USBD_EnableEP
+    489                          USBD_ResetEP(n);
+   \   00000138   0x0030             MOVS     R0,R6
+   \   0000013A   0x.... 0x....      BL       USBD_ResetEP
+    490                        }
+    491                        break;
+    492                    }
+    493                    pD = (USB_CONFIGURATION_DESCRIPTOR *)((U8 *)pD + pD->bLength);
+   \                     ??USBD_ReqSetConfiguration_20: (+1)
+   \                     ??USBD_ReqSetConfiguration_11: (+1)
+   \   0000013E   0x7820             LDRB     R0,[R4, #+0]
+   \   00000140   0x1824             ADDS     R4,R4,R0
+   \   00000142   0xE784             B        ??USBD_ReqSetConfiguration_5
+    494                  }
+    495                }
+    496                else {
+    497                  USBD_Configuration = 0;
+   \                     ??USBD_ReqSetConfiguration_1: (+1)
+   \   00000144   0x2000             MOVS     R0,#+0
+   \   00000146   0x....             LDR      R1,??DataTable13
+   \   00000148   0x7008             STRB     R0,[R1, #+0]
+    498                  for (n = 1; n < 16; n++) {
+   \   0000014A   0x2601             MOVS     R6,#+1
+   \   0000014C   0xE014             B        ??USBD_ReqSetConfiguration_23
+    499                    if (USBD_EndPointMask & (1 << n)) {
+   \                     ??USBD_ReqSetConfiguration_24: (+1)
+   \   0000014E   0x....             LDR      R0,??DataTable13_9
+   \   00000150   0x6800             LDR      R0,[R0, #+0]
+   \   00000152   0x40F0             LSRS     R0,R0,R6
+   \   00000154   0x07C0             LSLS     R0,R0,#+31
+   \   00000156   0xD502             BPL      ??USBD_ReqSetConfiguration_25
+    500                      USBD_DisableEP(n);
+   \   00000158   0x0030             MOVS     R0,R6
+   \   0000015A   0x.... 0x....      BL       USBD_DisableEP
+    501                    }
+    502                    if (USBD_EndPointMask & ((1 << 16) << n)) {
+   \                     ??USBD_ReqSetConfiguration_25: (+1)
+   \   0000015E   0x....             LDR      R0,??DataTable13_9
+   \   00000160   0x6800             LDR      R0,[R0, #+0]
+   \   00000162   0x2180             MOVS     R1,#+128
+   \   00000164   0x0249             LSLS     R1,R1,#+9        ;; #+65536
+   \   00000166   0x40B1             LSLS     R1,R1,R6
+   \   00000168   0x4001             ANDS     R1,R1,R0
+   \   0000016A   0x2900             CMP      R1,#+0
+   \   0000016C   0xD003             BEQ      ??USBD_ReqSetConfiguration_26
+    503                      USBD_DisableEP(n | 0x80);
+   \   0000016E   0x2080             MOVS     R0,#+128
+   \   00000170   0x4330             ORRS     R0,R0,R6
+   \   00000172   0x.... 0x....      BL       USBD_DisableEP
+    504                    }
+    505                  }
+   \                     ??USBD_ReqSetConfiguration_26: (+1)
+   \   00000176   0x1C76             ADDS     R6,R6,#+1
+   \                     ??USBD_ReqSetConfiguration_23: (+1)
+   \   00000178   0x2E10             CMP      R6,#+16
+   \   0000017A   0xD3E8             BCC      ??USBD_ReqSetConfiguration_24
+    506                  USBD_EndPointMask  = 0x00010001;
+   \   0000017C   0x....             LDR      R0,??DataTable13_10  ;; 0x10001
+   \   0000017E   0x....             LDR      R1,??DataTable13_9
+   \   00000180   0x6008             STR      R0,[R1, #+0]
+    507                  USBD_EndPointHalt  = 0x00000000;
+   \   00000182   0x2000             MOVS     R0,#+0
+   \   00000184   0x....             LDR      R1,??DataTable14
+   \   00000186   0x6008             STR      R0,[R1, #+0]
+    508                  USBD_EndPointStall = 0x00000000;
+   \   00000188   0x2000             MOVS     R0,#+0
+   \   0000018A   0x....             LDR      R1,??DataTable14_1
+   \   0000018C   0x6008             STR      R0,[R1, #+0]
+    509                  USBD_Configure(__FALSE);
+   \   0000018E   0x2000             MOVS     R0,#+0
+   \   00000190   0x.... 0x....      BL       USBD_Configure
+    510                }
+    511          
+    512                if (USBD_Configuration != USBD_SetupPacket.wValueL) {
+   \                     ??USBD_ReqSetConfiguration_7: (+1)
+   \   00000194   0x....             LDR      R0,??DataTable13
+   \   00000196   0x7800             LDRB     R0,[R0, #+0]
+   \   00000198   0x....             LDR      R1,??DataTable13_1
+   \   0000019A   0x7889             LDRB     R1,[R1, #+2]
+   \   0000019C   0x4288             CMP      R0,R1
+   \   0000019E   0xD001             BEQ      ??USBD_ReqSetConfiguration_27
+    513                  return (__FALSE);
+   \   000001A0   0x2000             MOVS     R0,#+0
+   \   000001A2   0xE002             B        ??USBD_ReqSetConfiguration_3
+    514                }
+    515                break;
+    516              default:
+    517                return (__FALSE);
+    518            }
+    519            return (__TRUE);
+   \                     ??USBD_ReqSetConfiguration_27: (+1)
+   \   000001A4   0x2001             MOVS     R0,#+1
+   \   000001A6   0xE000             B        ??USBD_ReqSetConfiguration_3
+   \                     ??USBD_ReqSetConfiguration_0: (+1)
+   \   000001A8   0x2000             MOVS     R0,#+0
+   \                     ??USBD_ReqSetConfiguration_3: (+1)
+   \   000001AA   0xBD70             POP      {R4-R6,PC}       ;; return
+    520          }
+    521          
+    522          
+    523          /*
+    524           *  Get Interface USB Device Request
+    525           *    Parameters:      None
+    526           *    Return Value:    TRUE - Success, FALSE - Error
+    527           */
+    528          
+
+   \                                 In section .text, align 2, keep-with-next
+    529          __inline BOOL USBD_ReqGetInterface (void) {
+   \                     USBD_ReqGetInterface: (+1)
+   \   00000000   0xB500             PUSH     {LR}
+    530          
+    531            switch (USBD_SetupPacket.bmRequestType.Recipient) {
+   \   00000002   0x....             LDR      R0,??DataTable13_1
+   \   00000004   0x7800             LDRB     R0,[R0, #+0]
+   \   00000006   0x06C0             LSLS     R0,R0,#+27       ;; ZeroExtS R0,R0,#+27,#+27
+   \   00000008   0x0EC0             LSRS     R0,R0,#+27
+   \   0000000A   0x2801             CMP      R0,#+1
+   \   0000000C   0xD113             BNE      ??USBD_ReqGetInterface_0
+    532              case REQUEST_TO_INTERFACE:
+    533                if ((USBD_Configuration != 0) && (USBD_SetupPacket.wIndexL < USBD_NumInterfaces)) {
+   \   0000000E   0x....             LDR      R0,??DataTable13
+   \   00000010   0x7800             LDRB     R0,[R0, #+0]
+   \   00000012   0x2800             CMP      R0,#+0
+   \   00000014   0xD00D             BEQ      ??USBD_ReqGetInterface_1
+   \   00000016   0x....             LDR      R0,??DataTable13_1
+   \   00000018   0x7900             LDRB     R0,[R0, #+4]
+   \   0000001A   0x....             LDR      R1,??DataTable13_6
+   \   0000001C   0x7809             LDRB     R1,[R1, #+0]
+   \   0000001E   0x4288             CMP      R0,R1
+   \   00000020   0xD207             BCS      ??USBD_ReqGetInterface_1
+    534                  USBD_EP0Data.pData = USBD_AltSetting + USBD_SetupPacket.wIndexL;
+   \   00000022   0x....             LDR      R0,??DataTable13_7
+   \   00000024   0x....             LDR      R1,??DataTable13_1
+   \   00000026   0x7909             LDRB     R1,[R1, #+4]
+   \   00000028   0x1840             ADDS     R0,R0,R1
+   \   0000002A   0x....             LDR      R1,??DataTable14_4
+   \   0000002C   0x6008             STR      R0,[R1, #+0]
+    535                } else {
+    536                  return (__FALSE);
+    537                }
+    538                break;
+    539              default:
+    540                return (__FALSE);
+    541            }
+    542            return (__TRUE);
+   \   0000002E   0x2001             MOVS     R0,#+1
+   \   00000030   0xE002             B        ??USBD_ReqGetInterface_2
+   \                     ??USBD_ReqGetInterface_1: (+1)
+   \   00000032   0x2000             MOVS     R0,#+0
+   \   00000034   0xE000             B        ??USBD_ReqGetInterface_2
+   \                     ??USBD_ReqGetInterface_0: (+1)
+   \   00000036   0x2000             MOVS     R0,#+0
+   \                     ??USBD_ReqGetInterface_2: (+1)
+   \   00000038   0xBD00             POP      {PC}             ;; return
+    543          }
+    544          
+    545          
+    546          /*
+    547           *  Set Interface USB Device Request
+    548           *    Parameters:      None
+    549           *    Return Value:    TRUE - Success, FALSE - Error
+    550           */
+    551          
+
+   \                                 In section .text, align 2, keep-with-next
+    552          __inline BOOL USBD_ReqSetInterface (void) {
+   \                     USBD_ReqSetInterface: (+1)
+   \   00000000   0xB5F0             PUSH     {R4-R7,LR}
+   \   00000002   0xB085             SUB      SP,SP,#+20
+    553            USB_COMMON_DESCRIPTOR *pD;
+    554            U32                    ifn = 0, alt = 0, old = 0, msk = 0;
+   \   00000004   0x2000             MOVS     R0,#+0
+   \   00000006   0x9002             STR      R0,[SP, #+8]
+   \   00000008   0x2000             MOVS     R0,#+0
+   \   0000000A   0x9001             STR      R0,[SP, #+4]
+   \   0000000C   0x2000             MOVS     R0,#+0
+   \   0000000E   0x9003             STR      R0,[SP, #+12]
+   \   00000010   0x2400             MOVS     R4,#+0
+    555            U32                    n, m;
+    556            BOOL                   set;
+    557          
+    558            switch (USBD_SetupPacket.bmRequestType.Recipient) {
+   \   00000012   0x....             LDR      R0,??DataTable14_5
+   \   00000014   0x7800             LDRB     R0,[R0, #+0]
+   \   00000016   0x06C0             LSLS     R0,R0,#+27       ;; ZeroExtS R0,R0,#+27,#+27
+   \   00000018   0x0EC0             LSRS     R0,R0,#+27
+   \   0000001A   0x2801             CMP      R0,#+1
+   \   0000001C   0xD000             BEQ      .+4
+   \   0000001E   0xE093             B        ??USBD_ReqSetInterface_0
+    559              case REQUEST_TO_INTERFACE:
+    560                if (USBD_Configuration == 0) return (__FALSE);
+   \   00000020   0x....             LDR      R0,??DataTable14_6
+   \   00000022   0x7800             LDRB     R0,[R0, #+0]
+   \   00000024   0x2800             CMP      R0,#+0
+   \   00000026   0xD101             BNE      ??USBD_ReqSetInterface_1
+   \   00000028   0x2000             MOVS     R0,#+0
+   \   0000002A   0xE08E             B        ??USBD_ReqSetInterface_2
+    561                set = __FALSE;
+   \                     ??USBD_ReqSetInterface_1: (+1)
+   \   0000002C   0x2700             MOVS     R7,#+0
+    562                if ((!usbd_hs_enable) && (USBD_HighSpeed == __TRUE)) {
+   \   0000002E   0x....             LDR      R0,??DataTable14_7
+   \   00000030   0x7800             LDRB     R0,[R0, #+0]
+   \   00000032   0x2800             CMP      R0,#+0
+   \   00000034   0xD105             BNE      ??USBD_ReqSetInterface_3
+   \   00000036   0x....             LDR      R0,??DataTable14_8
+   \   00000038   0x7800             LDRB     R0,[R0, #+0]
+   \   0000003A   0x2801             CMP      R0,#+1
+   \   0000003C   0xD101             BNE      ??USBD_ReqSetInterface_3
+    563                  return (__FALSE);  /* High speed request but high-speed not enabled */
+   \   0000003E   0x2000             MOVS     R0,#+0
+   \   00000040   0xE083             B        ??USBD_ReqSetInterface_2
+    564                }
+    565                if (USBD_HighSpeed == __FALSE) {
+   \                     ??USBD_ReqSetInterface_3: (+1)
+   \   00000042   0x....             LDR      R0,??DataTable14_8
+   \   00000044   0x7800             LDRB     R0,[R0, #+0]
+   \   00000046   0x2800             CMP      R0,#+0
+   \   00000048   0xD101             BNE      ??USBD_ReqSetInterface_4
+    566                  pD = (USB_COMMON_DESCRIPTOR *)USBD_ConfigDescriptor;
+   \   0000004A   0x....             LDR      R5,??DataTable14_9
+   \   0000004C   0xE008             B        ??USBD_ReqSetInterface_5
+    567                } else {
+    568                  pD = (USB_COMMON_DESCRIPTOR *)USBD_ConfigDescriptor_HS;
+   \                     ??USBD_ReqSetInterface_4: (+1)
+   \   0000004E   0x....             LDR      R5,??DataTable14_10
+   \   00000050   0xE006             B        ??USBD_ReqSetInterface_5
+    569                }
+    570                while (pD->bLength) {
+    571                  switch (pD->bDescriptorType) {
+    572                    case USB_CONFIGURATION_DESCRIPTOR_TYPE:
+    573                      if (((USB_CONFIGURATION_DESCRIPTOR *)pD)->bConfigurationValue != USBD_Configuration) {
+    574                        pD = (USB_COMMON_DESCRIPTOR *)((U8 *)pD+((USB_CONFIGURATION_DESCRIPTOR *)pD)->wTotalLength);
+   \                     ??USBD_ReqSetInterface_6: (+1)
+   \   00000052   0x78A8             LDRB     R0,[R5, #+2]
+   \   00000054   0x78E9             LDRB     R1,[R5, #+3]
+   \   00000056   0x0609             LSLS     R1,R1,#+24       ;; ZeroExtS R1,R1,#+24,#+16
+   \   00000058   0x0C09             LSRS     R1,R1,#+16
+   \   0000005A   0x4308             ORRS     R0,R0,R1
+   \   0000005C   0xB280             UXTH     R0,R0
+   \   0000005E   0x182D             ADDS     R5,R5,R0
+    575                        continue;
+    576                      }
+   \                     ??USBD_ReqSetInterface_5: (+1)
+   \   00000060   0x7828             LDRB     R0,[R5, #+0]
+   \   00000062   0x2800             CMP      R0,#+0
+   \   00000064   0xD06E             BEQ      ??USBD_ReqSetInterface_7
+   \   00000066   0x7868             LDRB     R0,[R5, #+1]
+   \   00000068   0x2802             CMP      R0,#+2
+   \   0000006A   0xD004             BEQ      ??USBD_ReqSetInterface_8
+   \   0000006C   0x2804             CMP      R0,#+4
+   \   0000006E   0xD008             BEQ      ??USBD_ReqSetInterface_9
+   \   00000070   0x2805             CMP      R0,#+5
+   \   00000072   0xD01F             BEQ      ??USBD_ReqSetInterface_10
+   \   00000074   0xE063             B        ??USBD_ReqSetInterface_11
+   \                     ??USBD_ReqSetInterface_8: (+1)
+   \   00000076   0x7968             LDRB     R0,[R5, #+5]
+   \   00000078   0x....             LDR      R1,??DataTable14_6
+   \   0000007A   0x7809             LDRB     R1,[R1, #+0]
+   \   0000007C   0x4288             CMP      R0,R1
+   \   0000007E   0xD1E8             BNE      ??USBD_ReqSetInterface_6
+    577                      break;
+   \   00000080   0xE05D             B        ??USBD_ReqSetInterface_11
+    578                    case USB_INTERFACE_DESCRIPTOR_TYPE:
+    579                      ifn = ((USB_INTERFACE_DESCRIPTOR *)pD)->bInterfaceNumber;
+   \                     ??USBD_ReqSetInterface_9: (+1)
+   \   00000082   0x78A8             LDRB     R0,[R5, #+2]
+   \   00000084   0x9002             STR      R0,[SP, #+8]
+    580                      alt = ((USB_INTERFACE_DESCRIPTOR *)pD)->bAlternateSetting;
+   \   00000086   0x78E8             LDRB     R0,[R5, #+3]
+   \   00000088   0x9001             STR      R0,[SP, #+4]
+    581                      msk = 0;
+   \   0000008A   0x2400             MOVS     R4,#+0
+    582                      if ((ifn == USBD_SetupPacket.wIndexL) && (alt == USBD_SetupPacket.wValueL)) {
+   \   0000008C   0x9802             LDR      R0,[SP, #+8]
+   \   0000008E   0x....             LDR      R1,??DataTable14_5
+   \   00000090   0x7909             LDRB     R1,[R1, #+4]
+   \   00000092   0x4288             CMP      R0,R1
+   \   00000094   0xD10D             BNE      ??USBD_ReqSetInterface_12
+   \   00000096   0x9801             LDR      R0,[SP, #+4]
+   \   00000098   0x....             LDR      R1,??DataTable14_5
+   \   0000009A   0x7889             LDRB     R1,[R1, #+2]
+   \   0000009C   0x4288             CMP      R0,R1
+   \   0000009E   0xD108             BNE      ??USBD_ReqSetInterface_12
+    583                        set = __TRUE;
+   \   000000A0   0x2701             MOVS     R7,#+1
+    584                        old = USBD_AltSetting[ifn];
+   \   000000A2   0x....             LDR      R0,??DataTable14_11
+   \   000000A4   0x9902             LDR      R1,[SP, #+8]
+   \   000000A6   0x5C40             LDRB     R0,[R0, R1]
+   \   000000A8   0x9003             STR      R0,[SP, #+12]
+    585                        USBD_AltSetting[ifn] = (U8)alt;
+   \   000000AA   0x9801             LDR      R0,[SP, #+4]
+   \   000000AC   0x....             LDR      R1,??DataTable14_11
+   \   000000AE   0x9A02             LDR      R2,[SP, #+8]
+   \   000000B0   0x5488             STRB     R0,[R1, R2]
+    586                      }
+    587                      break;
+   \                     ??USBD_ReqSetInterface_12: (+1)
+   \   000000B2   0xE044             B        ??USBD_ReqSetInterface_11
+    588                    case USB_ENDPOINT_DESCRIPTOR_TYPE:
+    589                      if (ifn == USBD_SetupPacket.wIndexL) {
+   \                     ??USBD_ReqSetInterface_10: (+1)
+   \   000000B4   0x9802             LDR      R0,[SP, #+8]
+   \   000000B6   0x....             LDR      R1,??DataTable14_5
+   \   000000B8   0x7909             LDRB     R1,[R1, #+4]
+   \   000000BA   0x4288             CMP      R0,R1
+   \   000000BC   0xD13F             BNE      ??USBD_ReqSetInterface_13
+    590                        n = ((USB_ENDPOINT_DESCRIPTOR *)pD)->bEndpointAddress & 0x8F;
+   \   000000BE   0x78A8             LDRB     R0,[R5, #+2]
+   \   000000C0   0x218F             MOVS     R1,#+143
+   \   000000C2   0x4001             ANDS     R1,R1,R0
+   \   000000C4   0x9100             STR      R1,[SP, #+0]
+    591                        m = (n & 0x80) ? ((1 << 16) << (n & 0x0F)) : (1 << n);
+   \   000000C6   0x9800             LDR      R0,[SP, #+0]
+   \   000000C8   0x0600             LSLS     R0,R0,#+24
+   \   000000CA   0xD506             BPL      ??USBD_ReqSetInterface_14
+   \   000000CC   0x2680             MOVS     R6,#+128
+   \   000000CE   0x0276             LSLS     R6,R6,#+9        ;; #+65536
+   \   000000D0   0x9800             LDR      R0,[SP, #+0]
+   \   000000D2   0x0700             LSLS     R0,R0,#+28       ;; ZeroExtS R0,R0,#+28,#+28
+   \   000000D4   0x0F00             LSRS     R0,R0,#+28
+   \   000000D6   0x4086             LSLS     R6,R6,R0
+   \   000000D8   0xE002             B        ??USBD_ReqSetInterface_15
+   \                     ??USBD_ReqSetInterface_14: (+1)
+   \   000000DA   0x2601             MOVS     R6,#+1
+   \   000000DC   0x9800             LDR      R0,[SP, #+0]
+   \   000000DE   0x4086             LSLS     R6,R6,R0
+    592                        if (alt == USBD_SetupPacket.wValueL) {
+   \                     ??USBD_ReqSetInterface_15: (+1)
+   \   000000E0   0x9801             LDR      R0,[SP, #+4]
+   \   000000E2   0x....             LDR      R1,??DataTable14_5
+   \   000000E4   0x7889             LDRB     R1,[R1, #+2]
+   \   000000E6   0x4288             CMP      R0,R1
+   \   000000E8   0xD116             BNE      ??USBD_ReqSetInterface_16
+    593                          USBD_EndPointMask |=  m;
+   \   000000EA   0x....             LDR      R0,??DataTable14_12
+   \   000000EC   0x6800             LDR      R0,[R0, #+0]
+   \   000000EE   0x4330             ORRS     R0,R0,R6
+   \   000000F0   0x....             LDR      R1,??DataTable14_12
+   \   000000F2   0x6008             STR      R0,[R1, #+0]
+    594                          USBD_EndPointHalt &= ~m;
+   \   000000F4   0x....             LDR      R0,??DataTable14
+   \   000000F6   0x6800             LDR      R0,[R0, #+0]
+   \   000000F8   0x43B0             BICS     R0,R0,R6
+   \   000000FA   0x....             LDR      R1,??DataTable14
+   \   000000FC   0x6008             STR      R0,[R1, #+0]
+    595                          USBD_ConfigEP((USB_ENDPOINT_DESCRIPTOR *)pD);
+   \   000000FE   0x0028             MOVS     R0,R5
+   \   00000100   0x.... 0x....      BL       USBD_ConfigEP
+    596                          USBD_EnableEP(n);
+   \   00000104   0x9800             LDR      R0,[SP, #+0]
+   \   00000106   0x.... 0x....      BL       USBD_EnableEP
+    597                          USBD_ResetEP(n);
+   \   0000010A   0x9800             LDR      R0,[SP, #+0]
+   \   0000010C   0x.... 0x....      BL       USBD_ResetEP
+    598                          msk |= m;
+   \   00000110   0x0020             MOVS     R0,R4
+   \   00000112   0x0034             MOVS     R4,R6
+   \   00000114   0x4304             ORRS     R4,R4,R0
+   \   00000116   0xE012             B        ??USBD_ReqSetInterface_13
+    599                        }
+    600                        else if ((alt == old) && ((msk & m) == 0)) {
+   \                     ??USBD_ReqSetInterface_16: (+1)
+   \   00000118   0x9801             LDR      R0,[SP, #+4]
+   \   0000011A   0x9903             LDR      R1,[SP, #+12]
+   \   0000011C   0x4288             CMP      R0,R1
+   \   0000011E   0xD10E             BNE      ??USBD_ReqSetInterface_13
+   \   00000120   0x4234             TST      R4,R6
+   \   00000122   0xD10C             BNE      ??USBD_ReqSetInterface_13
+    601                          USBD_EndPointMask &= ~m;
+   \   00000124   0x....             LDR      R0,??DataTable14_12
+   \   00000126   0x6800             LDR      R0,[R0, #+0]
+   \   00000128   0x43B0             BICS     R0,R0,R6
+   \   0000012A   0x....             LDR      R1,??DataTable14_12
+   \   0000012C   0x6008             STR      R0,[R1, #+0]
+    602                          USBD_EndPointHalt &= ~m;
+   \   0000012E   0x....             LDR      R0,??DataTable14
+   \   00000130   0x6800             LDR      R0,[R0, #+0]
+   \   00000132   0x43B0             BICS     R0,R0,R6
+   \   00000134   0x....             LDR      R1,??DataTable14
+   \   00000136   0x6008             STR      R0,[R1, #+0]
+    603                          USBD_DisableEP(n);
+   \   00000138   0x9800             LDR      R0,[SP, #+0]
+   \   0000013A   0x.... 0x....      BL       USBD_DisableEP
+    604                        }
+    605                      }
+    606                     break;
+    607                  }
+    608                  pD = (USB_COMMON_DESCRIPTOR *)((U8 *)pD + pD->bLength);
+   \                     ??USBD_ReqSetInterface_13: (+1)
+   \                     ??USBD_ReqSetInterface_11: (+1)
+   \   0000013E   0x7828             LDRB     R0,[R5, #+0]
+   \   00000140   0x182D             ADDS     R5,R5,R0
+   \   00000142   0xE78D             B        ??USBD_ReqSetInterface_5
+    609                }
+    610                break;
+    611              default:
+    612                return (__FALSE);
+    613            }
+    614          
+    615            return (set);
+   \                     ??USBD_ReqSetInterface_7: (+1)
+   \   00000144   0x0038             MOVS     R0,R7
+   \   00000146   0xE000             B        ??USBD_ReqSetInterface_2
+   \                     ??USBD_ReqSetInterface_0: (+1)
+   \   00000148   0x2000             MOVS     R0,#+0
+   \                     ??USBD_ReqSetInterface_2: (+1)
+   \   0000014A   0xB005             ADD      SP,SP,#+20
+   \   0000014C   0xBDF0             POP      {R4-R7,PC}       ;; return
+    616          }
+    617          
+    618          
+    619          /*
+    620           *  USB Device Endpoint 0 Event Callback
+    621           *    Parameters:      event
+    622           *    Return Value:    none
+    623           */
+    624          
+
+   \                                 In section .text, align 2, keep-with-next
+    625          void USBD_EndPoint0 (U32 event) {
+   \                     USBD_EndPoint0: (+1)
+   \   00000000   0xB510             PUSH     {R4,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+    626          
+    627            if (event & USBD_EVT_SETUP) {
+   \   00000004   0x07A0             LSLS     R0,R4,#+30
+   \   00000006   0xD400             BMI      .+4
+   \   00000008   0xE0C7             B        ??USBD_EndPoint0_0
+    628              USBD_SetupStage();
+   \   0000000A   0x.... 0x....      BL       USBD_SetupStage
+    629              USBD_DirCtrlEP(USBD_SetupPacket.bmRequestType.Dir);
+   \   0000000E   0x....             LDR      R0,??DataTable15
+   \   00000010   0x7800             LDRB     R0,[R0, #+0]
+   \   00000012   0xB2C0             UXTB     R0,R0
+   \   00000014   0x09C0             LSRS     R0,R0,#+7
+   \   00000016   0xB2C0             UXTB     R0,R0
+   \   00000018   0x.... 0x....      BL       USBD_DirCtrlEP
+    630              USBD_EP0Data.Count = USBD_SetupPacket.wLength;       /* Number of bytes to transfer */
+   \   0000001C   0x....             LDR      R0,??DataTable15
+   \   0000001E   0x88C0             LDRH     R0,[R0, #+6]
+   \   00000020   0x....             LDR      R1,??DataTable15_1
+   \   00000022   0x8088             STRH     R0,[R1, #+4]
+    631          
+    632              switch (USBD_SetupPacket.bmRequestType.Type) {
+   \   00000024   0x....             LDR      R0,??DataTable15
+   \   00000026   0x7800             LDRB     R0,[R0, #+0]
+   \   00000028   0xB2C0             UXTB     R0,R0
+   \   0000002A   0x0940             LSRS     R0,R0,#+5
+   \   0000002C   0x0780             LSLS     R0,R0,#+30       ;; ZeroExtS R0,R0,#+30,#+30
+   \   0000002E   0x0F80             LSRS     R0,R0,#+30
+   \   00000030   0x2800             CMP      R0,#+0
+   \   00000032   0xD003             BEQ      ??USBD_EndPoint0_1
+   \   00000034   0x2801             CMP      R0,#+1
+   \   00000036   0xD100             BNE      .+4
+   \   00000038   0xE08E             B        ??USBD_EndPoint0_2
+   \   0000003A   0xE01A             B        ??USBD_EndPoint0_3
+    633          
+    634                case REQUEST_STANDARD:
+    635                  switch (USBD_SetupPacket.bRequest) {
+   \                     ??USBD_EndPoint0_1: (+1)
+   \   0000003C   0x....             LDR      R0,??DataTable15
+   \   0000003E   0x7840             LDRB     R0,[R0, #+1]
+   \   00000040   0x2800             CMP      R0,#+0
+   \   00000042   0xD012             BEQ      ??USBD_EndPoint0_4
+   \   00000044   0x2801             CMP      R0,#+1
+   \   00000046   0xD028             BEQ      ??USBD_EndPoint0_5
+   \   00000048   0x2803             CMP      R0,#+3
+   \   0000004A   0xD035             BEQ      ??USBD_EndPoint0_6
+   \   0000004C   0x2805             CMP      R0,#+5
+   \   0000004E   0xD042             BEQ      ??USBD_EndPoint0_7
+   \   00000050   0x2806             CMP      R0,#+6
+   \   00000052   0xD04E             BEQ      ??USBD_EndPoint0_8
+   \   00000054   0x2807             CMP      R0,#+7
+   \   00000056   0xD053             BEQ      ??USBD_EndPoint0_9
+   \   00000058   0x2808             CMP      R0,#+8
+   \   0000005A   0xD052             BEQ      ??USBD_EndPoint0_10
+   \   0000005C   0x2809             CMP      R0,#+9
+   \   0000005E   0xD057             BEQ      ??USBD_EndPoint0_11
+   \   00000060   0x280A             CMP      R0,#+10
+   \   00000062   0xD063             BEQ      ??USBD_EndPoint0_12
+   \   00000064   0x280B             CMP      R0,#+11
+   \   00000066   0xD068             BEQ      ??USBD_EndPoint0_13
+   \   00000068   0xE075             B        ??USBD_EndPoint0_14
+    636          
+    637                    case USB_REQUEST_GET_STATUS:
+    638                      if (!USBD_ReqGetStatus()) {
+   \                     ??USBD_EndPoint0_4: (+1)
+   \   0000006A   0x.... 0x....      BL       USBD_ReqGetStatus
+   \   0000006E   0x2800             CMP      R0,#+0
+   \   00000070   0xD110             BNE      ??USBD_EndPoint0_15
+    639                        goto stall;
+    640                      }
+    641                      USBD_DataInStage();
+    642                      break;
+    643          
+    644                    case USB_REQUEST_CLEAR_FEATURE:
+    645                      if (!USBD_ReqSetClrFeature(0)) {
+    646                        goto stall;
+    647                      }
+    648                      USBD_StatusInStage();
+    649          #ifdef __RTX
+    650                      if (__rtx) {
+    651                        if (USBD_RTX_CoreTask) {
+    652                          usbd_os_evt_set(USBD_EVT_CLR_FEATURE, USBD_RTX_CoreTask);
+    653                        }
+    654                      } else {
+    655          #endif
+    656                        if (USBD_P_Feature_Event) {
+    657                          USBD_P_Feature_Event();
+    658                        }
+    659          #ifdef __RTX
+    660                      }
+    661          #endif
+    662                      break;
+    663          
+    664                    case USB_REQUEST_SET_FEATURE:
+    665                      if (!USBD_ReqSetClrFeature(1)) {
+    666                        goto stall;
+    667                      }
+    668                      USBD_StatusInStage();
+    669          #ifdef __RTX
+    670                      if (__rtx) {
+    671                        if (USBD_RTX_CoreTask) {
+    672                          usbd_os_evt_set(USBD_EVT_SET_FEATURE, USBD_RTX_CoreTask);
+    673                        }
+    674                      } else {
+    675          #endif
+    676                        if (USBD_P_Feature_Event) {
+    677                          USBD_P_Feature_Event();
+    678                        }
+    679          #ifdef __RTX
+    680                      }
+    681          #endif
+    682                      break;
+    683          
+    684                    case USB_REQUEST_SET_ADDRESS:
+    685                      if (!USBD_ReqSetAddress()) {
+    686                        goto stall;
+    687                      }
+    688                      USBD_SetAddress(USBD_DeviceAddress & 0x7F, 1);
+    689                      USBD_StatusInStage();
+    690                      break;
+    691          
+    692                    case USB_REQUEST_GET_DESCRIPTOR:
+    693                      if (!USBD_ReqGetDescriptor()) {
+    694                        goto stall;
+    695                      }
+    696                      USBD_DataInStage();
+    697                      break;
+    698          
+    699                    case USB_REQUEST_SET_DESCRIPTOR:
+    700                      goto stall;
+    701          
+    702                    case USB_REQUEST_GET_CONFIGURATION:
+    703                      if (!USBD_ReqGetConfiguration()) {
+    704                        goto stall;
+    705                      }
+    706                      USBD_DataInStage();
+    707                      break;
+    708          
+    709                    case USB_REQUEST_SET_CONFIGURATION:
+    710                      if (!USBD_ReqSetConfiguration()) {
+    711                        goto stall;
+    712                      }
+    713                      USBD_StatusInStage();
+    714          #ifdef __RTX
+    715                      if (__rtx) {
+    716                        if (USBD_RTX_CoreTask) {
+    717                          usbd_os_evt_set(USBD_EVT_SET_CFG, USBD_RTX_CoreTask);
+    718                        }
+    719                      } else {
+    720          #endif
+    721                        if (USBD_P_Configure_Event) {
+    722                          USBD_P_Configure_Event();
+    723                        }
+    724          #ifdef __RTX
+    725                      }
+    726          #endif
+    727                      break;
+    728          
+    729                    case USB_REQUEST_GET_INTERFACE:
+    730                      if (!USBD_ReqGetInterface()) {
+    731                        goto stall;
+    732                      }
+    733                      USBD_DataInStage();
+    734                      break;
+    735          
+    736                    case USB_REQUEST_SET_INTERFACE:
+    737                      if (!USBD_ReqSetInterface()) {
+    738                        goto stall;
+    739                      }
+    740                      USBD_StatusInStage();
+    741          #ifdef __RTX
+    742                      if (__rtx) {
+    743                        if (USBD_RTX_CoreTask) {
+    744                          usbd_os_evt_set(USBD_EVT_SET_IF, USBD_RTX_CoreTask);
+    745                        }
+    746                      } else {
+    747          #endif
+    748                        if (USBD_P_Interface_Event) {
+    749                          USBD_P_Interface_Event();
+    750                        }
+    751          #ifdef __RTX
+    752                      }
+    753          #endif
+    754                      break;
+    755          
+    756                    default:
+    757                      goto stall;
+    758                  }
+    759                  break;  /* end case REQUEST_STANDARD */
+    760          
+    761                case REQUEST_CLASS:
+    762                  switch (USBD_SetupPacket.bmRequestType.Recipient) {
+    763          
+    764                    case REQUEST_TO_DEVICE:
+    765                      goto stall;                                                  /* not supported */
+    766          
+    767                    case REQUEST_TO_INTERFACE:
+    768                      if (USBD_EndPoint0_Setup_HID_ReqToIF())
+    769                        goto setup_class_ok;
+    770                      if (USBD_EndPoint0_Setup_MSC_ReqToIF())
+    771                        goto setup_class_ok;
+    772                      if (USBD_EndPoint0_Setup_CDC_ReqToIF())
+    773                        goto setup_class_ok;
+    774                      goto stall;                                                  /* not supported */
+    775                      /* end case REQUEST_TO_INTERFACE */
+    776          
+    777                    case REQUEST_TO_ENDPOINT:
+    778                      goto stall;
+    779                      /* end case REQUEST_TO_ENDPOINT */
+    780          
+    781                    default:
+    782                      goto stall;
+    783                  }
+    784          setup_class_ok:                                                          /* request finished successfully */
+    785                  break;  /* end case REQUEST_CLASS */
+    786          
+    787                default:
+    788          stall:  if ((USBD_SetupPacket.bmRequestType.Dir == REQUEST_HOST_TO_DEVICE) &&
+    789                      (USBD_SetupPacket.wLength != 0)) {
+   \                     ??USBD_EndPoint0_3: (+1)
+   \   00000072   0x....             LDR      R0,??DataTable15
+   \   00000074   0x7800             LDRB     R0,[R0, #+0]
+   \   00000076   0xB2C0             UXTB     R0,R0
+   \   00000078   0x09C0             LSRS     R0,R0,#+7
+   \   0000007A   0xB2C0             UXTB     R0,R0
+   \   0000007C   0x2800             CMP      R0,#+0
+   \   0000007E   0xD000             BEQ      .+4
+   \   00000080   0xE085             B        ??USBD_EndPoint0_16
+   \   00000082   0x....             LDR      R0,??DataTable15
+   \   00000084   0x88C0             LDRH     R0,[R0, #+6]
+   \   00000086   0x2800             CMP      R0,#+0
+   \   00000088   0xD100             BNE      .+4
+   \   0000008A   0xE080             B        ??USBD_EndPoint0_16
+    790                    USBD_SetStallEP(0x00);
+   \   0000008C   0x2000             MOVS     R0,#+0
+   \   0000008E   0x.... 0x....      BL       USBD_SetStallEP
+   \   00000092   0xE07F             B        ??USBD_EndPoint0_17
+    791                  } else {
+   \                     ??USBD_EndPoint0_15: (+1)
+   \   00000094   0x.... 0x....      BL       USBD_DataInStage
+   \                     ??USBD_EndPoint0_18: (+1)
+   \   00000098   0xE07F             B        ??USBD_EndPoint0_0
+   \                     ??USBD_EndPoint0_5: (+1)
+   \   0000009A   0x2000             MOVS     R0,#+0
+   \   0000009C   0x.... 0x....      BL       USBD_ReqSetClrFeature
+   \   000000A0   0x2800             CMP      R0,#+0
+   \   000000A2   0xD0E6             BEQ      ??USBD_EndPoint0_3
+   \                     ??USBD_EndPoint0_19: (+1)
+   \   000000A4   0x.... 0x....      BL       USBD_StatusInStage
+   \   000000A8   0x....             LDR      R0,??DataTable15_2
+   \   000000AA   0x6800             LDR      R0,[R0, #+0]
+   \   000000AC   0x2800             CMP      R0,#+0
+   \   000000AE   0xD002             BEQ      ??USBD_EndPoint0_20
+   \   000000B0   0x....             LDR      R0,??DataTable15_2
+   \   000000B2   0x6800             LDR      R0,[R0, #+0]
+   \   000000B4   0x4780             BLX      R0
+   \                     ??USBD_EndPoint0_20: (+1)
+   \   000000B6   0xE7EF             B        ??USBD_EndPoint0_18
+   \                     ??USBD_EndPoint0_6: (+1)
+   \   000000B8   0x2001             MOVS     R0,#+1
+   \   000000BA   0x.... 0x....      BL       USBD_ReqSetClrFeature
+   \   000000BE   0x2800             CMP      R0,#+0
+   \   000000C0   0xD0D7             BEQ      ??USBD_EndPoint0_3
+   \                     ??USBD_EndPoint0_21: (+1)
+   \   000000C2   0x.... 0x....      BL       USBD_StatusInStage
+   \   000000C6   0x....             LDR      R0,??DataTable15_2
+   \   000000C8   0x6800             LDR      R0,[R0, #+0]
+   \   000000CA   0x2800             CMP      R0,#+0
+   \   000000CC   0xD002             BEQ      ??USBD_EndPoint0_22
+   \   000000CE   0x....             LDR      R0,??DataTable15_2
+   \   000000D0   0x6800             LDR      R0,[R0, #+0]
+   \   000000D2   0x4780             BLX      R0
+   \                     ??USBD_EndPoint0_22: (+1)
+   \   000000D4   0xE7E0             B        ??USBD_EndPoint0_18
+   \                     ??USBD_EndPoint0_7: (+1)
+   \   000000D6   0x.... 0x....      BL       USBD_ReqSetAddress
+   \   000000DA   0x2800             CMP      R0,#+0
+   \   000000DC   0xD0C9             BEQ      ??USBD_EndPoint0_3
+   \                     ??USBD_EndPoint0_23: (+1)
+   \   000000DE   0x2101             MOVS     R1,#+1
+   \   000000E0   0x....             LDR      R0,??DataTable15_3
+   \   000000E2   0x7800             LDRB     R0,[R0, #+0]
+   \   000000E4   0x0640             LSLS     R0,R0,#+25       ;; ZeroExtS R0,R0,#+25,#+25
+   \   000000E6   0x0E40             LSRS     R0,R0,#+25
+   \   000000E8   0x.... 0x....      BL       USBD_SetAddress
+   \   000000EC   0x.... 0x....      BL       USBD_StatusInStage
+   \   000000F0   0xE7D2             B        ??USBD_EndPoint0_18
+   \                     ??USBD_EndPoint0_8: (+1)
+   \   000000F2   0x.... 0x....      BL       USBD_ReqGetDescriptor
+   \   000000F6   0x2800             CMP      R0,#+0
+   \   000000F8   0xD0BB             BEQ      ??USBD_EndPoint0_3
+   \                     ??USBD_EndPoint0_24: (+1)
+   \   000000FA   0x.... 0x....      BL       USBD_DataInStage
+   \   000000FE   0xE7CB             B        ??USBD_EndPoint0_18
+   \                     ??USBD_EndPoint0_9: (+1)
+   \   00000100   0xE7B7             B        ??USBD_EndPoint0_3
+   \                     ??USBD_EndPoint0_10: (+1)
+   \   00000102   0x.... 0x....      BL       USBD_ReqGetConfiguration
+   \   00000106   0x2800             CMP      R0,#+0
+   \   00000108   0xD0B3             BEQ      ??USBD_EndPoint0_3
+   \                     ??USBD_EndPoint0_25: (+1)
+   \   0000010A   0x.... 0x....      BL       USBD_DataInStage
+   \   0000010E   0xE7C3             B        ??USBD_EndPoint0_18
+   \                     ??USBD_EndPoint0_11: (+1)
+   \   00000110   0x.... 0x....      BL       USBD_ReqSetConfiguration
+   \   00000114   0x2800             CMP      R0,#+0
+   \   00000116   0xD0AC             BEQ      ??USBD_EndPoint0_3
+   \                     ??USBD_EndPoint0_26: (+1)
+   \   00000118   0x.... 0x....      BL       USBD_StatusInStage
+   \   0000011C   0x....             LDR      R0,??DataTable15_4
+   \   0000011E   0x6800             LDR      R0,[R0, #+0]
+   \   00000120   0x2800             CMP      R0,#+0
+   \   00000122   0xD002             BEQ      ??USBD_EndPoint0_27
+   \   00000124   0x....             LDR      R0,??DataTable15_4
+   \   00000126   0x6800             LDR      R0,[R0, #+0]
+   \   00000128   0x4780             BLX      R0
+   \                     ??USBD_EndPoint0_27: (+1)
+   \   0000012A   0xE7B5             B        ??USBD_EndPoint0_18
+   \                     ??USBD_EndPoint0_12: (+1)
+   \   0000012C   0x.... 0x....      BL       USBD_ReqGetInterface
+   \   00000130   0x2800             CMP      R0,#+0
+   \   00000132   0xD09E             BEQ      ??USBD_EndPoint0_3
+   \                     ??USBD_EndPoint0_28: (+1)
+   \   00000134   0x.... 0x....      BL       USBD_DataInStage
+   \   00000138   0xE7AE             B        ??USBD_EndPoint0_18
+   \                     ??USBD_EndPoint0_13: (+1)
+   \   0000013A   0x.... 0x....      BL       USBD_ReqSetInterface
+   \   0000013E   0x2800             CMP      R0,#+0
+   \   00000140   0xD097             BEQ      ??USBD_EndPoint0_3
+   \                     ??USBD_EndPoint0_29: (+1)
+   \   00000142   0x.... 0x....      BL       USBD_StatusInStage
+   \   00000146   0x....             LDR      R0,??DataTable15_5
+   \   00000148   0x6800             LDR      R0,[R0, #+0]
+   \   0000014A   0x2800             CMP      R0,#+0
+   \   0000014C   0xD002             BEQ      ??USBD_EndPoint0_30
+   \   0000014E   0x....             LDR      R0,??DataTable15_5
+   \   00000150   0x6800             LDR      R0,[R0, #+0]
+   \   00000152   0x4780             BLX      R0
+   \                     ??USBD_EndPoint0_30: (+1)
+   \   00000154   0xE7A0             B        ??USBD_EndPoint0_18
+   \                     ??USBD_EndPoint0_14: (+1)
+   \   00000156   0xE78C             B        ??USBD_EndPoint0_3
+   \                     ??USBD_EndPoint0_2: (+1)
+   \   00000158   0x....             LDR      R0,??DataTable15
+   \   0000015A   0x7800             LDRB     R0,[R0, #+0]
+   \   0000015C   0x06C0             LSLS     R0,R0,#+27       ;; ZeroExtS R0,R0,#+27,#+27
+   \   0000015E   0x0EC0             LSRS     R0,R0,#+27
+   \   00000160   0x2800             CMP      R0,#+0
+   \   00000162   0xD003             BEQ      ??USBD_EndPoint0_31
+   \   00000164   0x2802             CMP      R0,#+2
+   \   00000166   0xD010             BEQ      ??USBD_EndPoint0_32
+   \   00000168   0xD301             BCC      ??USBD_EndPoint0_33
+   \   0000016A   0xE00F             B        ??USBD_EndPoint0_34
+   \                     ??USBD_EndPoint0_31: (+1)
+   \   0000016C   0xE781             B        ??USBD_EndPoint0_3
+   \                     ??USBD_EndPoint0_33: (+1)
+   \   0000016E   0x.... 0x....      BL       USBD_EndPoint0_Setup_HID_ReqToIF
+   \   00000172   0x2800             CMP      R0,#+0
+   \   00000174   0xD000             BEQ      ??USBD_EndPoint0_35
+   \                     ??USBD_EndPoint0_36: (+1)
+   \   00000176   0xE010             B        ??USBD_EndPoint0_0
+   \                     ??USBD_EndPoint0_35: (+1)
+   \   00000178   0x.... 0x....      BL       USBD_EndPoint0_Setup_MSC_ReqToIF
+   \   0000017C   0x2800             CMP      R0,#+0
+   \   0000017E   0xD1FA             BNE      ??USBD_EndPoint0_36
+   \                     ??USBD_EndPoint0_37: (+1)
+   \   00000180   0x.... 0x....      BL       USBD_EndPoint0_Setup_CDC_ReqToIF
+   \   00000184   0x2800             CMP      R0,#+0
+   \   00000186   0xD1F6             BNE      ??USBD_EndPoint0_36
+   \                     ??USBD_EndPoint0_38: (+1)
+   \   00000188   0xE773             B        ??USBD_EndPoint0_3
+   \                     ??USBD_EndPoint0_32: (+1)
+   \   0000018A   0xE772             B        ??USBD_EndPoint0_3
+   \                     ??USBD_EndPoint0_34: (+1)
+   \   0000018C   0xE771             B        ??USBD_EndPoint0_3
+    792                    USBD_SetStallEP(0x80);
+   \                     ??USBD_EndPoint0_16: (+1)
+   \   0000018E   0x2080             MOVS     R0,#+128
+   \   00000190   0x.... 0x....      BL       USBD_SetStallEP
+    793                  }
+    794                  USBD_EP0Data.Count = 0;
+   \                     ??USBD_EndPoint0_17: (+1)
+   \   00000194   0x2000             MOVS     R0,#+0
+   \   00000196   0x....             LDR      R1,??DataTable15_1
+   \   00000198   0x8088             STRH     R0,[R1, #+4]
+    795                  break;
+    796              }
+    797            }
+    798          
+    799            if (event & USBD_EVT_OUT) {
+   \                     ??USBD_EndPoint0_0: (+1)
+   \   0000019A   0x0760             LSLS     R0,R4,#+29
+   \   0000019C   0xD53B             BPL      ??USBD_EndPoint0_39
+    800              if (USBD_SetupPacket.bmRequestType.Dir == REQUEST_HOST_TO_DEVICE) {
+   \   0000019E   0x....             LDR      R0,??DataTable15
+   \   000001A0   0x7800             LDRB     R0,[R0, #+0]
+   \   000001A2   0xB2C0             UXTB     R0,R0
+   \   000001A4   0x09C0             LSRS     R0,R0,#+7
+   \   000001A6   0xB2C0             UXTB     R0,R0
+   \   000001A8   0x2800             CMP      R0,#+0
+   \   000001AA   0xD132             BNE      ??USBD_EndPoint0_40
+    801                if (USBD_EP0Data.Count) {                                          /* still data to receive ? */
+   \   000001AC   0x....             LDR      R0,??DataTable15_1
+   \   000001AE   0x8880             LDRH     R0,[R0, #+4]
+   \   000001B0   0x2800             CMP      R0,#+0
+   \   000001B2   0xD030             BEQ      ??USBD_EndPoint0_39
+    802                  USBD_DataOutStage();                                             /* receive data */
+   \   000001B4   0x.... 0x....      BL       USBD_DataOutStage
+    803                  if (USBD_EP0Data.Count == 0) {                                   /* data complete ? */
+   \   000001B8   0x....             LDR      R0,??DataTable15_1
+   \   000001BA   0x8880             LDRH     R0,[R0, #+4]
+   \   000001BC   0x2800             CMP      R0,#+0
+   \   000001BE   0xD12A             BNE      ??USBD_EndPoint0_39
+    804                    switch (USBD_SetupPacket.bmRequestType.Type) {
+   \   000001C0   0x....             LDR      R0,??DataTable15
+   \   000001C2   0x7800             LDRB     R0,[R0, #+0]
+   \   000001C4   0xB2C0             UXTB     R0,R0
+   \   000001C6   0x0940             LSRS     R0,R0,#+5
+   \   000001C8   0x0780             LSLS     R0,R0,#+30       ;; ZeroExtS R0,R0,#+30,#+30
+   \   000001CA   0x0F80             LSRS     R0,R0,#+30
+   \   000001CC   0x2800             CMP      R0,#+0
+   \   000001CE   0xD002             BEQ      ??USBD_EndPoint0_41
+   \   000001D0   0x2801             CMP      R0,#+1
+   \   000001D2   0xD007             BEQ      ??USBD_EndPoint0_42
+   \   000001D4   0xE7FF             B        ??USBD_EndPoint0_43
+    805          
+    806                      case REQUEST_STANDARD:
+    807                        goto stall_i;                                              /* not supported */
+    808          
+    809                      case REQUEST_CLASS:
+    810                        switch (USBD_SetupPacket.bmRequestType.Recipient) {
+    811                          case REQUEST_TO_DEVICE:
+    812                            goto stall_i;                                          /* not supported */
+    813          
+    814                          case REQUEST_TO_INTERFACE:
+    815                            if (USBD_EndPoint0_Out_HID_ReqToIF())
+    816                              goto out_class_ok;
+    817                            if (USBD_EndPoint0_Out_CDC_ReqToIF())
+    818                              goto out_class_ok;
+    819                            goto stall_i;
+    820                            /* end case REQUEST_TO_INTERFACE */
+    821          
+    822                          case REQUEST_TO_ENDPOINT:
+    823                            goto stall_i;
+    824                            /* end case REQUEST_TO_ENDPOINT */
+    825          
+    826                          default:
+    827                            goto stall_i;
+    828                        }
+    829          out_class_ok:                                                            /* request finished successfully */
+    830                        break; /* end case REQUEST_CLASS */
+    831          
+    832                      default:
+    833          stall_i:      USBD_SetStallEP(0x80);
+   \                     ??USBD_EndPoint0_41: (+1)
+   \                     ??USBD_EndPoint0_43: (+1)
+   \   000001D6   0x2080             MOVS     R0,#+128
+   \   000001D8   0x.... 0x....      BL       USBD_SetStallEP
+    834                        USBD_EP0Data.Count = 0;
+   \   000001DC   0x2000             MOVS     R0,#+0
+   \   000001DE   0x....             LDR      R1,??DataTable15_1
+   \   000001E0   0x8088             STRH     R0,[R1, #+4]
+    835                        break;
+   \   000001E2   0xE018             B        ??USBD_EndPoint0_39
+   \                     ??USBD_EndPoint0_42: (+1)
+   \   000001E4   0x....             LDR      R0,??DataTable15
+   \   000001E6   0x7800             LDRB     R0,[R0, #+0]
+   \   000001E8   0x06C0             LSLS     R0,R0,#+27       ;; ZeroExtS R0,R0,#+27,#+27
+   \   000001EA   0x0EC0             LSRS     R0,R0,#+27
+   \   000001EC   0x2800             CMP      R0,#+0
+   \   000001EE   0xD003             BEQ      ??USBD_EndPoint0_44
+   \   000001F0   0x2802             CMP      R0,#+2
+   \   000001F2   0xD00C             BEQ      ??USBD_EndPoint0_45
+   \   000001F4   0xD301             BCC      ??USBD_EndPoint0_46
+   \   000001F6   0xE00B             B        ??USBD_EndPoint0_47
+   \                     ??USBD_EndPoint0_44: (+1)
+   \   000001F8   0xE7ED             B        ??USBD_EndPoint0_43
+   \                     ??USBD_EndPoint0_46: (+1)
+   \   000001FA   0x.... 0x....      BL       USBD_EndPoint0_Out_HID_ReqToIF
+   \   000001FE   0x2800             CMP      R0,#+0
+   \   00000200   0xD000             BEQ      ??USBD_EndPoint0_48
+   \                     ??USBD_EndPoint0_49: (+1)
+   \   00000202   0xE008             B        ??USBD_EndPoint0_39
+   \                     ??USBD_EndPoint0_48: (+1)
+   \   00000204   0x.... 0x....      BL       USBD_EndPoint0_Out_CDC_ReqToIF
+   \   00000208   0x2800             CMP      R0,#+0
+   \   0000020A   0xD1FA             BNE      ??USBD_EndPoint0_49
+   \                     ??USBD_EndPoint0_50: (+1)
+   \   0000020C   0xE7E3             B        ??USBD_EndPoint0_43
+   \                     ??USBD_EndPoint0_45: (+1)
+   \   0000020E   0xE7E2             B        ??USBD_EndPoint0_43
+   \                     ??USBD_EndPoint0_47: (+1)
+   \   00000210   0xE7E1             B        ??USBD_EndPoint0_43
+    836                    }
+    837                  }
+    838                }
+    839              } else {
+    840                USBD_StatusOutStage();                                             /* receive Acknowledge */
+   \                     ??USBD_EndPoint0_40: (+1)
+   \   00000212   0x.... 0x....      BL       USBD_StatusOutStage
+    841              }
+    842            }  /* end USBD_EVT_OUT */
+    843          
+    844            if (event & USBD_EVT_IN) {
+   \                     ??USBD_EndPoint0_39: (+1)
+   \   00000216   0x0720             LSLS     R0,R4,#+28
+   \   00000218   0xD520             BPL      ??USBD_EndPoint0_51
+    845              if (USBD_SetupPacket.bmRequestType.Dir == REQUEST_DEVICE_TO_HOST) {
+   \   0000021A   0x....             LDR      R0,??DataTable15
+   \   0000021C   0x7800             LDRB     R0,[R0, #+0]
+   \   0000021E   0xB2C0             UXTB     R0,R0
+   \   00000220   0x09C0             LSRS     R0,R0,#+7
+   \   00000222   0xB2C0             UXTB     R0,R0
+   \   00000224   0x2800             CMP      R0,#+0
+   \   00000226   0xD00A             BEQ      ??USBD_EndPoint0_52
+    846                if (USBD_EP0Data.Count || USBD_ZLP) USBD_DataInStage();            /* send data */
+   \   00000228   0x....             LDR      R0,??DataTable15_1
+   \   0000022A   0x8880             LDRH     R0,[R0, #+4]
+   \   0000022C   0x2800             CMP      R0,#+0
+   \   0000022E   0xD103             BNE      ??USBD_EndPoint0_53
+   \   00000230   0x....             LDR      R0,??DataTable15_6
+   \   00000232   0x7800             LDRB     R0,[R0, #+0]
+   \   00000234   0x2800             CMP      R0,#+0
+   \   00000236   0xD011             BEQ      ??USBD_EndPoint0_51
+   \                     ??USBD_EndPoint0_53: (+1)
+   \   00000238   0x.... 0x....      BL       USBD_DataInStage
+   \   0000023C   0xE00E             B        ??USBD_EndPoint0_51
+    847              } else {
+    848                if (USBD_DeviceAddress & 0x80) {
+   \                     ??USBD_EndPoint0_52: (+1)
+   \   0000023E   0x....             LDR      R0,??DataTable15_3
+   \   00000240   0x7800             LDRB     R0,[R0, #+0]
+   \   00000242   0x0600             LSLS     R0,R0,#+24
+   \   00000244   0xD50A             BPL      ??USBD_EndPoint0_51
+    849                  USBD_DeviceAddress &= 0x7F;
+   \   00000246   0x....             LDR      R0,??DataTable15_3
+   \   00000248   0x7800             LDRB     R0,[R0, #+0]
+   \   0000024A   0x0640             LSLS     R0,R0,#+25       ;; ZeroExtS R0,R0,#+25,#+25
+   \   0000024C   0x0E40             LSRS     R0,R0,#+25
+   \   0000024E   0x....             LDR      R1,??DataTable15_3
+   \   00000250   0x7008             STRB     R0,[R1, #+0]
+    850                  USBD_SetAddress(USBD_DeviceAddress, 0 );
+   \   00000252   0x2100             MOVS     R1,#+0
+   \   00000254   0x....             LDR      R0,??DataTable15_3
+   \   00000256   0x7800             LDRB     R0,[R0, #+0]
+   \   00000258   0x.... 0x....      BL       USBD_SetAddress
+    851                }
+    852              }
+    853            }  /* end USBD_EVT_IN */
+    854          
+    855            if (event & USBD_EVT_OUT_STALL) {
+   \                     ??USBD_EndPoint0_51: (+1)
+   \   0000025C   0x0660             LSLS     R0,R4,#+25
+   \   0000025E   0xD502             BPL      ??USBD_EndPoint0_54
+    856              USBD_ClrStallEP(0x00);
+   \   00000260   0x2000             MOVS     R0,#+0
+   \   00000262   0x.... 0x....      BL       USBD_ClrStallEP
+    857            }
+    858          
+    859            if (event & USBD_EVT_IN_STALL) {
+   \                     ??USBD_EndPoint0_54: (+1)
+   \   00000266   0x0620             LSLS     R0,R4,#+24
+   \   00000268   0xD502             BPL      ??USBD_EndPoint0_55
+    860              USBD_ClrStallEP(0x80);
+   \   0000026A   0x2080             MOVS     R0,#+128
+   \   0000026C   0x.... 0x....      BL       USBD_ClrStallEP
+    861            }
+    862          }
+   \                     ??USBD_EndPoint0_55: (+1)
+   \   00000270   0xBD10             POP      {R4,PC}          ;; return
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable7:
+   \   00000000   0x........         DC32     usbd_power
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable8:
+   \   00000000   0x........         DC32     USBD_DeviceStatus
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable8_1:
+   \   00000000   0x........         DC32     USBD_DeviceAddress
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable8_2:
+   \   00000000   0x........         DC32     USBD_Configuration
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable8_3:
+   \   00000000   0x00010001         DC32     0x10001
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable8_4:
+   \   00000000   0x........         DC32     USBD_EndPointMask
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable9:
+   \   00000000   0x........         DC32     USBD_HighSpeed
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable9_1:
+   \   00000000   0x........         DC32     USBD_EndPointHalt
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable9_2:
+   \   00000000   0x........         DC32     USBD_EndPointStall
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable9_3:
+   \   00000000   0x........         DC32     USBD_SetupPacket
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable9_4:
+   \   00000000   0x........         DC32     usbd_max_packet0
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable9_5:
+   \   00000000   0x........         DC32     USBD_EP0Data
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable9_6:
+   \   00000000   0x........         DC32     USBD_ZLP
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable9_7:
+   \   00000000   0x........         DC32     USBD_EP0Buf
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable9_8:
+   \   00000000   0x........         DC32     USBD_NumInterfaces
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable9_9:
+   \   00000000   0x0000FFFD         DC32     0xfffd
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11:
+   \   00000000   0x........         DC32     USBD_DeviceAddress
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_1:
+   \   00000000   0x........         DC32     USBD_SetupPacket
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_2:
+   \   00000000   0x........         DC32     USBD_DeviceDescriptor
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_3:
+   \   00000000   0x........         DC32     USBD_EP0Data
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_4:
+   \   00000000   0x........         DC32     usbd_max_packet0
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_5:
+   \   00000000   0x........         DC32     USBD_ZLP
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_6:
+   \   00000000   0x........         DC32     usbd_hs_enable
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_7:
+   \   00000000   0x........         DC32     USBD_HighSpeed
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_8:
+   \   00000000   0x........         DC32     USBD_DeviceQualifier
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_9:
+   \   00000000   0x........         DC32     USBD_DeviceQualifier_HS
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_10:
+   \   00000000   0x........         DC32     USBD_ConfigDescriptor
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_11:
+   \   00000000   0x........         DC32     USBD_ConfigDescriptor_HS
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_12:
+   \   00000000   0x........         DC32     USBD_OtherSpeedConfigDescriptor
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_13:
+   \   00000000   0x........         DC32     USBD_OtherSpeedConfigDescriptor_HS
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable12:
+   \   00000000   0x........         DC32     USBD_StringDescriptor
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable13:
+   \   00000000   0x........         DC32     USBD_Configuration
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable13_1:
+   \   00000000   0x........         DC32     USBD_SetupPacket
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable13_2:
+   \   00000000   0x........         DC32     usbd_hs_enable
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable13_3:
+   \   00000000   0x........         DC32     USBD_HighSpeed
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable13_4:
+   \   00000000   0x........         DC32     USBD_ConfigDescriptor
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable13_5:
+   \   00000000   0x........         DC32     USBD_ConfigDescriptor_HS
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable13_6:
+   \   00000000   0x........         DC32     USBD_NumInterfaces
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable13_7:
+   \   00000000   0x........         DC32     USBD_AltSetting
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable13_8:
+   \   00000000   0x........         DC32     usbd_if_num
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable13_9:
+   \   00000000   0x........         DC32     USBD_EndPointMask
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable13_10:
+   \   00000000   0x00010001         DC32     0x10001
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable14:
+   \   00000000   0x........         DC32     USBD_EndPointHalt
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable14_1:
+   \   00000000   0x........         DC32     USBD_EndPointStall
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable14_2:
+   \   00000000   0x........         DC32     USBD_DeviceStatus
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable14_3:
+   \   00000000   0x0000FFFE         DC32     0xfffe
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable14_4:
+   \   00000000   0x........         DC32     USBD_EP0Data
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable14_5:
+   \   00000000   0x........         DC32     USBD_SetupPacket
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable14_6:
+   \   00000000   0x........         DC32     USBD_Configuration
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable14_7:
+   \   00000000   0x........         DC32     usbd_hs_enable
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable14_8:
+   \   00000000   0x........         DC32     USBD_HighSpeed
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable14_9:
+   \   00000000   0x........         DC32     USBD_ConfigDescriptor
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable14_10:
+   \   00000000   0x........         DC32     USBD_ConfigDescriptor_HS
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable14_11:
+   \   00000000   0x........         DC32     USBD_AltSetting
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable14_12:
+   \   00000000   0x........         DC32     USBD_EndPointMask
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable15:
+   \   00000000   0x........         DC32     USBD_SetupPacket
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable15_1:
+   \   00000000   0x........         DC32     USBD_EP0Data
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable15_2:
+   \   00000000   0x........         DC32     USBD_P_Feature_Event
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable15_3:
+   \   00000000   0x........         DC32     USBD_DeviceAddress
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable15_4:
+   \   00000000   0x........         DC32     USBD_P_Configure_Event
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable15_5:
+   \   00000000   0x........         DC32     USBD_P_Interface_Event
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable15_6:
+   \   00000000   0x........         DC32     USBD_ZLP
+    863          
+    864          
+    865          /*
+    866           *  USB Device Endpoint 0 RTX Task
+    867           *    Parameters:      none
+    868           *    Return Value:    none
+    869           */
+    870          
+    871          #ifdef __RTX
+    872          __task void USBD_RTX_EndPoint0 (void) {
+    873          
+    874            if (__rtx) {
+    875              for (;;) {
+    876                usbd_os_evt_wait_or (0xFFFF, 0xFFFF);
+    877                USBD_EndPoint0 (usbd_os_evt_get());
+    878              }
+    879            }
+    880          }
+    881          #endif
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       8   USBD_DataInStage
+         8   -> USBD_WriteEP
+       8   USBD_DataOutStage
+         8   -> USBD_ReadEP
+       8   USBD_EndPoint0
+         8   -- Indirect call
+         8   -> USBD_ClrStallEP
+         8   -> USBD_DataInStage
+         8   -> USBD_DataOutStage
+         8   -> USBD_DirCtrlEP
+         8   -> USBD_EndPoint0_Out_CDC_ReqToIF
+         8   -> USBD_EndPoint0_Out_HID_ReqToIF
+         8   -> USBD_EndPoint0_Setup_CDC_ReqToIF
+         8   -> USBD_EndPoint0_Setup_HID_ReqToIF
+         8   -> USBD_EndPoint0_Setup_MSC_ReqToIF
+         8   -> USBD_ReqGetConfiguration
+         8   -> USBD_ReqGetDescriptor
+         8   -> USBD_ReqGetInterface
+         8   -> USBD_ReqGetStatus
+         8   -> USBD_ReqSetAddress
+         8   -> USBD_ReqSetClrFeature
+         8   -> USBD_ReqSetConfiguration
+         8   -> USBD_ReqSetInterface
+         8   -> USBD_SetAddress
+         8   -> USBD_SetStallEP
+         8   -> USBD_SetupStage
+         8   -> USBD_StatusInStage
+         8   -> USBD_StatusOutStage
+       4   USBD_ReqGetConfiguration
+      16   USBD_ReqGetDescriptor
+        16   -> USBD_ReqGetDescriptor_HID
+       4   USBD_ReqGetInterface
+       4   USBD_ReqGetStatus
+       4   USBD_ReqSetAddress
+      16   USBD_ReqSetClrFeature
+        16   -> USBD_ClrStallEP
+        16   -> USBD_ReqClrFeature_MSC
+        16   -> USBD_SetStallEP
+        16   -> USBD_WakeUpCfg
+      16   USBD_ReqSetConfiguration
+        16   -> USBD_ConfigEP
+        16   -> USBD_Configure
+        16   -> USBD_DisableEP
+        16   -> USBD_EnableEP
+        16   -> USBD_ResetEP
+      40   USBD_ReqSetInterface
+        40   -> USBD_ConfigEP
+        40   -> USBD_DisableEP
+        40   -> USBD_EnableEP
+        40   -> USBD_ResetEP
+       8   USBD_SetupStage
+         8   -> USBD_ReadEP
+       8   USBD_StatusInStage
+         8   -> USBD_WriteEP
+       8   USBD_StatusOutStage
+         8   -> USBD_ReadEP
+       4   usbd_configured
+       8   usbd_connect
+         8   -> USBD_Connect
+       8   usbd_init
+         8   -> USBD_Init
+         8   -> USBD_RTX_TaskInit
+         8   -> usbd_class_init
+       0   usbd_reset_core
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable11
+       4  ??DataTable11_1
+       4  ??DataTable11_10
+       4  ??DataTable11_11
+       4  ??DataTable11_12
+       4  ??DataTable11_13
+       4  ??DataTable11_2
+       4  ??DataTable11_3
+       4  ??DataTable11_4
+       4  ??DataTable11_5
+       4  ??DataTable11_6
+       4  ??DataTable11_7
+       4  ??DataTable11_8
+       4  ??DataTable11_9
+       4  ??DataTable12
+       4  ??DataTable13
+       4  ??DataTable13_1
+       4  ??DataTable13_10
+       4  ??DataTable13_2
+       4  ??DataTable13_3
+       4  ??DataTable13_4
+       4  ??DataTable13_5
+       4  ??DataTable13_6
+       4  ??DataTable13_7
+       4  ??DataTable13_8
+       4  ??DataTable13_9
+       4  ??DataTable14
+       4  ??DataTable14_1
+       4  ??DataTable14_10
+       4  ??DataTable14_11
+       4  ??DataTable14_12
+       4  ??DataTable14_2
+       4  ??DataTable14_3
+       4  ??DataTable14_4
+       4  ??DataTable14_5
+       4  ??DataTable14_6
+       4  ??DataTable14_7
+       4  ??DataTable14_8
+       4  ??DataTable14_9
+       4  ??DataTable15
+       4  ??DataTable15_1
+       4  ??DataTable15_2
+       4  ??DataTable15_3
+       4  ??DataTable15_4
+       4  ??DataTable15_5
+       4  ??DataTable15_6
+       4  ??DataTable7
+       4  ??DataTable8
+       4  ??DataTable8_1
+       4  ??DataTable8_2
+       4  ??DataTable8_3
+       4  ??DataTable8_4
+       4  ??DataTable9
+       4  ??DataTable9_1
+       4  ??DataTable9_2
+       4  ??DataTable9_3
+       4  ??DataTable9_4
+       4  ??DataTable9_5
+       4  ??DataTable9_6
+       4  ??DataTable9_7
+       4  ??DataTable9_8
+       4  ??DataTable9_9
+       1  USBD_Configuration
+      70  USBD_DataInStage
+      34  USBD_DataOutStage
+       1  USBD_DeviceAddress
+       2  USBD_DeviceStatus
+       8  USBD_EP0Data
+     626  USBD_EndPoint0
+       4  USBD_EndPointHalt
+       4  USBD_EndPointMask
+       4  USBD_EndPointStall
+       1  USBD_HighSpeed
+       1  USBD_NumInterfaces
+      28  USBD_ReqGetConfiguration
+     454  USBD_ReqGetDescriptor
+      58  USBD_ReqGetInterface
+     170  USBD_ReqGetStatus
+      34  USBD_ReqSetAddress
+     220  USBD_ReqSetClrFeature
+     428  USBD_ReqSetConfiguration
+     334  USBD_ReqSetInterface
+       8  USBD_SetupPacket
+      12  USBD_SetupStage
+      14  USBD_StatusInStage
+      12  USBD_StatusOutStage
+       1  USBD_ZLP
+      18  usbd_configured
+       8  usbd_connect
+      22  usbd_init
+      40  usbd_reset_core
+
+ 
+    35 bytes in section .bss
+ 2 830 bytes in section .text
+ 
+ 2 830 bytes of CODE memory
+    35 bytes of DATA memory
+
+Errors: none
+Warnings: none

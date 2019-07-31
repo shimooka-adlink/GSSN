@@ -1,0 +1,523 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V7.80.4.12462/W32 for ARM       17/May/2019  13:31:42
+# Copyright 1999-2017 IAR Systems AB.
+#
+#    Cpu mode     =  thumb
+#    Endian       =  little
+#    Source file  =  
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\apl\man_battery.c
+#    Command line =  
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\apl\man_battery.c -D
+#        __TARGET_ARCH_7_M -D S1C31W74 -D GNSS_GW_SIDE_A -lCN
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\List
+#        -lA
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\List
+#        --diag_suppress Pe177,Pe111,Pa082 -o
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\Obj
+#        --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa
+#        --no_clustering --no_scheduling --debug --endian=little
+#        --cpu=Cortex-M0+ -e --fpu=None --dlib_config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench
+#        7.5\arm\INC\c\DLib_Config_Normal.h" -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\ -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\
+#        -I "C:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        7.5\arm\CMSIS\Include\" -I "C:\Program Files (x86)\IAR
+#        Systems\Embedded Workbench 7.5\arm\inc\Epson\" -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\CMSIS\Device\S1C31W74\Include\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\CMSIS\Driver\Include\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\sePeriphLibrary\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\board\S5U1C31W74T1\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\USBStack\INC\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\include\
+#        -Ol
+#    Locale       =  Japanese_Japan.932
+#    List file    =  
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\List\man_battery.lst
+#    Object file  =  
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\Obj\man_battery.o
+#
+###############################################################################
+
+C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\apl\man_battery.c
+      1          
+      2          /**
+      3            ******************************************************************************
+      4            * @file    man_battery.c
+      5            * @author  コア
+      6            * @version V1.0
+      7            * @date    2017.11.14
+      8            * @brief   バッテリー電圧、残量データを管理する
+      9            ******************************************************************************
+     10            $Id: man_battery.c 246 2018-07-27 06:18:43Z shitaoka $
+     11            * @attention
+     12            *
+     13            *****************************************************************************
+     14          */
+     15          
+     16          #include <string.h>
+     17          #include <stdio.h>
+     18          #include <stdlib.h>
+     19          
+     20          #include "board.h"
+     21          #include "system_manager.h"
+     22          #include "ctrl_BQ28Z610.h"
+     23          #include "gnss_gw_common.h"
+     24          #include "man_charge.h"
+     25          #include "man_error.h"
+     26          #include "man_battery.h"
+     27          
+     28          #pragma section = "APL_PRG_BLOCK"
+     29          
+     30          /************************************************************************/
+     31          /* declaration of structure                                             */
+     32          /************************************************************************/
+     33          
+     34          
+     35          
+     36          #define	MAN_BATTERY_MODE_STANDBY		0	// 受信停止
+     37          #define	MAN_BATTERY_MODE_ACTIVE			1	// 受信中
+     38          
+     39          
+     40          // 受信データ
+     41          typedef struct _man_battery_recv_t {
+     42          	int32_t 				voltage;		// 電圧(0~6000[mv])
+     43          	int16_t 				current;		// 電流
+     44          	int32_t					remaining;		// バッテリー残量(0~100[%])
+     45          } man_battery_recv_t;
+     46          
+     47          
+     48          // センサ管理ワーク
+     49          typedef struct _man_battery_work_t {
+     50          	uint32_t				mode;			// 動作状態
+     51          	man_battery_recv_t		battery_recv;	// 受信したデータ
+     52          	uint32_t				rcv_cnt;
+     53          } man_battery_work_t;
+     54          
+     55          
+     56          /************************************************************************/
+     57          /* definition of variables                                              */
+     58          /************************************************************************/
+     59          
+
+   \                                 In section .bss, align 4
+     60          man_battery_work_t                 man_battery_work;
+   \                     man_battery_work:
+   \   00000000                      DS8 20
+     61          
+     62          /********************************************************************/
+     63          /*	callback関数                                                    */
+     64          /********************************************************************/
+     65          
+     66          /********************************************************************/
+     67          /*	static関数                                                      */
+     68          /********************************************************************/
+     69          
+     70          /********************************************************************/
+     71          /*	extern関数                                                      */
+     72          /********************************************************************/
+     73          
+     74          /********************************************************************/
+     75          /*!
+     76           * \name	man_battery_init
+     77           * \brief	電圧・バッテリー残量の初期化処理
+     78           * \param	なし
+     79           * \return   0: 正常
+     80           *          -1: 異常
+     81           * \note	起動時に、呼ばれること
+     82           */
+     83          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+     84          int32_t man_battery_init(void)
+     85          {
+   \                     man_battery_init: (+1)
+   \   00000000   0xB538             PUSH     {R3-R5,LR}
+     86          	int32_t	ret;
+     87          
+     88          	// MPL3115A2の開始処理
+     89          	ret = ctrl_BQ28Z610_start();
+   \   00000002   0x.... 0x....      BL       ctrl_BQ28Z610_start
+   \   00000006   0x0004             MOVS     R4,R0
+     90          
+     91          	// 内部変数を初期化する
+     92          	memset(&man_battery_work, 0, sizeof(man_battery_work_t));
+   \   00000008   0x2114             MOVS     R1,#+20
+   \   0000000A   0x2200             MOVS     R2,#+0
+   \   0000000C   0x....             LDR      R5,??DataTable5
+   \   0000000E   0x0028             MOVS     R0,R5
+   \   00000010   0x.... 0x....      BL       __aeabi_memset
+     93          
+     94          	// 受信開始
+     95          	man_battery_work.mode = MAN_BATTERY_MODE_ACTIVE;
+   \   00000014   0x2001             MOVS     R0,#+1
+   \   00000016   0x....             LDR      R1,??DataTable5
+   \   00000018   0x6008             STR      R0,[R1, #+0]
+     96          
+     97          	return ret;
+   \   0000001A   0x0020             MOVS     R0,R4
+   \   0000001C   0xBD32             POP      {R1,R4,R5,PC}    ;; return
+     98          }
+     99          
+    100          /********************************************************************/
+    101          /*!
+    102           * \name	man_battery_500ms_main
+    103           * \brief	電圧・バッテリー残量データ管理のmain処理
+    104           * \param	なし
+    105           * \return  なし
+    106           * \note	500ms毎に呼ばれること
+    107           */
+    108          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    109          void man_battery_500ms_main(void)
+    110          {
+   \                     man_battery_500ms_main: (+1)
+   \   00000000   0xB5E0             PUSH     {R5-R7,LR}
+    111          	int32_t		ret=-1;
+   \   00000002   0x2000             MOVS     R0,#+0
+   \   00000004   0x43C0             MVNS     R0,R0            ;; #-1
+    112          	int32_t 	voltage;			// 電圧(0~6000[mv])
+    113          	int16_t 	current;			// 電流
+    114          	int32_t		remaining;			// バッテリー残量(0~100[%])
+    115          	
+    116          	if (man_battery_work.mode == MAN_BATTERY_MODE_ACTIVE) {
+   \   00000006   0x....             LDR      R0,??DataTable5
+   \   00000008   0x6800             LDR      R0,[R0, #+0]
+   \   0000000A   0x2801             CMP      R0,#+1
+   \   0000000C   0xD12F             BNE      ??man_battery_500ms_main_0
+    117          		man_battery_work.rcv_cnt++;
+   \   0000000E   0x....             LDR      R0,??DataTable5
+   \   00000010   0x6900             LDR      R0,[R0, #+16]
+   \   00000012   0x1C40             ADDS     R0,R0,#+1
+   \   00000014   0x....             LDR      R1,??DataTable5
+   \   00000016   0x6108             STR      R0,[R1, #+16]
+    118          		if (man_battery_work.rcv_cnt >= 10) {
+   \   00000018   0x....             LDR      R0,??DataTable5
+   \   0000001A   0x6900             LDR      R0,[R0, #+16]
+   \   0000001C   0x280A             CMP      R0,#+10
+   \   0000001E   0xD302             BCC      ??man_battery_500ms_main_1
+    119          			man_battery_work.rcv_cnt=0;
+   \   00000020   0x2000             MOVS     R0,#+0
+   \   00000022   0x....             LDR      R1,??DataTable5
+   \   00000024   0x6108             STR      R0,[R1, #+16]
+    120          		}
+    121          
+    122          		// 500ms毎に取得する(電源電圧から開始する)
+    123          		if ( (man_battery_work.rcv_cnt % 2) != 0) {
+   \                     ??man_battery_500ms_main_1: (+1)
+   \   00000026   0x....             LDR      R0,??DataTable5
+   \   00000028   0x7C00             LDRB     R0,[R0, #+16]
+   \   0000002A   0x07C0             LSLS     R0,R0,#+31
+   \   0000002C   0xD517             BPL      ??man_battery_500ms_main_2
+    124          			//電圧情報取得
+    125          			ret = ctrl_BQ28Z610_get_voltage(&voltage); 
+   \   0000002E   0x4668             MOV      R0,SP
+   \   00000030   0x.... 0x....      BL       ctrl_BQ28Z610_get_voltage
+    126          			if (ret >= 0) {
+   \   00000034   0x2800             CMP      R0,#+0
+   \   00000036   0xD405             BMI      ??man_battery_500ms_main_3
+    127          				man_battery_work.battery_recv.voltage = voltage;
+   \   00000038   0x9800             LDR      R0,[SP, #+0]
+   \   0000003A   0x....             LDR      R1,??DataTable5
+   \   0000003C   0x6048             STR      R0,[R1, #+4]
+    128          				// 電源電圧を通知する
+    129          				man_charge_noti_voltage(voltage);
+   \   0000003E   0x9800             LDR      R0,[SP, #+0]
+   \   00000040   0x.... 0x....      BL       man_charge_noti_voltage
+    130          			}
+    131          			ret = ctrl_BQ28Z610_get_current(&current); 
+   \                     ??man_battery_500ms_main_3: (+1)
+   \   00000044   0xA802             ADD      R0,SP,#+8
+   \   00000046   0x.... 0x....      BL       ctrl_BQ28Z610_get_current
+    132          			if (ret >= 0) {
+   \   0000004A   0x2800             CMP      R0,#+0
+   \   0000004C   0xD40F             BMI      ??man_battery_500ms_main_0
+    133          				man_battery_work.battery_recv.current = current;
+   \   0000004E   0x9802             LDR      R0,[SP, #+8]
+   \   00000050   0xB200             SXTH     R0,R0
+   \   00000052   0x....             LDR      R1,??DataTable5
+   \   00000054   0x8108             STRH     R0,[R1, #+8]
+    134          				// 電源電圧を通知する
+    135          				man_charge_noti_voltage(voltage);
+   \   00000056   0x9800             LDR      R0,[SP, #+0]
+   \   00000058   0x.... 0x....      BL       man_charge_noti_voltage
+   \   0000005C   0xE007             B        ??man_battery_500ms_main_0
+    136          			}
+    137          		}
+    138          		else {
+    139          			//バッテリー残量取得
+    140          			ret = ctrl_BQ28Z610_get_remaining(&remaining);
+   \                     ??man_battery_500ms_main_2: (+1)
+   \   0000005E   0xA801             ADD      R0,SP,#+4
+   \   00000060   0x.... 0x....      BL       ctrl_BQ28Z610_get_remaining
+    141          			if (ret >= 0) {
+   \   00000064   0x2800             CMP      R0,#+0
+   \   00000066   0xD402             BMI      ??man_battery_500ms_main_0
+    142          				man_battery_work.battery_recv.remaining = remaining;
+   \   00000068   0x9801             LDR      R0,[SP, #+4]
+   \   0000006A   0x....             LDR      R1,??DataTable5
+   \   0000006C   0x60C8             STR      R0,[R1, #+12]
+    143                                          
+    144          			}
+    145          		}
+    146          	}
+    147          }
+   \                     ??man_battery_500ms_main_0: (+1)
+   \   0000006E   0xBD07             POP      {R0-R2,PC}       ;; return
+    148          
+    149          /********************************************************************/
+    150          /*!
+    151           * \name	man_battery_get_data
+    152           * \brief	保持している電圧・バッテリー残量データの取得
+    153           * \param	voltage    : 電圧(0～6000 mV)
+    154           *          remaining  : バッテリー残量(0～100%)
+    155           * \return   0: 正常
+    156           *          -1: 異常
+    157           * \note	必要時に呼ばれること
+    158           */
+    159          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    160          int32_t man_battery_get_data(int32_t *voltage, int32_t *remaining)
+    161          {
+   \                     man_battery_get_data: (+1)
+   \   00000000   0xB500             PUSH     {LR}
+   \   00000002   0x0002             MOVS     R2,R0
+    162          	int32_t		ret=-1;
+   \   00000004   0x2000             MOVS     R0,#+0
+   \   00000006   0x43C0             MVNS     R0,R0            ;; #-1
+    163          	
+    164          	if ( (voltage != NULL) && (remaining != NULL)) {
+   \   00000008   0x2A00             CMP      R2,#+0
+   \   0000000A   0xD008             BEQ      ??man_battery_get_data_0
+   \   0000000C   0x2900             CMP      R1,#+0
+   \   0000000E   0xD006             BEQ      ??man_battery_get_data_0
+    165          
+    166          		*voltage = man_battery_work.battery_recv.voltage;
+   \   00000010   0x....             LDR      R0,??DataTable5
+   \   00000012   0x6840             LDR      R0,[R0, #+4]
+   \   00000014   0x6010             STR      R0,[R2, #+0]
+    167          		*remaining = man_battery_work.battery_recv.remaining;
+   \   00000016   0x....             LDR      R0,??DataTable5
+   \   00000018   0x68C0             LDR      R0,[R0, #+12]
+   \   0000001A   0x6008             STR      R0,[R1, #+0]
+    168          		ret = 0;
+   \   0000001C   0x2000             MOVS     R0,#+0
+    169          	}
+    170          	
+    171          	return ret;
+   \                     ??man_battery_get_data_0: (+1)
+   \   0000001E   0xBD00             POP      {PC}             ;; return
+    172          }
+    173          
+    174          
+    175          
+    176          /********************************************************************/
+    177          /*!
+    178           * \name	man_battery_active
+    179           * \brief	電圧・バッテリー残量データ管理のアクティブモード処理
+    180           * \param	なし
+    181           * \return   0: 正常
+    182           *          -1: 異常
+    183           * \note	スタンバイ -> アクティブ時に、呼ばれること
+    184           */
+    185          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    186          int32_t man_battery_active(void)
+    187          {
+    188          	int32_t	ret=0;
+   \                     man_battery_active: (+1)
+   \   00000000   0x2000             MOVS     R0,#+0
+    189          	
+    190          	// 受信再開
+    191          	man_battery_work.mode = MAN_BATTERY_MODE_ACTIVE;
+   \   00000002   0x2101             MOVS     R1,#+1
+   \   00000004   0x....             LDR      R2,??DataTable5
+   \   00000006   0x6011             STR      R1,[R2, #+0]
+    192          
+    193          	return ret;
+   \   00000008   0x4770             BX       LR               ;; return
+    194          }
+    195          
+    196          /********************************************************************/
+    197          /*!
+    198           * \name	man_battery_standby
+    199           * \brief	電圧・バッテリー残量データ管理のスタンバイモード処理
+    200           * \param	なし
+    201           * \return   0: 正常
+    202           *          -1: 異常
+    203           * \note	アクティブ -> スタンバイ時に、呼ばれること
+    204           */
+    205          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    206          int32_t man_battery_standby(void)
+    207          {
+    208          	int32_t	ret=0;
+   \                     man_battery_standby: (+1)
+   \   00000000   0x2000             MOVS     R0,#+0
+    209          	
+    210          	// 受信停止
+    211          	man_battery_work.mode = MAN_BATTERY_MODE_STANDBY;
+   \   00000002   0x2100             MOVS     R1,#+0
+   \   00000004   0x....             LDR      R2,??DataTable5
+   \   00000006   0x6011             STR      R1,[R2, #+0]
+    212          
+    213          	return ret;
+   \   00000008   0x4770             BX       LR               ;; return
+    214          }
+    215          
+
+   \                                 In section .bss, align 4
+    216          char man_battery_status_log_buf[64];
+   \                     man_battery_status_log_buf:
+   \   00000000                      DS8 64
+
+   \                                 In section .text, align 2, keep-with-next
+    217          void  man_battery_status_log()
+    218          {
+   \                     man_battery_status_log: (+1)
+   \   00000000   0xB510             PUSH     {R4,LR}
+   \   00000002   0xB082             SUB      SP,SP,#+8
+    219            sprintf(print_buf,"Battery V:%d Rem:%d Cur:%d\r\n",
+    220                              man_battery_work.battery_recv.voltage,
+    221                              man_battery_work.battery_recv.remaining,
+    222                              man_battery_work.battery_recv.current);
+   \   00000004   0x....             LDR      R0,??DataTable5
+   \   00000006   0x2108             MOVS     R1,#+8
+   \   00000008   0x5E40             LDRSH    R0,[R0, R1]
+   \   0000000A   0x9000             STR      R0,[SP, #+0]
+   \   0000000C   0x....             LDR      R0,??DataTable5
+   \   0000000E   0x68C3             LDR      R3,[R0, #+12]
+   \   00000010   0x....             LDR      R0,??DataTable5
+   \   00000012   0x6842             LDR      R2,[R0, #+4]
+   \   00000014   0x....             LDR      R1,??DataTable5_1
+   \   00000016   0x....             LDR      R0,??DataTable5_2
+   \   00000018   0x.... 0x....      BL       sprintf
+    223                        
+    224            if(memcmp(man_battery_status_log_buf,print_buf,strlen(print_buf)) != 0)
+   \   0000001C   0x....             LDR      R0,??DataTable5_2
+   \   0000001E   0x.... 0x....      BL       strlen
+   \   00000022   0x0002             MOVS     R2,R0
+   \   00000024   0x....             LDR      R1,??DataTable5_2
+   \   00000026   0x....             LDR      R0,??DataTable5_3
+   \   00000028   0x.... 0x....      BL       memcmp
+   \   0000002C   0x2800             CMP      R0,#+0
+   \   0000002E   0xD006             BEQ      ??man_battery_status_log_0
+    225            {
+    226                 sysmgr_log(print_buf,strlen(print_buf));
+   \   00000030   0x....             LDR      R0,??DataTable5_2
+   \   00000032   0x.... 0x....      BL       strlen
+   \   00000036   0x0001             MOVS     R1,R0
+   \   00000038   0x....             LDR      R0,??DataTable5_2
+   \   0000003A   0x.... 0x....      BL       sysmgr_log
+    227            }
+    228            memcpy(man_battery_status_log_buf,print_buf,strlen(print_buf)); 
+   \                     ??man_battery_status_log_0: (+1)
+   \   0000003E   0x....             LDR      R0,??DataTable5_2
+   \   00000040   0x.... 0x....      BL       strlen
+   \   00000044   0x0002             MOVS     R2,R0
+   \   00000046   0x....             LDR      R1,??DataTable5_2
+   \   00000048   0x....             LDR      R4,??DataTable5_3
+   \   0000004A   0x0020             MOVS     R0,R4
+   \   0000004C   0x.... 0x....      BL       __aeabi_memcpy
+    229          }
+   \   00000050   0xBD13             POP      {R0,R1,R4,PC}    ;; return
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable5:
+   \   00000000   0x........         DC32     man_battery_work
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable5_1:
+   \   00000000   0x........         DC32     ?_0
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable5_2:
+   \   00000000   0x........         DC32     print_buf
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable5_3:
+   \   00000000   0x........         DC32     man_battery_status_log_buf
+
+   \                                 In section .rodata, align 4
+   \                     ?_0:
+   \   00000000   0x42 0x61          DC8 "Battery V:%d Rem:%d Cur:%d\015\012"
+   \              0x74 0x74    
+   \              0x65 0x72    
+   \              0x79 0x20    
+   \              0x56 0x3A    
+   \              0x25 0x64    
+   \              0x20 0x52    
+   \              0x65 0x6D    
+   \              0x3A 0x25    
+   \              0x64 0x20    
+   \              0x43 0x75    
+   \              0x72 0x3A    
+   \              0x25 0x64    
+   \              0x0D 0x0A    
+   \              0x00         
+   \   0000001D   0x00 0x00          DC8 0, 0, 0
+   \              0x00         
+    230          
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+      16   man_battery_500ms_main
+        16   -> ctrl_BQ28Z610_get_current
+        16   -> ctrl_BQ28Z610_get_remaining
+        16   -> ctrl_BQ28Z610_get_voltage
+        16   -> man_charge_noti_voltage
+       0   man_battery_active
+       4   man_battery_get_data
+      16   man_battery_init
+        16   -> __aeabi_memset
+        16   -> ctrl_BQ28Z610_start
+       0   man_battery_standby
+      16   man_battery_status_log
+        16   -> __aeabi_memcpy
+        16   -> memcmp
+        16   -> sprintf
+        16   -> strlen
+        16   -> sysmgr_log
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable5
+       4  ??DataTable5_1
+       4  ??DataTable5_2
+       4  ??DataTable5_3
+      32  ?_0
+     112  man_battery_500ms_main
+      10  man_battery_active
+      32  man_battery_get_data
+      30  man_battery_init
+      10  man_battery_standby
+      82  man_battery_status_log
+      64  man_battery_status_log_buf
+      20  man_battery_work
+
+ 
+  84 bytes in section .bss
+  32 bytes in section .rodata
+ 292 bytes in section .text
+ 
+ 292 bytes of CODE  memory
+  32 bytes of CONST memory
+  84 bytes of DATA  memory
+
+Errors: none
+Warnings: none

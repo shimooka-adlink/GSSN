@@ -1,0 +1,65 @@
+/*###ICF### Section handled by ICF editor, don't touch! ****/
+/*-Editor annotation file-*/
+/* IcfEditorFile="$TOOLKIT_DIR$\config\ide\IcfEditor\cortex_v1_0.xml" */
+/*-Specials-*/
+//define symbol __ICFEDIT_intvec_start__ = 0x00000000;
+/*-Memory Regions-*/
+define symbol __ICFEDIT_region_ROM_TBL1_1_start__ = 0x00010000;
+define symbol __ICFEDIT_region_ROM_TBL1_1_end__   = 0x000100ff;
+define symbol __ICFEDIT_region_ROM_TBL1_2_start__ = 0x00010100;
+define symbol __ICFEDIT_region_ROM_TBL1_2_end__   = 0x000101ff;
+define symbol __ICFEDIT_region_ROM_PRG1_start__   = 0x0001010C;
+define symbol __ICFEDIT_region_ROM_PRG1_end__     = 0x0003FFFF;
+
+
+define symbol __ICFEDIT_region_ROM_TBL2_1_start__ = 0x00040000;
+define symbol __ICFEDIT_region_ROM_TBL2_1_end__   = 0x000400ff;
+define symbol __ICFEDIT_region_ROM_TBL2_2_start__ = 0x00040100;
+define symbol __ICFEDIT_region_ROM_TBL2_2_end__   = 0x000401ff;
+define symbol __ICFEDIT_region_ROM_PRG2_start__   = 0x0004010C;
+define symbol __ICFEDIT_region_ROM_PRG2_end__     = 0x0006FFFF;
+
+define symbol __ICFEDIT_region_RAM_USER_start__ = 0x20000020;
+define symbol __ICFEDIT_region_RAM_USER_end__   = 0x2001EBFF;
+define symbol __ICFEDIT_region_RAM_STACK_start__= 0x2001EC00;
+define symbol __ICFEDIT_region_RAM_STACK_end__  = 0x2001FDFF;
+/*-Sizes-*/
+define symbol __ICFEDIT_size_cstack__ = 0x1000;
+define symbol __ICFEDIT_size_heap__   = 0x200;
+/**** End of ICF editor section. ###ICF###*/
+
+
+define memory mem with size = 4G;
+define region ROM_TBL1_1_region = mem:[from __ICFEDIT_region_ROM_TBL1_1_start__   to __ICFEDIT_region_ROM_TBL1_1_end__];
+define region ROM_TBL1_2_region = mem:[from __ICFEDIT_region_ROM_TBL1_2_start__   to __ICFEDIT_region_ROM_TBL1_2_end__];
+define region ROM_PRG_region    = mem:[from __ICFEDIT_region_ROM_PRG1_start__     to __ICFEDIT_region_ROM_PRG1_end__];
+define region RAM_USER_region   = mem:[from __ICFEDIT_region_RAM_USER_start__     to __ICFEDIT_region_RAM_USER_end__];
+define region RAM_STACK_region  = mem:[from __ICFEDIT_region_RAM_STACK_start__    to __ICFEDIT_region_RAM_STACK_end__];
+
+define block CSTACK    with alignment = 8, size = __ICFEDIT_size_cstack__   { };
+define block HEAP      with alignment = 8, size = __ICFEDIT_size_heap__     { };
+
+define block TBL2_BLOCK   { ro code object cstartup_M.o };
+
+
+initialize by copy { readwrite };
+
+initialize manually with packing = none { section .flash_common_text};
+
+//initialize by copy with packing = none { section __DLIB_PERTHREAD }; // Required in a multi-threaded application
+do not initialize  { section .noinit };
+
+//place at address mem:__ICFEDIT_intvec_start__ { readonly section .intvec };
+
+
+
+place in ROM_PRG_region    { readonly };
+place in ROM_PRG_region    { section .flash_common_text_init};
+
+place in ROM_TBL1_1_region { readonly section MYSECTION1 };
+place in ROM_TBL1_2_region { block TBL2_BLOCK };
+
+place in RAM_USER_region   { readwrite };
+place in RAM_USER_region   { section .flash_common_text };
+
+place in RAM_STACK_region   { block CSTACK, block HEAP };

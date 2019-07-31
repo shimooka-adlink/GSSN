@@ -1,0 +1,72 @@
+﻿Document license
+
+IMPORTANT:
+THIS DOWNLOAD CONTAINS COMPUTER PROGRAMS, DOCUMENTATION AND OTHER PROPRIETARY MATERIAL PROPRIETARY TO SEIKO EPSON CORPORATION AND/OR ITS LICENSORS AND/OR SUPPLIERS (COLLECTIVELY, "EPSON"). THIS DOWNLOAD IS SUBJECT TO THIS END-USER SOFTWARE LICENSE AGREEMENT ("AGREEMENT"). 
+IF YOU SELECT "Accept" OR IF YOU OTHERWISE INSTALL OR USE ANY PART OF THIS DOWNLOAD, YOU ARE REPRESENTING AND WARRANTING THAT YOU ARE CONSENTING TO BE BOUND BY, AND YOU HAVE BECOME A PARTY TO, THIS AGREEMENT. 
+IF YOU DO NOT AGREE TO (OR CANNOT COMPLY WITH) ALL OF THE TERMS OF THIS AGREEMENT, SELECT "Decline", AND YOU SHALL NOT BE AUTHORIZED TO USE OR HAVE ANY LICENSE TO ANY PART OF THIS DOWNLOAD. 
+
+********************************************************************************
+SOFTWARE LICENSE AGREEMENT
+
+1. Scope and Open-Source Software Notification. 
+
+a. This Agreement is a legal agreement and constitutes the entire understanding between you (an individual or single entity, referred to hereinafter as "you") and EPSON regarding computer programs and related documentation, data and proprietary information that you download, more specifically described in Paragraph 2 of Exhibit A hereto, (the "Licensed Software"). 
+
+b. The Licensed Software may contain open-source software (pursuant to the definition by the Open Source Initiative). If there is a conflict between the terms and conditions of this Agreement and any terms or conditions applicable to any open-source software contained in the Licensed Software, the terms and conditions applicable to such open-source software shall prevail and govern. 
+
+2. Copyright and Other Rights. As between the parties, EPSON retains any and all ownership rights, title and interest in the Licensed Software including any and all copies thereof. This Agreement does not constitute a sale of the Licensed Software or any portion thereof. The Licensed Software is protected under Japanese Copyright Laws and International Copyright Treaties, as well as other intellectual property laws and treaties. Except for the rights and licenses expressly granted to you hereunder, you shall not be granted, expressly, impliedly or by estoppel, any rights under any intellectual property rights (including patents, trademarks and copyrights) in and to the Licensed Software or any such third party software provided hereunder.
+
+3. License Grants. 
+
+a. Subject to and conditional upon the terms of this Agreement, EPSON hereby grants to you a non-exclusive, non-sublicensable (except in accordance with Section 3b), personal and non-transferable, royalty-free limited license and right as follows: 
+
+(1) to use and make derivative works of or otherwise modify the Licensed Software, in whole or in part, in human-readable form (gSource Codeh) if downloaded in such software code, only for the purposes of developing, manufacturing and selling your products integrating Epsonfs integrated circuit products specified in Paragraph 1 of Exhibit A hereto ("Products");
+
+(2) to use and reproduce the Licensed Software (including derivative works of the Licensed Software pursuant to this Section 3) only for the purposes of developing, manufacturing and selling the Products; and
+
+(3) to use the Licensed Software (including derivative works of the Licensed Software pursuant to this Section 3) for the purpose of evaluating the Products. 
+
+b. The license grants specified in the above Subsections (1) through (3) shall include the right to grant sub-licenses to your subcontractors only in connection with the manufacture of your products integrating the Products; provided, however, you shall impose the same obligations and restrictions hereunder upon such subcontractors, and you shall be jointly and severally liable for any breach of this Agreement by such subcontractors. 
+
+4. Restrictions. Notwithstanding anything to the contrary herein, you shall not, and you shall not cause your subcontractors to: (a) use the Licensed Software (including any derivative works of the Licensed Software pursuant to Section 3) for any purpose except those expressly permitted hereunder; (b) disassemble, de-compile or otherwise reverse engineer the Licensed Software downloaded in machine readable form ("Object Code") in order to discover or otherwise obtain the Source Code thereof; (c) disclose or distribute to third parties (except your subcontractors) the Licensed Software downloaded in Source Code form; (d) assign, rent, lease, lend and re-distribute the Licensed Software (i) on a stand-alone basis, and/or (ii) by writing the Licensed Software into any products other than your products integrating the Products; (e) remove or change any legend or notice of copyright or other intellectual property right set forth in the Licensed Software as downloaded; or (f) remove or change any legend or notice of any logo, trade name, and trademark set forth in the Licensed Software as downloaded. 
+
+5. Term. This Agreement shall be effective upon completing the download of the Licensed Software and shall remain in effect unless and until terminated in accordance with Section 6.
+
+6. Termination. EPSON may terminate this Agreement at any time with immediate effect and without any notice to you if you are in material breach of this Agreement. You may terminate this Agreement at any time by uninstalling the Licensed Software and disposing of any and all copies thereof. Upon termination of this Agreement, all licenses granted hereunder shall automatically and simultaneously terminate, and you shall stop all use of the Licensed Software. Except as otherwise provided herein, the terms of this Agreement shall survive termination hereof. Termination is not an exclusive remedy, and any and all other remedies shall be available whether or not this Agreement is terminated.
+
+7. Export Control Laws Compliance. You shall comply with all applicable export laws, restrictions, and/or regulations of Japan , the United States or any other applicable foreign agency or authority. You will not export or re-export, or allow the export or re-export of any product, technology or information you obtain or learn of pursuant to this Agreement (or any direct product thereof) in violation of any such laws, restrictions and/or regulations.
+
+8. Warranty Disclaimers. THE LICENSED SOFTWARE IS PROVIDED "AS IS" AND WITHOUT ANY WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO, WARRANTIES OF MERCHANTABILITY OR FITNESS FOR ANY PARTICULAR PURPOSE, TITLE, QUIET ENJOYMENT AND NON-INFRINGEMENT. EPSON DOES NOT WARRANT THE ACCURACY OR RELIABILITY OF THE USE OF LICENSED SOFTWARE (INCLUDING ANY DERIVATIVE WORKS OF THE LICENSED SOFTWARE PURSUANT TO SECTION 3) OR THE RESULTS OF THE USE OF THE LICENSED SOFTWARE (INCLUDING ANY DERIVATIVE WORKS OF THE LICENSED SOFTWARE PURSUANT TO SECTION 3), AND THE USE OF THE LICENSED SOFTWARE (INCLUDING ANY DERIVATIVE WORKS OF THE LICENSED SOFTWARE PURSUANT TO SECTION 3) IS AT YOUR OWN RISK. EPSON DOES NOT WARRANT THAT THE LICENSED SOFTWARE (INCLUDING ANY DERIVATIVE WORKS OF THE LICENSED SOFTWARE PURSUANT TO SECTION 3) WILL MEET YOUR REQUIREMENTS, OPERATE ERROR FREE, WITHOUT INTERRUPTION, OR IN COMBINATION WITH OTHER SOFTWARE, OR THAT ALL PROGRAM DEFECTS ARE CORRECTABLE.
+
+9. No Assignment. Other than expressly provided herein, you shall NOT assign or otherwise transfer any rights and obligations hereunder, or this Agreement, to any third party without the prior written consent of EPSON.
+
+10. Governing Law. This Agreement shall be construed and governed by the laws of Japan, without reference to conflict of law provisions. 
+
+11. Invalidity. If any provision of this Agreement is determined to be invalid under applicable law, such provision shall, to that extent, be deemed omitted. The invalidity of any portion of this Agreement shall not render this Agreement or any other portion hereof invalid. 
+
+12. Entire Agreement. This Agreement constitutes the entire understanding and agreement between you and EPSON relating to the subject matter hereof, and supersedes any previous communications, representations, or agreements, whether oral or written, between you and EPSON in respect of the subject matter hereof.
+
+13. Consequential Damages Waiver. IN NO EVENT SHALL EPSON BE LIABLE TO YOU OR ANY THIRD PARTY WITH RESPECT TO ANY SUBJECT MATTER OF THIS AGREEMENT WHETHER ARISING UNDER CONTRACT, TORT (INCLUDING NEGLIGENCE), STRICT LIABILITY, BREACH OF WARRANTY, OR MISREPRESENTATION FOR ANY LOSS OF PROFITS, LOSS OF BUSINESS, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, EVEN IF ADVISED OF SUCH DAMAGES. Some jurisdictions do not allow the exclusion of damages, so the above exclusion may not apply to you. 
+
+14. Limitation of Liability. EPSON'S AGGREGATE LIABILITY TO YOU OR ANY THIRD PARTY WITH RESPECT TO ANY SUBJECT MATTER OF THIS AGREEMENT WHETHER ARISING UNDER CONTRACT, TORT (INCLUDING NEGLIGENCE), STRICT LIABILITY, BREACH OF WARRANTY, OR MISREPRESENTATION FOR ANY DAMAGES SHALL NOT EXCEED THE AMOUNTS PAID BY YOU TO EPSON TO USE THE LICENSED SOFTWARE HEREUNDER. Some jurisdictions do not allow the limitation of damages, so the above limitation may not apply to you. 
+
+Disclaimer Notice:
+
+EPSON shall not be liable in connection with your access to this Home Page even if such access is deemed illegal or a violation under applicable laws and regulations. 
+
+
+Exhibit A
+
+1. EPSON integrated circuit products
+    S1C31W74
+
+2. Licensed Software 
+    (1) Epson Original Software 
+		- S1C31W74 Software Package
+			- Peripheral Library
+			- Demonstration application "Examples"
+			- Flashloader Plug-in for IAR EWARM IDE
+			- Flashloader Plug-in for MDK-ARM IDE(uVision)
+			- Configuration files for IAR EWARM IDE
+
+

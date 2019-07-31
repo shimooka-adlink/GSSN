@@ -1,0 +1,533 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V7.80.4.12462/W32 for ARM       17/May/2019  13:32:04
+# Copyright 1999-2017 IAR Systems AB.
+#
+#    Cpu mode     =  thumb
+#    Endian       =  little
+#    Source file  =  
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\driver\usb\drv_usb_main.c
+#    Command line =  
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\driver\usb\drv_usb_main.c -D
+#        __TARGET_ARCH_7_M -D S1C31W74 -D GNSS_GW_SIDE_B -lCN
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\List
+#        -lA
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\List
+#        --diag_suppress Pe177,Pe111,Pa082 -o
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj
+#        --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa
+#        --no_clustering --no_scheduling --debug --endian=little
+#        --cpu=Cortex-M0+ -e --fpu=None --dlib_config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench
+#        7.5\arm\INC\c\DLib_Config_Normal.h" -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\ -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\
+#        -I "C:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        7.5\arm\CMSIS\Include\" -I "C:\Program Files (x86)\IAR
+#        Systems\Embedded Workbench 7.5\arm\inc\Epson\" -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\CMSIS\Device\S1C31W74\Include\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\CMSIS\Driver\Include\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\sePeriphLibrary\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\board\S5U1C31W74T1\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\USBStack\INC\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\include\
+#        -Ol
+#    Locale       =  Japanese_Japan.932
+#    List file    =  
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\List\drv_usb_main.lst
+#    Object file  =  
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\drv_usb_main.o
+#
+###############################################################################
+
+C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\driver\usb\drv_usb_main.c
+      1          /**
+      2            ******************************************************************************
+      3            * @file    drv_usb_main.c
+      4            * @author  コア
+      5            * @version V1.0
+      6            * @date    2017.10.2
+      7            * @brief   This demo(test) demonstrates one of the USB CDC use cases.
+      8            ******************************************************************************
+      9            $Id: drv_usb_main.c 220 2018-07-17 04:20:23Z shitaoka $
+     10            * @attention
+     11            *
+     12            ******************************************************************************
+     13            */
+     14          
+     15          
+     16          #include <string.h>
+     17          #include <stdio.h>
+     18          #include <stdarg.h>
+     19          
+     20          #include "RTL.h"
+     21          #include "rl_usb.h"
+     22          
+     23          #include <S1C31.h>
+     24          #include "board.h"
+     25          #include "system_S1C31.h"
+     26          #include "se_usb.h"
+     27          #include "se_common.h"
+     28          #include "man_timer.h"
+     29          #include "man_error.h"
+     30          
+     31          #pragma section = "DRV_PRG_BLOCK"
+     32          
+     33          
+     34          /* Following functions could be used by user if CDC_ACM class is successfully initialized. */
+     35          /* CDC_ACMクラスが正常に初期化された場合、以下の関数を使用することができます。*/
+     36          
+     37          /* USB Device CDC ACM class user functions                                    
+     38          int32_t  USBD_CDC_ACM_PortSetLineCoding         (CDC_LINE_CODING *line_coding);			:: この機能は、仮想COMポートとして使用されるポートの通信設定を変更します。
+     39          int32_t  USBD_CDC_ACM_PortGetLineCoding         (CDC_LINE_CODING *line_coding);         :: この関数は、仮想COMポートとして使用されるポートの通信設定を取得します。
+     40          int32_t  USBD_CDC_ACM_PortSetControlLineState   (uint16_t ctrl_bmp);					:: この機能は、仮想COMポートとして使用されるポートの制御回線状態を設定します。
+     41          int32_t  USBD_CDC_ACM_DataSend                  (const uint8_t *buf, int32_t len);		:: この関数は、要求されたデータを送信中間バッファに置き、仮想COMポートを介して送信する準備をします。
+     42          int32_t  USBD_CDC_ACM_DataFree                  (void);									:: 送信バッファ(USBD_CDC_ACM_SENDBUF_SIZE)内の空きバイト数を返します
+     43          int32_t  USBD_CDC_ACM_PutChar                   (const uint8_t  ch);					:: この関数は、要求されたデータ文字を送信中間バッファに置き、仮想COMポートを介して送信するための準備を行います。
+     44          int32_t  USBD_CDC_ACM_DataRead                  (      uint8_t *buf, int32_t len);		:: この関数は、仮想COMポート経由で受信した受信中間バッファからデータを読み取ります。
+     45          int32_t  USBD_CDC_ACM_GetChar                   (void);									:: この関数は、仮想COMポート経由で受信した受信中間バッファからデータ文字を読み取ります。
+     46          int32_t  USBD_CDC_ACM_DataAvailable             (void);									:: この関数は、仮想COMポート経由で受信された中間バッファで使用可能なバイト数を取得します。
+     47          int32_t  USBD_CDC_ACM_Notify                    (uint16_t stat);						:: この関数は、仮想COMポートのエラーと回線ステータスを割り込みエンドポイントに送信します。
+     48          */
+     49          
+
+   \                                 In section .bss, align 4
+     50          static uint32_t	usb_timer_max;
+   \                     usb_timer_max:
+   \   00000000                      DS8 4
+     51          
+     52          /********************************************************************/
+     53          /*!
+     54           * \name	serial_usb_init
+     55           * \brief	シリアルUSB Driverの初期化
+     56           * \param	なし
+     57           * \return   0: 正常
+     58           *          -1: 異常
+     59           * \note	
+     60           */
+     61          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+     62          int32_t serial_usb_init( void ) 
+     63          {
+   \                     serial_usb_init: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+     64          	usb_timer_max = 20;
+   \   00000002   0x2014             MOVS     R0,#+20
+   \   00000004   0x....             LDR      R1,??DataTable1
+   \   00000006   0x6008             STR      R0,[R1, #+0]
+     65          
+     66            /* Initialization of the USDB device. */
+     67            /* USDBデバイスの初期化。 */
+     68          	usbd_init();
+   \   00000008   0x.... 0x....      BL       usbd_init
+     69          
+     70          	return 0;
+   \   0000000C   0x2000             MOVS     R0,#+0
+   \   0000000E   0xBD02             POP      {R1,PC}          ;; return
+     71          } 
+     72          
+     73          
+     74          
+     75          
+     76          
+     77          
+     78          /********************************************************************/
+     79          /*!
+     80           * \name	serial_usb_get_size_sbuff
+     81           * \brief	シリアルUSB送信バッファの空きサイズを取得する
+     82           * \param	なし
+     83           * \return  空きサイズ
+     84           * \note	
+     85           */
+     86          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+     87          int32_t serial_usb_get_size_sbuff( void ) 
+     88          {
+   \                     serial_usb_get_size_sbuff: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+     89          	return (USBD_CDC_ACM_DataFree());
+   \   00000002   0x.... 0x....      BL       USBD_CDC_ACM_DataFree
+   \   00000006   0xBD02             POP      {R1,PC}          ;; return
+     90          }
+     91          
+     92          /********************************************************************/
+     93          /*!
+     94           * \name	serial_usb_send
+     95           * \brief	シリアルUSB送信
+     96           * \param	buff   : 送信データ
+     97           *			length : 送信データ長
+     98           * \return   0: 成功
+     99           *          -1: 失敗
+    100           * \note	
+    101           */
+    102          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    103          int32_t serial_usb_send( const uint8_t *buff, int32_t length )
+    104          {
+   \                     serial_usb_send: (+1)
+   \   00000000   0xB5F2             PUSH     {R1,R4-R7,LR}
+   \   00000002   0x0007             MOVS     R7,R0
+    105          	int32_t		ret=0;
+   \   00000004   0x2500             MOVS     R5,#+0
+    106          	int			send_len;
+    107          	uint32_t	Timer = 578 * 50;			// 50ms
+   \   00000006   0x....             LDR      R4,??DataTable1_1  ;; 0x70e4
+    108          	uint32_t	timer_start;
+    109          	uint32_t	timer_end;
+    110          	uint32_t	timer_diff;
+    111          
+    112          	timer_start = man_timer_get_1ms_count();
+   \   00000008   0x.... 0x....      BL       man_timer_get_1ms_count
+   \   0000000C   0x0006             MOVS     R6,R0
+    113          	send_len = USBD_CDC_ACM_DataSend(buff, length);
+   \   0000000E   0x9900             LDR      R1,[SP, #+0]
+   \   00000010   0x0038             MOVS     R0,R7
+   \   00000012   0x.... 0x....      BL       USBD_CDC_ACM_DataSend
+   \   00000016   0x0007             MOVS     R7,R0
+    114          	while ( 0 == USBD_CDC_ACM_WaitSendCompletion() ) {
+   \                     ??serial_usb_send_0: (+1)
+   \   00000018   0x.... 0x....      BL       USBD_CDC_ACM_WaitSendCompletion
+   \   0000001C   0x2800             CMP      R0,#+0
+   \   0000001E   0xD102             BNE      ??serial_usb_send_1
+    115          		if (--Timer == 0) break;
+   \   00000020   0x1E64             SUBS     R4,R4,#+1
+   \   00000022   0x2C00             CMP      R4,#+0
+   \   00000024   0xD1F8             BNE      ??serial_usb_send_0
+    116          	}
+    117          	timer_end = man_timer_get_1ms_count();
+   \                     ??serial_usb_send_1: (+1)
+   \   00000026   0x.... 0x....      BL       man_timer_get_1ms_count
+    118          	timer_diff = man_timer_get_elapsed_time(timer_start, timer_end);
+   \   0000002A   0x0001             MOVS     R1,R0
+   \   0000002C   0x0030             MOVS     R0,R6
+   \   0000002E   0x.... 0x....      BL       man_timer_get_elapsed_time
+   \   00000032   0x0001             MOVS     R1,R0
+    119          	if (usb_timer_max < timer_diff) {
+   \   00000034   0x....             LDR      R0,??DataTable1
+   \   00000036   0x6800             LDR      R0,[R0, #+0]
+   \   00000038   0x4288             CMP      R0,R1
+   \   0000003A   0xD206             BCS      ??serial_usb_send_2
+    120          		usb_timer_max = timer_diff;
+   \   0000003C   0x....             LDR      R0,??DataTable1
+   \   0000003E   0x6001             STR      R1,[R0, #+0]
+    121          		// エラー登録
+    122          		man_error_setting(MAN_ERROR_DRV_USB, timer_diff, Timer);
+   \   00000040   0x237A             MOVS     R3,#+122
+   \   00000042   0x0022             MOVS     R2,R4
+   \   00000044   0x200A             MOVS     R0,#+10
+   \   00000046   0x.... 0x....      BL       man_error_set
+    123          	}
+    124          
+    125          	// 送信データ長と送信した数が不一致時は異常とする
+    126          	if (send_len != length) {
+   \                     ??serial_usb_send_2: (+1)
+   \   0000004A   0x9800             LDR      R0,[SP, #+0]
+   \   0000004C   0x4287             CMP      R7,R0
+   \   0000004E   0xD007             BEQ      ??serial_usb_send_3
+    127          		man_error_setting(MAN_ERROR_DRV_USB, length, send_len);
+   \   00000050   0x237F             MOVS     R3,#+127
+   \   00000052   0x003A             MOVS     R2,R7
+   \   00000054   0x9900             LDR      R1,[SP, #+0]
+   \   00000056   0x200A             MOVS     R0,#+10
+   \   00000058   0x.... 0x....      BL       man_error_set
+    128          		ret = -1;
+   \   0000005C   0x2500             MOVS     R5,#+0
+   \   0000005E   0x43ED             MVNS     R5,R5            ;; #-1
+    129          	}
+    130          	return ret;
+   \                     ??serial_usb_send_3: (+1)
+   \   00000060   0x0028             MOVS     R0,R5
+   \   00000062   0xBDF2             POP      {R1,R4-R7,PC}    ;; return
+    131          }
+    132          
+    133          
+    134          /********************************************************************/
+    135          /*!
+    136           * \name	serial_usb_get_size_recv
+    137           * \brief	シリアルUSB受信したデータ数を取得する
+    138           * \param	なし
+    139           * \return  受信したデータ数
+    140           * \note	
+    141           */
+    142          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    143          int32_t serial_usb_get_size_recv( void ) 
+    144          {
+   \                     serial_usb_get_size_recv: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    145          	return(USBD_CDC_ACM_DataAvailable());
+   \   00000002   0x.... 0x....      BL       USBD_CDC_ACM_DataAvailable
+   \   00000006   0xBD02             POP      {R1,PC}          ;; return
+    146          }
+    147          
+    148          /********************************************************************/
+    149          /*!
+    150           * \name	drv_usb_GetChar
+    151           * \brief	シリアルUSB１文字受信
+    152           * \param	なし
+    153           * \return  -1: 受信データなし
+    154           *          以外: 受信データ
+    155           * \note	
+    156           */
+    157          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    158          int32_t drv_usb_GetChar(void)
+    159          {
+   \                     drv_usb_GetChar: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    160          	return USBD_CDC_ACM_GetChar();
+   \   00000002   0x.... 0x....      BL       USBD_CDC_ACM_GetChar
+   \   00000006   0xBD02             POP      {R1,PC}          ;; return
+    161          }
+    162          
+    163          
+    164          /********************************************************************/
+    165          /*!
+    166           * \name	drv_usb_chk_config
+    167           * \brief	USBデバイスの設定を確認する
+    168           * \param	なし
+    169           * \return  0 : 設定
+    170           *          -1: 未設定
+    171           * \note	設定後はUSBの使用が可能となります
+    172           */
+    173          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    174          int32_t drv_usb_chk_config( void )
+    175          {
+   \                     drv_usb_chk_config: (+1)
+   \   00000000   0xB510             PUSH     {R4,LR}
+    176          	int32_t	ret=-1;
+   \   00000002   0x2400             MOVS     R4,#+0
+   \   00000004   0x43E4             MVNS     R4,R4            ;; #-1
+    177          
+    178          	if (usbd_configured()) {
+   \   00000006   0x.... 0x....      BL       usbd_configured
+   \   0000000A   0x2800             CMP      R0,#+0
+   \   0000000C   0xD000             BEQ      ??drv_usb_chk_config_0
+    179          		ret = 0;
+   \   0000000E   0x2400             MOVS     R4,#+0
+    180          	}
+    181          
+    182          	return ret;
+   \                     ??drv_usb_chk_config_0: (+1)
+   \   00000010   0x0020             MOVS     R0,R4
+   \   00000012   0xBD10             POP      {R4,PC}          ;; return
+    183          }
+    184          
+    185          
+    186          /********************************************************************/
+    187          /*!
+    188           * \name	drv_usb_exec_reset
+    189           * \brief	USBデバイスのリセットを実施する
+    190           * \param	なし
+    191           * \return  なし
+    192           * \note	
+    193           */
+    194          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    195          void drv_usb_exec_reset( void )
+    196          {
+   \                     drv_usb_exec_reset: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    197          	USBD_CDC_ACM_Reset();
+   \   00000002   0x.... 0x....      BL       USBD_CDC_ACM_Reset
+    198          }
+   \   00000006   0xBD01             POP      {R0,PC}          ;; return
+    199          
+    200          
+    201          /**
+    202            * @brief When RTX is not used following functions are called in Interrupt context.      : RTXを使用しない場合、以下の関数が割り込みコンテキストで呼び出されます。
+    203            * Uncomment printfs only for debugging. Alternatively the event functions can set       : printfsはデバッグのためにのみコメントを解除します。
+    204            * the global event flags.                                                               : あるいは、イベント関数は、グローバルイベントフラグをセットすることができる。
+    205            */
+    206          
+
+   \                                 In section .text, align 2, keep-with-next
+    207          void USBD_Reset_Event       (void) { /* printf( "Reset\n"); */ }                // 
+   \                     USBD_Reset_Event: (+1)
+   \   00000000   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+    208          void USBD_Suspend_Event     (void) { /* printf( "Suspend\n");*/ }               // USB中断 イベント
+   \                     USBD_Suspend_Event: (+1)
+   \   00000000   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+    209          void USBD_Resume_Event      (void) { /* printf( "Resume\n" );*/ }               // USB再開 イベント
+   \                     USBD_Resume_Event: (+1)
+   \   00000000   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+    210          void USBD_Configure_Event   (void) { /* printf( "Configure\n"); */}             // 
+   \                     USBD_Configure_Event: (+1)
+   \   00000000   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+    211          void USBD_Interface_Event   (void) { /* printf( "Interface\n" );*/ }            // 
+   \                     USBD_Interface_Event: (+1)
+   \   00000000   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+    212          void USBD_Feature_Event     (void) {  /* printf( "Feature\n");*/}               // 
+   \                     USBD_Feature_Event: (+1)
+   \   00000000   0x4770             BX       LR               ;; return
+    213          
+    214          
+    215          /* USB Device CDC ACM class functions called automatically by USBD Core module durinng class initialization */  // : USBデバイスCDC ACDクラス関数は、USBDコアモジュールによって自動的に呼び出され、クラスの初期化が行われます。
+
+   \                                 In section .text, align 2, keep-with-next
+    216          int32_t  USBD_CDC_ACM_Initialize (void) 
+    217          {
+   \                     USBD_CDC_ACM_Initialize: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    218            USBD_CDC_ACM_PortInitialize();			// 仮想COMポートとして使用されるポートのハードウェアリソースを初期化します。
+   \   00000002   0x.... 0x....      BL       USBD_CDC_ACM_PortInitialize
+    219            USBD_CDC_ACM_Reset ();					// クラス変数と状態をリセット
+   \   00000006   0x.... 0x....      BL       USBD_CDC_ACM_Reset
+    220            return 1; 
+   \   0000000A   0x2001             MOVS     R0,#+1
+   \   0000000C   0xBD02             POP      {R1,PC}          ;; return
+    221          }
+    222          
+    223          /* Functions handling CDC ACM requests (overridden to provide custom       : CDC ACM要求を処理する関数（CDC ACM要求のカスタム処理を提供するためにオーバーライドされる）
+    224             handling of CDC ACM requests */
+
+   \                                 In section .text, align 2, keep-with-next
+    225          int32_t USBD_CDC_ACM_SendEncapsulatedCommand (void){return 1;}				// カプセル化コマンドを送信する
+   \                     USBD_CDC_ACM_SendEncapsulatedCommand: (+1)
+   \   00000000   0x2001             MOVS     R0,#+1
+   \   00000002   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+    226          int32_t USBD_CDC_ACM_GetEncapsulatedResponse (void){return 1;}				// カプセル化された応答を得る
+   \                     USBD_CDC_ACM_GetEncapsulatedResponse: (+1)
+   \   00000000   0x2001             MOVS     R0,#+1
+   \   00000002   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+    227          int32_t USBD_CDC_ACM_SetCommFeature          (uint16_t feat){return 1;}		// 通信機能を設定する
+   \                     USBD_CDC_ACM_SetCommFeature: (+1)
+   \   00000000   0x2001             MOVS     R0,#+1
+   \   00000002   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+    228          int32_t USBD_CDC_ACM_GetCommFeature          (uint16_t feat){return 1;}		// 通信機能を取得する
+   \                     USBD_CDC_ACM_GetCommFeature: (+1)
+   \   00000000   0x2001             MOVS     R0,#+1
+   \   00000002   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+    229          int32_t USBD_CDC_ACM_ClearCommFeature        (uint16_t feat){return 1;}		// 通信機能をクリアする
+   \                     USBD_CDC_ACM_ClearCommFeature: (+1)
+   \   00000000   0x2001             MOVS     R0,#+1
+   \   00000002   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+    230          int32_t USBD_CDC_ACM_SendBreak               (uint16_t dur){return 1;}		// Breakを送信する
+   \                     USBD_CDC_ACM_SendBreak: (+1)
+   \   00000000   0x2001             MOVS     R0,#+1
+   \   00000002   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable1:
+   \   00000000   0x........         DC32     usb_timer_max
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable1_1:
+   \   00000000   0x000070E4         DC32     0x70e4
+    231          
+    232          
+    233          
+    234          
+    235          
+    236          
+    237          
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       0   USBD_CDC_ACM_ClearCommFeature
+       0   USBD_CDC_ACM_GetCommFeature
+       0   USBD_CDC_ACM_GetEncapsulatedResponse
+       8   USBD_CDC_ACM_Initialize
+         8   -> USBD_CDC_ACM_PortInitialize
+         8   -> USBD_CDC_ACM_Reset
+       0   USBD_CDC_ACM_SendBreak
+       0   USBD_CDC_ACM_SendEncapsulatedCommand
+       0   USBD_CDC_ACM_SetCommFeature
+       0   USBD_Configure_Event
+       0   USBD_Feature_Event
+       0   USBD_Interface_Event
+       0   USBD_Reset_Event
+       0   USBD_Resume_Event
+       0   USBD_Suspend_Event
+       8   drv_usb_GetChar
+         8   -> USBD_CDC_ACM_GetChar
+       8   drv_usb_chk_config
+         8   -> usbd_configured
+       8   drv_usb_exec_reset
+         8   -> USBD_CDC_ACM_Reset
+       8   serial_usb_get_size_recv
+         8   -> USBD_CDC_ACM_DataAvailable
+       8   serial_usb_get_size_sbuff
+         8   -> USBD_CDC_ACM_DataFree
+       8   serial_usb_init
+         8   -> usbd_init
+      24   serial_usb_send
+        24   -> USBD_CDC_ACM_DataSend
+        24   -> USBD_CDC_ACM_WaitSendCompletion
+        24   -> man_error_set
+        24   -> man_timer_get_1ms_count
+        24   -> man_timer_get_elapsed_time
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable1
+       4  ??DataTable1_1
+       4  USBD_CDC_ACM_ClearCommFeature
+       4  USBD_CDC_ACM_GetCommFeature
+       4  USBD_CDC_ACM_GetEncapsulatedResponse
+      14  USBD_CDC_ACM_Initialize
+       4  USBD_CDC_ACM_SendBreak
+       4  USBD_CDC_ACM_SendEncapsulatedCommand
+       4  USBD_CDC_ACM_SetCommFeature
+       2  USBD_Configure_Event
+       2  USBD_Feature_Event
+       2  USBD_Interface_Event
+       2  USBD_Reset_Event
+       2  USBD_Resume_Event
+       2  USBD_Suspend_Event
+       8  drv_usb_GetChar
+      20  drv_usb_chk_config
+       8  drv_usb_exec_reset
+       8  serial_usb_get_size_recv
+       8  serial_usb_get_size_sbuff
+      16  serial_usb_init
+     100  serial_usb_send
+       4  usb_timer_max
+
+ 
+   4 bytes in section .bss
+ 226 bytes in section .text
+ 
+ 226 bytes of CODE memory
+   4 bytes of DATA memory
+
+Errors: none
+Warnings: none

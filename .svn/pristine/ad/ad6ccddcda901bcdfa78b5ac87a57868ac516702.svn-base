@@ -1,0 +1,875 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V7.80.4.12462/W32 for ARM       17/May/2019  13:31:37
+# Copyright 1999-2017 IAR Systems AB.
+#
+#    Cpu mode     =  thumb
+#    Endian       =  little
+#    Source file  =  C:\GNSS\Software\rJ104_rc2\board\S5U1C31W74T1\board.c
+#    Command line =  
+#        C:\GNSS\Software\rJ104_rc2\board\S5U1C31W74T1\board.c -D
+#        __TARGET_ARCH_7_M -D S1C31W74 -D GNSS_GW_SIDE_A -lCN
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\List
+#        -lA
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\List
+#        --diag_suppress Pe177,Pe111,Pa082 -o
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\Obj
+#        --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa
+#        --no_clustering --no_scheduling --debug --endian=little
+#        --cpu=Cortex-M0+ -e --fpu=None --dlib_config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench
+#        7.5\arm\INC\c\DLib_Config_Normal.h" -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\ -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\
+#        -I "C:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        7.5\arm\CMSIS\Include\" -I "C:\Program Files (x86)\IAR
+#        Systems\Embedded Workbench 7.5\arm\inc\Epson\" -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\CMSIS\Device\S1C31W74\Include\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\CMSIS\Driver\Include\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\sePeriphLibrary\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\board\S5U1C31W74T1\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\USBStack\INC\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\include\
+#        -Ol
+#    Locale       =  Japanese_Japan.932
+#    List file    =  
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\List\board.lst
+#    Object file  =  
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\Obj\board.o
+#
+###############################################################################
+
+C:\GNSS\Software\rJ104_rc2\board\S5U1C31W74T1\board.c
+      1          /**
+      2            ******************************************************************************
+      3            * @file    board.c
+      4            * @author  Epson
+      5            * @version V1.1
+      6            * @date    22-December-2015
+      7            * @brief   This file contains all the board functions for the C31W74.  
+      8            *    
+      9            ******************************************************************************
+     10            * @attention
+     11            *
+     12            * <h2><center>&copy; Copyright(C) SEIKO EPSON CORPORATION 2016. All rights reserved.	</center></h2>
+     13            ******************************************************************************
+     14            */
+     15          #include <stdio.h>
+     16          #include <string.h>
+     17          #include "system_S1C31W74.h"
+     18          #include <settings.h>
+     19          #include <board.h>
+     20          #include <handler_id.h>
+     21          #include "S1C31W74.h"
+     22          
+     23          #include "se_common.h"
+     24          #include "se_clg.h"
+     25          #include "se_i2c.h"
+     26          #include "se_qspi.h"
+     27          #include "se_remc2.h"
+     28          #include "se_rfc.h"
+     29          #include "se_snda.h"
+     30          #include "se_spia.h"
+     31          #include "se_svd2.h"
+     32          #include "se_t16b.h"
+     33          #include "se_uart2.h"
+     34          
+     35          
+     36          extern uint32_t __Vectors;        // Vector table
+     37          extern volatile unsigned g1msSysTicks;        // Timer tick 
+     38          
+     39          #if defined( BOOT_LOADER )
+     40          static void start_application( uint32_t app_link_location ){
+     41            void (*pfMainApp)( void );
+     42            uint32_t *pointer;
+     43          
+     44            __disable_interrupt();
+     45          
+     46            SCB->VTOR = app_link_location;
+     47            pointer = (uint32_t *)app_link_location;
+     48            __set_MSP(*pointer);
+     49            pointer++;
+     50            pfMainApp = (void (*)(void))(*pointer);
+     51            pfMainApp();
+     52          }
+     53          #endif // BOOT_LOADER
+     54          
+     55          #if  defined( UART_PRINTF ) 
+     56          void ConfigureDebugUART2_0( seUART2_InitTypeDef* InitStruct )
+     57          {
+     58            ///< Stop supplying operating clock
+     59            seUART2_Disable( UART2_0 );   
+     60            
+     61            // Configure the UPMUX directly instead of calling the sePPORT_UpMuxFunction
+     62            // Since RAM has not been initialized yet
+     63          
+     64            // Set the USIN - P16, USOUT - P17
+     65            PPORT->P1IOEN_b.P1IEN6 = 0;
+     66            PPORT->P1IOEN_b.P1IEN7 = 0;
+     67            PPORT->P1IOEN_b.P1OEN6 = 1;
+     68            PPORT->P1IOEN_b.P1OEN7 = 1;
+     69            PPORT->P1DAT_b.P1OUT6 = 1;
+     70            PPORT->P1DAT_b.P1OUT7 = 1;
+     71            PPORT->P1MODSEL_b.P1SEL6 = 0;
+     72            PPORT->P1MODSEL_b.P1SEL7 = 0;
+     73            UPMUX->P1MUX3_b.P16PERISEL = 3;		// UART.
+     74            UPMUX->P1MUX3_b.P16PPFNC = 1;	        // USIN.
+     75            UPMUX->P1MUX3_b.P16PERICH = 0;		// Ch.0.
+     76            UPMUX->P1MUX3_b.P17PERISEL = 3;		// UART.
+     77            UPMUX->P1MUX3_b.P17PPFNC = 2;	        // USOUT.
+     78            UPMUX->P1MUX3_b.P17PERICH = 0;		// Ch.0.
+     79            PPORT->P1FNCSEL_b.P16MUX      = 1;    //  UPMUX.
+     80            PPORT->P1MODSEL_b.P1SEL6      = 1;    // Enable peripheral I/O function.
+     81            PPORT->P1FNCSEL_b.P17MUX      = 1;    // UPMUX.
+     82            PPORT->P1MODSEL_b.P1SEL7      = 1;    // Enable peripheral I/O function.  
+     83            
+     84            // Configure the UART Ch.n operating clock.
+     85            seUART2_ConfigureClock( UART2_0, InitStruct->ClkSrc, InitStruct->ClkDivider );
+     86                       
+     87            // Select operation mode; 
+     88            seUART2_ConfigureMode( UART2_0, InitStruct->Mode );
+     89            
+     90            // Initialize interrupt.
+     91            seUART2_DisableInt( UART2_0, seUART2_ALL_INT ); 
+     92            seUART2_ClearIntFlag( UART2_0, seUART2_ALL_INT );
+     93          }
+     94          #endif // UART_PRINTF
+     95          
+
+   \                                 In section .text, align 2, keep-with-next
+     96          seStatus BoardInit( void ) {
+   \                     BoardInit: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+     97            g1msSysTicks = 0;
+   \   00000002   0x2000             MOVS     R0,#+0
+   \   00000004   0x....             LDR      R1,??DataTable1
+   \   00000006   0x6008             STR      R0,[R1, #+0]
+     98          #if  defined( CACHE_ENABLED )
+     99            /* Disable cache in case of a warm boot */
+    100            seProtectSys( seWRITE_PROTECT_OFF );
+   \   00000008   0x2096             MOVS     R0,#+150
+   \   0000000A   0x.... 0x....      BL       seProtectSys
+    101            CACHE->CTL_b.CACHEEN = 0;
+   \   0000000E   0x....             LDR      R0,??DataTable1_1  ;; 0x40000080
+   \   00000010   0x8800             LDRH     R0,[R0, #+0]
+   \   00000012   0x....             LDR      R1,??DataTable1_2  ;; 0xfffe
+   \   00000014   0x4001             ANDS     R1,R1,R0
+   \   00000016   0x....             LDR      R0,??DataTable1_1  ;; 0x40000080
+   \   00000018   0x8001             STRH     R1,[R0, #+0]
+    102            seProtectSys( seWRITE_PROTECT_ON );
+   \   0000001A   0x2000             MOVS     R0,#+0
+   \   0000001C   0x.... 0x....      BL       seProtectSys
+    103          #endif // CACHE_ENABLED 
+    104            
+    105            /* relocate vector table */    
+    106            __disable_irq(); 
+   \   00000020   0xB672             CPSID    I
+    107            if ( (uint32_t) &__Vectors != 0 ) {
+   \   00000022   0x....             LDR      R0,??DataTable1_3
+   \   00000024   0x2800             CMP      R0,#+0
+   \   00000026   0xD004             BEQ      ??BoardInit_0
+    108              SCB->VTOR = (uint32_t)&__Vectors;  
+   \   00000028   0x....             LDR      R0,??DataTable1_3
+   \   0000002A   0x....             LDR      R1,??DataTable1_4  ;; 0xe000ed08
+   \   0000002C   0x6008             STR      R0,[R1, #+0]
+    109              __DSB();
+   \   0000002E   0xF3BF 0x8F4F      DSB      
+    110            }
+    111            __enable_irq();
+   \                     ??BoardInit_0: (+1)
+   \   00000032   0xB662             CPSIE    I
+    112            
+    113          #ifdef EXECUTE_ON_OSC3 
+    114            seStatus fStatus;
+    115            seCLG_ClkDiv ClkDiv;
+    116            seCLG_Start( seCLG_OSC3 ); 
+   \   00000034   0x2002             MOVS     R0,#+2
+   \   00000036   0x.... 0x....      BL       seCLG_Start
+    117            ClkDiv.OSC3_ClkDiv = seCLG_OSC3_CLKDIV_1;
+   \   0000003A   0x2000             MOVS     R0,#+0
+   \   0000003C   0x4669             MOV      R1,SP
+   \   0000003E   0x7008             STRB     R0,[R1, #+0]
+    118            fStatus = seCLG_SwitchSysClkSrc( seCLG_OSC3, ClkDiv ); 
+   \   00000040   0x9900             LDR      R1,[SP, #+0]
+   \   00000042   0x2002             MOVS     R0,#+2
+   \   00000044   0x.... 0x....      BL       seCLG_SwitchSysClkSrc
+    119            if ( fStatus == seSTATUS_NG ) {
+   \   00000048   0xB2C0             UXTB     R0,R0
+   \   0000004A   0x2800             CMP      R0,#+0
+   \   0000004C   0xD106             BNE      ??BoardInit_1
+    120              seASSERT( fStatus );  
+   \   0000004E   0xB2C0             UXTB     R0,R0
+   \   00000050   0x2800             CMP      R0,#+0
+   \   00000052   0xD103             BNE      ??BoardInit_1
+   \   00000054   0x2178             MOVS     R1,#+120
+   \   00000056   0x....             LDR      R0,??DataTable1_5
+   \   00000058   0x.... 0x....      BL       seAssert
+    121            }
+    122          #else // EXECUTE_ON_OSC3 
+    123            
+    124            seProtectSys( seWRITE_PROTECT_OFF );
+    125            FLASHC->WAIT_b.RDWAIT = 2;
+    126            seProtectSys( seWRITE_PROTECT_ON );
+    127            
+    128            seCLG_SetIoscFreqSel( seCLG_IOSC_IOSCFQ_20 );
+    129          
+    130          #ifdef IOSC_AUTOTRIMMING_ON
+    131             // Run Autotrimming of IOSC. Temporary switch to OSC3
+    132            seCLG_Start( seCLG_OSC3 ); 
+    133            seCLG_RunAutoTrimming( seCLG_IOSC, seCLG_OSC3 );
+    134            seCLG_ClearIntFlag( seCLG_FLGS(( seCLG_IOSCTERIF | seCLG_IOSCTEDIF )));
+    135            seCLG_Stop( seCLG_OSC3 );
+    136          #endif // IOSC_AUTOTRIMMING_ON
+    137            
+    138          #endif // EXECUTE_ON_OSC3 
+    139            
+    140            SystemCoreClockUpdate();
+   \                     ??BoardInit_1: (+1)
+   \   0000005C   0x.... 0x....      BL       SystemCoreClockUpdate
+    141            
+    142          #ifndef TICKLESS_ENABLED  
+    143            seSysTickInit( SystemCoreClock / TICK_PERSECOND, seENABLE );
+    144            seSysTickStart();
+    145          #endif // TICKLESS_ENABLED 
+    146            
+    147          #if  defined( UART_PRINTF ) 
+    148            {
+    149            seUART2_InitTypeDef InitStruct;
+    150            memset( &InitStruct, 0, sizeof( InitStruct ) );
+    151            seCLG_Start( seCLG_OSC3 );
+    152            seUART2_InitStruct( &InitStruct );
+    153            InitStruct.ClkSrc = seCLG_OSC3; 
+    154            InitStruct.ClkDivider = seUART2_OSC3_CLKDIV_1;  
+    155            InitStruct.Mode.reg_b.puen = seUART2_MOD_PUEN_ENABLE;
+    156            InitStruct.Mode.reg_b.chln = seUART2_MOD_CHLN_8BIT;
+    157            InitStruct.Mode.reg_b.stpb = seUART2_MOD_STPB_1BIT;
+    158            InitStruct.Mode.reg_b.pren = seUART2_MOD_PREN_NO_PARITY;
+    159            InitStruct.Mode.reg_b.prmd = seUART2_MOD_PRMD_EVEN;
+    160            InitStruct.Mode.reg_b.irmd = seUART2_MOD_IRMD_NO_IRDA;
+    161          
+    162            ConfigureDebugUART2_0( &InitStruct );
+    163            seUART2_SetBaudRate( UART2_0, seUART2_BAUD_RATE_115200 );
+    164           
+    165            seUART2_Enable( UART2_0 );
+    166            }
+    167          #endif // UART_PRINTF
+    168          
+    169          #if  defined( CACHE_ENABLED )
+    170            /* Enable/Disable cache if configured */
+    171            seProtectSys( seWRITE_PROTECT_OFF );
+   \   00000060   0x2096             MOVS     R0,#+150
+   \   00000062   0x.... 0x....      BL       seProtectSys
+    172            CACHE->CTL_b.CACHEEN = seENABLE;
+   \   00000066   0x....             LDR      R0,??DataTable1_1  ;; 0x40000080
+   \   00000068   0x8800             LDRH     R0,[R0, #+0]
+   \   0000006A   0x2101             MOVS     R1,#+1
+   \   0000006C   0x4301             ORRS     R1,R1,R0
+   \   0000006E   0x....             LDR      R0,??DataTable1_1  ;; 0x40000080
+   \   00000070   0x8001             STRH     R1,[R0, #+0]
+    173            seProtectSys( seWRITE_PROTECT_ON );
+   \   00000072   0x2000             MOVS     R0,#+0
+   \   00000074   0x.... 0x....      BL       seProtectSys
+    174          #endif  // CACHE_ENABLED
+    175          #if defined( BOOT_LOADER )
+    176            start_application( APPLICATION_LINK_ADDRESS );
+    177          #endif // BOOT_LOADER
+    178            
+    179            return seSTATUS_OK;
+   \   00000078   0x2001             MOVS     R0,#+1
+   \   0000007A   0xBD02             POP      {R1,PC}          ;; return
+    180          }
+    181          
+    182          
+    183          #if  defined( UART_PRINTF ) 
+    184          int16_t seUART2_GetCh( void ) {
+    185           
+    186            return UART2_0->RXD;
+    187          }
+    188          
+    189          int16_t seUART2_getchar( void ) {
+    190            
+    191            while( seINTERRUPT_OCCURRED != seUART2_GetIntFlag( UART2_0,  seUART2_RB1FIE_INT ) ) {
+    192              ;
+    193            }
+    194            return UART2_0->RXD;
+    195          }
+    196          
+    197          int16_t seUART2_putchar ( int16_t character ) {
+    198            
+    199            while( seINTERRUPT_OCCURRED != seUART2_GetIntFlag( UART2_0,  seUART2_TBEIE_INT ) ) {
+    200              ;
+    201            }
+    202            UART2_0->TXD = character;
+    203            
+    204            return character;
+    205          }
+    206          
+    207          int16_t seUART2_kbhit( void ) {
+    208          
+    209            return seUART2_GetIntFlag( UART2_0,  seUART2_RB1FIE_INT ) ;
+    210          }
+    211          #endif
+    212          
+
+   \                                 In section .text, align 2, keep-with-next
+    213          void ShowRunningClock( void ) {
+   \                     ShowRunningClock: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    214          
+    215              if ( seCLG_OSC1 == seCLG_GetSysClkSrc() ) {
+   \   00000002   0x.... 0x....      BL       seCLG_GetSysClkSrc
+   \   00000006   0x2801             CMP      R0,#+1
+   \   00000008   0xD106             BNE      ??ShowRunningClock_0
+    216                printf ( " -CPU clock- seCLG_OSC1 (%d)\n", seCLG_GetSysClk() );
+   \   0000000A   0x.... 0x....      BL       seCLG_GetSysClk
+   \   0000000E   0x0001             MOVS     R1,R0
+   \   00000010   0x....             LDR      R0,??DataTable1_6
+   \   00000012   0x.... 0x....      BL       printf
+   \   00000016   0xE018             B        ??ShowRunningClock_1
+    217              } else if ( seCLG_OSC3 == seCLG_GetSysClkSrc() ) {
+   \                     ??ShowRunningClock_0: (+1)
+   \   00000018   0x.... 0x....      BL       seCLG_GetSysClkSrc
+   \   0000001C   0x2802             CMP      R0,#+2
+   \   0000001E   0xD106             BNE      ??ShowRunningClock_2
+    218                printf ( " -CPU clock- seCLG_OSC3 (%d) \n", seCLG_GetSysClk() );
+   \   00000020   0x.... 0x....      BL       seCLG_GetSysClk
+   \   00000024   0x0001             MOVS     R1,R0
+   \   00000026   0x....             LDR      R0,??DataTable1_7
+   \   00000028   0x.... 0x....      BL       printf
+   \   0000002C   0xE00D             B        ??ShowRunningClock_1
+    219              } else if ( seCLG_IOSC == seCLG_GetSysClkSrc() ) {
+   \                     ??ShowRunningClock_2: (+1)
+   \   0000002E   0x.... 0x....      BL       seCLG_GetSysClkSrc
+   \   00000032   0x2800             CMP      R0,#+0
+   \   00000034   0xD106             BNE      ??ShowRunningClock_3
+    220                printf ( " -CPU clock- seCLG_IOSC (%d) \n", seCLG_GetSysClk() );
+   \   00000036   0x.... 0x....      BL       seCLG_GetSysClk
+   \   0000003A   0x0001             MOVS     R1,R0
+   \   0000003C   0x....             LDR      R0,??DataTable1_8
+   \   0000003E   0x.... 0x....      BL       printf
+   \   00000042   0xE002             B        ??ShowRunningClock_1
+    221              } else {
+    222                printf ( " - ??? Not expected state ??? \n" );
+   \                     ??ShowRunningClock_3: (+1)
+   \   00000044   0x....             LDR      R0,??DataTable1_9
+   \   00000046   0x.... 0x....      BL       printf
+    223              }
+    224          }
+   \                     ??ShowRunningClock_1: (+1)
+   \   0000004A   0xBD01             POP      {R0,PC}          ;; return
+    225          
+    226          
+    227          //-------------- CLG Ports ---------------------------------------------------
+
+   \                                 In section .rodata, align 1
+    228          const sePPORT_Id      OSC3_PORTID = sePPORT_Pd2;
+   \                     OSC3_PORTID:
+   \   00000000   0x52               DC8 82
+
+   \                                 In section .rodata, align 1
+    229          const sePPORT_AltFunc OSC3_ALTFUNC = sePPORT_ALT_2;
+   \                     OSC3_ALTFUNC:
+   \   00000000   0x02               DC8 2
+
+   \                                 In section .rodata, align 1
+    230          const sePPORT_Id      OSC4_PORTID = sePPORT_Pd3;
+   \                     OSC4_PORTID:
+   \   00000000   0x53               DC8 83
+
+   \                                 In section .rodata, align 1
+    231          const sePPORT_AltFunc OSC4_ALTFUNC = sePPORT_ALT_2;
+   \                     OSC4_ALTFUNC:
+   \   00000000   0x02               DC8 2
+    232          
+    233          
+    234          //-------------- I2C channels ------------------------------------------------
+    235          // Channel 0 - P30, P31
+
+   \                                 In section .data, align 4
+    236          seI2C_ChannelDef I2C_CH0 = {
+   \                     I2C_CH0:
+   \   00000000   0x400003C0         DC32 400003C0H
+   \   00000004   0x00 0x18          DC8 0, 24, 2, 1, 25, 2, 1, 0
+   \              0x02 0x01    
+   \              0x19 0x02    
+   \              0x01 0x00    
+    237                       I2C_0,            // I2C channel 0 peripheral
+    238                       seUPMUX_CH_0,     // I2C UPMUX channel 0
+    239                       sePPORT_P30, sePPORT_PERIPHPORT_UPMUX, sePPORT_ALT_1,  // SCL
+    240                       sePPORT_P31, sePPORT_PERIPHPORT_UPMUX, sePPORT_ALT_1   // SDA
+    241          };
+    242          
+    243          // Channel 1 - P32, P33
+
+   \                                 In section .data, align 4
+    244          seI2C_ChannelDef I2C_CH1 = {
+   \                     I2C_CH1:
+   \   00000000   0x400006C0         DC32 400006C0H
+   \   00000004   0x01 0x1A          DC8 1, 26, 2, 1, 27, 2, 1, 0
+   \              0x02 0x01    
+   \              0x1B 0x02    
+   \              0x01 0x00    
+    245                       I2C_1,            // I2C channel 1 peripheral
+    246                       seUPMUX_CH_1,     // I2C UPMUX channel 1
+    247                       sePPORT_P32, sePPORT_PERIPHPORT_UPMUX, sePPORT_ALT_1,  // SCL
+    248                       sePPORT_P33, sePPORT_PERIPHPORT_UPMUX, sePPORT_ALT_1   // SDA
+    249          };
+    250          
+    251          
+    252          
+    253          //-------------- QSPI channels -----------------------------------------------
+
+   \                                 In section .rodata, align 4
+    254          const uint32_t QSPI_MMA_START_ADDR = 0x00080000U;
+   \                     QSPI_MMA_START_ADDR:
+   \   00000000   0x00080000         DC32 524288
+    255          
+    256          
+
+   \                                 In section .data, align 4
+    257          seQSPI_ChannelDef QSPI_CH0 = {
+   \                     QSPI_CH0:
+   \   00000000   0x40000690         DC32 40000690H, 40000680H
+   \              0x40000680   
+   \   00000008   0x00 0x01          DC8 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0
+   \              0x01 0x00    
+   \              0x01 0x01    
+   \              0x00 0x01    
+   \              0x01 0x00    
+   \              0x01 0x01    
+   \              0x00 0x01    
+   \              0x01 0x00    
+   \              0x01 0x01    
+   \              0x00 0x00    
+    258                       QSPI_0,           // QSPI channel 0 peripheral
+    259                       T16_2,            // T16 channel 2 peripheral
+    260                       sePPORT_P00, sePPORT_PERIPHPORT_NOTUPMUX, sePPORT_ALT_1,    // QSPID0
+    261                       sePPORT_P00, sePPORT_PERIPHPORT_NOTUPMUX, sePPORT_ALT_1,    // QSPID1
+    262                       sePPORT_P00, sePPORT_PERIPHPORT_NOTUPMUX, sePPORT_ALT_1,    // QSPID2
+    263                       sePPORT_P00, sePPORT_PERIPHPORT_NOTUPMUX, sePPORT_ALT_1,    // QSPID3
+    264                       sePPORT_P00, sePPORT_PERIPHPORT_NOTUPMUX, sePPORT_ALT_1,    // QSPICLK
+    265                       sePPORT_P00, sePPORT_PERIPHPORT_NOTUPMUX, sePPORT_ALT_1     // QSPISS
+    266          };
+    267          
+    268          
+    269          
+    270          //-------------- REMC2 channels ----------------------------------------------
+
+   \                                 In section .data, align 4
+    271          seREMC2_ChannelDef REMC2_CH = {
+   \                     REMC2_CH:
+   \   00000000   0x40000720         DC32 40000720H
+   \   00000004   0x00 0x01          DC8 0, 1, 0, 0, 0, 0, 0, 0
+   \              0x00 0x00    
+   \              0x00 0x00    
+   \              0x00 0x00    
+    272                       REMC2,            // REMC2 peripheral
+    273                       sePPORT_P00, sePPORT_PERIPHPORT_NOTUPMUX, sePPORT_ALT_0,    // REMO
+    274                       sePPORT_P00, sePPORT_PERIPHPORT_NOINIT, sePPORT_ALT_0,      // CLPLS
+    275          };
+    276          
+    277          
+    278          
+    279          //-------------- RFC channels ------------------------------------------------
+
+   \                                 In section .data, align 4
+    280          seRFC_ChannelDef RFC_CH0 = {
+   \                     RFC_CH0:
+   \   00000000   0x40000840         DC32 40000840H
+   \   00000004   0x00 0x01          DC8 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0
+   \              0x00 0x00    
+   \              0x01 0x00    
+   \              0x00 0x01    
+   \              0x00 0x00    
+   \              0x01 0x00    
+   \              0x00 0x00    
+   \              0x00 0x00    
+    281                       RFC_0,            // RFC channel 0 peripheral
+    282                       sePPORT_P00, sePPORT_PERIPHPORT_NOTUPMUX, sePPORT_ALT_0,  // SENA 
+    283                       sePPORT_P00, sePPORT_PERIPHPORT_NOTUPMUX, sePPORT_ALT_0,  // SENB
+    284                       sePPORT_P00, sePPORT_PERIPHPORT_NOTUPMUX, sePPORT_ALT_0,  // REF
+    285                       sePPORT_P00, sePPORT_PERIPHPORT_NOTUPMUX, sePPORT_ALT_0,   // RFIN
+    286                       sePPORT_P00, sePPORT_PERIPHPORT_NOINIT, sePPORT_ALT_0     // RFCLKO
+    287          };
+    288          
+    289          
+    290          //-------------- SNDA channels -----------------------------------------------
+
+   \                                 In section .data, align 4
+    291          seSNDA_ChannelDef SNDA_CH = {
+   \                     SNDA_CH:
+   \   00000000   0x40000700         DC32 40000700H
+   \   00000004   0x00 0x01          DC8 0, 1, 0, 1, 0, 0, 0, 0
+   \              0x00 0x01    
+   \              0x00 0x00    
+   \              0x00 0x00    
+    292                       SNDA,             // SNDA peripheral
+    293                       sePPORT_P00, sePPORT_PERIPHPORT_NOTUPMUX, sePPORT_ALT_0,    // BZOUT
+    294                       sePPORT_P01, sePPORT_PERIPHPORT_NOINIT, sePPORT_ALT_0,      // #BZOUT
+    295          };
+    296          
+    297          
+    298          
+    299          //-------------- SPIA channels -----------------------------------------------
+    300          // Channel 0 - 
+
+   \                                 In section .data, align 4
+    301          seSPIA_ChannelDef SPIA_CH0 = {
+   \                     SPIA_CH0:
+   \   00000000   0x400003B0         DC32 400003B0H, 400003A0H
+   \              0x400003A0   
+   \   00000008   0x00 0x03          DC8 0, 3, 1, 0, 0, 1, 0, 1, 1, 0, 2, 1, 0, 0, 0, 0
+   \              0x01 0x00    
+   \              0x00 0x01    
+   \              0x00 0x01    
+   \              0x01 0x00    
+   \              0x02 0x01    
+   \              0x00 0x00    
+   \              0x00 0x00    
+    302                       SPIA_0,           // SPIA channel 0 peripheral
+    303                       T16_1,            // T16 channel 1 peripheral
+    304                       seUPMUX_CH_0,     // SPIA UPMUX channel 0
+    305                       sePPORT_P03, sePPORT_PERIPHPORT_NOTUPMUX, sePPORT_ALT_0,  // SPISS#
+    306                       sePPORT_P00, sePPORT_PERIPHPORT_NOTUPMUX, sePPORT_ALT_0,  // SDI
+    307                       sePPORT_P01, sePPORT_PERIPHPORT_NOTUPMUX, sePPORT_ALT_0,  // SDO
+    308                       sePPORT_P02, sePPORT_PERIPHPORT_NOTUPMUX, sePPORT_ALT_0   // SPICLK
+    309          };
+    310          
+    311          
+    312          //-------------- SVD2 channels -----------------------------------------------
+    313          // Channel 0 - P27, port pin not initialized
+
+   \                                 In section .data, align 4
+    314          seSVD2_ChannelDef SVD2_CH0 = {
+   \                     SVD2_CH0:
+   \   00000000   0x40000100         DC32 40000100H
+   \   00000004   0x00 0x00          DC8 0, 0, 2, 0
+   \              0x02 0x00    
+    315                       SVD2_0,           // SVD2 channel 1 peripheral
+    316                       sePPORT_P00, sePPORT_PERIPHPORT_NOINIT, sePPORT_ALT_2   // EXSVD0 is P27, alternate function 2
+    317          };
+    318          
+    319          // Channel 1 - P90
+
+   \                                 In section .data, align 4
+    320          seSVD2_ChannelDef SVD2_CH1 = {
+   \                     SVD2_CH1:
+   \   00000000   0x40000980         DC32 40000980H
+   \   00000004   0x00 0x00          DC8 0, 0, 2, 0
+   \              0x02 0x00    
+    321                       SVD2_1,           // SVD2 channel 1 peripheral
+    322                       sePPORT_P00, sePPORT_PERIPHPORT_NOINIT, sePPORT_ALT_2   // EXSVD1 is P90, alternate function 2
+    323          };
+    324          
+    325          
+    326          //-------------- T16B channels -----------------------------------------------
+    327          // Channel 0 - P10 and P11 for TOUT0/CAP0 and TOUT1/CAP1
+
+   \                                 In section .data, align 4
+    328          seT16B_ChannelDef T16B_CH0 = {
+   \                     T16B_CH0:
+   \   00000000   0x40000400         DC32 40000400H
+   \   00000004   0x00 0x00          DC8 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+   \              0x00 0x00    
+   \              0x00 0x00    
+   \              0x00 0x00    
+   \              0x00 0x00    
+   \              0x00 0x00    
+   \              0x00 0x00    
+   \              0x00 0x00    
+   \              0x00 0x00    
+   \              0x00 0x00    
+    329                       T16B_0,           // T16B channel peripheral
+    330                       seUPMUX_CH_0,     // T16B UPMUX channel
+    331                       sePPORT_P00, sePPORT_PERIPHPORT_NOINIT, sePPORT_ALT_0,  // TOUT0/CAP0 pin not initialized
+    332                       sePPORT_P00, sePPORT_PERIPHPORT_NOINIT, sePPORT_ALT_0,  // TOUT1/CAP1 pin not initialized
+    333                       sePPORT_P00, sePPORT_PERIPHPORT_NOINIT, sePPORT_ALT_0,  // TOUT2/CAP2 pin not initialized
+    334                       sePPORT_P00, sePPORT_PERIPHPORT_NOINIT, sePPORT_ALT_0,  // TOUT3/CAP3 pin not initialized
+    335                       sePPORT_P00, sePPORT_PERIPHPORT_NOINIT, sePPORT_ALT_0,  // TOUT4/CAP4 pin not initialized
+    336                       sePPORT_P00, sePPORT_PERIPHPORT_NOINIT, sePPORT_ALT_0   // TOUT5/CAP5 pin not initialized
+    337          };
+    338          
+    339          // Channel 1 - Port pins not initialized
+
+   \                                 In section .data, align 4
+    340          seT16B_ChannelDef T16B_CH1 = {
+   \                     T16B_CH1:
+   \   00000000   0x40000440         DC32 40000440H
+   \   00000004   0x01 0x00          DC8 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+   \              0x00 0x00    
+   \              0x00 0x00    
+   \              0x00 0x00    
+   \              0x00 0x00    
+   \              0x00 0x00    
+   \              0x00 0x00    
+   \              0x00 0x00    
+   \              0x00 0x00    
+   \              0x00 0x00    
+    341                       T16B_1,           // T16B channel peripheral
+    342                       seUPMUX_CH_1,     // T16B UPMUX channel
+    343                       sePPORT_P00, sePPORT_PERIPHPORT_NOINIT, sePPORT_ALT_0,  // TOUT0/CAP0 pin not initialized
+    344                       sePPORT_P00, sePPORT_PERIPHPORT_NOINIT, sePPORT_ALT_0,  // TOUT1/CAP1 pin not initialized
+    345                       sePPORT_P00, sePPORT_PERIPHPORT_NOINIT, sePPORT_ALT_0,  // TOUT2/CAP2 pin not initialized
+    346                       sePPORT_P00, sePPORT_PERIPHPORT_NOINIT, sePPORT_ALT_0,  // TOUT3/CAP3 pin not initialized
+    347                       sePPORT_P00, sePPORT_PERIPHPORT_NOINIT, sePPORT_ALT_0,  // TOUT4/CAP4 pin not initialized
+    348                       sePPORT_P00, sePPORT_PERIPHPORT_NOINIT, sePPORT_ALT_0   // TOUT5/CAP5 pin not initialized
+    349          };
+    350          
+    351          
+    352          //-------------- UART2 channels ----------------------------------------------
+    353          // Channel 0 - P37, P36
+
+   \                                 In section .data, align 4
+    354          seUART2_ChannelDef UART2_CH0 = {
+   \                     UART2_CH0:
+   \   00000000   0x40000380         DC32 40000380H
+   \   00000004   0x00 0x1E          DC8 0, 30, 2, 1, 31, 2, 1, 0
+   \              0x02 0x01    
+   \              0x1F 0x02    
+   \              0x01 0x00    
+    355                       UART2_0,          // UART2 channel 0 peripheral
+    356                       seUPMUX_CH_0,     // UART2 UPMUX channel 0
+    357                       sePPORT_P36, sePPORT_PERIPHPORT_UPMUX, sePPORT_ALT_1,    // USIN
+    358                       sePPORT_P37, sePPORT_PERIPHPORT_UPMUX, sePPORT_ALT_1     // USOUT
+    359          };
+    360          
+    361          // Channel 1 - P35, P34
+
+   \                                 In section .data, align 4
+    362          seUART2_ChannelDef UART2_CH1 = {
+   \                     UART2_CH1:
+   \   00000000   0x40000600         DC32 40000600H
+   \   00000004   0x01 0x1C          DC8 1, 28, 2, 1, 29, 2, 1, 0
+   \              0x02 0x01    
+   \              0x1D 0x02    
+   \              0x01 0x00    
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable1:
+   \   00000000   0x........         DC32     g1msSysTicks
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable1_1:
+   \   00000000   0x40000080         DC32     0x40000080
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable1_2:
+   \   00000000   0x0000FFFE         DC32     0xfffe
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable1_3:
+   \   00000000   0x........         DC32     __Vectors
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable1_4:
+   \   00000000   0xE000ED08         DC32     0xe000ed08
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable1_5:
+   \   00000000   0x........         DC32     ?_0
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable1_6:
+   \   00000000   0x........         DC32     ?_1
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable1_7:
+   \   00000000   0x........         DC32     ?_2
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable1_8:
+   \   00000000   0x........         DC32     ?_3
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable1_9:
+   \   00000000   0x........         DC32     ?_4
+
+   \                                 In section .rodata, align 4
+   \                     ?_0:
+   \   00000000   0x43 0x3A          DC8 43H, 3AH, 5CH, 47H, 4EH, 53H, 53H, 5CH
+   \              0x5C 0x47    
+   \              0x4E 0x53    
+   \              0x53 0x5C    
+   \   00000008   0x53 0x6F          DC8 53H, 6FH, 66H, 74H, 77H, 61H, 72H, 65H
+   \              0x66 0x74    
+   \              0x77 0x61    
+   \              0x72 0x65    
+   \   00000010   0x5C 0x72          DC8 5CH, 72H, 4AH, 31H, 30H, 34H, 5FH, 72H
+   \              0x4A 0x31    
+   \              0x30 0x34    
+   \              0x5F 0x72    
+   \   00000018   0x63 0x32          DC8 63H, 32H, 5CH, 62H, 6FH, 61H, 72H, 64H
+   \              0x5C 0x62    
+   \              0x6F 0x61    
+   \              0x72 0x64    
+   \   00000020   0x5C 0x53          DC8 5CH, 53H, 35H, 55H, 31H, 43H, 33H, 31H
+   \              0x35 0x55    
+   \              0x31 0x43    
+   \              0x33 0x31    
+   \   00000028   0x57 0x37          DC8 57H, 37H, 34H, 54H, 31H, 5CH, 62H, 6FH
+   \              0x34 0x54    
+   \              0x31 0x5C    
+   \              0x62 0x6F    
+   \   00000030   0x61 0x72          DC8 61H, 72H, 64H, 2EH, 63H, 0
+   \              0x64 0x2E    
+   \              0x63 0x00    
+   \   00000036   0x00 0x00          DC8 0, 0
+
+   \                                 In section .rodata, align 4
+   \                     ?_1:
+   \   00000000   0x20 0x2D          DC8 " -CPU clock- seCLG_OSC1 (%d)\012"
+   \              0x43 0x50    
+   \              0x55 0x20    
+   \              0x63 0x6C    
+   \              0x6F 0x63    
+   \              0x6B 0x2D    
+   \              0x20 0x73    
+   \              0x65 0x43    
+   \              0x4C 0x47    
+   \              0x5F 0x4F    
+   \              0x53 0x43    
+   \              0x31 0x20    
+   \              0x28 0x25    
+   \              0x64 0x29    
+   \              0x0A 0x00    
+   \   0000001E   0x00 0x00          DC8 0, 0
+
+   \                                 In section .rodata, align 4
+   \                     ?_2:
+   \   00000000   0x20 0x2D          DC8 " -CPU clock- seCLG_OSC3 (%d) \012"
+   \              0x43 0x50    
+   \              0x55 0x20    
+   \              0x63 0x6C    
+   \              0x6F 0x63    
+   \              0x6B 0x2D    
+   \              0x20 0x73    
+   \              0x65 0x43    
+   \              0x4C 0x47    
+   \              0x5F 0x4F    
+   \              0x53 0x43    
+   \              0x33 0x20    
+   \              0x28 0x25    
+   \              0x64 0x29    
+   \              0x20 0x0A    
+   \              0x00         
+   \   0000001F   0x00               DC8 0
+
+   \                                 In section .rodata, align 4
+   \                     ?_3:
+   \   00000000   0x20 0x2D          DC8 " -CPU clock- seCLG_IOSC (%d) \012"
+   \              0x43 0x50    
+   \              0x55 0x20    
+   \              0x63 0x6C    
+   \              0x6F 0x63    
+   \              0x6B 0x2D    
+   \              0x20 0x73    
+   \              0x65 0x43    
+   \              0x4C 0x47    
+   \              0x5F 0x49    
+   \              0x4F 0x53    
+   \              0x43 0x20    
+   \              0x28 0x25    
+   \              0x64 0x29    
+   \              0x20 0x0A    
+   \              0x00         
+   \   0000001F   0x00               DC8 0
+
+   \                                 In section .rodata, align 4
+   \                     ?_4:
+   \   00000000   0x20 0x2D          DC8 " - ??? Not expected state ??? \012"
+   \              0x20 0x3F    
+   \              0x3F 0x3F    
+   \              0x20 0x4E    
+   \              0x6F 0x74    
+   \              0x20 0x65    
+   \              0x78 0x70    
+   \              0x65 0x63    
+   \              0x74 0x65    
+   \              0x64 0x20    
+   \              0x73 0x74    
+   \              0x61 0x74    
+   \              0x65 0x20    
+   \              0x3F 0x3F    
+   \              0x3F 0x20    
+   \              0x0A 0x00    
+    363                       UART2_1,          // UART2 channel 1 peripheral
+    364                       seUPMUX_CH_1,     // UART2 UPMUX channel 1
+    365                       sePPORT_P34, sePPORT_PERIPHPORT_UPMUX, sePPORT_ALT_1,  // USIN
+    366                       sePPORT_P35, sePPORT_PERIPHPORT_UPMUX, sePPORT_ALT_1   // USOUT
+    367          };
+    368          
+    369          
+    370          
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       8   BoardInit
+         8   -> SystemCoreClockUpdate
+         8   -> seAssert
+         8   -> seCLG_Start
+         8   -> seCLG_SwitchSysClkSrc
+         8   -> seProtectSys
+       8   ShowRunningClock
+         8   -> printf
+         8   -> seCLG_GetSysClk
+         8   -> seCLG_GetSysClkSrc
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable1
+       4  ??DataTable1_1
+       4  ??DataTable1_2
+       4  ??DataTable1_3
+       4  ??DataTable1_4
+       4  ??DataTable1_5
+       4  ??DataTable1_6
+       4  ??DataTable1_7
+       4  ??DataTable1_8
+       4  ??DataTable1_9
+      56  ?_0
+      32  ?_1
+      32  ?_2
+      32  ?_3
+      32  ?_4
+     124  BoardInit
+      12  I2C_CH0
+      12  I2C_CH1
+       1  OSC3_ALTFUNC
+       1  OSC3_PORTID
+       1  OSC4_ALTFUNC
+       1  OSC4_PORTID
+      28  QSPI_CH0
+       4  QSPI_MMA_START_ADDR
+      12  REMC2_CH
+      20  RFC_CH0
+      12  SNDA_CH
+      24  SPIA_CH0
+       8  SVD2_CH0
+       8  SVD2_CH1
+      76  ShowRunningClock
+      24  T16B_CH0
+      24  T16B_CH1
+      12  UART2_CH0
+      12  UART2_CH1
+
+ 
+ 208 bytes in section .data
+ 192 bytes in section .rodata
+ 240 bytes in section .text
+ 
+ 240 bytes of CODE  memory
+ 192 bytes of CONST memory
+ 208 bytes of DATA  memory
+
+Errors: none
+Warnings: none

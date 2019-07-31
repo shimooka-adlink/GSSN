@@ -1,0 +1,19 @@
+  <Target>
+    <TargetName>_TARGETNAME_</TargetName>
+    <ToolsetNumber>0x4</ToolsetNumber>
+    <ToolsetName>ARM-ADS</ToolsetName>
+    <TargetOption>
+      <DebugOpt>
+        <tIfile></tIfile>
+        <pMon>BIN\CMSIS_AGDI.dll</pMon>
+      </DebugOpt>
+      <TargetDriverDllRegistry>
+        <SetRegEntry>
+          <Number>0</Number>
+          <Key>CMSIS_AGDI</Key>
+          <Name>-X"Any" -UAny -O206 -S0 -C0 -P00 -N00("ARM CoreSight SW-DP") -D00(0BC11477) -L00(0) -TO18 -TC10000000 -TP20 -TDS8007 -TDT0 -TDC1F -TIEFFFFFFFF -TIP8 -FO7 -FD20000000 -FC4000 -FN1 -FF0S1C31_MCU_int -FS00 -FL080000</Name>
+        </SetRegEntry>
+      </TargetDriverDllRegistry>
+    </TargetOption>
+  </Target>
+

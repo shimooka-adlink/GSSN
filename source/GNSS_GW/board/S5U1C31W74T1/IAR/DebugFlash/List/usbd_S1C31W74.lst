@@ -1,0 +1,2823 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V7.80.4.12462/W32 for ARM       21/May/2019  17:01:06
+# Copyright 1999-2017 IAR Systems AB.
+#
+#    Cpu mode     =  thumb
+#    Endian       =  little
+#    Source file  =  C:\GNSS\Software\rJ105\USBStack\SRC\usbd_S1C31W74.c
+#    Command line =  
+#        C:\GNSS\Software\rJ105\USBStack\SRC\usbd_S1C31W74.c -D
+#        __TARGET_ARCH_7_M -D S1C31W74 -D GNSS_GW_SIDE_A -lCN
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\List
+#        -lA
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\List
+#        --diag_suppress Pe177,Pe111,Pa082 -o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\Obj
+#        --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa
+#        --no_clustering --no_scheduling --debug --endian=little
+#        --cpu=Cortex-M0+ -e --fpu=None --dlib_config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench
+#        7.5\arm\INC\c\DLib_Config_Normal.h" -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\ -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\
+#        -I "C:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        7.5\arm\CMSIS\Include\" -I "C:\Program Files (x86)\IAR
+#        Systems\Embedded Workbench 7.5\arm\inc\Epson\" -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\CMSIS\Device\S1C31W74\Include\
+#        -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\CMSIS\Driver\Include\
+#        -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\sePeriphLibrary\
+#        -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\board\S5U1C31W74T1\
+#        -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\USBStack\INC\
+#        -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\include\
+#        -Ol
+#    Locale       =  Japanese_Japan.932
+#    List file    =  
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\List\usbd_S1C31W74.lst
+#    Object file  =  
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\Obj\usbd_S1C31W74.o
+#
+###############################################################################
+
+C:\GNSS\Software\rJ105\USBStack\SRC\usbd_S1C31W74.c
+      1          /* CMSIS-DAP Interface Firmware
+      2           * Copyright (c) 2009-2015 ARM Limited
+      3           *
+      4           * Licensed under the Apache License, Version 2.0 (the "License");
+      5           * you may not use this file except in compliance with the License.
+      6           * You may obtain a copy of the License at
+      7           *
+      8           *     http://www.apache.org/licenses/LICENSE-2.0
+      9           *
+     10           * Unless required by applicable law or agreed to in writing, software
+     11           * distributed under the License is distributed on an "AS IS" BASIS,
+     12           * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     13           * See the License for the specific language governing permissions and
+     14           * limitations under the License.
+     15           */
+     16          #include <stdio.h>
+     17          #include "RTL.h"
+     18          #include "rl_usb.h"
+     19          #include "usb_config.c"
+
+   \                                 In section .rodata, align 4
+   \   __absolute void (*const USBD_P_Configure_Event)(void)
+   \                     USBD_P_Configure_Event:
+   \   00000000   0x........         DC32 USBD_Configure_Event
+
+   \                                 In section .rodata, align 4
+   \   __absolute void (*const USBD_P_Interface_Event)(void)
+   \                     USBD_P_Interface_Event:
+   \   00000000   0x........         DC32 USBD_Interface_Event
+
+   \                                 In section .rodata, align 4
+   \   __absolute void (*const USBD_P_Feature_Event)(void)
+   \                     USBD_P_Feature_Event:
+   \   00000000   0x........         DC32 USBD_Feature_Event
+
+   \                                 In section .bss, align 2
+   \   __absolute U8 USBD_AltSetting[2]
+   \                     USBD_AltSetting:
+   \   00000000                      DS8 2
+
+   \                                 In section .bss, align 4
+   \   __absolute U8 USBD_EP0Buf[64]
+   \                     USBD_EP0Buf:
+   \   00000000                      DS8 64
+
+   \                                 In section .rodata, align 1
+   \   __absolute U8 const usbd_power
+   \                     usbd_power:
+   \   00000000   0x01               DC8 1
+
+   \                                 In section .rodata, align 1
+   \   __absolute U8 const usbd_hs_enable
+   \                     usbd_hs_enable:
+   \   00000000   0x00               DC8 0
+
+   \                                 In section .rodata, align 2
+   \   __absolute U16 const usbd_if_num
+   \                     usbd_if_num:
+   \   00000000   0x0002             DC16 2
+
+   \                                 In section .rodata, align 1
+   \   __absolute U8 const usbd_ep_num
+   \                     usbd_ep_num:
+   \   00000000   0x03               DC8 3
+
+   \                                 In section .rodata, align 1
+   \   __absolute U8 const usbd_max_packet0
+   \                     usbd_max_packet0:
+   \   00000000   0x40               DC8 64
+
+   \                                 In section .rodata, align 1
+   \   __absolute U8 const usbd_cdc_acm_cif_num
+   \                     usbd_cdc_acm_cif_num:
+   \   00000000   0x01               DC8 1
+
+   \                                 In section .rodata, align 1
+   \   __absolute U8 const usbd_cdc_acm_dif_num
+   \                     usbd_cdc_acm_dif_num:
+   \   00000000   0x02               DC8 2
+
+   \                                 In section .rodata, align 1
+   \   __absolute U8 const usbd_cdc_acm_ep_intin
+   \                     usbd_cdc_acm_ep_intin:
+   \   00000000   0x03               DC8 3
+
+   \                                 In section .rodata, align 1
+   \   __absolute U8 const usbd_cdc_acm_ep_bulkin
+   \                     usbd_cdc_acm_ep_bulkin:
+   \   00000000   0x01               DC8 1
+
+   \                                 In section .rodata, align 1
+   \   __absolute U8 const usbd_cdc_acm_ep_bulkout
+   \                     usbd_cdc_acm_ep_bulkout:
+   \   00000000   0x02               DC8 2
+
+   \                                 In section .rodata, align 2
+   \   __absolute U16 const usbd_cdc_acm_sendbuf_sz
+   \                     usbd_cdc_acm_sendbuf_sz:
+   \   00000000   0x0800             DC16 2048
+
+   \                                 In section .rodata, align 2
+   \   __absolute U16 const usbd_cdc_acm_receivebuf_sz
+   \                     usbd_cdc_acm_receivebuf_sz:
+   \   00000000   0x0800             DC16 2048
+
+   \                                 In section .rodata, align 4
+   \   __absolute U16 const usbd_cdc_acm_maxpacketsize[2]
+   \                     usbd_cdc_acm_maxpacketsize:
+   \   00000000   0x0010 0x0010      DC16 16, 16
+
+   \                                 In section .rodata, align 4
+   \   __absolute U16 const usbd_cdc_acm_maxpacketsize1[2]
+   \                     usbd_cdc_acm_maxpacketsize1:
+   \   00000000   0x0040 0x0040      DC16 64, 64
+
+   \                                 In section .bss, align 4
+   \   __absolute U8 USBD_CDC_ACM_SendBuf[2048]
+   \                     USBD_CDC_ACM_SendBuf:
+   \   00000000                      DS8 2048
+
+   \                                 In section .bss, align 4
+   \   __absolute U8 USBD_CDC_ACM_ReceiveBuf[2048]
+   \                     USBD_CDC_ACM_ReceiveBuf:
+   \   00000000                      DS8 2048
+
+   \                                 In section .bss, align 4
+   \   __absolute U8 USBD_CDC_ACM_NotifyBuf[10]
+   \                     USBD_CDC_ACM_NotifyBuf:
+   \   00000000                      DS8 12
+
+   \                                 In section .text, align 2, keep-with-next
+   \   __interwork __softfp BOOL USBD_ReqGetDescriptor_HID(U8 **, U32 *)
+   \                     USBD_ReqGetDescriptor_HID: (+1)
+   \   00000000   0x2000             MOVS     R0,#+0
+   \   00000002   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   __interwork __softfp BOOL USBD_EndPoint0_Setup_HID_ReqToIF(void)
+   \                     USBD_EndPoint0_Setup_HID_ReqToIF: (+1)
+   \   00000000   0x2000             MOVS     R0,#+0
+   \   00000002   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   __interwork __softfp BOOL USBD_EndPoint0_Out_HID_ReqToIF(void)
+   \                     USBD_EndPoint0_Out_HID_ReqToIF: (+1)
+   \   00000000   0x2000             MOVS     R0,#+0
+   \   00000002   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   __interwork __softfp void USBD_ReqClrFeature_MSC(U32)
+   \                     USBD_ReqClrFeature_MSC: (+1)
+   \   00000000   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   __interwork __softfp BOOL USBD_EndPoint0_Setup_MSC_ReqToIF(void)
+   \                     USBD_EndPoint0_Setup_MSC_ReqToIF: (+1)
+   \   00000000   0x2000             MOVS     R0,#+0
+   \   00000002   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   __interwork __softfp BOOL USBD_EndPoint0_Out_MSC_ReqToIF(void)
+   \                     USBD_EndPoint0_Out_MSC_ReqToIF: (+1)
+   \   00000000   0x2000             MOVS     R0,#+0
+   \   00000002   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   __interwork __softfp BOOL USBD_EndPoint0_Setup_ADC_ReqToIF(void)
+   \                     USBD_EndPoint0_Setup_ADC_ReqToIF: (+1)
+   \   00000000   0x2000             MOVS     R0,#+0
+   \   00000002   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   __interwork __softfp BOOL USBD_EndPoint0_Setup_ADC_ReqToEP(void)
+   \                     USBD_EndPoint0_Setup_ADC_ReqToEP: (+1)
+   \   00000000   0x2000             MOVS     R0,#+0
+   \   00000002   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   __interwork __softfp BOOL USBD_EndPoint0_Out_ADC_ReqToIF(void)
+   \                     USBD_EndPoint0_Out_ADC_ReqToIF: (+1)
+   \   00000000   0x2000             MOVS     R0,#+0
+   \   00000002   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   __interwork __softfp BOOL USBD_EndPoint0_Out_ADC_ReqToEP(void)
+   \                     USBD_EndPoint0_Out_ADC_ReqToEP: (+1)
+   \   00000000   0x2000             MOVS     R0,#+0
+   \   00000002   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   __interwork __softfp BOOL USBD_EndPoint0_Setup_CLS_ReqToDEV(void)
+   \                     USBD_EndPoint0_Setup_CLS_ReqToDEV: (+1)
+   \   00000000   0x2000             MOVS     R0,#+0
+   \   00000002   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   __interwork __softfp BOOL USBD_EndPoint0_Setup_CLS_ReqToIF(void)
+   \                     USBD_EndPoint0_Setup_CLS_ReqToIF: (+1)
+   \   00000000   0x2000             MOVS     R0,#+0
+   \   00000002   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   __interwork __softfp BOOL USBD_EndPoint0_Setup_CLS_ReqToEP(void)
+   \                     USBD_EndPoint0_Setup_CLS_ReqToEP: (+1)
+   \   00000000   0x2000             MOVS     R0,#+0
+   \   00000002   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   __interwork __softfp BOOL USBD_EndPoint0_Out_CLS_ReqToDEV(void)
+   \                     USBD_EndPoint0_Out_CLS_ReqToDEV: (+1)
+   \   00000000   0x2000             MOVS     R0,#+0
+   \   00000002   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   __interwork __softfp BOOL USBD_EndPoint0_Out_CLS_ReqToIF(void)
+   \                     USBD_EndPoint0_Out_CLS_ReqToIF: (+1)
+   \   00000000   0x2000             MOVS     R0,#+0
+   \   00000002   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   __interwork __softfp BOOL USBD_EndPoint0_Out_CLS_ReqToEP(void)
+   \                     USBD_EndPoint0_Out_CLS_ReqToEP: (+1)
+   \   00000000   0x2000             MOVS     R0,#+0
+   \   00000002   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2
+   \   __interwork __softfp void USBD_Reset_Event(void)
+   \                     USBD_Reset_Event: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+   \   00000002   0x.... 0x....      BL       USBD_CDC_ACM_Reset_Event
+   \   00000006   0xBD01             POP      {R0,PC}          ;; return
+
+   \                                 In section .text, align 2
+   \   __interwork __softfp void USBD_SOF_Event(void)
+   \                     USBD_SOF_Event: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+   \   00000002   0x.... 0x....      BL       USBD_CDC_ACM_SOF_Event
+   \   00000006   0xBD01             POP      {R0,PC}          ;; return
+
+   \                                 In section .rodata, align 4
+   \   __absolute void (*const USBD_P_Power_Event)(BOOL)
+   \                     USBD_P_Power_Event:
+   \   00000000   0x........         DC32 USBD_Power_Event
+
+   \                                 In section .rodata, align 4
+   \   __absolute void (*const USBD_P_Reset_Event)(void)
+   \                     USBD_P_Reset_Event:
+   \   00000000   0x........         DC32 USBD_Reset_Event
+
+   \                                 In section .rodata, align 4
+   \   __absolute void (*const USBD_P_Suspend_Event)(void)
+   \                     USBD_P_Suspend_Event:
+   \   00000000   0x........         DC32 USBD_Suspend_Event
+
+   \                                 In section .rodata, align 4
+   \   __absolute void (*const USBD_P_Resume_Event)(void)
+   \                     USBD_P_Resume_Event:
+   \   00000000   0x........         DC32 USBD_Resume_Event
+
+   \                                 In section .rodata, align 4
+   \   __absolute void (*const USBD_P_WakeUp_Event)(void)
+   \                     USBD_P_WakeUp_Event:
+   \   00000000   0x........         DC32 USBD_WakeUp_Event
+
+   \                                 In section .rodata, align 4
+   \   __absolute void (*const USBD_P_SOF_Event)(void)
+   \                     USBD_P_SOF_Event:
+   \   00000000   0x........         DC32 USBD_SOF_Event
+
+   \                                 In section .rodata, align 4
+   \   __absolute void (*const USBD_P_Error_Event)(U32)
+   \                     USBD_P_Error_Event:
+   \   00000000   0x........         DC32 USBD_Error_Event
+
+   \                                 In section .rodata, align 4
+   \   __absolute void (*const USBD_P_EP[16])(U32)
+   \                     USBD_P_EP:
+   \   00000000   0x........         DC32 USBD_EndPoint0, USBD_CDC_ACM_EP_BULKIN_Event
+   \              0x........   
+   \   00000008   0x........         DC32 USBD_CDC_ACM_EP_BULKOUT_Event, USBD_CDC_ACM_EP_INTIN_Event
+   \              0x........   
+   \   00000010   0x........         DC32 USBD_EndPoint4, USBD_EndPoint5, USBD_EndPoint6, USBD_EndPoint7
+   \              0x........   
+   \              0x........   
+   \              0x........   
+   \   00000020   0x........         DC32 USBD_EndPoint8, USBD_EndPoint9, USBD_EndPoint10, USBD_EndPoint11
+   \              0x........   
+   \              0x........   
+   \              0x........   
+   \   00000030   0x........         DC32 USBD_EndPoint12, USBD_EndPoint13, USBD_EndPoint14, USBD_EndPoint15
+   \              0x........   
+   \              0x........   
+   \              0x........   
+
+   \                                 In section .rodata, align 4
+   \   __absolute BOOL const __rtx
+   \                     __rtx:
+   \   00000000   0x00000000         DC32 0
+
+   \                                 In section .text, align 2, keep-with-next
+   \   __interwork __softfp void usbd_os_evt_set(U16, U32)
+   \                     usbd_os_evt_set: (+1)
+   \   00000000   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   __interwork __softfp U16 usbd_os_evt_get(void)
+   \                     usbd_os_evt_get: (+1)
+   \   00000000   0x2000             MOVS     R0,#+0
+   \   00000002   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   __interwork __softfp U32 usbd_os_evt_wait_or(U16, U16)
+   \                     usbd_os_evt_wait_or: (+1)
+   \   00000000   0x2000             MOVS     R0,#+0
+   \   00000002   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   __interwork __softfp void usbd_class_init(void)
+   \                     usbd_class_init: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+   \   00000002   0x.... 0x....      BL       USBD_CDC_ACM_Initialize
+   \   00000006   0xBD01             POP      {R0,PC}          ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   __interwork __softfp void USBD_RTX_TaskInit(void)
+   \                     USBD_RTX_TaskInit: (+1)
+   \   00000000   0x4770             BX       LR               ;; return
+
+   \                                 In section .rodata, align 4
+   \   __absolute U8 const USBD_HID_ReportDescriptor[33]
+   \                     USBD_HID_ReportDescriptor:
+   \   00000000   0x06 0x00          DC8 6, 0, 255, 9, 1, 161, 1, 21, 0, 38, 255, 0, 117, 8, 149, 64, 9, 1
+   \              0xFF 0x09    
+   \              0x01 0xA1    
+   \              0x01 0x15    
+   \              0x00 0x26    
+   \              0xFF 0x00    
+   \              0x75 0x08    
+   \              0x95 0x40    
+   \              0x09 0x01    
+   \   00000012   0x81 0x02          DC8 129, 2, 149, 64, 9, 1, 145, 2, 149, 1, 9, 1, 177, 2, 192, 0, 0, 0
+   \              0x95 0x40    
+   \              0x09 0x01    
+   \              0x91 0x02    
+   \              0x95 0x01    
+   \              0x09 0x01    
+   \              0xB1 0x02    
+   \              0xC0 0x00    
+   \              0x00 0x00    
+
+   \                                 In section .rodata, align 2
+   \   __absolute U16 const USBD_HID_ReportDescriptorSize
+   \                     USBD_HID_ReportDescriptorSize:
+   \   00000000   0x0021             DC16 33
+
+   \                                 In section .rodata, align 2
+   \   __absolute U16 const USBD_HID_DescriptorOffset
+   \                     USBD_HID_DescriptorOffset:
+   \   00000000   0x004C             DC16 76
+
+   \                                 In section .rodata, align 4
+   \   __absolute U8 const USBD_DeviceDescriptor[18]
+   \                     USBD_DeviceDescriptor:
+   \   00000000   0x12 0x01          DC8 18, 1, 16, 1, 2, 0, 0, 64, 184, 4, 6, 5, 0, 1, 1, 2, 3, 1, 0, 0
+   \              0x10 0x01    
+   \              0x02 0x00    
+   \              0x00 0x40    
+   \              0xB8 0x04    
+   \              0x06 0x05    
+   \              0x00 0x01    
+   \              0x01 0x02    
+   \              0x03 0x01    
+   \              0x00 0x00    
+
+   \                                 In section .rodata, align 1
+   \   __absolute U8 const USBD_DeviceQualifier[1]
+   \                     USBD_DeviceQualifier:
+   \   00000000   0x00               DC8 0
+
+   \                                 In section .rodata, align 1
+   \   __absolute U8 const USBD_DeviceQualifier_HS[1]
+   \                     USBD_DeviceQualifier_HS:
+   \   00000000   0x00               DC8 0
+
+   \                                 In section .rodata, align 4
+   \   __absolute U8 const USBD_ConfigDescriptor[68]
+   \                     USBD_ConfigDescriptor:
+   \   00000000   0x09 0x02          DC8 9, 2, 67, 0, 2, 1, 0, 224, 250, 9, 4, 1, 0, 1, 2, 2, 1, 4, 5, 36, 0
+   \              0x43 0x00    
+   \              0x02 0x01    
+   \              0x00 0xE0    
+   \              0xFA 0x09    
+   \              0x04 0x01    
+   \              0x00 0x01    
+   \              0x02 0x02    
+   \              0x01 0x04    
+   \              0x05 0x24    
+   \              0x00         
+   \   00000015   0x10 0x01          DC8 16, 1, 5, 36, 1, 3, 2, 4, 36, 2, 6, 5, 36, 6, 1, 2, 7, 5, 131, 3
+   \              0x05 0x24    
+   \              0x01 0x03    
+   \              0x02 0x04    
+   \              0x24 0x02    
+   \              0x06 0x05    
+   \              0x24 0x06    
+   \              0x01 0x02    
+   \              0x07 0x05    
+   \              0x83 0x03    
+   \   00000029   0x10 0x00          DC8 16, 0, 32, 9, 4, 2, 0, 2, 10, 0, 0, 5, 7, 5, 2, 2, 64, 0, 0, 7, 5
+   \              0x20 0x09    
+   \              0x04 0x02    
+   \              0x00 0x02    
+   \              0x0A 0x00    
+   \              0x00 0x05    
+   \              0x07 0x05    
+   \              0x02 0x02    
+   \              0x40 0x00    
+   \              0x00 0x07    
+   \              0x05         
+   \   0000003E   0x81 0x02          DC8 129, 2, 64, 0, 0, 0
+   \              0x40 0x00    
+   \              0x00 0x00    
+
+   \                                 In section .rodata, align 1
+   \   __absolute U8 const USBD_ConfigDescriptor_HS[1]
+   \                     USBD_ConfigDescriptor_HS:
+   \   00000000   0x00               DC8 0
+
+   \                                 In section .rodata, align 1
+   \   __absolute U8 const USBD_OtherSpeedConfigDescriptor[1]
+   \                     USBD_OtherSpeedConfigDescriptor:
+   \   00000000   0x00               DC8 0
+
+   \                                 In section .rodata, align 1
+   \   __absolute U8 const USBD_OtherSpeedConfigDescriptor_HS[1]
+   \                     USBD_OtherSpeedConfigDescriptor_HS:
+   \   00000000   0x00               DC8 0
+
+   \                                 In section .rodata, align 4
+   \   __absolute struct <unnamed> const USBD_StringDescriptor
+   \                     USBD_StringDescriptor:
+   \   00000000   0x04 0x03          DC8 4, 3
+   \   00000002   0x0409             DC16 1033
+   \   00000004   0x0C 0x03          DC8 12, 3
+   \   00000006   0x45 0x00          DC8 45H, 0, 50H, 0, 53H, 0, 4FH, 0
+   \              0x50 0x00    
+   \              0x53 0x00    
+   \              0x4F 0x00    
+   \   0000000E   0x4E 0x00          DC8 4EH, 0
+   \   00000010   0x20 0x03          DC8 32, 3
+   \   00000012   0x45 0x00          DC8 45H, 0, 50H, 0, 53H, 0, 4FH, 0
+   \              0x50 0x00    
+   \              0x53 0x00    
+   \              0x4F 0x00    
+   \   0000001A   0x4E 0x00          DC8 4EH, 0, 20H, 0, 43H, 0, 4DH, 0
+   \              0x20 0x00    
+   \              0x43 0x00    
+   \              0x4D 0x00    
+   \   00000022   0x53 0x00          DC8 53H, 0, 49H, 0, 53H, 0, 2DH, 0
+   \              0x49 0x00    
+   \              0x53 0x00    
+   \              0x2D 0x00    
+   \   0000002A   0x43 0x00          DC8 43H, 0, 44H, 0, 43H, 0
+   \              0x44 0x00    
+   \              0x43 0x00    
+   \   00000030   0x1A 0x03          DC8 26, 3
+   \   00000032   0x30 0x00          DC8 30H, 0, 30H, 0, 30H, 0, 31H, 0
+   \              0x30 0x00    
+   \              0x30 0x00    
+   \              0x31 0x00    
+   \   0000003A   0x41 0x00          DC8 41H, 0, 30H, 0, 30H, 0, 30H, 0
+   \              0x30 0x00    
+   \              0x30 0x00    
+   \              0x30 0x00    
+   \   00000042   0x30 0x00          DC8 30H, 0, 30H, 0, 30H, 0, 30H, 0
+   \              0x30 0x00    
+   \              0x30 0x00    
+   \              0x30 0x00    
+   \   0000004A   0x10 0x03          DC8 16, 3
+   \   0000004C   0x55 0x00          DC8 55H, 0, 53H, 0, 42H, 0, 5FH, 0
+   \              0x53 0x00    
+   \              0x42 0x00    
+   \              0x5F 0x00    
+   \   00000054   0x43 0x00          DC8 43H, 0, 44H, 0, 43H, 0
+   \              0x44 0x00    
+   \              0x43 0x00    
+   \   0000005A   0x12 0x03          DC8 18, 3
+   \   0000005C   0x55 0x00          DC8 55H, 0, 53H, 0, 42H, 0, 5FH, 0
+   \              0x53 0x00    
+   \              0x42 0x00    
+   \              0x5F 0x00    
+   \   00000064   0x43 0x00          DC8 43H, 0, 44H, 0, 43H, 0, 31H, 0
+   \              0x44 0x00    
+   \              0x43 0x00    
+   \              0x31 0x00    
+     20          #include <S1C31.h>
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void NVIC_EnableIRQ(IRQn_Type)
+   \                     NVIC_EnableIRQ: (+1)
+   \   00000000   0xB500             PUSH     {LR}
+   \   00000002   0xB240             SXTB     R0,R0
+   \   00000004   0x2800             CMP      R0,#+0
+   \   00000006   0xD405             BMI      ??NVIC_EnableIRQ_0
+   \   00000008   0x2101             MOVS     R1,#+1
+   \   0000000A   0x06C0             LSLS     R0,R0,#+27       ;; ZeroExtS R0,R0,#+27,#+27
+   \   0000000C   0x0EC0             LSRS     R0,R0,#+27
+   \   0000000E   0x4081             LSLS     R1,R1,R0
+   \   00000010   0x....             LDR      R0,??DataTable10  ;; 0xe000e100
+   \   00000012   0x6001             STR      R1,[R0, #+0]
+   \                     ??NVIC_EnableIRQ_0: (+1)
+   \   00000014   0xBD00             POP      {PC}             ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void NVIC_DisableIRQ(IRQn_Type)
+   \                     NVIC_DisableIRQ: (+1)
+   \   00000000   0xB500             PUSH     {LR}
+   \   00000002   0xB240             SXTB     R0,R0
+   \   00000004   0x2800             CMP      R0,#+0
+   \   00000006   0xD405             BMI      ??NVIC_DisableIRQ_0
+   \   00000008   0x2101             MOVS     R1,#+1
+   \   0000000A   0x06C0             LSLS     R0,R0,#+27       ;; ZeroExtS R0,R0,#+27,#+27
+   \   0000000C   0x0EC0             LSRS     R0,R0,#+27
+   \   0000000E   0x4081             LSLS     R1,R1,R0
+   \   00000010   0x....             LDR      R0,??DataTable10_1  ;; 0xe000e180
+   \   00000012   0x6001             STR      R1,[R0, #+0]
+   \                     ??NVIC_DisableIRQ_0: (+1)
+   \   00000014   0xBD00             POP      {PC}             ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void NVIC_ClearPendingIRQ(IRQn_Type)
+   \                     NVIC_ClearPendingIRQ: (+1)
+   \   00000000   0xB500             PUSH     {LR}
+   \   00000002   0xB240             SXTB     R0,R0
+   \   00000004   0x2800             CMP      R0,#+0
+   \   00000006   0xD405             BMI      ??NVIC_ClearPendingIRQ_0
+   \   00000008   0x2101             MOVS     R1,#+1
+   \   0000000A   0x06C0             LSLS     R0,R0,#+27       ;; ZeroExtS R0,R0,#+27,#+27
+   \   0000000C   0x0EC0             LSRS     R0,R0,#+27
+   \   0000000E   0x4081             LSLS     R1,R1,R0
+   \   00000010   0x....             LDR      R0,??DataTable10_2  ;; 0xe000e280
+   \   00000012   0x6001             STR      R1,[R0, #+0]
+   \                     ??NVIC_ClearPendingIRQ_0: (+1)
+   \   00000014   0xBD00             POP      {PC}             ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp void NVIC_SetPriority(IRQn_Type, uint32_t)
+   \                     NVIC_SetPriority: (+1)
+   \   00000000   0xB5F0             PUSH     {R4-R7,LR}
+   \   00000002   0xB240             SXTB     R0,R0
+   \   00000004   0x2800             CMP      R0,#+0
+   \   00000006   0xD41B             BMI      ??NVIC_SetPriority_0
+   \   00000008   0x....             LDR      R2,??DataTable10_3  ;; 0xe000e400
+   \   0000000A   0xB240             SXTB     R0,R0
+   \   0000000C   0x0883             LSRS     R3,R0,#+2
+   \   0000000E   0x2404             MOVS     R4,#+4
+   \   00000010   0x4363             MULS     R3,R4,R3
+   \   00000012   0x58D2             LDR      R2,[R2, R3]
+   \   00000014   0x23FF             MOVS     R3,#+255
+   \   00000016   0x0784             LSLS     R4,R0,#+30       ;; ZeroExtS R4,R0,#+30,#+30
+   \   00000018   0x0FA4             LSRS     R4,R4,#+30
+   \   0000001A   0x2508             MOVS     R5,#+8
+   \   0000001C   0x436C             MULS     R4,R5,R4
+   \   0000001E   0x40A3             LSLS     R3,R3,R4
+   \   00000020   0x439A             BICS     R2,R2,R3
+   \   00000022   0x0189             LSLS     R1,R1,#+6
+   \   00000024   0xB2C9             UXTB     R1,R1
+   \   00000026   0x0783             LSLS     R3,R0,#+30       ;; ZeroExtS R3,R0,#+30,#+30
+   \   00000028   0x0F9B             LSRS     R3,R3,#+30
+   \   0000002A   0x2408             MOVS     R4,#+8
+   \   0000002C   0x4363             MULS     R3,R4,R3
+   \   0000002E   0x4099             LSLS     R1,R1,R3
+   \   00000030   0x4311             ORRS     R1,R1,R2
+   \   00000032   0x....             LDR      R2,??DataTable10_3  ;; 0xe000e400
+   \   00000034   0xB240             SXTB     R0,R0
+   \   00000036   0x0880             LSRS     R0,R0,#+2
+   \   00000038   0x2304             MOVS     R3,#+4
+   \   0000003A   0x4358             MULS     R0,R3,R0
+   \   0000003C   0x5011             STR      R1,[R2, R0]
+   \   0000003E   0xE020             B        ??NVIC_SetPriority_1
+   \                     ??NVIC_SetPriority_0: (+1)
+   \   00000040   0x....             LDR      R3,??DataTable10_4  ;; 0xe000ed1c
+   \   00000042   0xB240             SXTB     R0,R0
+   \   00000044   0x0702             LSLS     R2,R0,#+28       ;; ZeroExtS R2,R0,#+28,#+28
+   \   00000046   0x0F12             LSRS     R2,R2,#+28
+   \   00000048   0x3A08             SUBS     R2,R2,#+8
+   \   0000004A   0x0892             LSRS     R2,R2,#+2
+   \   0000004C   0x2404             MOVS     R4,#+4
+   \   0000004E   0x4362             MULS     R2,R4,R2
+   \   00000050   0x....             LDR      R4,??DataTable10_4  ;; 0xe000ed1c
+   \   00000052   0xB240             SXTB     R0,R0
+   \   00000054   0x0705             LSLS     R5,R0,#+28       ;; ZeroExtS R5,R0,#+28,#+28
+   \   00000056   0x0F2D             LSRS     R5,R5,#+28
+   \   00000058   0x3D08             SUBS     R5,R5,#+8
+   \   0000005A   0x08AD             LSRS     R5,R5,#+2
+   \   0000005C   0x2604             MOVS     R6,#+4
+   \   0000005E   0x4375             MULS     R5,R6,R5
+   \   00000060   0x5964             LDR      R4,[R4, R5]
+   \   00000062   0x25FF             MOVS     R5,#+255
+   \   00000064   0x0786             LSLS     R6,R0,#+30       ;; ZeroExtS R6,R0,#+30,#+30
+   \   00000066   0x0FB6             LSRS     R6,R6,#+30
+   \   00000068   0x2708             MOVS     R7,#+8
+   \   0000006A   0x437E             MULS     R6,R7,R6
+   \   0000006C   0x40B5             LSLS     R5,R5,R6
+   \   0000006E   0x43AC             BICS     R4,R4,R5
+   \   00000070   0x0189             LSLS     R1,R1,#+6
+   \   00000072   0xB2C9             UXTB     R1,R1
+   \   00000074   0x0780             LSLS     R0,R0,#+30       ;; ZeroExtS R0,R0,#+30,#+30
+   \   00000076   0x0F80             LSRS     R0,R0,#+30
+   \   00000078   0x2508             MOVS     R5,#+8
+   \   0000007A   0x4368             MULS     R0,R5,R0
+   \   0000007C   0x4081             LSLS     R1,R1,R0
+   \   0000007E   0x4321             ORRS     R1,R1,R4
+   \   00000080   0x5099             STR      R1,[R3, R2]
+   \                     ??NVIC_SetPriority_1: (+1)
+   \   00000082   0xBDF0             POP      {R4-R7,PC}       ;; return
+     21          #include "system_S1C31.h"
+     22          #include "se_usb.h"
+     23          #include "se_svd2.h"
+     24          #include "se_common.h"
+     25          
+
+   \                                 In section .bss, align 4
+     26          uint32_t gFrameNumber;
+   \                     gFrameNumber:
+   \   00000000                      DS8 4
+
+   \                                 In section .bss, align 2
+     27          uint16_t gSetupToken;
+   \                     gSetupToken:
+   \   00000000                      DS8 2
+
+   \                                 In section .bss, align 2
+     28          uint16_t gRemoteWakeUpConfigured;
+   \                     gRemoteWakeUpConfigured:
+   \   00000000                      DS8 2
+
+   \                                 In section .bss, align 4
+     29          uint8_t  gEpSize[USBD_EP_NUM + 1];
+   \                     gEpSize:
+   \   00000000                      DS8 4
+     30          
+     31          static void handleEpaInt( void );
+     32          static void handleEpbInt( void );
+     33          static void handleEpcInt( void );
+     34          
+     35          
+     36          /*
+     37           *  USB Device Initialize Function
+     38           *   Called by the User to initialize USB
+     39           *   Function does low level initialization 
+     40           *   by starting nessesary clocks. 
+     41           *   Return Value:    None
+     42           */
+     43          
+
+   \                                 In section .text, align 2, keep-with-next
+     44          void USBD_Init( void ) {
+   \                     USBD_Init: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+     45            
+     46            gEpSize[0] = USBD_MAX_PACKET0;
+   \   00000002   0x2040             MOVS     R0,#+64
+   \   00000004   0x....             LDR      R1,??DataTable10_5
+   \   00000006   0x7008             STRB     R0,[R1, #+0]
+     47            seUSB_InitTypeDef InitStruct; 
+     48            InitStruct.ClkSrc = seUSB_PLL; //  C31W74
+   \   00000008   0x2000             MOVS     R0,#+0
+   \   0000000A   0x4669             MOV      R1,SP
+   \   0000000C   0x7008             STRB     R0,[R1, #+0]
+     49            seCLG_Start( seCLG_OSC3 );
+   \   0000000E   0x2002             MOVS     R0,#+2
+   \   00000010   0x.... 0x....      BL       seCLG_Start
+     50          #ifdef USB_WITH_DMA
+     51            InitStruct.DmaChIn = seUSB_DMACH_IN;
+     52            InitStruct.DmaChOut = seUSB_DMACH_OUT;
+     53          #endif
+     54            seUSB_Init( &InitStruct );
+   \   00000014   0x4668             MOV      R0,SP
+   \   00000016   0x.... 0x....      BL       seUSB_Init
+     55            seUSB_ConfigurePortsForUsb( seUSB_GPIO );  
+   \   0000001A   0x2000             MOVS     R0,#+0
+   \   0000001C   0x.... 0x....      BL       seUSB_ConfigurePortsForUsb
+     56          
+     57          }
+   \   00000020   0xBD01             POP      {R0,PC}          ;; return
+     58          
+     59          
+     60          /*
+     61           *  USB Device Connect Function
+     62           *   Called by the User to Connect/Disconnect USB Device
+     63           *    Parameters:      con:   Connect/Disconnect
+     64           *    Return Value:    None
+     65           */
+     66          
+
+   \                                 In section .text, align 2, keep-with-next
+     67          void USBD_Connect( uint32_t con ) {
+   \                     USBD_Connect: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+     68            
+     69            if ( con ) 
+   \   00000002   0x2800             CMP      R0,#+0
+   \   00000004   0xD002             BEQ      ??USBD_Connect_0
+     70              seUSB_Connect();
+   \   00000006   0x.... 0x....      BL       seUSB_Connect
+   \   0000000A   0xE001             B        ??USBD_Connect_1
+     71            else 
+     72              seUSB_Disconnect();
+   \                     ??USBD_Connect_0: (+1)
+   \   0000000C   0x.... 0x....      BL       seUSB_Disconnect
+     73          
+     74          }
+   \                     ??USBD_Connect_1: (+1)
+   \   00000010   0xBD01             POP      {R0,PC}          ;; return
+     75          
+     76          
+     77          /*
+     78           *  USB Device Reset Function
+     79           *   Called automatically on USB Device Reset
+     80           *    Return Value:    None
+     81           */
+     82          
+
+   \                                 In section .text, align 2, keep-with-next
+     83          void USBD_Reset( void ) {
+   \                     USBD_Reset: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+     84            
+     85            gFrameNumber = 0;
+   \   00000002   0x2000             MOVS     R0,#+0
+   \   00000004   0x....             LDR      R1,??DataTable10_6
+   \   00000006   0x6008             STR      R0,[R1, #+0]
+     86            gSetupToken = 0;
+   \   00000008   0x2000             MOVS     R0,#+0
+   \   0000000A   0x....             LDR      R1,??DataTable10_7
+   \   0000000C   0x8008             STRH     R0,[R1, #+0]
+     87            gRemoteWakeUpConfigured = 0;
+   \   0000000E   0x2000             MOVS     R0,#+0
+   \   00000010   0x....             LDR      R1,??DataTable10_8
+   \   00000012   0x8008             STRH     R0,[R1, #+0]
+     88            seUSB_Reset();
+   \   00000014   0x.... 0x....      BL       seUSB_Reset
+     89            seUSB_ClearEPnFifos();
+   \   00000018   0x.... 0x....      BL       seUSB_ClearEPnFifos
+     90            seUSB_InitEp0();
+   \   0000001C   0x.... 0x....      BL       seUSB_InitEp0
+     91            seUSB_ClearAllIntFlags();
+   \   00000020   0x.... 0x....      BL       seUSB_ClearAllIntFlags
+     92          
+     93          }
+   \   00000024   0xBD01             POP      {R0,PC}          ;; return
+     94          
+     95          /*
+     96           *  USB Device Suspend Function
+     97           *   Called automatically on USB Device Suspend
+     98           *    Return Value:    None
+     99           */
+    100          
+
+   \                                 In section .text, align 2, keep-with-next
+    101          void USBD_Suspend( void ) {
+   \                     USBD_Suspend: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    102          
+    103            seUSB_Suspend();
+   \   00000002   0x.... 0x....      BL       seUSB_Suspend
+    104          
+    105          }
+   \   00000006   0xBD01             POP      {R0,PC}          ;; return
+    106          
+    107          
+    108          /*
+    109           *  USB Device Resume Function
+    110           *   Called automatically on USB Device Resume
+    111           *    Return Value:    None
+    112           */
+    113          
+
+   \                                 In section .text, align 2, keep-with-next
+    114          void USBD_Resume( void ) {
+   \                     USBD_Resume: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    115          
+    116            seUSB_Resume();
+   \   00000002   0x.... 0x....      BL       seUSB_Resume
+    117          
+    118          }
+   \   00000006   0xBD01             POP      {R0,PC}          ;; return
+    119          
+    120          
+    121          /*
+    122           *  USB Device Remote Wakeup Function
+    123           *   Called automatically on USB Device Remote Wakeup
+    124           *    Return Value:    None
+    125           */
+    126          
+
+   \                                 In section .text, align 2, keep-with-next
+    127          void USBD_WakeUp( void ) {
+   \                     USBD_WakeUp: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    128            
+    129            if ( gRemoteWakeUpConfigured ) {
+   \   00000002   0x....             LDR      R0,??DataTable10_8
+   \   00000004   0x8800             LDRH     R0,[R0, #+0]
+   \   00000006   0x2800             CMP      R0,#+0
+   \   00000008   0xD001             BEQ      ??USBD_WakeUp_0
+    130              seUSB_WakeUp();
+   \   0000000A   0x.... 0x....      BL       seUSB_WakeUp
+    131            }
+    132          }
+   \                     ??USBD_WakeUp_0: (+1)
+   \   0000000E   0xBD01             POP      {R0,PC}          ;; return
+    133          
+    134          
+    135          /*
+    136           *  USB Device Remote Wakeup Configuration Function
+    137           *    Parameters:      cfg:   Device Enable/Disable
+    138           *    Return Value:    None
+    139           */
+    140          
+
+   \                                 In section .text, align 2, keep-with-next
+    141          void USBD_WakeUpCfg( uint32_t cfg ) {
+    142            
+    143            gRemoteWakeUpConfigured  = cfg;
+   \                     USBD_WakeUpCfg: (+1)
+   \   00000000   0x....             LDR      R1,??DataTable10_8
+   \   00000002   0x8008             STRH     R0,[R1, #+0]
+    144          
+    145          }
+   \   00000004   0x4770             BX       LR               ;; return
+    146          
+    147          /*
+    148           *  USB Device Set Address Function
+    149           *    Parameters:      adr:   USB Device Address
+    150           *    Return Value:    None
+    151           */
+    152          
+
+   \                                 In section .text, align 2, keep-with-next
+    153          void USBD_SetAddress( uint32_t  adr, uint32_t setup ) {
+   \                     USBD_SetAddress: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    154          
+    155            seUSB_SetAddress( adr, setup );
+   \   00000002   0x.... 0x....      BL       seUSB_SetAddress
+    156          
+    157          }
+   \   00000006   0xBD01             POP      {R0,PC}          ;; return
+    158          
+    159          
+    160          /*
+    161           *  USB Device Configure Function
+    162           *    Parameters:      cfg:   Device Configure/Deconfigure
+    163           *    Return Value:    None
+    164           */
+    165          
+
+   \                                 In section .text, align 2, keep-with-next
+    166          void USBD_Configure( uint32_t cfg ) {
+    167            
+    168            /* Not needed */
+    169          
+    170          }
+   \                     USBD_Configure: (+1)
+   \   00000000   0x4770             BX       LR               ;; return
+    171          
+    172          
+    173          /*
+    174           *  Configure USB Device Endpoint according to Descriptor
+    175           *    Parameters:      pEPD:  Pointer to Device Endpoint Descriptor
+    176           *    Return Value:    None
+    177           */
+    178          
+
+   \                                 In section .text, align 2, keep-with-next
+    179          void USBD_ConfigEP( USB_ENDPOINT_DESCRIPTOR *pEPD ) {
+   \                     USBD_ConfigEP: (+1)
+   \   00000000   0xB510             PUSH     {R4,LR}
+    180          
+    181            uint32_t num, val, dir;
+    182          
+    183            num = pEPD->bEndpointAddress & 0x7; //  may be 0xf
+   \   00000002   0x7881             LDRB     R1,[R0, #+2]
+   \   00000004   0x074C             LSLS     R4,R1,#+29       ;; ZeroExtS R4,R1,#+29,#+29
+   \   00000006   0x0F64             LSRS     R4,R4,#+29
+    184            val = pEPD->wMaxPacketSize;
+   \   00000008   0x7901             LDRB     R1,[R0, #+4]
+   \   0000000A   0x7942             LDRB     R2,[R0, #+5]
+   \   0000000C   0x0612             LSLS     R2,R2,#+24       ;; ZeroExtS R2,R2,#+24,#+16
+   \   0000000E   0x0C12             LSRS     R2,R2,#+16
+   \   00000010   0x4311             ORRS     R1,R1,R2
+   \   00000012   0xB289             UXTH     R1,R1
+    185            dir = 1;
+   \   00000014   0x2201             MOVS     R2,#+1
+    186          
+    187            if ( !( pEPD->bEndpointAddress & 0x80 ) ) {
+   \   00000016   0x7880             LDRB     R0,[R0, #+2]
+   \   00000018   0x0600             LSLS     R0,R0,#+24
+   \   0000001A   0xD403             BMI      ??USBD_ConfigEP_0
+    188              gEpSize[num] = val;
+   \   0000001C   0x0008             MOVS     R0,R1
+   \   0000001E   0x....             LDR      R2,??DataTable11
+   \   00000020   0x5510             STRB     R0,[R2, R4]
+    189              dir = 0;
+   \   00000022   0x2200             MOVS     R2,#+0
+    190            }  
+    191            seUSB_ConfigureEPm( num, val, dir );
+   \                     ??USBD_ConfigEP_0: (+1)
+   \   00000024   0x0020             MOVS     R0,R4
+   \   00000026   0x.... 0x....      BL       seUSB_ConfigureEPm
+    192            USBD_ResetEP( num );
+   \   0000002A   0x0020             MOVS     R0,R4
+   \   0000002C   0x.... 0x....      BL       USBD_ResetEP
+    193          
+    194          }
+   \   00000030   0xBD10             POP      {R4,PC}          ;; return
+    195          
+    196          
+    197          /*
+    198           *  Set Direction for USB Device Control Endpoint
+    199           *    Parameters:      dir:   Out (dir == 0), In (dir = 1)
+    200           *    Return Value:    None
+    201           */
+    202          
+
+   \                                 In section .text, align 2, keep-with-next
+    203          void USBD_DirCtrlEP( uint32_t dir ) {
+   \                     USBD_DirCtrlEP: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    204          
+    205            seUSB_SetEp0Dir(dir);
+   \   00000002   0x.... 0x....      BL       seUSB_SetEp0Dir
+    206          
+    207          }
+   \   00000006   0xBD01             POP      {R0,PC}          ;; return
+    208          
+    209          
+    210          /*
+    211           *  Enable USB Device Endpoint
+    212           *    Parameters:      EPNum: Device Endpoint Number
+    213           *                       EPNum.0..3: Address
+    214           *                       EPNum.7:    Dir
+    215           *    Return Value:    None
+    216           */
+    217          
+
+   \                                 In section .text, align 2, keep-with-next
+    218          void USBD_EnableEP( uint32_t EPNum ) {
+   \                     USBD_EnableEP: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    219          
+    220              seUSB_EnableEPm( EPNum & 0xf );
+   \   00000002   0x0700             LSLS     R0,R0,#+28       ;; ZeroExtS R0,R0,#+28,#+28
+   \   00000004   0x0F00             LSRS     R0,R0,#+28
+   \   00000006   0x.... 0x....      BL       seUSB_EnableEPm
+    221          }
+   \   0000000A   0xBD01             POP      {R0,PC}          ;; return
+    222          
+    223          /*
+    224           *  Disable USB Endpoint
+    225           *    Parameters:      EPNum: Endpoint Number
+    226           *                       EPNum.0..3: Address
+    227           *                       EPNum.7:    Dir
+    228           *    Return Value:    None
+    229           */
+    230          
+
+   \                                 In section .text, align 2, keep-with-next
+    231          void USBD_DisableEP( uint32_t EPNum ) {
+   \                     USBD_DisableEP: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    232          
+    233            seUSB_DisableEPm( EPNum & 0xf );
+   \   00000002   0x0700             LSLS     R0,R0,#+28       ;; ZeroExtS R0,R0,#+28,#+28
+   \   00000004   0x0F00             LSRS     R0,R0,#+28
+   \   00000006   0x.... 0x....      BL       seUSB_DisableEPm
+    234          }
+   \   0000000A   0xBD01             POP      {R0,PC}          ;; return
+    235          
+    236          /*
+    237           *  Reset USB Device Endpoint
+    238           *    Parameters:      EPNum: Device Endpoint Number
+    239           *                       EPNum.0..3: Address
+    240           *                       EPNum.7:    Dir
+    241           *    Return Value:    None
+    242           */
+    243          
+
+   \                                 In section .text, align 2, keep-with-next
+    244          void USBD_ResetEP( uint32_t EPNum ) {
+   \                     USBD_ResetEP: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    245          
+    246            seUSB_ResetEPm( EPNum & 0xf );
+   \   00000002   0x0700             LSLS     R0,R0,#+28       ;; ZeroExtS R0,R0,#+28,#+28
+   \   00000004   0x0F00             LSRS     R0,R0,#+28
+   \   00000006   0x.... 0x....      BL       seUSB_ResetEPm
+    247          
+    248          }
+   \   0000000A   0xBD01             POP      {R0,PC}          ;; return
+    249          
+    250          /*
+    251           *  Set Stall for USB Device Endpoint
+    252           *    Parameters:      EPNum: Device Endpoint Number
+    253           *                       EPNum.0..3: Address
+    254           *                       EPNum.7:    Dir
+    255           *    Return Value:    None
+    256           */
+    257          
+
+   \                                 In section .text, align 2, keep-with-next
+    258          void USBD_SetStallEP( uint32_t EPNum ) {
+   \                     USBD_SetStallEP: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    259          
+    260            seUSB_SetStall( EPNum & 0xf );
+   \   00000002   0x0700             LSLS     R0,R0,#+28       ;; ZeroExtS R0,R0,#+28,#+28
+   \   00000004   0x0F00             LSRS     R0,R0,#+28
+   \   00000006   0x.... 0x....      BL       seUSB_SetStall
+    261          
+    262          }
+   \   0000000A   0xBD01             POP      {R0,PC}          ;; return
+    263          
+    264          
+    265          /*
+    266           *  Clear Stall for USB Device Endpoint
+    267           *    Parameters:      EPNum: Device Endpoint Number
+    268           *                       EPNum.0..3: Address
+    269           *                       EPNum.7:    Dir
+    270           *    Return Value:    None
+    271           */
+    272          
+
+   \                                 In section .text, align 2, keep-with-next
+    273          void USBD_ClrStallEP( uint32_t EPNum ) {
+   \                     USBD_ClrStallEP: (+1)
+   \   00000000   0xB510             PUSH     {R4,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+    274          
+    275            EPNum &= 0xf;
+   \   00000004   0x0724             LSLS     R4,R4,#+28       ;; ZeroExtS R4,R4,#+28,#+28
+   \   00000006   0x0F24             LSRS     R4,R4,#+28
+    276            seUSB_ClrStall( EPNum );
+   \   00000008   0x0020             MOVS     R0,R4
+   \   0000000A   0x.... 0x....      BL       seUSB_ClrStall
+    277            USBD_ResetEP( EPNum );
+   \   0000000E   0x0020             MOVS     R0,R4
+   \   00000010   0x.... 0x....      BL       USBD_ResetEP
+    278          
+    279          }
+   \   00000014   0xBD10             POP      {R4,PC}          ;; return
+    280          
+    281          /*
+    282           *  Clear USB Device Endpoint Buffer
+    283           *    Parameters:      EPNum: Device Endpoint Number
+    284           *                       EPNum.0..3: Address
+    285           *                       EPNum.7:    Dir
+    286           *    Return Value:    None
+    287           */
+    288          
+
+   \                                 In section .text, align 2, keep-with-next
+    289          void USBD_ClearEPBuf( uint32_t EPNum ) {
+   \                     USBD_ClearEPBuf: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    290          
+    291            seUSB_ClearEPmFifo( EPNum & 0xf );
+   \   00000002   0x0700             LSLS     R0,R0,#+28       ;; ZeroExtS R0,R0,#+28,#+28
+   \   00000004   0x0F00             LSRS     R0,R0,#+28
+   \   00000006   0x.... 0x....      BL       seUSB_ClearEPmFifo
+    292          
+    293          }
+   \   0000000A   0xBD01             POP      {R0,PC}          ;; return
+    294          
+    295          
+    296          /*
+    297           *  Read USB Device Endpoint Data
+    298           *    Parameters:      EPNum: Device Endpoint Number
+    299           *                       EPNum.0..3: Address
+    300           *                       EPNum.7:    Dir
+    301           *                     pData: Pointer to Data Buffer
+    302           *    Return Value:    Number of bytes read
+    303           */
+    304          
+
+   \                                 In section .text, align 2, keep-with-next
+    305          uint32_t USBD_ReadEP( uint32_t EPNum, uint8_t *pData ) {
+   \                     USBD_ReadEP: (+1)
+   \   00000000   0xB510             PUSH     {R4,LR}
+    306          
+    307            uint32_t sz = gEpSize[EPNum & 0xf]; 
+   \   00000002   0x....             LDR      R2,??DataTable10_5
+   \   00000004   0x0703             LSLS     R3,R0,#+28       ;; ZeroExtS R3,R0,#+28,#+28
+   \   00000006   0x0F1B             LSRS     R3,R3,#+28
+   \   00000008   0x5CD4             LDRB     R4,[R2, R3]
+    308            
+    309            if ( ( EPNum == 0) && gSetupToken ) { 
+   \   0000000A   0x2800             CMP      R0,#+0
+   \   0000000C   0xD10A             BNE      ??USBD_ReadEP_0
+   \   0000000E   0x....             LDR      R2,??DataTable10_7
+   \   00000010   0x8812             LDRH     R2,[R2, #+0]
+   \   00000012   0x2A00             CMP      R2,#+0
+   \   00000014   0xD006             BEQ      ??USBD_ReadEP_0
+    310              seUSB_GetSetupPacket( (USB_SETUP_PACKET*)pData );
+   \   00000016   0x0008             MOVS     R0,R1
+   \   00000018   0x.... 0x....      BL       seUSB_GetSetupPacket
+    311              gSetupToken = 0;
+   \   0000001C   0x2000             MOVS     R0,#+0
+   \   0000001E   0x....             LDR      R1,??DataTable10_7
+   \   00000020   0x8008             STRH     R0,[R1, #+0]
+   \   00000022   0xE006             B        ??USBD_ReadEP_1
+    312            } else {
+    313              sz = seUSB_ReadFifo( EPNum & 0xf, pData, sz );
+   \                     ??USBD_ReadEP_0: (+1)
+   \   00000024   0x0022             MOVS     R2,R4
+   \   00000026   0xB292             UXTH     R2,R2
+   \   00000028   0x0700             LSLS     R0,R0,#+28       ;; ZeroExtS R0,R0,#+28,#+28
+   \   0000002A   0x0F00             LSRS     R0,R0,#+28
+   \   0000002C   0x.... 0x....      BL       seUSB_ReadFifo
+   \   00000030   0x0004             MOVS     R4,R0
+    314            }
+    315            return (sz);
+   \                     ??USBD_ReadEP_1: (+1)
+   \   00000032   0x0020             MOVS     R0,R4
+   \   00000034   0xBD10             POP      {R4,PC}          ;; return
+    316          }
+    317          
+    318          
+    319          /*
+    320           *  Write USB Device Endpoint Data
+    321           *    Parameters:      EPNum: Device Endpoint Number
+    322           *                       EPNum.0..3: Address
+    323           *                       EPNum.7:    Dir
+    324           *                     pData: Pointer to Data Buffer
+    325           *                     cnt:   Number of bytes to write
+    326           *    Return Value:    Number of bytes written
+    327           */
+    328          
+
+   \                                 In section .text, align 2, keep-with-next
+    329          uint32_t USBD_WriteEP( uint32_t EPNum, uint8_t *pData, uint32_t cnt ) {
+   \                     USBD_WriteEP: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    330            
+    331            EPNum &=0xf;
+   \   00000002   0x0700             LSLS     R0,R0,#+28       ;; ZeroExtS R0,R0,#+28,#+28
+   \   00000004   0x0F00             LSRS     R0,R0,#+28
+    332            cnt = seUSB_WriteFifo( EPNum, pData, cnt );
+   \   00000006   0xB292             UXTH     R2,R2
+   \   00000008   0xB280             UXTH     R0,R0
+   \   0000000A   0x.... 0x....      BL       seUSB_WriteFifo
+   \   0000000E   0x0002             MOVS     R2,R0
+    333            return cnt;
+   \   00000010   0x0010             MOVS     R0,R2
+   \   00000012   0xBD02             POP      {R1,PC}          ;; return
+    334          
+    335          }
+    336          
+    337          /*
+    338           *  Get USB Device Last Frame Number
+    339           *    Parameters:      None
+    340           *    Return Value:    Frame Number
+    341           */
+    342          
+
+   \                                 In section .text, align 2, keep-with-next
+    343          uint32_t USBD_GetFrame( void ) {
+    344            return gFrameNumber;
+   \                     USBD_GetFrame: (+1)
+   \   00000000   0x....             LDR      R0,??DataTable10_6
+   \   00000002   0x6800             LDR      R0,[R0, #+0]
+   \   00000004   0x4770             BX       LR               ;; return
+    345          }
+    346          
+    347          /*
+    348           *  USB Device Interrupt Service Routine
+    349           */
+
+   \                                 In section .text, align 2, keep-with-next
+    350          void USB_IRQHandler( void ) {
+   \                     USB_IRQHandler: (+1)
+   \   00000000   0xB5E0             PUSH     {R5-R7,LR}
+    351            volatile uint32_t igp, imain, isie, ip0;
+    352            imain = UsbGetMainInt() & UsbGetMainIntEn();
+   \   00000002   0x....             LDR      R0,??DataTable11_1  ;; 0x20400050
+   \   00000004   0x7800             LDRB     R0,[R0, #+0]
+   \   00000006   0xB2C0             UXTB     R0,R0
+   \   00000008   0x....             LDR      R1,??DataTable11_2  ;; 0x20400060
+   \   0000000A   0x7809             LDRB     R1,[R1, #+0]
+   \   0000000C   0xB2C9             UXTB     R1,R1
+   \   0000000E   0x4001             ANDS     R1,R1,R0
+   \   00000010   0x9101             STR      R1,[SP, #+4]
+    353            isie = UsbGetSIEInt() &  UsbGetSIEIntEn();
+   \   00000012   0x....             LDR      R0,??DataTable11_3  ;; 0x20400051
+   \   00000014   0x7800             LDRB     R0,[R0, #+0]
+   \   00000016   0xB2C0             UXTB     R0,R0
+   \   00000018   0x....             LDR      R1,??DataTable11_4  ;; 0x20400061
+   \   0000001A   0x7809             LDRB     R1,[R1, #+0]
+   \   0000001C   0xB2C9             UXTB     R1,R1
+   \   0000001E   0x4001             ANDS     R1,R1,R0
+   \   00000020   0x9100             STR      R1,[SP, #+0]
+    354            igp = UsbGetGEPInt() &  UsbGetGEPIntEn();
+   \   00000022   0x....             LDR      R0,??DataTable11_5  ;; 0x20400052
+   \   00000024   0x7800             LDRB     R0,[R0, #+0]
+   \   00000026   0xB2C0             UXTB     R0,R0
+   \   00000028   0x....             LDR      R1,??DataTable11_6  ;; 0x20400062
+   \   0000002A   0x7809             LDRB     R1,[R1, #+0]
+   \   0000002C   0xB2C9             UXTB     R1,R1
+   \   0000002E   0x4001             ANDS     R1,R1,R0
+   \   00000030   0x9102             STR      R1,[SP, #+8]
+    355            //  Sie interrupt    
+    356            if ( imain & seUSB_MAIN_SIEIF_INT ) {   
+   \   00000032   0x9801             LDR      R0,[SP, #+4]
+   \   00000034   0x0600             LSLS     R0,R0,#+24
+   \   00000036   0xD546             BPL      ??USB_IRQHandler_0
+    357              if ( isie &  seUSB_SIE_RESETIF_INT ) {   
+   \   00000038   0x9800             LDR      R0,[SP, #+0]
+   \   0000003A   0x0680             LSLS     R0,R0,#+26
+   \   0000003C   0xD50D             BPL      ??USB_IRQHandler_1
+    358          	  UsbClearSIEInt( seUSB_SIE_RESETIF_INT );
+   \   0000003E   0x2020             MOVS     R0,#+32
+   \   00000040   0x....             LDR      R1,??DataTable11_3  ;; 0x20400051
+   \   00000042   0x7008             STRB     R0,[R1, #+0]
+    359                USBD_Reset();
+   \   00000044   0x.... 0x....      BL       USBD_Reset
+    360                usbd_reset_core();
+   \   00000048   0x.... 0x....      BL       usbd_reset_core
+    361                if ( USBD_P_Reset_Event ) {
+   \   0000004C   0x....             LDR      R0,??DataTable12
+   \   0000004E   0x6800             LDR      R0,[R0, #+0]
+   \   00000050   0x2800             CMP      R0,#+0
+   \   00000052   0xD002             BEQ      ??USB_IRQHandler_1
+    362                  USBD_P_Reset_Event();
+   \   00000054   0x....             LDR      R0,??DataTable12
+   \   00000056   0x6800             LDR      R0,[R0, #+0]
+   \   00000058   0x4780             BLX      R0
+    363                }
+    364              }
+    365              
+    366              if ( isie &  seUSB_SIE_ATADDRI_INT ) {
+   \                     ??USB_IRQHandler_1: (+1)
+   \   0000005A   0x9800             LDR      R0,[SP, #+0]
+   \   0000005C   0x07C0             LSLS     R0,R0,#+31
+   \   0000005E   0xD502             BPL      ??USB_IRQHandler_2
+    367                UsbClearSIEInt( seUSB_SIE_ATADDRI_INT );
+   \   00000060   0x2001             MOVS     R0,#+1
+   \   00000062   0x....             LDR      R1,??DataTable11_3  ;; 0x20400051
+   \   00000064   0x7008             STRB     R0,[R1, #+0]
+    368              }
+    369          
+    370              if ( isie &  seUSB_SIE_SUSPENDIF_INT ) {
+   \                     ??USB_IRQHandler_2: (+1)
+   \   00000066   0x9800             LDR      R0,[SP, #+0]
+   \   00000068   0x06C0             LSLS     R0,R0,#+27
+   \   0000006A   0xD50B             BPL      ??USB_IRQHandler_3
+    371          	  UsbClearSIEInt( seUSB_SIE_SUSPENDIF_INT );
+   \   0000006C   0x2010             MOVS     R0,#+16
+   \   0000006E   0x....             LDR      R1,??DataTable11_3  ;; 0x20400051
+   \   00000070   0x7008             STRB     R0,[R1, #+0]
+    372                USBD_Suspend();
+   \   00000072   0x.... 0x....      BL       USBD_Suspend
+    373                if ( USBD_P_Suspend_Event ) {
+   \   00000076   0x....             LDR      R0,??DataTable12_1
+   \   00000078   0x6800             LDR      R0,[R0, #+0]
+   \   0000007A   0x2800             CMP      R0,#+0
+   \   0000007C   0xD002             BEQ      ??USB_IRQHandler_3
+    374                  USBD_P_Suspend_Event();
+   \   0000007E   0x....             LDR      R0,??DataTable12_1
+   \   00000080   0x6800             LDR      R0,[R0, #+0]
+   \   00000082   0x4780             BLX      R0
+    375                } 
+    376              }
+    377              
+    378              if ( isie &  seUSB_SIE_NONJIF_INT ) {
+   \                     ??USB_IRQHandler_3: (+1)
+   \   00000084   0x9800             LDR      R0,[SP, #+0]
+   \   00000086   0x0640             LSLS     R0,R0,#+25
+   \   00000088   0xD50B             BPL      ??USB_IRQHandler_4
+    379          	  UsbClearSIEInt( seUSB_SIE_NONJIF_INT );
+   \   0000008A   0x2040             MOVS     R0,#+64
+   \   0000008C   0x....             LDR      R1,??DataTable11_3  ;; 0x20400051
+   \   0000008E   0x7008             STRB     R0,[R1, #+0]
+    380                USBD_Resume();
+   \   00000090   0x.... 0x....      BL       USBD_Resume
+    381                if ( USBD_P_Resume_Event ) {
+   \   00000094   0x....             LDR      R0,??DataTable12_2
+   \   00000096   0x6800             LDR      R0,[R0, #+0]
+   \   00000098   0x2800             CMP      R0,#+0
+   \   0000009A   0xD002             BEQ      ??USB_IRQHandler_4
+    382                  USBD_P_Resume_Event();
+   \   0000009C   0x....             LDR      R0,??DataTable12_2
+   \   0000009E   0x6800             LDR      R0,[R0, #+0]
+   \   000000A0   0x4780             BLX      R0
+    383                } 
+    384              }  
+    385              
+    386              //  Start Of Frame                                                           
+    387              if ( isie & seUSB_SIE_SOFIF_INT ) {
+   \                     ??USB_IRQHandler_4: (+1)
+   \   000000A2   0x9800             LDR      R0,[SP, #+0]
+   \   000000A4   0x0700             LSLS     R0,R0,#+28
+   \   000000A6   0xD50E             BPL      ??USB_IRQHandler_0
+    388          	  UsbClearSIEInt( seUSB_SIE_SOFIF_INT ); 
+   \   000000A8   0x2008             MOVS     R0,#+8
+   \   000000AA   0x....             LDR      R1,??DataTable11_3  ;; 0x20400051
+   \   000000AC   0x7008             STRB     R0,[R1, #+0]
+    389                if ( USBD_P_SOF_Event ) {
+   \   000000AE   0x....             LDR      R0,??DataTable12_3
+   \   000000B0   0x6800             LDR      R0,[R0, #+0]
+   \   000000B2   0x2800             CMP      R0,#+0
+   \   000000B4   0xD007             BEQ      ??USB_IRQHandler_0
+    390                  USBD_P_SOF_Event(); // del hk
+   \   000000B6   0x....             LDR      R0,??DataTable12_3
+   \   000000B8   0x6800             LDR      R0,[R0, #+0]
+   \   000000BA   0x4780             BLX      R0
+    391                  gFrameNumber++;
+   \   000000BC   0x....             LDR      R0,??DataTable12_4
+   \   000000BE   0x6800             LDR      R0,[R0, #+0]
+   \   000000C0   0x1C40             ADDS     R0,R0,#+1
+   \   000000C2   0x....             LDR      R1,??DataTable12_4
+   \   000000C4   0x6008             STR      R0,[R1, #+0]
+    392                }
+    393              }
+    394          #if 0
+    395            //  To add error handling.                                                      
+    396          #endif
+    397              
+    398            }
+    399            //  Ep0 setup interrupt    
+    400            if ( imain & seUSB_MAIN_EP0SETIF_INT ) {
+   \                     ??USB_IRQHandler_0: (+1)
+   \   000000C6   0x9801             LDR      R0,[SP, #+4]
+   \   000000C8   0x07C0             LSLS     R0,R0,#+31
+   \   000000CA   0xD515             BPL      ??USB_IRQHandler_5
+    401          	UsbClearMainInt( seUSB_MAIN_EP0SETIF_INT ); 
+   \   000000CC   0x2001             MOVS     R0,#+1
+   \   000000CE   0x....             LDR      R1,??DataTable11_1  ;; 0x20400050
+   \   000000D0   0x7008             STRB     R0,[R1, #+0]
+    402              //  analize Ep0Cfg    
+    403              gSetupToken = 1;
+   \   000000D2   0x2001             MOVS     R0,#+1
+   \   000000D4   0x....             LDR      R1,??DataTable12_5
+   \   000000D6   0x8008             STRH     R0,[R1, #+0]
+    404              USBD_P_EP[0]( USBD_EVT_SETUP );
+   \   000000D8   0x2002             MOVS     R0,#+2
+   \   000000DA   0x....             LDR      R1,??DataTable12_6
+   \   000000DC   0x6809             LDR      R1,[R1, #+0]
+   \   000000DE   0x4788             BLX      R1
+    405              //  prepare for transaction direction already set in core. 
+    406              if ( USB->EP0CFG_b.DIR == 0 ) {
+   \   000000E0   0x....             LDR      R0,??DataTable12_7  ;; 0x2040001a
+   \   000000E2   0x7800             LDRB     R0,[R0, #+0]
+   \   000000E4   0xB2C0             UXTB     R0,R0
+   \   000000E6   0x09C0             LSRS     R0,R0,#+7
+   \   000000E8   0xB2C0             UXTB     R0,R0
+   \   000000EA   0x2800             CMP      R0,#+0
+   \   000000EC   0xD102             BNE      ??USB_IRQHandler_6
+    407                seUSB_DataOutStage();
+   \   000000EE   0x.... 0x....      BL       seUSB_DataOutStage
+   \   000000F2   0xE001             B        ??USB_IRQHandler_5
+    408              } else {
+    409                seUSB_DataInStage();
+   \                     ??USB_IRQHandler_6: (+1)
+   \   000000F4   0x.... 0x....      BL       seUSB_DataInStage
+    410              }   
+    411            }
+    412            
+    413            //  Ep0 interrupt    
+    414            if ( imain & seUSB_MAIN_EP0IF_INT ) {
+   \                     ??USB_IRQHandler_5: (+1)
+   \   000000F8   0x9801             LDR      R0,[SP, #+4]
+   \   000000FA   0x0780             LSLS     R0,R0,#+30
+   \   000000FC   0xD400             BMI      .+4
+   \   000000FE   0xE085             B        ??USB_IRQHandler_7
+    415            if ( USB->EP0INTF_b.INNAKIF ) {
+   \   00000100   0x....             LDR      R0,??DataTable13  ;; 0x20400053
+   \   00000102   0x7800             LDRB     R0,[R0, #+0]
+   \   00000104   0xB2C0             UXTB     R0,R0
+   \   00000106   0x08C0             LSRS     R0,R0,#+3
+   \   00000108   0x0001             MOVS     R1,R0
+   \   0000010A   0x07C9             LSLS     R1,R1,#+31       ;; ZeroExtS R1,R1,#+31,#+31
+   \   0000010C   0x0FC9             LSRS     R1,R1,#+31
+   \   0000010E   0x2900             CMP      R1,#+0
+   \   00000110   0xD016             BEQ      ??USB_IRQHandler_8
+    416          	UsbClearEP0Int( seUSB_EP0_INNAKIF_INT );
+   \   00000112   0x2008             MOVS     R0,#+8
+   \   00000114   0x....             LDR      R1,??DataTable13  ;; 0x20400053
+   \   00000116   0x7008             STRB     R0,[R1, #+0]
+    417              //  Switch to status stage 
+    418              if ( USB->EP0CFG_b.DIR == 0 ) {
+   \   00000118   0x....             LDR      R0,??DataTable12_7  ;; 0x2040001a
+   \   0000011A   0x7800             LDRB     R0,[R0, #+0]
+   \   0000011C   0xB2C0             UXTB     R0,R0
+   \   0000011E   0x09C0             LSRS     R0,R0,#+7
+   \   00000120   0xB2C0             UXTB     R0,R0
+   \   00000122   0x2800             CMP      R0,#+0
+   \   00000124   0xD102             BNE      ??USB_IRQHandler_9
+    419              seUSB_StatusInStage();
+   \   00000126   0x.... 0x....      BL       seUSB_StatusInStage
+   \   0000012A   0xE009             B        ??USB_IRQHandler_8
+    420               }
+    421               else {
+    422                seUSB_DataInStage();
+   \                     ??USB_IRQHandler_9: (+1)
+   \   0000012C   0x.... 0x....      BL       seUSB_DataInStage
+    423                if ( USBD_P_EP[0] ) {
+   \   00000130   0x....             LDR      R0,??DataTable12_6
+   \   00000132   0x6800             LDR      R0,[R0, #+0]
+   \   00000134   0x2800             CMP      R0,#+0
+   \   00000136   0xD003             BEQ      ??USB_IRQHandler_8
+    424                  USBD_P_EP[0]( USBD_EVT_IN );
+   \   00000138   0x2008             MOVS     R0,#+8
+   \   0000013A   0x....             LDR      R1,??DataTable12_6
+   \   0000013C   0x6809             LDR      R1,[R1, #+0]
+   \   0000013E   0x4788             BLX      R1
+    425                }
+    426              }
+    427            }
+    428            
+    429              if ( USB->EP0INTF_b.OUTNAKIF ) {
+   \                     ??USB_IRQHandler_8: (+1)
+   \   00000140   0x....             LDR      R0,??DataTable13  ;; 0x20400053
+   \   00000142   0x7800             LDRB     R0,[R0, #+0]
+   \   00000144   0xB2C0             UXTB     R0,R0
+   \   00000146   0x0880             LSRS     R0,R0,#+2
+   \   00000148   0x0001             MOVS     R1,R0
+   \   0000014A   0x07C9             LSLS     R1,R1,#+31       ;; ZeroExtS R1,R1,#+31,#+31
+   \   0000014C   0x0FC9             LSRS     R1,R1,#+31
+   \   0000014E   0x2900             CMP      R1,#+0
+   \   00000150   0xD00E             BEQ      ??USB_IRQHandler_10
+    430          	  UsbClearEP0Int( seUSB_EP0_OUTNAKIF_INT );
+   \   00000152   0x2004             MOVS     R0,#+4
+   \   00000154   0x....             LDR      R1,??DataTable13  ;; 0x20400053
+   \   00000156   0x7008             STRB     R0,[R1, #+0]
+    431                //  Switch to status stage
+    432                if ( USB->EP0CFG_b.DIR == 1 ) {
+   \   00000158   0x....             LDR      R0,??DataTable12_7  ;; 0x2040001a
+   \   0000015A   0x7800             LDRB     R0,[R0, #+0]
+   \   0000015C   0xB2C0             UXTB     R0,R0
+   \   0000015E   0x09C0             LSRS     R0,R0,#+7
+   \   00000160   0xB2C0             UXTB     R0,R0
+   \   00000162   0x2800             CMP      R0,#+0
+   \   00000164   0xD002             BEQ      ??USB_IRQHandler_11
+    433                  seseUSB_StatusOutStage(); 
+   \   00000166   0x.... 0x....      BL       seseUSB_StatusOutStage
+   \   0000016A   0xE001             B        ??USB_IRQHandler_10
+    434                } else {
+    435                  seUSB_DataOutStage();
+   \                     ??USB_IRQHandler_11: (+1)
+   \   0000016C   0x.... 0x....      BL       seUSB_DataOutStage
+    436                }
+    437              }
+    438            
+    439              if ( USB->EP0INTF_b.OUTACKIF ) {
+   \                     ??USB_IRQHandler_10: (+1)
+   \   00000170   0x....             LDR      R0,??DataTable13  ;; 0x20400053
+   \   00000172   0x7800             LDRB     R0,[R0, #+0]
+   \   00000174   0xB2C0             UXTB     R0,R0
+   \   00000176   0x0900             LSRS     R0,R0,#+4
+   \   00000178   0x0001             MOVS     R1,R0
+   \   0000017A   0x07C9             LSLS     R1,R1,#+31       ;; ZeroExtS R1,R1,#+31,#+31
+   \   0000017C   0x0FC9             LSRS     R1,R1,#+31
+   \   0000017E   0x2900             CMP      R1,#+0
+   \   00000180   0xD00A             BEQ      ??USB_IRQHandler_12
+    440          	  UsbClearEP0Int( seUSB_EP0_OUTACKIF_INT );
+   \   00000182   0x2010             MOVS     R0,#+16
+   \   00000184   0x....             LDR      R1,??DataTable13  ;; 0x20400053
+   \   00000186   0x7008             STRB     R0,[R1, #+0]
+    441                if ( USBD_P_EP[0] ) {
+   \   00000188   0x....             LDR      R0,??DataTable12_6
+   \   0000018A   0x6800             LDR      R0,[R0, #+0]
+   \   0000018C   0x2800             CMP      R0,#+0
+   \   0000018E   0xD003             BEQ      ??USB_IRQHandler_12
+    442                 USBD_P_EP[0](USBD_EVT_OUT);
+   \   00000190   0x2004             MOVS     R0,#+4
+   \   00000192   0x....             LDR      R1,??DataTable12_6
+   \   00000194   0x6809             LDR      R1,[R1, #+0]
+   \   00000196   0x4788             BLX      R1
+    443                }
+    444              }
+    445            
+    446              if ( USB->EP0INTF_b.INACKIF ) {
+   \                     ??USB_IRQHandler_12: (+1)
+   \   00000198   0x....             LDR      R0,??DataTable13  ;; 0x20400053
+   \   0000019A   0x7800             LDRB     R0,[R0, #+0]
+   \   0000019C   0xB2C0             UXTB     R0,R0
+   \   0000019E   0x0940             LSRS     R0,R0,#+5
+   \   000001A0   0x0001             MOVS     R1,R0
+   \   000001A2   0x07C9             LSLS     R1,R1,#+31       ;; ZeroExtS R1,R1,#+31,#+31
+   \   000001A4   0x0FC9             LSRS     R1,R1,#+31
+   \   000001A6   0x2900             CMP      R1,#+0
+   \   000001A8   0xD00A             BEQ      ??USB_IRQHandler_13
+    447          	  UsbClearEP0Int( seUSB_EP0_INACKIF_INT );
+   \   000001AA   0x2020             MOVS     R0,#+32
+   \   000001AC   0x....             LDR      R1,??DataTable13  ;; 0x20400053
+   \   000001AE   0x7008             STRB     R0,[R1, #+0]
+    448                if ( USBD_P_EP[0] ) {
+   \   000001B0   0x....             LDR      R0,??DataTable12_6
+   \   000001B2   0x6800             LDR      R0,[R0, #+0]
+   \   000001B4   0x2800             CMP      R0,#+0
+   \   000001B6   0xD003             BEQ      ??USB_IRQHandler_13
+    449                  USBD_P_EP[0]( USBD_EVT_IN );
+   \   000001B8   0x2008             MOVS     R0,#+8
+   \   000001BA   0x....             LDR      R1,??DataTable12_6
+   \   000001BC   0x6809             LDR      R1,[R1, #+0]
+   \   000001BE   0x4788             BLX      R1
+    450                }
+    451              }
+    452               if ( USB->EP0INTF_b.OUTERRIF ) {
+   \                     ??USB_IRQHandler_13: (+1)
+   \   000001C0   0x....             LDR      R0,??DataTable13  ;; 0x20400053
+   \   000001C2   0x7800             LDRB     R0,[R0, #+0]
+   \   000001C4   0x0001             MOVS     R1,R0
+   \   000001C6   0x07C9             LSLS     R1,R1,#+31       ;; ZeroExtS R1,R1,#+31,#+31
+   \   000001C8   0x0FC9             LSRS     R1,R1,#+31
+   \   000001CA   0x2900             CMP      R1,#+0
+   \   000001CC   0xD00A             BEQ      ??USB_IRQHandler_14
+    453          	  UsbClearEP0Int( seUSB_EP0_OUTERRIF_INT );
+   \   000001CE   0x2001             MOVS     R0,#+1
+   \   000001D0   0x....             LDR      R1,??DataTable13  ;; 0x20400053
+   \   000001D2   0x7008             STRB     R0,[R1, #+0]
+    454                if ( USBD_P_EP[0] ) {
+   \   000001D4   0x....             LDR      R0,??DataTable12_6
+   \   000001D6   0x6800             LDR      R0,[R0, #+0]
+   \   000001D8   0x2800             CMP      R0,#+0
+   \   000001DA   0xD003             BEQ      ??USB_IRQHandler_14
+    455                 USBD_P_EP[0]( USBD_EVT_OUT_STALL );
+   \   000001DC   0x2040             MOVS     R0,#+64
+   \   000001DE   0x....             LDR      R1,??DataTable12_6
+   \   000001E0   0x6809             LDR      R1,[R1, #+0]
+   \   000001E2   0x4788             BLX      R1
+    456                }
+    457              }
+    458            
+    459              if ( USB->EP0INTF_b.INERRIF ) {
+   \                     ??USB_IRQHandler_14: (+1)
+   \   000001E4   0x....             LDR      R0,??DataTable13  ;; 0x20400053
+   \   000001E6   0x7800             LDRB     R0,[R0, #+0]
+   \   000001E8   0xB2C0             UXTB     R0,R0
+   \   000001EA   0x0840             LSRS     R0,R0,#+1
+   \   000001EC   0x0001             MOVS     R1,R0
+   \   000001EE   0x07C9             LSLS     R1,R1,#+31       ;; ZeroExtS R1,R1,#+31,#+31
+   \   000001F0   0x0FC9             LSRS     R1,R1,#+31
+   \   000001F2   0x2900             CMP      R1,#+0
+   \   000001F4   0xD00A             BEQ      ??USB_IRQHandler_7
+    460          	  UsbClearEP0Int( seUSB_EP0_INERRIF_INT );
+   \   000001F6   0x2002             MOVS     R0,#+2
+   \   000001F8   0x....             LDR      R1,??DataTable13  ;; 0x20400053
+   \   000001FA   0x7008             STRB     R0,[R1, #+0]
+    461                if ( USBD_P_EP[0] ) {
+   \   000001FC   0x....             LDR      R0,??DataTable12_6
+   \   000001FE   0x6800             LDR      R0,[R0, #+0]
+   \   00000200   0x2800             CMP      R0,#+0
+   \   00000202   0xD003             BEQ      ??USB_IRQHandler_7
+    462                  USBD_P_EP[0]( USBD_EVT_IN_STALL );
+   \   00000204   0x2080             MOVS     R0,#+128
+   \   00000206   0x....             LDR      R1,??DataTable12_6
+   \   00000208   0x6809             LDR      R1,[R1, #+0]
+   \   0000020A   0x4788             BLX      R1
+    463                }
+    464              }
+    465            }
+    466            if ( igp & seUSB_GPE_EPAIF_INT ) {
+   \                     ??USB_IRQHandler_7: (+1)
+   \   0000020C   0x9802             LDR      R0,[SP, #+8]
+   \   0000020E   0x07C0             LSLS     R0,R0,#+31
+   \   00000210   0xD504             BPL      ??USB_IRQHandler_15
+    467          	UsbClearEPaInt( seUSB_GPE_EPAIF_INT );
+   \   00000212   0x2001             MOVS     R0,#+1
+   \   00000214   0x....             LDR      R1,??DataTable15  ;; 0x20400054
+   \   00000216   0x7008             STRB     R0,[R1, #+0]
+    468              handleEpaInt();
+   \   00000218   0x.... 0x....      BL       handleEpaInt
+    469            }
+    470            if ( igp & seUSB_GPE_EPBIF_INT ) {
+   \                     ??USB_IRQHandler_15: (+1)
+   \   0000021C   0x9802             LDR      R0,[SP, #+8]
+   \   0000021E   0x0780             LSLS     R0,R0,#+30
+   \   00000220   0xD504             BPL      ??USB_IRQHandler_16
+    471          	UsbClearEPbInt( seUSB_GPE_EPBIF_INT );
+   \   00000222   0x2002             MOVS     R0,#+2
+   \   00000224   0x....             LDR      R1,??DataTable16  ;; 0x20400055
+   \   00000226   0x7008             STRB     R0,[R1, #+0]
+    472              handleEpbInt();
+   \   00000228   0x.... 0x....      BL       handleEpbInt
+    473            }  
+    474            if ( igp & seUSB_GPE_EPCIF_INT ) {
+   \                     ??USB_IRQHandler_16: (+1)
+   \   0000022C   0x9802             LDR      R0,[SP, #+8]
+   \   0000022E   0x0740             LSLS     R0,R0,#+29
+   \   00000230   0xD504             BPL      ??USB_IRQHandler_17
+    475          	UsbClearEPcInt( seUSB_GPE_EPCIF_INT );
+   \   00000232   0x2004             MOVS     R0,#+4
+   \   00000234   0x....             LDR      R1,??DataTable16_1  ;; 0x20400056
+   \   00000236   0x7008             STRB     R0,[R1, #+0]
+    476              handleEpcInt();
+   \   00000238   0x.... 0x....      BL       handleEpcInt
+    477            }
+    478          }
+   \                     ??USB_IRQHandler_17: (+1)
+   \   0000023C   0xBD07             POP      {R0-R2,PC}       ;; return
+    479          
+
+   \                                 In section .text, align 2, keep-with-next
+    480          void handleEpaInt( void ) {
+   \                     handleEpaInt: (+1)
+   \   00000000   0xB510             PUSH     {R4,LR}
+    481            uint8_t num = USB->EPACFG_b.EPNUM; 
+   \   00000002   0x....             LDR      R0,??DataTable16_2  ;; 0x20400030
+   \   00000004   0x7800             LDRB     R0,[R0, #+0]
+   \   00000006   0x0704             LSLS     R4,R0,#+28       ;; ZeroExtS R4,R0,#+28,#+28
+   \   00000008   0x0F24             LSRS     R4,R4,#+28
+    482            
+    483            if ( USB->EPAINTF_b.INNAKIF ) {
+   \   0000000A   0x....             LDR      R0,??DataTable15  ;; 0x20400054
+   \   0000000C   0x7800             LDRB     R0,[R0, #+0]
+   \   0000000E   0xB2C0             UXTB     R0,R0
+   \   00000010   0x08C0             LSRS     R0,R0,#+3
+   \   00000012   0x0001             MOVS     R1,R0
+   \   00000014   0x07C9             LSLS     R1,R1,#+31       ;; ZeroExtS R1,R1,#+31,#+31
+   \   00000016   0x0FC9             LSRS     R1,R1,#+31
+   \   00000018   0x2900             CMP      R1,#+0
+   \   0000001A   0xD002             BEQ      ??handleEpaInt_0
+    484              
+    485              UsbClearEPaInt( seUSB_EPM_INNAKIF_INT );
+   \   0000001C   0x2008             MOVS     R0,#+8
+   \   0000001E   0x....             LDR      R1,??DataTable15  ;; 0x20400054
+   \   00000020   0x7008             STRB     R0,[R1, #+0]
+    486            }
+    487            if ( USB->EPAINTF_b.OUTNAKIF ) {
+   \                     ??handleEpaInt_0: (+1)
+   \   00000022   0x....             LDR      R0,??DataTable15  ;; 0x20400054
+   \   00000024   0x7800             LDRB     R0,[R0, #+0]
+   \   00000026   0xB2C0             UXTB     R0,R0
+   \   00000028   0x0880             LSRS     R0,R0,#+2
+   \   0000002A   0x0001             MOVS     R1,R0
+   \   0000002C   0x07C9             LSLS     R1,R1,#+31       ;; ZeroExtS R1,R1,#+31,#+31
+   \   0000002E   0x0FC9             LSRS     R1,R1,#+31
+   \   00000030   0x2900             CMP      R1,#+0
+   \   00000032   0xD002             BEQ      ??handleEpaInt_1
+    488                
+    489             
+    490              UsbClearEPaInt( seUSB_EPM_OUTNAKIF_INT );
+   \   00000034   0x2004             MOVS     R0,#+4
+   \   00000036   0x....             LDR      R1,??DataTable15  ;; 0x20400054
+   \   00000038   0x7008             STRB     R0,[R1, #+0]
+    491            }
+    492             if ( USB->EPAINTF_b.INERRIF ) {
+   \                     ??handleEpaInt_1: (+1)
+   \   0000003A   0x....             LDR      R0,??DataTable15  ;; 0x20400054
+   \   0000003C   0x7800             LDRB     R0,[R0, #+0]
+   \   0000003E   0xB2C0             UXTB     R0,R0
+   \   00000040   0x0840             LSRS     R0,R0,#+1
+   \   00000042   0x0001             MOVS     R1,R0
+   \   00000044   0x07C9             LSLS     R1,R1,#+31       ;; ZeroExtS R1,R1,#+31,#+31
+   \   00000046   0x0FC9             LSRS     R1,R1,#+31
+   \   00000048   0x2900             CMP      R1,#+0
+   \   0000004A   0xD002             BEQ      ??handleEpaInt_2
+    493              UsbClearEPaInt( seUSB_EPM_INERRIF_INT );
+   \   0000004C   0x2002             MOVS     R0,#+2
+   \   0000004E   0x....             LDR      R1,??DataTable15  ;; 0x20400054
+   \   00000050   0x7008             STRB     R0,[R1, #+0]
+    494            }
+    495            
+    496            if ( USB->EPAINTF_b.OUTACKIF ) {
+   \                     ??handleEpaInt_2: (+1)
+   \   00000052   0x....             LDR      R0,??DataTable15  ;; 0x20400054
+   \   00000054   0x7800             LDRB     R0,[R0, #+0]
+   \   00000056   0xB2C0             UXTB     R0,R0
+   \   00000058   0x0900             LSRS     R0,R0,#+4
+   \   0000005A   0x0001             MOVS     R1,R0
+   \   0000005C   0x07C9             LSLS     R1,R1,#+31       ;; ZeroExtS R1,R1,#+31,#+31
+   \   0000005E   0x0FC9             LSRS     R1,R1,#+31
+   \   00000060   0x2900             CMP      R1,#+0
+   \   00000062   0xD010             BEQ      ??handleEpaInt_3
+    497              UsbClearEPaInt( seUSB_EPM_OUTACKIF_INT );
+   \   00000064   0x2010             MOVS     R0,#+16
+   \   00000066   0x....             LDR      R1,??DataTable15  ;; 0x20400054
+   \   00000068   0x7008             STRB     R0,[R1, #+0]
+    498              if ( USBD_P_EP[num] ) {
+   \   0000006A   0x....             LDR      R0,??DataTable12_6
+   \   0000006C   0xB2E4             UXTB     R4,R4
+   \   0000006E   0x2104             MOVS     R1,#+4
+   \   00000070   0x4361             MULS     R1,R4,R1
+   \   00000072   0x5840             LDR      R0,[R0, R1]
+   \   00000074   0x2800             CMP      R0,#+0
+   \   00000076   0xD006             BEQ      ??handleEpaInt_3
+    499               USBD_P_EP[num]( USBD_EVT_OUT );
+   \   00000078   0x2004             MOVS     R0,#+4
+   \   0000007A   0x....             LDR      R1,??DataTable12_6
+   \   0000007C   0xB2E4             UXTB     R4,R4
+   \   0000007E   0x2204             MOVS     R2,#+4
+   \   00000080   0x4362             MULS     R2,R4,R2
+   \   00000082   0x5889             LDR      R1,[R1, R2]
+   \   00000084   0x4788             BLX      R1
+    500              }
+    501              
+    502            }
+    503            if ( USB->EPAINTF_b.INACKIF ) {
+   \                     ??handleEpaInt_3: (+1)
+   \   00000086   0x....             LDR      R0,??DataTable15  ;; 0x20400054
+   \   00000088   0x7800             LDRB     R0,[R0, #+0]
+   \   0000008A   0xB2C0             UXTB     R0,R0
+   \   0000008C   0x0940             LSRS     R0,R0,#+5
+   \   0000008E   0x0001             MOVS     R1,R0
+   \   00000090   0x07C9             LSLS     R1,R1,#+31       ;; ZeroExtS R1,R1,#+31,#+31
+   \   00000092   0x0FC9             LSRS     R1,R1,#+31
+   \   00000094   0x2900             CMP      R1,#+0
+   \   00000096   0xD010             BEQ      ??handleEpaInt_4
+    504              UsbClearEPaInt( seUSB_EPM_INACKIF_INT );
+   \   00000098   0x2020             MOVS     R0,#+32
+   \   0000009A   0x....             LDR      R1,??DataTable15  ;; 0x20400054
+   \   0000009C   0x7008             STRB     R0,[R1, #+0]
+    505          	if ( USBD_P_EP[num] ) {
+   \   0000009E   0x....             LDR      R0,??DataTable12_6
+   \   000000A0   0xB2E4             UXTB     R4,R4
+   \   000000A2   0x2104             MOVS     R1,#+4
+   \   000000A4   0x4361             MULS     R1,R4,R1
+   \   000000A6   0x5840             LDR      R0,[R0, R1]
+   \   000000A8   0x2800             CMP      R0,#+0
+   \   000000AA   0xD006             BEQ      ??handleEpaInt_4
+    506                USBD_P_EP[num]( USBD_EVT_IN );
+   \   000000AC   0x2008             MOVS     R0,#+8
+   \   000000AE   0x....             LDR      R1,??DataTable12_6
+   \   000000B0   0xB2E4             UXTB     R4,R4
+   \   000000B2   0x2204             MOVS     R2,#+4
+   \   000000B4   0x4354             MULS     R4,R2,R4
+   \   000000B6   0x5909             LDR      R1,[R1, R4]
+   \   000000B8   0x4788             BLX      R1
+    507              }
+    508            }
+    509          
+    510          }
+   \                     ??handleEpaInt_4: (+1)
+   \   000000BA   0xBD10             POP      {R4,PC}          ;; return
+    511          
+
+   \                                 In section .text, align 2, keep-with-next
+    512          void handleEpbInt( void ) {
+   \                     handleEpbInt: (+1)
+   \   00000000   0xB510             PUSH     {R4,LR}
+    513             uint8_t num = USB->EPBCFG_b.EPNUM; 
+   \   00000002   0x....             LDR      R0,??DataTable16_3  ;; 0x20400032
+   \   00000004   0x7800             LDRB     R0,[R0, #+0]
+   \   00000006   0x0704             LSLS     R4,R0,#+28       ;; ZeroExtS R4,R0,#+28,#+28
+   \   00000008   0x0F24             LSRS     R4,R4,#+28
+    514            if ( USB->EPBINTF_b.OUTSHACKIF ) {
+   \   0000000A   0x....             LDR      R0,??DataTable16  ;; 0x20400055
+   \   0000000C   0x7800             LDRB     R0,[R0, #+0]
+   \   0000000E   0xB2C0             UXTB     R0,R0
+   \   00000010   0x0980             LSRS     R0,R0,#+6
+   \   00000012   0x0001             MOVS     R1,R0
+   \   00000014   0x07C9             LSLS     R1,R1,#+31       ;; ZeroExtS R1,R1,#+31,#+31
+   \   00000016   0x0FC9             LSRS     R1,R1,#+31
+   \   00000018   0x2900             CMP      R1,#+0
+   \   0000001A   0xD002             BEQ      ??handleEpbInt_0
+    515              UsbClearEPbInt( seUSB_EPM_OUTSHACKIF_INT );
+   \   0000001C   0x2040             MOVS     R0,#+64
+   \   0000001E   0x....             LDR      R1,??DataTable16  ;; 0x20400055
+   \   00000020   0x7008             STRB     R0,[R1, #+0]
+    516            }
+    517            if ( USB->EPBINTF_b.INNAKIF ) {
+   \                     ??handleEpbInt_0: (+1)
+   \   00000022   0x....             LDR      R0,??DataTable16  ;; 0x20400055
+   \   00000024   0x7800             LDRB     R0,[R0, #+0]
+   \   00000026   0xB2C0             UXTB     R0,R0
+   \   00000028   0x08C0             LSRS     R0,R0,#+3
+   \   0000002A   0x0001             MOVS     R1,R0
+   \   0000002C   0x07C9             LSLS     R1,R1,#+31       ;; ZeroExtS R1,R1,#+31,#+31
+   \   0000002E   0x0FC9             LSRS     R1,R1,#+31
+   \   00000030   0x2900             CMP      R1,#+0
+   \   00000032   0xD002             BEQ      ??handleEpbInt_1
+    518              
+    519              UsbClearEPbInt( seUSB_EPM_INNAKIF_INT );
+   \   00000034   0x2008             MOVS     R0,#+8
+   \   00000036   0x....             LDR      R1,??DataTable16  ;; 0x20400055
+   \   00000038   0x7008             STRB     R0,[R1, #+0]
+    520            }
+    521            if ( USB->EPBINTF_b.OUTNAKIF ) {
+   \                     ??handleEpbInt_1: (+1)
+   \   0000003A   0x....             LDR      R0,??DataTable16  ;; 0x20400055
+   \   0000003C   0x7800             LDRB     R0,[R0, #+0]
+   \   0000003E   0xB2C0             UXTB     R0,R0
+   \   00000040   0x0880             LSRS     R0,R0,#+2
+   \   00000042   0x0001             MOVS     R1,R0
+   \   00000044   0x07C9             LSLS     R1,R1,#+31       ;; ZeroExtS R1,R1,#+31,#+31
+   \   00000046   0x0FC9             LSRS     R1,R1,#+31
+   \   00000048   0x2900             CMP      R1,#+0
+   \   0000004A   0xD002             BEQ      ??handleEpbInt_2
+    522              
+    523              UsbClearEPbInt( seUSB_EPM_OUTNAKIF_INT );
+   \   0000004C   0x2004             MOVS     R0,#+4
+   \   0000004E   0x....             LDR      R1,??DataTable16  ;; 0x20400055
+   \   00000050   0x7008             STRB     R0,[R1, #+0]
+    524            }
+    525            if ( USB->EPBINTF_b.INERRIF ) {
+   \                     ??handleEpbInt_2: (+1)
+   \   00000052   0x....             LDR      R0,??DataTable16  ;; 0x20400055
+   \   00000054   0x7800             LDRB     R0,[R0, #+0]
+   \   00000056   0xB2C0             UXTB     R0,R0
+   \   00000058   0x0840             LSRS     R0,R0,#+1
+   \   0000005A   0x0001             MOVS     R1,R0
+   \   0000005C   0x07C9             LSLS     R1,R1,#+31       ;; ZeroExtS R1,R1,#+31,#+31
+   \   0000005E   0x0FC9             LSRS     R1,R1,#+31
+   \   00000060   0x2900             CMP      R1,#+0
+   \   00000062   0xD002             BEQ      ??handleEpbInt_3
+    526              
+    527              UsbClearEPbInt( seUSB_EPM_INERRIF_INT );
+   \   00000064   0x2002             MOVS     R0,#+2
+   \   00000066   0x....             LDR      R1,??DataTable16  ;; 0x20400055
+   \   00000068   0x7008             STRB     R0,[R1, #+0]
+    528            }
+    529            if ( USB->EPBINTF_b.OUTACKIF ) {
+   \                     ??handleEpbInt_3: (+1)
+   \   0000006A   0x....             LDR      R0,??DataTable16  ;; 0x20400055
+   \   0000006C   0x7800             LDRB     R0,[R0, #+0]
+   \   0000006E   0xB2C0             UXTB     R0,R0
+   \   00000070   0x0900             LSRS     R0,R0,#+4
+   \   00000072   0x0001             MOVS     R1,R0
+   \   00000074   0x07C9             LSLS     R1,R1,#+31       ;; ZeroExtS R1,R1,#+31,#+31
+   \   00000076   0x0FC9             LSRS     R1,R1,#+31
+   \   00000078   0x2900             CMP      R1,#+0
+   \   0000007A   0xD010             BEQ      ??handleEpbInt_4
+    530              UsbClearEPbInt( seUSB_EPM_OUTACKIF_INT );
+   \   0000007C   0x2010             MOVS     R0,#+16
+   \   0000007E   0x....             LDR      R1,??DataTable16  ;; 0x20400055
+   \   00000080   0x7008             STRB     R0,[R1, #+0]
+    531              if ( USBD_P_EP[num] ) {
+   \   00000082   0x....             LDR      R0,??DataTable17
+   \   00000084   0xB2E4             UXTB     R4,R4
+   \   00000086   0x2104             MOVS     R1,#+4
+   \   00000088   0x4361             MULS     R1,R4,R1
+   \   0000008A   0x5840             LDR      R0,[R0, R1]
+   \   0000008C   0x2800             CMP      R0,#+0
+   \   0000008E   0xD006             BEQ      ??handleEpbInt_4
+    532               USBD_P_EP[num]( USBD_EVT_OUT );
+   \   00000090   0x2004             MOVS     R0,#+4
+   \   00000092   0x....             LDR      R1,??DataTable17
+   \   00000094   0xB2E4             UXTB     R4,R4
+   \   00000096   0x2204             MOVS     R2,#+4
+   \   00000098   0x4362             MULS     R2,R4,R2
+   \   0000009A   0x5889             LDR      R1,[R1, R2]
+   \   0000009C   0x4788             BLX      R1
+    533              }
+    534              
+    535            }
+    536            if ( USB->EPBINTF_b.INACKIF ) {
+   \                     ??handleEpbInt_4: (+1)
+   \   0000009E   0x....             LDR      R0,??DataTable16  ;; 0x20400055
+   \   000000A0   0x7800             LDRB     R0,[R0, #+0]
+   \   000000A2   0xB2C0             UXTB     R0,R0
+   \   000000A4   0x0940             LSRS     R0,R0,#+5
+   \   000000A6   0x0001             MOVS     R1,R0
+   \   000000A8   0x07C9             LSLS     R1,R1,#+31       ;; ZeroExtS R1,R1,#+31,#+31
+   \   000000AA   0x0FC9             LSRS     R1,R1,#+31
+   \   000000AC   0x2900             CMP      R1,#+0
+   \   000000AE   0xD010             BEQ      ??handleEpbInt_5
+    537              UsbClearEPbInt( seUSB_EPM_INACKIF_INT );
+   \   000000B0   0x2020             MOVS     R0,#+32
+   \   000000B2   0x....             LDR      R1,??DataTable16  ;; 0x20400055
+   \   000000B4   0x7008             STRB     R0,[R1, #+0]
+    538          	if ( USBD_P_EP[num] ) {
+   \   000000B6   0x....             LDR      R0,??DataTable17
+   \   000000B8   0xB2E4             UXTB     R4,R4
+   \   000000BA   0x2104             MOVS     R1,#+4
+   \   000000BC   0x4361             MULS     R1,R4,R1
+   \   000000BE   0x5840             LDR      R0,[R0, R1]
+   \   000000C0   0x2800             CMP      R0,#+0
+   \   000000C2   0xD006             BEQ      ??handleEpbInt_5
+    539                USBD_P_EP[num]( USBD_EVT_IN );
+   \   000000C4   0x2008             MOVS     R0,#+8
+   \   000000C6   0x....             LDR      R1,??DataTable17
+   \   000000C8   0xB2E4             UXTB     R4,R4
+   \   000000CA   0x2204             MOVS     R2,#+4
+   \   000000CC   0x4354             MULS     R4,R2,R4
+   \   000000CE   0x5909             LDR      R1,[R1, R4]
+   \   000000D0   0x4788             BLX      R1
+    540              }
+    541            }
+    542          }
+   \                     ??handleEpbInt_5: (+1)
+   \   000000D2   0xBD10             POP      {R4,PC}          ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+    543          void handleEpcInt( void ) {
+   \                     handleEpcInt: (+1)
+   \   00000000   0xB510             PUSH     {R4,LR}
+    544            uint8_t num = USB->EPCCFG_b.EPNUM; ;
+   \   00000002   0x....             LDR      R0,??DataTable17_1  ;; 0x20400034
+   \   00000004   0x7800             LDRB     R0,[R0, #+0]
+   \   00000006   0x0704             LSLS     R4,R0,#+28       ;; ZeroExtS R4,R0,#+28,#+28
+   \   00000008   0x0F24             LSRS     R4,R4,#+28
+    545            if ( USB->EPCINTF_b.INNAKIF ) {
+   \   0000000A   0x....             LDR      R0,??DataTable16_1  ;; 0x20400056
+   \   0000000C   0x7800             LDRB     R0,[R0, #+0]
+   \   0000000E   0xB2C0             UXTB     R0,R0
+   \   00000010   0x08C0             LSRS     R0,R0,#+3
+   \   00000012   0x0001             MOVS     R1,R0
+   \   00000014   0x07C9             LSLS     R1,R1,#+31       ;; ZeroExtS R1,R1,#+31,#+31
+   \   00000016   0x0FC9             LSRS     R1,R1,#+31
+   \   00000018   0x2900             CMP      R1,#+0
+   \   0000001A   0xD002             BEQ      ??handleEpcInt_0
+    546               
+    547              UsbClearEPcInt( seUSB_EPM_INNAKIF_INT );
+   \   0000001C   0x2008             MOVS     R0,#+8
+   \   0000001E   0x....             LDR      R1,??DataTable16_1  ;; 0x20400056
+   \   00000020   0x7008             STRB     R0,[R1, #+0]
+    548            }
+    549            if ( USB->EPCINTF_b.OUTNAKIF ) {
+   \                     ??handleEpcInt_0: (+1)
+   \   00000022   0x....             LDR      R0,??DataTable16_1  ;; 0x20400056
+   \   00000024   0x7800             LDRB     R0,[R0, #+0]
+   \   00000026   0xB2C0             UXTB     R0,R0
+   \   00000028   0x0880             LSRS     R0,R0,#+2
+   \   0000002A   0x0001             MOVS     R1,R0
+   \   0000002C   0x07C9             LSLS     R1,R1,#+31       ;; ZeroExtS R1,R1,#+31,#+31
+   \   0000002E   0x0FC9             LSRS     R1,R1,#+31
+   \   00000030   0x2900             CMP      R1,#+0
+   \   00000032   0xD002             BEQ      ??handleEpcInt_1
+    550               
+    551              UsbClearEPcInt( seUSB_EPM_OUTNAKIF_INT );
+   \   00000034   0x2004             MOVS     R0,#+4
+   \   00000036   0x....             LDR      R1,??DataTable16_1  ;; 0x20400056
+   \   00000038   0x7008             STRB     R0,[R1, #+0]
+    552            }
+    553            if ( USB->EPCINTF_b.OUTACKIF ) {
+   \                     ??handleEpcInt_1: (+1)
+   \   0000003A   0x....             LDR      R0,??DataTable16_1  ;; 0x20400056
+   \   0000003C   0x7800             LDRB     R0,[R0, #+0]
+   \   0000003E   0xB2C0             UXTB     R0,R0
+   \   00000040   0x0900             LSRS     R0,R0,#+4
+   \   00000042   0x0001             MOVS     R1,R0
+   \   00000044   0x07C9             LSLS     R1,R1,#+31       ;; ZeroExtS R1,R1,#+31,#+31
+   \   00000046   0x0FC9             LSRS     R1,R1,#+31
+   \   00000048   0x2900             CMP      R1,#+0
+   \   0000004A   0xD010             BEQ      ??handleEpcInt_2
+    554              UsbClearEPcInt( seUSB_EPM_OUTACKIF_INT );
+   \   0000004C   0x2010             MOVS     R0,#+16
+   \   0000004E   0x....             LDR      R1,??DataTable16_1  ;; 0x20400056
+   \   00000050   0x7008             STRB     R0,[R1, #+0]
+    555              if ( USBD_P_EP[num] ) {
+   \   00000052   0x....             LDR      R0,??DataTable17
+   \   00000054   0xB2E4             UXTB     R4,R4
+   \   00000056   0x2104             MOVS     R1,#+4
+   \   00000058   0x4361             MULS     R1,R4,R1
+   \   0000005A   0x5840             LDR      R0,[R0, R1]
+   \   0000005C   0x2800             CMP      R0,#+0
+   \   0000005E   0xD006             BEQ      ??handleEpcInt_2
+    556               USBD_P_EP[num]( USBD_EVT_OUT );
+   \   00000060   0x2004             MOVS     R0,#+4
+   \   00000062   0x....             LDR      R1,??DataTable17
+   \   00000064   0xB2E4             UXTB     R4,R4
+   \   00000066   0x2204             MOVS     R2,#+4
+   \   00000068   0x4362             MULS     R2,R4,R2
+   \   0000006A   0x5889             LDR      R1,[R1, R2]
+   \   0000006C   0x4788             BLX      R1
+    557              }
+    558              
+    559            }
+    560            if ( USB->EPCINTF_b.INACKIF ) {
+   \                     ??handleEpcInt_2: (+1)
+   \   0000006E   0x....             LDR      R0,??DataTable16_1  ;; 0x20400056
+   \   00000070   0x7800             LDRB     R0,[R0, #+0]
+   \   00000072   0xB2C0             UXTB     R0,R0
+   \   00000074   0x0940             LSRS     R0,R0,#+5
+   \   00000076   0x0001             MOVS     R1,R0
+   \   00000078   0x07C9             LSLS     R1,R1,#+31       ;; ZeroExtS R1,R1,#+31,#+31
+   \   0000007A   0x0FC9             LSRS     R1,R1,#+31
+   \   0000007C   0x2900             CMP      R1,#+0
+   \   0000007E   0xD010             BEQ      ??handleEpcInt_3
+    561              UsbClearEPcInt( seUSB_EPM_INACKIF_INT );
+   \   00000080   0x2020             MOVS     R0,#+32
+   \   00000082   0x....             LDR      R1,??DataTable16_1  ;; 0x20400056
+   \   00000084   0x7008             STRB     R0,[R1, #+0]
+    562          	if ( USBD_P_EP[num] ) {
+   \   00000086   0x....             LDR      R0,??DataTable17
+   \   00000088   0xB2E4             UXTB     R4,R4
+   \   0000008A   0x2104             MOVS     R1,#+4
+   \   0000008C   0x4361             MULS     R1,R4,R1
+   \   0000008E   0x5840             LDR      R0,[R0, R1]
+   \   00000090   0x2800             CMP      R0,#+0
+   \   00000092   0xD006             BEQ      ??handleEpcInt_3
+    563                USBD_P_EP[num]( USBD_EVT_IN );
+   \   00000094   0x2008             MOVS     R0,#+8
+   \   00000096   0x....             LDR      R1,??DataTable17
+   \   00000098   0xB2E4             UXTB     R4,R4
+   \   0000009A   0x2204             MOVS     R2,#+4
+   \   0000009C   0x4354             MULS     R4,R2,R4
+   \   0000009E   0x5909             LDR      R1,[R1, R4]
+   \   000000A0   0x4788             BLX      R1
+    564              }
+    565            }
+    566          
+    567          }
+   \                     ??handleEpcInt_3: (+1)
+   \   000000A2   0xBD10             POP      {R4,PC}          ;; return
+    568          #if 0
+    569          void PORT_IRQHandler( void ) {
+    570            
+    571            if ( PPORT->P9INTF_b.P9IF0 ) {
+    572          	PPORT->P9INTF = 0x01;
+    573              if ( !seUSB_IsVbusConnected() ) {
+    574                seUSB_ConfigurePortsForUsb( seUSB_PERIPH );
+    575                seUSB_ConfSvdDetectDisconnect();
+    576                seSVD2_Start( SVD2_1 );
+    577                seUSB_Attach();
+    578              }
+    579            } 
+    580          
+    581          }
+    582          #endif
+
+   \                                 In section .text, align 2, keep-with-next
+    583          void SVD2_1_IRQHandler( void ) {
+   \                     SVD2_1_IRQHandler: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    584          
+    585            if ( seSVD2_IsIntLowVoltage( SVD2_1 ) ) {
+   \   00000002   0x....             LDR      R0,??DataTable17_2  ;; 0x40000980
+   \   00000004   0x.... 0x....      BL       seSVD2_IsIntLowVoltage
+   \   00000008   0x2800             CMP      R0,#+0
+   \   0000000A   0xD012             BEQ      ??SVD2_1_IRQHandler_0
+    586          	seSVD2_ClearIntLowVoltage( SVD2_1 );
+   \   0000000C   0x....             LDR      R0,??DataTable17_2  ;; 0x40000980
+   \   0000000E   0x.... 0x....      BL       seSVD2_ClearIntLowVoltage
+    587              seSVD2_Stop( SVD2_1 );
+   \   00000012   0x....             LDR      R0,??DataTable17_2  ;; 0x40000980
+   \   00000014   0x.... 0x....      BL       seSVD2_Stop
+    588              NVIC_DisableIRQ( USB_IRQn );
+   \   00000018   0x2013             MOVS     R0,#+19
+   \   0000001A   0x.... 0x....      BL       NVIC_DisableIRQ
+    589              seUSB_DeactivateUSBCLK();
+   \   0000001E   0x.... 0x....      BL       seUSB_DeactivateUSBCLK
+    590              seSVD2_ClearIntLowVoltage( SVD2_1 );
+   \   00000022   0x....             LDR      R0,??DataTable17_2  ;; 0x40000980
+   \   00000024   0x.... 0x....      BL       seSVD2_ClearIntLowVoltage
+    591          	
+    592          	usbd_reset_core();
+   \   00000028   0x.... 0x....      BL       usbd_reset_core
+    593          	
+    594              usbd_init();
+   \   0000002C   0x.... 0x....      BL       usbd_init
+   \   00000030   0xE002             B        ??SVD2_1_IRQHandler_1
+    595            }
+    596            else {
+    597              seSVD2_ClearIntLowVoltage( SVD2_1 );
+   \                     ??SVD2_1_IRQHandler_0: (+1)
+   \   00000032   0x....             LDR      R0,??DataTable17_2  ;; 0x40000980
+   \   00000034   0x.... 0x....      BL       seSVD2_ClearIntLowVoltage
+    598            }
+    599          }
+   \                     ??SVD2_1_IRQHandler_1: (+1)
+   \   00000038   0xBD01             POP      {R0,PC}          ;; return
+    600          
+    601          
+
+   \                                 In section .text, align 2, keep-with-next
+    602          void seUSB_ConfSvdDetectDisconnect( void ) {  
+   \                     seUSB_ConfSvdDetectDisconnect: (+1)
+   \   00000000   0xB500             PUSH     {LR}
+   \   00000002   0xB085             SUB      SP,SP,#+20
+    603          
+    604            ///< Activate the SVD for detecting VBUS disconnection (refer to the “Supply Voltage DetectorEchapt
+    605            seSVD2_InitTypeDef SVD_InitStruct;  
+    606            seCLG_Start( seCLG_OSC1 );
+   \   00000004   0x2001             MOVS     R0,#+1
+   \   00000006   0x.... 0x....      BL       seCLG_Start
+    607            SVD_InitStruct.ClkSrc                = seCLG_OSC1;
+   \   0000000A   0x2001             MOVS     R0,#+1
+   \   0000000C   0x4669             MOV      R1,SP
+   \   0000000E   0x7008             STRB     R0,[R1, #+0]
+    608            SVD_InitStruct.ClkDivider            = seSVD2_OSC1_CLKDIV_1;
+   \   00000010   0x2000             MOVS     R0,#+0
+   \   00000012   0x4669             MOV      R1,SP
+   \   00000014   0x8048             STRH     R0,[R1, #+2]
+    609            
+    610            SVD_InitStruct.VDSEL                 = seSVD2_EXSVD;
+   \   00000016   0x2001             MOVS     R0,#+1
+   \   00000018   0x4669             MOV      R1,SP
+   \   0000001A   0x7108             STRB     R0,[R1, #+4]
+    611            SVD_InitStruct.ResetEnable           = seDISABLE;
+   \   0000001C   0x2000             MOVS     R0,#+0
+   \   0000001E   0x4669             MOV      R1,SP
+   \   00000020   0x7188             STRB     R0,[R1, #+6]
+    612            SVD_InitStruct.IntermittentMode      = seSVD2_Continious;
+   \   00000022   0x2000             MOVS     R0,#+0
+   \   00000024   0x4669             MOV      R1,SP
+   \   00000026   0x71C8             STRB     R0,[R1, #+7]
+    613            SVD_InitStruct.CompareVoltage        = 1;
+   \   00000028   0x2001             MOVS     R0,#+1
+   \   0000002A   0x9002             STR      R0,[SP, #+8]
+    614            SVD_InitStruct.SamplingResCnt        = seSVD2_CTL_4_TIMES_ROW;
+   \   0000002C   0x2002             MOVS     R0,#+2
+   \   0000002E   0x4669             MOV      R1,SP
+   \   00000030   0x7308             STRB     R0,[R1, #+12]
+    615            SVD_InitStruct.DetectMode            = seSVD2_CTL_LOWER_DETECT;
+   \   00000032   0x2000             MOVS     R0,#+0
+   \   00000034   0x4669             MOV      R1,SP
+   \   00000036   0x7348             STRB     R0,[R1, #+13]
+    616            seSVD2_Init( &SVD2_CH1, &SVD_InitStruct );     
+   \   00000038   0x4669             MOV      R1,SP
+   \   0000003A   0x....             LDR      R0,??DataTable17_3
+   \   0000003C   0x.... 0x....      BL       seSVD2_Init
+    617            seSVD2_SetComparisonVoltage( SVD2_1, 1 );
+   \   00000040   0x2101             MOVS     R1,#+1
+   \   00000042   0x....             LDR      R0,??DataTable17_2  ;; 0x40000980
+   \   00000044   0x.... 0x....      BL       seSVD2_SetComparisonVoltage
+    618          
+    619          }
+   \   00000048   0xB005             ADD      SP,SP,#+20
+   \   0000004A   0xBD00             POP      {PC}             ;; return
+    620          
+    621          
+
+   \                                 In section .text, align 2, keep-with-next
+    622          void seUSB_ConfigurePortsForUsb( seUSB_PSEL selection ) {
+   \                     seUSB_ConfigurePortsForUsb: (+1)
+   \   00000000   0xB510             PUSH     {R4,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+    623          
+    624            seProtectSys( seWRITE_PROTECT_OFF ); 
+   \   00000004   0x2096             MOVS     R0,#+150
+   \   00000006   0x.... 0x....      BL       seProtectSys
+    625            PPORT->CLK_b.DBRUN = seDBRUN; ///< Whether clock supplied in DEBUG mode or not.
+   \   0000000A   0x....             LDR      R0,??DataTable17_4  ;; 0x400002e0
+   \   0000000C   0x8800             LDRH     R0,[R0, #+0]
+   \   0000000E   0x2180             MOVS     R1,#+128
+   \   00000010   0x0049             LSLS     R1,R1,#+1        ;; #+256
+   \   00000012   0x4301             ORRS     R1,R1,R0
+   \   00000014   0x....             LDR      R0,??DataTable17_4  ;; 0x400002e0
+   \   00000016   0x8001             STRH     R1,[R0, #+0]
+    626            seProtectSys( seWRITE_PROTECT_ON ); 
+   \   00000018   0x2000             MOVS     R0,#+0
+   \   0000001A   0x.... 0x....      BL       seProtectSys
+    627          
+    628            if ( selection == seUSB_PERIPH ) {
+   \   0000001E   0xB2E4             UXTB     R4,R4
+   \   00000020   0x2C01             CMP      R4,#+1
+   \   00000022   0xD135             BNE      ??seUSB_ConfigurePortsForUsb_0
+    629              ///< Set the PxIOEN.PxIENy bit to 0. (Disable input)
+    630              PPORT->P9IOEN_b.P9IEN0 = 0;
+   \   00000024   0x....             LDR      R0,??DataTable17_5  ;; 0x40000292
+   \   00000026   0x8800             LDRH     R0,[R0, #+0]
+   \   00000028   0x....             LDR      R1,??DataTable17_6  ;; 0xfeff
+   \   0000002A   0x4001             ANDS     R1,R1,R0
+   \   0000002C   0x....             LDR      R0,??DataTable17_5  ;; 0x40000292
+   \   0000002E   0x8001             STRH     R1,[R0, #+0]
+    631              ///< Set the PxIOEN.PxOENy bit to 0. (Disable output)
+    632              PPORT->P9IOEN_b.P9OEN0 = 0;
+   \   00000030   0x....             LDR      R0,??DataTable17_5  ;; 0x40000292
+   \   00000032   0x8800             LDRH     R0,[R0, #+0]
+   \   00000034   0x....             LDR      R1,??DataTable17_7  ;; 0xfffe
+   \   00000036   0x4001             ANDS     R1,R1,R0
+   \   00000038   0x....             LDR      R0,??DataTable17_5  ;; 0x40000292
+   \   0000003A   0x8001             STRH     R1,[R0, #+0]
+    633              ///< Set the PxMODSEL.PxSELy bit to 0. (Disable peripheral I/O function)
+    634              PPORT->P9MODSEL_b.P9SEL0 = 0;
+   \   0000003C   0x....             LDR      R0,??DataTable17_8  ;; 0x4000029c
+   \   0000003E   0x8800             LDRH     R0,[R0, #+0]
+   \   00000040   0x....             LDR      R1,??DataTable17_7  ;; 0xfffe
+   \   00000042   0x4001             ANDS     R1,R1,R0
+   \   00000044   0x....             LDR      R0,??DataTable17_8  ;; 0x4000029c
+   \   00000046   0x8001             STRH     R1,[R0, #+0]
+    635              
+    636              ///< Initialize the peripheral circuit that uses the pin.
+    637              
+    638              ///< Set the PxFNCSEL.PxyMUX[1:0] bits. (Select peripheral I/O function)
+    639              PPORT->P9FNCSEL_b.P90MUX  = 2; 
+   \   00000048   0x....             LDR      R0,??DataTable17_9  ;; 0x4000029e
+   \   0000004A   0x8800             LDRH     R0,[R0, #+0]
+   \   0000004C   0x....             LDR      R1,??DataTable17_10  ;; 0xfffc
+   \   0000004E   0x4001             ANDS     R1,R1,R0
+   \   00000050   0x2002             MOVS     R0,#+2
+   \   00000052   0x4308             ORRS     R0,R0,R1
+   \   00000054   0x....             LDR      R1,??DataTable17_9  ;; 0x4000029e
+   \   00000056   0x8008             STRH     R0,[R1, #+0]
+    640              ///< Set the PxMODSEL.PxSELy bit to 1. (Enable peripheral I/O function)
+    641              PPORT->P9MODSEL_b.P9SEL0  = selection; 
+   \   00000058   0x....             LDR      R0,??DataTable17_8  ;; 0x4000029c
+   \   0000005A   0x8800             LDRH     R0,[R0, #+0]
+   \   0000005C   0x....             LDR      R1,??DataTable17_7  ;; 0xfffe
+   \   0000005E   0x4001             ANDS     R1,R1,R0
+   \   00000060   0xB2E4             UXTB     R4,R4
+   \   00000062   0x0020             MOVS     R0,R4
+   \   00000064   0x07C0             LSLS     R0,R0,#+31       ;; ZeroExtS R0,R0,#+31,#+31
+   \   00000066   0x0FC0             LSRS     R0,R0,#+31
+   \   00000068   0x4308             ORRS     R0,R0,R1
+   \   0000006A   0x....             LDR      R1,??DataTable17_8  ;; 0x4000029c
+   \   0000006C   0x8008             STRH     R0,[R1, #+0]
+    642          
+    643              NVIC_SetPriority( SVD2_1_IRQn, 2 );
+   \   0000006E   0x2102             MOVS     R1,#+2
+   \   00000070   0x2014             MOVS     R0,#+20
+   \   00000072   0x.... 0x....      BL       NVIC_SetPriority
+    644              NVIC_ClearPendingIRQ( SVD2_1_IRQn );
+   \   00000076   0x2014             MOVS     R0,#+20
+   \   00000078   0x.... 0x....      BL       NVIC_ClearPendingIRQ
+    645              NVIC_EnableIRQ( SVD2_1_IRQn );
+   \   0000007C   0x2014             MOVS     R0,#+20
+   \   0000007E   0x.... 0x....      BL       NVIC_EnableIRQ
+    646              NVIC_DisableIRQ( PORT_IRQn );
+   \   00000082   0x2002             MOVS     R0,#+2
+   \   00000084   0x.... 0x....      BL       NVIC_DisableIRQ
+    647              NVIC_ClearPendingIRQ( PORT_IRQn );
+   \   00000088   0x2002             MOVS     R0,#+2
+   \   0000008A   0x.... 0x....      BL       NVIC_ClearPendingIRQ
+   \   0000008E   0xE04B             B        ??seUSB_ConfigurePortsForUsb_1
+    648              
+    649            } else {
+    650              
+    651              ///< Write 0 to the PxINTCTL.PxIEy bit. (Disable interrupt)
+    652              PPORT->P9INTCTL_b.P9IE0 = 0;
+   \                     ??seUSB_ConfigurePortsForUsb_0: (+1)
+   \   00000090   0x....             LDR      R0,??DataTable17_11  ;; 0x40000298
+   \   00000092   0x8800             LDRH     R0,[R0, #+0]
+   \   00000094   0x....             LDR      R1,??DataTable17_7  ;; 0xfffe
+   \   00000096   0x4001             ANDS     R1,R1,R0
+   \   00000098   0x....             LDR      R0,??DataTable17_11  ;; 0x40000298
+   \   0000009A   0x8001             STRH     R1,[R0, #+0]
+    653              
+    654              ///< Configure the following PxRCTL register bits when pulling up/down 
+    655              ///< the port using the internal pull-up or down resistor:
+    656              PPORT->P9RCTL_b.P9PDPU0 = 0; ///< PxRCTL.PxPDPUy bit (Select pull-up or pull-down resistor)
+   \   0000009C   0x....             LDR      R0,??DataTable17_12  ;; 0x40000294
+   \   0000009E   0x8800             LDRH     R0,[R0, #+0]
+   \   000000A0   0x....             LDR      R1,??DataTable17_6  ;; 0xfeff
+   \   000000A2   0x4001             ANDS     R1,R1,R0
+   \   000000A4   0x....             LDR      R0,??DataTable17_12  ;; 0x40000294
+   \   000000A6   0x8001             STRH     R1,[R0, #+0]
+    657              PPORT->P9RCTL_b.P9REN0 = 1;  ///< PxRENy bit to 1. (Enable pull-up/down)
+   \   000000A8   0x....             LDR      R0,??DataTable17_12  ;; 0x40000294
+   \   000000AA   0x8800             LDRH     R0,[R0, #+0]
+   \   000000AC   0x2101             MOVS     R1,#+1
+   \   000000AE   0x4301             ORRS     R1,R1,R0
+   \   000000B0   0x....             LDR      R0,??DataTable17_12  ;; 0x40000294
+   \   000000B2   0x8001             STRH     R1,[R0, #+0]
+    658                                           ///< Set the PxRCTL.PxRENy bit to 0 if the internal pull-up/down 
+    659                                           ///< resistors are not used.
+    660              ///< Set the PxMODSEL.PxSELy bit to 0. (Enable GPIO function)
+    661              PPORT->P9MODSEL_b.P9SEL0 = selection;
+   \   000000B4   0x....             LDR      R0,??DataTable17_8  ;; 0x4000029c
+   \   000000B6   0x8800             LDRH     R0,[R0, #+0]
+   \   000000B8   0x....             LDR      R1,??DataTable17_7  ;; 0xfffe
+   \   000000BA   0x4001             ANDS     R1,R1,R0
+   \   000000BC   0xB2E4             UXTB     R4,R4
+   \   000000BE   0x0020             MOVS     R0,R4
+   \   000000C0   0x07C0             LSLS     R0,R0,#+31       ;; ZeroExtS R0,R0,#+31,#+31
+   \   000000C2   0x0FC0             LSRS     R0,R0,#+31
+   \   000000C4   0x4308             ORRS     R0,R0,R1
+   \   000000C6   0x....             LDR      R1,??DataTable17_8  ;; 0x4000029c
+   \   000000C8   0x8008             STRH     R0,[R1, #+0]
+    662              ///< Configure the following bits when using the port input interrupt: *
+    663              ///< Write 1 to the PxINTF.PxIFy bit. (Clear interrupt flag as a whole register)
+    664              PPORT->P9INTF             = 0x01;
+   \   000000CA   0x2001             MOVS     R0,#+1
+   \   000000CC   0x....             LDR      R1,??DataTable17_13  ;; 0x40000296
+   \   000000CE   0x8008             STRH     R0,[R1, #+0]
+    665              ///< PxINTCTL.PxEDGEy bit (Select interrupt edge (input rising edge/falling edge(1)))
+    666              PPORT->P9INTCTL_b.P9EDGE0 = 0;
+   \   000000D0   0x....             LDR      R0,??DataTable17_11  ;; 0x40000298
+   \   000000D2   0x8800             LDRH     R0,[R0, #+0]
+   \   000000D4   0x....             LDR      R1,??DataTable17_6  ;; 0xfeff
+   \   000000D6   0x4001             ANDS     R1,R1,R0
+   \   000000D8   0x....             LDR      R0,??DataTable17_11  ;; 0x40000298
+   \   000000DA   0x8001             STRH     R1,[R0, #+0]
+    667              ///< Set the PxINTCTL.PxIEy bit to 1. (Enable interrupt)
+    668              PPORT->P9INTCTL_b.P9IE0 = 1;
+   \   000000DC   0x....             LDR      R0,??DataTable17_11  ;; 0x40000298
+   \   000000DE   0x8800             LDRH     R0,[R0, #+0]
+   \   000000E0   0x2101             MOVS     R1,#+1
+   \   000000E2   0x4301             ORRS     R1,R1,R0
+   \   000000E4   0x....             LDR      R0,??DataTable17_11  ;; 0x40000298
+   \   000000E6   0x8001             STRH     R1,[R0, #+0]
+    669              ///< Set the PxIOEN.PxOENy bit to 0. (Disable output)
+    670              PPORT->P9IOEN_b.P9OEN0 = 0;
+   \   000000E8   0x....             LDR      R0,??DataTable17_5  ;; 0x40000292
+   \   000000EA   0x8800             LDRH     R0,[R0, #+0]
+   \   000000EC   0x....             LDR      R1,??DataTable17_7  ;; 0xfffe
+   \   000000EE   0x4001             ANDS     R1,R1,R0
+   \   000000F0   0x....             LDR      R0,??DataTable17_5  ;; 0x40000292
+   \   000000F2   0x8001             STRH     R1,[R0, #+0]
+    671              ///< Set the PxIOEN.PxIENy bit to 1. (Enable input)
+    672              PPORT->P9IOEN_b.P9IEN0 = 1;
+   \   000000F4   0x....             LDR      R0,??DataTable17_5  ;; 0x40000292
+   \   000000F6   0x8800             LDRH     R0,[R0, #+0]
+   \   000000F8   0x2180             MOVS     R1,#+128
+   \   000000FA   0x0049             LSLS     R1,R1,#+1        ;; #+256
+   \   000000FC   0x4301             ORRS     R1,R1,R0
+   \   000000FE   0x....             LDR      R0,??DataTable17_5  ;; 0x40000292
+   \   00000100   0x8001             STRH     R1,[R0, #+0]
+    673              
+    674              NVIC_ClearPendingIRQ( SVD2_1_IRQn );
+   \   00000102   0x2014             MOVS     R0,#+20
+   \   00000104   0x.... 0x....      BL       NVIC_ClearPendingIRQ
+    675              NVIC_DisableIRQ( SVD2_1_IRQn );
+   \   00000108   0x2014             MOVS     R0,#+20
+   \   0000010A   0x.... 0x....      BL       NVIC_DisableIRQ
+    676              NVIC_ClearPendingIRQ( PORT_IRQn );
+   \   0000010E   0x2002             MOVS     R0,#+2
+   \   00000110   0x.... 0x....      BL       NVIC_ClearPendingIRQ
+    677              
+    678              NVIC_SetPriority (PORT_IRQn, 2 );    
+   \   00000114   0x2102             MOVS     R1,#+2
+   \   00000116   0x2002             MOVS     R0,#+2
+   \   00000118   0x.... 0x....      BL       NVIC_SetPriority
+    679              NVIC_ClearPendingIRQ( PORT_IRQn );
+   \   0000011C   0x2002             MOVS     R0,#+2
+   \   0000011E   0x.... 0x....      BL       NVIC_ClearPendingIRQ
+    680              NVIC_EnableIRQ(PORT_IRQn);
+   \   00000122   0x2002             MOVS     R0,#+2
+   \   00000124   0x.... 0x....      BL       NVIC_EnableIRQ
+    681          
+    682            } 
+    683          
+    684          }
+   \                     ??seUSB_ConfigurePortsForUsb_1: (+1)
+   \   00000128   0xBD10             POP      {R4,PC}          ;; return
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable10:
+   \   00000000   0xE000E100         DC32     0xe000e100
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable10_1:
+   \   00000000   0xE000E180         DC32     0xe000e180
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable10_2:
+   \   00000000   0xE000E280         DC32     0xe000e280
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable10_3:
+   \   00000000   0xE000E400         DC32     0xe000e400
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable10_4:
+   \   00000000   0xE000ED1C         DC32     0xe000ed1c
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable10_5:
+   \   00000000   0x........         DC32     gEpSize
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable10_6:
+   \   00000000   0x........         DC32     gFrameNumber
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable10_7:
+   \   00000000   0x........         DC32     gSetupToken
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable10_8:
+   \   00000000   0x........         DC32     gRemoteWakeUpConfigured
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11:
+   \   00000000   0x........         DC32     gEpSize
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_1:
+   \   00000000   0x20400050         DC32     0x20400050
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_2:
+   \   00000000   0x20400060         DC32     0x20400060
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_3:
+   \   00000000   0x20400051         DC32     0x20400051
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_4:
+   \   00000000   0x20400061         DC32     0x20400061
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_5:
+   \   00000000   0x20400052         DC32     0x20400052
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_6:
+   \   00000000   0x20400062         DC32     0x20400062
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable12:
+   \   00000000   0x........         DC32     USBD_P_Reset_Event
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable12_1:
+   \   00000000   0x........         DC32     USBD_P_Suspend_Event
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable12_2:
+   \   00000000   0x........         DC32     USBD_P_Resume_Event
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable12_3:
+   \   00000000   0x........         DC32     USBD_P_SOF_Event
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable12_4:
+   \   00000000   0x........         DC32     gFrameNumber
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable12_5:
+   \   00000000   0x........         DC32     gSetupToken
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable12_6:
+   \   00000000   0x........         DC32     USBD_P_EP
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable12_7:
+   \   00000000   0x2040001A         DC32     0x2040001a
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable13:
+   \   00000000   0x20400053         DC32     0x20400053
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable15:
+   \   00000000   0x20400054         DC32     0x20400054
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable16:
+   \   00000000   0x20400055         DC32     0x20400055
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable16_1:
+   \   00000000   0x20400056         DC32     0x20400056
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable16_2:
+   \   00000000   0x20400030         DC32     0x20400030
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable16_3:
+   \   00000000   0x20400032         DC32     0x20400032
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable17:
+   \   00000000   0x........         DC32     USBD_P_EP
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable17_1:
+   \   00000000   0x20400034         DC32     0x20400034
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable17_2:
+   \   00000000   0x40000980         DC32     0x40000980
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable17_3:
+   \   00000000   0x........         DC32     SVD2_CH1
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable17_4:
+   \   00000000   0x400002E0         DC32     0x400002e0
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable17_5:
+   \   00000000   0x40000292         DC32     0x40000292
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable17_6:
+   \   00000000   0x0000FEFF         DC32     0xfeff
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable17_7:
+   \   00000000   0x0000FFFE         DC32     0xfffe
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable17_8:
+   \   00000000   0x4000029C         DC32     0x4000029c
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable17_9:
+   \   00000000   0x4000029E         DC32     0x4000029e
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable17_10:
+   \   00000000   0x0000FFFC         DC32     0xfffc
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable17_11:
+   \   00000000   0x40000298         DC32     0x40000298
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable17_12:
+   \   00000000   0x40000294         DC32     0x40000294
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable17_13:
+   \   00000000   0x40000296         DC32     0x40000296
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       4   NVIC_ClearPendingIRQ
+       4   NVIC_DisableIRQ
+       4   NVIC_EnableIRQ
+      20   NVIC_SetPriority
+       8   SVD2_1_IRQHandler
+         8   -> NVIC_DisableIRQ
+         8   -> seSVD2_ClearIntLowVoltage
+         8   -> seSVD2_IsIntLowVoltage
+         8   -> seSVD2_Stop
+         8   -> seUSB_DeactivateUSBCLK
+         8   -> usbd_init
+         8   -> usbd_reset_core
+       8   USBD_ClearEPBuf
+         8   -> seUSB_ClearEPmFifo
+       8   USBD_ClrStallEP
+         8   -> USBD_ResetEP
+         8   -> seUSB_ClrStall
+       8   USBD_ConfigEP
+         8   -> USBD_ResetEP
+         8   -> seUSB_ConfigureEPm
+       0   USBD_Configure
+       8   USBD_Connect
+         8   -> seUSB_Connect
+         8   -> seUSB_Disconnect
+       8   USBD_DirCtrlEP
+         8   -> seUSB_SetEp0Dir
+       8   USBD_DisableEP
+         8   -> seUSB_DisableEPm
+       8   USBD_EnableEP
+         8   -> seUSB_EnableEPm
+       0   USBD_EndPoint0_Out_ADC_ReqToEP
+       0   USBD_EndPoint0_Out_ADC_ReqToIF
+       0   USBD_EndPoint0_Out_CLS_ReqToDEV
+       0   USBD_EndPoint0_Out_CLS_ReqToEP
+       0   USBD_EndPoint0_Out_CLS_ReqToIF
+       0   USBD_EndPoint0_Out_HID_ReqToIF
+       0   USBD_EndPoint0_Out_MSC_ReqToIF
+       0   USBD_EndPoint0_Setup_ADC_ReqToEP
+       0   USBD_EndPoint0_Setup_ADC_ReqToIF
+       0   USBD_EndPoint0_Setup_CLS_ReqToDEV
+       0   USBD_EndPoint0_Setup_CLS_ReqToEP
+       0   USBD_EndPoint0_Setup_CLS_ReqToIF
+       0   USBD_EndPoint0_Setup_HID_ReqToIF
+       0   USBD_EndPoint0_Setup_MSC_ReqToIF
+       0   USBD_GetFrame
+       8   USBD_Init
+         8   -> seCLG_Start
+         8   -> seUSB_ConfigurePortsForUsb
+         8   -> seUSB_Init
+       0   USBD_RTX_TaskInit
+       8   USBD_ReadEP
+         8   -> seUSB_GetSetupPacket
+         8   -> seUSB_ReadFifo
+       0   USBD_ReqClrFeature_MSC
+       0   USBD_ReqGetDescriptor_HID
+       8   USBD_Reset
+         8   -> seUSB_ClearAllIntFlags
+         8   -> seUSB_ClearEPnFifos
+         8   -> seUSB_InitEp0
+         8   -> seUSB_Reset
+       8   USBD_ResetEP
+         8   -> seUSB_ResetEPm
+       8   USBD_Reset_Event
+         8   -> USBD_CDC_ACM_Reset_Event
+       8   USBD_Resume
+         8   -> seUSB_Resume
+       8   USBD_SOF_Event
+         8   -> USBD_CDC_ACM_SOF_Event
+       8   USBD_SetAddress
+         8   -> seUSB_SetAddress
+       8   USBD_SetStallEP
+         8   -> seUSB_SetStall
+       8   USBD_Suspend
+         8   -> seUSB_Suspend
+       8   USBD_WakeUp
+         8   -> seUSB_WakeUp
+       0   USBD_WakeUpCfg
+       8   USBD_WriteEP
+         8   -> seUSB_WriteFifo
+      16   USB_IRQHandler
+        16   -- Indirect call
+        16   -> USBD_Reset
+        16   -> USBD_Resume
+        16   -> USBD_Suspend
+        16   -> handleEpaInt
+        16   -> handleEpbInt
+        16   -> handleEpcInt
+        16   -> seUSB_DataInStage
+        16   -> seUSB_DataOutStage
+        16   -> seUSB_StatusInStage
+        16   -> seseUSB_StatusOutStage
+        16   -> usbd_reset_core
+       8   handleEpaInt
+         8   -- Indirect call
+       8   handleEpbInt
+         8   -- Indirect call
+       8   handleEpcInt
+         8   -- Indirect call
+      24   seUSB_ConfSvdDetectDisconnect
+        24   -> seCLG_Start
+        24   -> seSVD2_Init
+        24   -> seSVD2_SetComparisonVoltage
+       8   seUSB_ConfigurePortsForUsb
+         8   -> NVIC_ClearPendingIRQ
+         8   -> NVIC_DisableIRQ
+         8   -> NVIC_EnableIRQ
+         8   -> NVIC_SetPriority
+         8   -> seProtectSys
+       8   usbd_class_init
+         8   -> USBD_CDC_ACM_Initialize
+       0   usbd_os_evt_get
+       0   usbd_os_evt_set
+       0   usbd_os_evt_wait_or
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable10
+       4  ??DataTable10_1
+       4  ??DataTable10_2
+       4  ??DataTable10_3
+       4  ??DataTable10_4
+       4  ??DataTable10_5
+       4  ??DataTable10_6
+       4  ??DataTable10_7
+       4  ??DataTable10_8
+       4  ??DataTable11
+       4  ??DataTable11_1
+       4  ??DataTable11_2
+       4  ??DataTable11_3
+       4  ??DataTable11_4
+       4  ??DataTable11_5
+       4  ??DataTable11_6
+       4  ??DataTable12
+       4  ??DataTable12_1
+       4  ??DataTable12_2
+       4  ??DataTable12_3
+       4  ??DataTable12_4
+       4  ??DataTable12_5
+       4  ??DataTable12_6
+       4  ??DataTable12_7
+       4  ??DataTable13
+       4  ??DataTable15
+       4  ??DataTable16
+       4  ??DataTable16_1
+       4  ??DataTable16_2
+       4  ??DataTable16_3
+       4  ??DataTable17
+       4  ??DataTable17_1
+       4  ??DataTable17_10
+       4  ??DataTable17_11
+       4  ??DataTable17_12
+       4  ??DataTable17_13
+       4  ??DataTable17_2
+       4  ??DataTable17_3
+       4  ??DataTable17_4
+       4  ??DataTable17_5
+       4  ??DataTable17_6
+       4  ??DataTable17_7
+       4  ??DataTable17_8
+       4  ??DataTable17_9
+      22  NVIC_ClearPendingIRQ
+      22  NVIC_DisableIRQ
+      22  NVIC_EnableIRQ
+     132  NVIC_SetPriority
+      58  SVD2_1_IRQHandler
+       2  USBD_AltSetting
+      12  USBD_CDC_ACM_NotifyBuf
+    2048  USBD_CDC_ACM_ReceiveBuf
+    2048  USBD_CDC_ACM_SendBuf
+      12  USBD_ClearEPBuf
+      22  USBD_ClrStallEP
+      68  USBD_ConfigDescriptor
+       1  USBD_ConfigDescriptor_HS
+      50  USBD_ConfigEP
+       2  USBD_Configure
+      18  USBD_Connect
+      20  USBD_DeviceDescriptor
+       1  USBD_DeviceQualifier
+       1  USBD_DeviceQualifier_HS
+       8  USBD_DirCtrlEP
+      12  USBD_DisableEP
+      64  USBD_EP0Buf
+      12  USBD_EnableEP
+       4  USBD_EndPoint0_Out_ADC_ReqToEP
+       4  USBD_EndPoint0_Out_ADC_ReqToIF
+       4  USBD_EndPoint0_Out_CLS_ReqToDEV
+       4  USBD_EndPoint0_Out_CLS_ReqToEP
+       4  USBD_EndPoint0_Out_CLS_ReqToIF
+       4  USBD_EndPoint0_Out_HID_ReqToIF
+       4  USBD_EndPoint0_Out_MSC_ReqToIF
+       4  USBD_EndPoint0_Setup_ADC_ReqToEP
+       4  USBD_EndPoint0_Setup_ADC_ReqToIF
+       4  USBD_EndPoint0_Setup_CLS_ReqToDEV
+       4  USBD_EndPoint0_Setup_CLS_ReqToEP
+       4  USBD_EndPoint0_Setup_CLS_ReqToIF
+       4  USBD_EndPoint0_Setup_HID_ReqToIF
+       4  USBD_EndPoint0_Setup_MSC_ReqToIF
+       6  USBD_GetFrame
+       2  USBD_HID_DescriptorOffset
+      36  USBD_HID_ReportDescriptor
+       2  USBD_HID_ReportDescriptorSize
+      34  USBD_Init
+       1  USBD_OtherSpeedConfigDescriptor
+       1  USBD_OtherSpeedConfigDescriptor_HS
+       4  USBD_P_Configure_Event
+      64  USBD_P_EP
+       4  USBD_P_Error_Event
+       4  USBD_P_Feature_Event
+       4  USBD_P_Interface_Event
+       4  USBD_P_Power_Event
+       4  USBD_P_Reset_Event
+       4  USBD_P_Resume_Event
+       4  USBD_P_SOF_Event
+       4  USBD_P_Suspend_Event
+       4  USBD_P_WakeUp_Event
+       2  USBD_RTX_TaskInit
+      54  USBD_ReadEP
+       2  USBD_ReqClrFeature_MSC
+       4  USBD_ReqGetDescriptor_HID
+      38  USBD_Reset
+      12  USBD_ResetEP
+       8  USBD_Reset_Event
+       8  USBD_Resume
+       8  USBD_SOF_Event
+       8  USBD_SetAddress
+      12  USBD_SetStallEP
+     108  USBD_StringDescriptor
+       8  USBD_Suspend
+      16  USBD_WakeUp
+       6  USBD_WakeUpCfg
+      20  USBD_WriteEP
+     574  USB_IRQHandler
+       4  __rtx
+       4  gEpSize
+       4  gFrameNumber
+       2  gRemoteWakeUpConfigured
+       2  gSetupToken
+     188  handleEpaInt
+     212  handleEpbInt
+     164  handleEpcInt
+      76  seUSB_ConfSvdDetectDisconnect
+     298  seUSB_ConfigurePortsForUsb
+       1  usbd_cdc_acm_cif_num
+       1  usbd_cdc_acm_dif_num
+       1  usbd_cdc_acm_ep_bulkin
+       1  usbd_cdc_acm_ep_bulkout
+       1  usbd_cdc_acm_ep_intin
+       4  usbd_cdc_acm_maxpacketsize
+       4  usbd_cdc_acm_maxpacketsize1
+       2  usbd_cdc_acm_receivebuf_sz
+       2  usbd_cdc_acm_sendbuf_sz
+       8  usbd_class_init
+       1  usbd_ep_num
+       1  usbd_hs_enable
+       2  usbd_if_num
+       1  usbd_max_packet0
+       4  usbd_os_evt_get
+       2  usbd_os_evt_set
+       4  usbd_os_evt_wait_or
+       1  usbd_power
+
+ 
+ 4 186 bytes in section .bss
+   372 bytes in section .rodata
+ 2 400 bytes in section .text
+ 
+ 2 384 bytes of CODE  memory (+ 16 bytes shared)
+   372 bytes of CONST memory
+ 4 186 bytes of DATA  memory
+
+Errors: none
+Warnings: none

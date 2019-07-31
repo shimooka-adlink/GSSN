@@ -1,0 +1,155 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V7.80.4.12462/W32 for ARM       17/May/2019  13:32:08
+# Copyright 1999-2017 IAR Systems AB.
+#
+#    Cpu mode     =  thumb
+#    Endian       =  little
+#    Source file  =  C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\apl\man_memory.c
+#    Command line =  
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\apl\man_memory.c -D
+#        __TARGET_ARCH_7_M -D S1C31W74 -D GNSS_GW_SIDE_B -lCN
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\List
+#        -lA
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\List
+#        --diag_suppress Pe177,Pe111,Pa082 -o
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj
+#        --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa
+#        --no_clustering --no_scheduling --debug --endian=little
+#        --cpu=Cortex-M0+ -e --fpu=None --dlib_config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench
+#        7.5\arm\INC\c\DLib_Config_Normal.h" -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\ -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\
+#        -I "C:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        7.5\arm\CMSIS\Include\" -I "C:\Program Files (x86)\IAR
+#        Systems\Embedded Workbench 7.5\arm\inc\Epson\" -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\CMSIS\Device\S1C31W74\Include\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\CMSIS\Driver\Include\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\sePeriphLibrary\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\board\S5U1C31W74T1\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\USBStack\INC\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\include\
+#        -Ol
+#    Locale       =  Japanese_Japan.932
+#    List file    =  
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\List\man_memory.lst
+#    Object file  =  
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\man_memory.o
+#
+###############################################################################
+
+C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\apl\man_memory.c
+      1          
+      2          /**
+      3            ******************************************************************************
+      4            * @file    man_memory.c
+      5            * @author  コア
+      6            * @version V1.0
+      7            * @date    2017.10.2
+      8            * @brief   メモリーを管理する
+      9            ******************************************************************************
+     10            $Id: man_memory.c 57 2018-03-30 05:54:51Z shitaoka $
+     11            * @attention
+     12            *
+     13            *****************************************************************************
+     14          */
+     15          
+     16          #include <string.h>
+     17          #include <stdio.h>
+     18          #include <stdlib.h>
+     19          
+     20          #include "board.h"
+     21          
+     22          #include "man_memory.h"
+     23          
+     24          #pragma section = "APL_PRG_BLOCK"
+     25          
+     26          /************************************************************************/
+     27          /* declaration of structure                                             */
+     28          /************************************************************************/
+     29          
+     30          
+     31          // メモリ管理ワーク
+     32          typedef struct _man_memory_work_t {
+     33          	uint8_t					buff[MAN_MEMORY_ALLOC_MAX];
+     34          } man_memory_work_t;
+     35          
+     36          
+     37          /************************************************************************/
+     38          /* definition of variables                                              */
+     39          /************************************************************************/
+     40          
+
+   \                                 In section .bss, align 4
+     41          man_memory_work_t	man_memory_work;
+   \                     man_memory_work:
+   \   00000000                      DS8 2048
+     42          
+     43          
+     44          
+     45          /********************************************************************/
+     46          /*	callback関数                                                    */
+     47          /********************************************************************/
+     48          
+     49          
+     50          /********************************************************************/
+     51          /*	static関数                                                      */
+     52          /********************************************************************/
+     53          
+     54          /********************************************************************/
+     55          /*	extern関数                                                      */
+     56          /********************************************************************/
+     57          
+     58          
+     59          /********************************************************************/
+     60          /*!
+     61           * \name	man_memory_alloc
+     62           * \brief	メモリ確保処理
+     63           * \param	なし
+     64           * \return  メモリ」先頭アドレス
+     65           * \note	一次バッファでのみ使用してください
+     66           *          確保できるサイズはMAN_MEMORY_ALLOC_MAXです
+     67           */
+     68          /********************************************************************/
+
+   \                                 In section .text, align 4, keep-with-next
+     69          uint8_t *man_memory_alloc( void )
+     70          {
+     71          	return &man_memory_work.buff[0];
+   \                     man_memory_alloc: (+1)
+   \   00000000   0x4800             LDR      R0,??man_memory_alloc_0
+   \   00000002   0x4770             BX       LR               ;; return
+   \                     ??man_memory_alloc_0:
+   \   00000004   0x........         DC32     man_memory_work
+     72          }
+     73          
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       0   man_memory_alloc
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       8  man_memory_alloc
+    2048  man_memory_work
+
+ 
+ 2 048 bytes in section .bss
+     8 bytes in section .text
+ 
+     8 bytes of CODE memory
+ 2 048 bytes of DATA memory
+
+Errors: none
+Warnings: none

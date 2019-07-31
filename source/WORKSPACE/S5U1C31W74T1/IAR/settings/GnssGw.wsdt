@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<Workspace>
+  <ConfigDictionary>
+    
+    
+    
+  <CurrentConfigs><Project>sePeriphLibrary/Debug</Project><Project>GNSS_GW/DebugFlash</Project></CurrentConfigs><CurrentProj>GNSS_GW</CurrentProj><OverviewSelected>0</OverviewSelected></ConfigDictionary>
+  <Desktop>
+    <Static>
+      <Debug-Log>
+        
+        
+      <PreferedWindows><Position>3</Position><ScreenPosX>0</ScreenPosX><ScreenPosY>0</ScreenPosY><Windows><Window><Factory>Build</Factory></Window><Window><Factory>Find-in-Files</Factory></Window><Window><Factory>Find-All-References</Factory></Window><Window><Factory>Select-Ambiguous-Definitions</Factory></Window></Windows></PreferedWindows><ColumnWidth0>16</ColumnWidth0><ColumnWidth1>1089</ColumnWidth1></Debug-Log>
+      <Workspace>
+        <ColumnWidths>
+          
+          
+          
+          
+        <Column0>197</Column0><Column1>13</Column1><Column2>27</Column2><Column3>0</Column3></ColumnWidths>
+      </Workspace>
+      <Build>
+        
+        
+        
+        
+      <PreferedWindows><Position>3</Position><ScreenPosX>0</ScreenPosX><ScreenPosY>0</ScreenPosY><Windows><Window><Factory>Debug-Log</Factory></Window><Window><Factory>Find-in-Files</Factory></Window><Window><Factory>Find-All-References</Factory></Window><Window><Factory>Select-Ambiguous-Definitions</Factory></Window></Windows></PreferedWindows><ColumnWidth0>16</ColumnWidth0><ColumnWidth1>816</ColumnWidth1><ColumnWidth2>217</ColumnWidth2><ColumnWidth3>54</ColumnWidth3></Build>
+    <TerminalIO/><Find-in-Files><PreferedWindows><Position>3</Position><ScreenPosX>0</ScreenPosX><ScreenPosY>0</ScreenPosY><Windows><Window><Factory>Debug-Log</Factory></Window><Window><Factory>Build</Factory></Window><Window><Factory>Find-All-References</Factory></Window><Window><Factory>Select-Ambiguous-Definitions</Factory></Window></Windows></PreferedWindows><ColumnWidth0>405</ColumnWidth0><ColumnWidth1>56</ColumnWidth1><ColumnWidth2>511</ColumnWidth2><ColumnWidth3>227</ColumnWidth3></Find-in-Files><Find-All-References><PreferedWindows><Position>3</Position><ScreenPosX>0</ScreenPosX><ScreenPosY>0</ScreenPosY><Windows><Window><Factory>Debug-Log</Factory></Window><Window><Factory>Build</Factory></Window><Window><Factory>Find-in-Files</Factory></Window><Window><Factory>Select-Ambiguous-Definitions</Factory></Window></Windows></PreferedWindows><ColumnWidth0>423</ColumnWidth0><ColumnWidth1>60</ColumnWidth1><ColumnWidth2>726</ColumnWidth2></Find-All-References><Select-Ambiguous-Definitions><PreferedWindows><Position>3</Position><ScreenPosX>0</ScreenPosX><ScreenPosY>0</ScreenPosY><Windows><Window><Factory>Debug-Log</Factory></Window><Window><Factory>Build</Factory></Window><Window><Factory>Find-in-Files</Factory></Window><Window><Factory>Find-All-References</Factory></Window></Windows></PreferedWindows><ColumnWidth0>409</ColumnWidth0><ColumnWidth1>58</ColumnWidth1><ColumnWidth2>702</ColumnWidth2></Select-Ambiguous-Definitions><PROJECT_GUI_CALL_GRAPH><PreferedWindows><Position>3</Position><ScreenPosX>0</ScreenPosX><ScreenPosY>0</ScreenPosY><Windows/></PreferedWindows><col-names><item>&#x30D5;&#x30A1;&#x30A4;&#x30eB;</item><item>&#x95A2;&#x6570;</item><item>&#x884C;</item></col-names><col-widths><item>200</item><item>700</item><item>100</item></col-widths></PROJECT_GUI_CALL_GRAPH><Find-All-Declarations><ColumnWidth0>437</ColumnWidth0><ColumnWidth1>62</ColumnWidth1><ColumnWidth2>749</ColumnWidth2></Find-All-Declarations></Static>
+    <Windows>
+      
+      
+    <Wnd0>
+        <Tabs>
+          <Tab>
+            <Identity>TabID-21412-12744</Identity>
+            <TabName>&#x30eF;&#x30FC;&#x30AF;&#x30B9;&#x30DA;&#x30FC;&#x30B9;</TabName>
+            <Factory>Workspace</Factory>
+            <Session>
+              
+            <NodeDict><ExpandedNode>&lt;ws&gt;</ExpandedNode><ExpandedNode>&lt;ws&gt;/GNSS_GW</ExpandedNode><ExpandedNode>&lt;ws&gt;/GNSS_GW/Output</ExpandedNode><ExpandedNode>&lt;ws&gt;/GNSS_GW/Output/GNSS_GW_FW_SIDE_B.out</ExpandedNode><ExpandedNode>&lt;ws&gt;/GNSS_GW/Output/GNSS_GW_FW_SIDE_B.out/Output</ExpandedNode><ExpandedNode>&lt;ws&gt;/GNSS_GW/apl</ExpandedNode><ExpandedNode>&lt;ws&gt;/sePeriphLibrary</ExpandedNode><ExpandedNode>&lt;ws&gt;/sePeriphLibrary/Output</ExpandedNode><ExpandedNode>GNSS_GW</ExpandedNode><ExpandedNode>GNSS_GW/CMSIS</ExpandedNode><ExpandedNode>GNSS_GW/apl</ExpandedNode><ExpandedNode>GNSS_GW/apl/man_net.c</ExpandedNode><ExpandedNode>GNSS_GW/board</ExpandedNode><ExpandedNode>GNSS_GW/board/read.c</ExpandedNode><ExpandedNode>GNSS_GW/common</ExpandedNode><ExpandedNode>GNSS_GW/driver</ExpandedNode><ExpandedNode>GNSS_GW/driver/clg</ExpandedNode><ExpandedNode>sePeriphLibrary</ExpandedNode></NodeDict></Session>
+          </Tab>
+        </Tabs>
+        
+      <SelectedTab>0</SelectedTab></Wnd0><Wnd1><Tabs><Tab><Identity>TabID-6965-4449</Identity><TabName>&#x30D5;&#x30A1;&#x30A4;&#x30eB;&#x304B;&#x3089;&#x691C;&#x7D22;</TabName><Factory>Find-in-Files</Factory><Session/></Tab><Tab><Identity>TabID-31264-5631</Identity><TabName>&#x30D3;&#x30eB;&#x30C9;</TabName><Factory>Build</Factory><Session/></Tab><Tab><Identity>TabID-18424-5667</Identity><TabName>&#x30C7;&#x30D0;&#x30C3;&#x30B0;&#x30eD;&#x30B0;</TabName><Factory>Debug-Log</Factory><Session/></Tab><Tab><Identity>TabID-25443-3603</Identity><TabName>&#x53C2;&#x7167;</TabName><Factory>Find-All-References</Factory><Session/></Tab><Tab><Identity>TabID-9891-19457</Identity><TabName>&#x66D6;&#x6627;&#x306A;&#x5B9A;&#x7FA9;</TabName><Factory>Select-Ambiguous-Definitions</Factory><Session/></Tab><Tab><Identity>TabID-4734-26565</Identity><TabName>&#x5BA3;&#x8A00;</TabName><Factory>Find-All-Declarations</Factory><Session/></Tab></Tabs><SelectedTab>2</SelectedTab></Wnd1><Wnd2><Tabs><Tab><Identity>TabID-18521-14176</Identity><TabName>&#x30B3;&#x30FC;&#x30eB;&#x30B0;&#x30e9;&#x30D5;</TabName><Factory>PROJECT_GUI_CALL_GRAPH</Factory></Tab></Tabs><SelectedTab>0</SelectedTab></Wnd2></Windows>
+    <Editor>
+      
+      
+      
+      
+    <Pane><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\..\GNSS_GW\apl\man_ope.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>3196</YPos2><SelStart2>84811</SelStart2><SelEnd2>84811</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\..\GNSS_GW\main.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>525</YPos2><SelStart2>13040</SelStart2><SelEnd2>13052</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\..\GNSS_GW\apl\man_http.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>177</YPos2><SelStart2>34316</SelStart2><SelEnd2>34316</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\..\GNSS_GW\apl\man_cmd.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>2328</YPos2><SelStart2>72074</SelStart2><SelEnd2>72074</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\..\GNSS_GW\apl\man_rtc.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>103</YPos2><SelStart2>3312</SelStart2><SelEnd2>3325</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\..\GNSS_GW\apl\man_gps.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>324</YPos2><SelStart2>12820</SelStart2><SelEnd2>12820</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\..\GNSS_GW\driver\rtc\drv_rtc.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>105</YPos2><SelStart2>3529</SelStart2><SelEnd2>3555</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\..\GNSS_GW\apl\man_version.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>27</YPos2><SelStart2>1548</SelStart2><SelEnd2>1548</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\..\..\sePeriphLibrary\se_rtca.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>214</YPos2><SelStart2>7591</SelStart2><SelEnd2>7617</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\..\..\sePeriphLibrary\se_rtca.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>42</YPos2><SelStart2>13444</SelStart2><SelEnd2>13444</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\..\GNSS_GW\apl\man_lte.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>352</YPos2><SelStart2>13395</SelStart2><SelEnd2>13395</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\..\GNSS_GW\apl\man_net.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>1397</YPos2><SelStart2>12282</SelStart2><SelEnd2>12282</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\..\GNSS_GW\middle\mid_HTTP.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>3581</YPos2><SelStart2>118251</SelStart2><SelEnd2>118251</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\..\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\List\GNSS_GW_FW_SIDE_A.map</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>18</YPos2><SelStart2>0</SelStart2><SelEnd2>0</SelEnd2></Tab><ActiveTab>13</ActiveTab></Pane><ActivePane>0</ActivePane><Sizes><Pane><X>1000000</X><Y>1000000</Y></Pane></Sizes><SplitMode>1</SplitMode></Editor>
+    <Positions>
+      
+      
+      
+      
+      
+    <Top><Row0><Sizes><Toolbar-0028E5B8><key>iaridepm.jpn1</key></Toolbar-0028E5B8></Sizes></Row0><Row1><Sizes/></Row1></Top><Left><Row0><Sizes><Wnd0><Rect><Top>-2</Top><Left>-2</Left><Bottom>390</Bottom><Right>274</Right><x>-2</x><y>-2</y><xscreen>1568</xscreen><yscreen>768</yscreen><sizeHorzCX>1233674</sizeHorzCX><sizeHorzCY>1098712</sizeHorzCY><sizeVertCX>217152</sizeVertCX><sizeVertCY>560801</sizeVertCY></Rect></Wnd0></Sizes></Row0></Left><Right><Row0><Sizes/></Row0></Right><Bottom><Row0><Sizes><Wnd1><Rect><Top>-2</Top><Left>-2</Left><Bottom>193</Bottom><Right>1273</Right><x>-2</x><y>-2</y><xscreen>1275</xscreen><yscreen>195</yscreen><sizeHorzCX>1003147</sizeHorzCX><sizeHorzCY>278970</sizeHorzCY><sizeVertCX>162077</sizeVertCX><sizeVertCY>361946</sizeVertCY></Rect></Wnd1></Sizes></Row0><Row1><Sizes><Wnd2><Rect><Top>191</Top><Left>-2</Left><Bottom>264</Bottom><Right>1273</Right><x>-2</x><y>191</y><xscreen>1275</xscreen><yscreen>73</yscreen><sizeHorzCX>1003147</sizeHorzCX><sizeHorzCY>104435</sizeHorzCY><sizeVertCX>157356</sizeVertCX><sizeVertCY>286123</sizeVertCY></Rect></Wnd2></Sizes></Row1></Bottom><Float><Sizes/></Float></Positions>
+  </Desktop>
+</Workspace>
+
+

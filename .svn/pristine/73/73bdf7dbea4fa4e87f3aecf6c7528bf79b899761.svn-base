@@ -1,0 +1,386 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V7.80.4.12462/W32 for ARM       17/May/2019  13:32:04
+# Copyright 1999-2017 IAR Systems AB.
+#
+#    Cpu mode     =  thumb
+#    Endian       =  little
+#    Source file  =  
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\driver\wdt\drv_wdt.c
+#    Command line =  
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\driver\wdt\drv_wdt.c -D
+#        __TARGET_ARCH_7_M -D S1C31W74 -D GNSS_GW_SIDE_B -lCN
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\List
+#        -lA
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\List
+#        --diag_suppress Pe177,Pe111,Pa082 -o
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj
+#        --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa
+#        --no_clustering --no_scheduling --debug --endian=little
+#        --cpu=Cortex-M0+ -e --fpu=None --dlib_config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench
+#        7.5\arm\INC\c\DLib_Config_Normal.h" -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\ -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\
+#        -I "C:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        7.5\arm\CMSIS\Include\" -I "C:\Program Files (x86)\IAR
+#        Systems\Embedded Workbench 7.5\arm\inc\Epson\" -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\CMSIS\Device\S1C31W74\Include\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\CMSIS\Driver\Include\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\sePeriphLibrary\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\board\S5U1C31W74T1\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\USBStack\INC\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\include\
+#        -Ol
+#    Locale       =  Japanese_Japan.932
+#    List file    =  
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\List\drv_wdt.lst
+#    Object file  =  
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\drv_wdt.o
+#
+###############################################################################
+
+C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\driver\wdt\drv_wdt.c
+      1          
+      2          /**
+      3            ******************************************************************************
+      4            * @file    drv_wdt.c
+      5            * @author  コア
+      6            * @version V1.0
+      7            * @date    2017.10.2
+      8            * @brief   WDT機能を提供する
+      9            ******************************************************************************
+     10            $Id: drv_wdt.c 57 2018-03-30 05:54:51Z shitaoka $
+     11            * @attention
+     12            *
+     13            * 
+     14            *****************************************************************************
+     15          */
+     16          
+     17          
+     18          #include <string.h>
+     19          #include <stdio.h>
+     20          #include "board.h"
+     21          #include "se_wdt2.h"
+     22          #include "se_common.h"
+     23          #include "drv_uart2_0.h"
+     24          
+     25          
+     26          #pragma section = "DRV_PRG_BLOCK"
+     27          
+     28          //Structures to support the peripheral library interface
+
+   \                                 In section .bss, align 4
+     29          static seWDT2_InitTypeDef WDT_InitStruct;
+   \                     WDT_InitStruct:
+   \   00000000                      DS8 8
+     30          
+     31          
+     32          /********************************************************************/
+     33          /*!
+     34           * \name	wdt_init
+     35           * \brief	WDT Driverの初期化
+     36           * \param	なし
+     37           * \return   0: 成功
+     38           *          -1: 失敗
+     39           * \note	WDT時間：256Hz * 1024 = 4秒
+     40           *			変更する場合seWDT2_SetCMPを使用
+     41           */
+     42          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+     43          int32_t wdt_init( void ) 
+     44          {
+   \                     wdt_init: (+1)
+   \   00000000   0xB510             PUSH     {R4,LR}
+     45          	seStatus	fResult;
+     46          
+     47          	memset(&WDT_InitStruct, 0, sizeof(seWDT2_InitTypeDef));
+   \   00000002   0x2108             MOVS     R1,#+8
+   \   00000004   0x2200             MOVS     R2,#+0
+   \   00000006   0x....             LDR      R4,??DataTable1
+   \   00000008   0x0020             MOVS     R0,R4
+   \   0000000A   0x.... 0x....      BL       __aeabi_memset
+     48          	seWDT2_InitStruct( &WDT_InitStruct );						// 初期値設定(CMP=1023)
+   \   0000000E   0x....             LDR      R0,??DataTable1
+   \   00000010   0x.... 0x....      BL       seWDT2_InitStruct
+     49          	// WDT 4 secs cycle is set (256Hz * 1024 = 4sec)
+     50          //	seWDT2_SetCMP(1023);
+     51          
+     52          	WDT_InitStruct.ClkSrc = seCLG_OSC1;							// 32768
+   \   00000014   0x2001             MOVS     R0,#+1
+   \   00000016   0x....             LDR      R1,??DataTable1
+   \   00000018   0x7008             STRB     R0,[R1, #+0]
+     53          	WDT_InitStruct.ClkDivider = seWDT2_OSC1_CLKDIV_128;			// 1/128 = 256 Hz
+   \   0000001A   0x2000             MOVS     R0,#+0
+   \   0000001C   0x....             LDR      R1,??DataTable1
+   \   0000001E   0x8048             STRH     R0,[R1, #+2]
+     54          	fResult = seWDT2_Init( &WDT_InitStruct );
+   \   00000020   0x....             LDR      R0,??DataTable1
+   \   00000022   0x.... 0x....      BL       seWDT2_Init
+   \   00000026   0x0004             MOVS     R4,R0
+     55          
+     56          	seWDT2_ChipReset( seWDT2_ResetMode );
+   \   00000028   0x2000             MOVS     R0,#+0
+   \   0000002A   0x.... 0x....      BL       seWDT2_ChipReset
+     57          
+     58          	if ( fResult == seSTATUS_OK ) {
+   \   0000002E   0xB2E4             UXTB     R4,R4
+   \   00000030   0x2C01             CMP      R4,#+1
+   \   00000032   0xD101             BNE      ??wdt_init_0
+     59          		return 0;
+   \   00000034   0x2000             MOVS     R0,#+0
+   \   00000036   0xE001             B        ??wdt_init_1
+     60          	}
+     61          	else {
+     62          		return -1;
+   \                     ??wdt_init_0: (+1)
+   \   00000038   0x2000             MOVS     R0,#+0
+   \   0000003A   0x43C0             MVNS     R0,R0            ;; #-1
+   \                     ??wdt_init_1: (+1)
+   \   0000003C   0xBD10             POP      {R4,PC}          ;; return
+     63          	}
+     64          }
+     65          
+     66          /********************************************************************/
+     67          /*!
+     68           * \name	wdt_init
+     69           * \brief	WDT Driverの初期化
+     70           * \param	なし
+     71           * \return   0: 成功
+     72           *          -1: 失敗
+     73           * \note	WDT時間：256Hz * 1024 = 4秒
+     74           *			変更する場合seWDT2_SetCMPを使用
+     75           */
+     76          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+     77          int32_t wdt_NMI_init( void ) 
+     78          {
+   \                     wdt_NMI_init: (+1)
+   \   00000000   0xB510             PUSH     {R4,LR}
+     79          	seStatus	fResult;
+     80          
+     81          	memset(&WDT_InitStruct, 0, sizeof(seWDT2_InitTypeDef));
+   \   00000002   0x2108             MOVS     R1,#+8
+   \   00000004   0x2200             MOVS     R2,#+0
+   \   00000006   0x....             LDR      R4,??DataTable1
+   \   00000008   0x0020             MOVS     R0,R4
+   \   0000000A   0x.... 0x....      BL       __aeabi_memset
+     82          	seWDT2_InitStruct( &WDT_InitStruct );						// 初期値設定(CMP=1023)
+   \   0000000E   0x....             LDR      R0,??DataTable1
+   \   00000010   0x.... 0x....      BL       seWDT2_InitStruct
+     83          	// WDT 4 secs cycle is set (256Hz * 1024 = 4sec)
+     84          //	seWDT2_SetCMP(1023);
+     85          
+     86          	WDT_InitStruct.ClkSrc = seCLG_OSC1;							// 32768
+   \   00000014   0x2001             MOVS     R0,#+1
+   \   00000016   0x....             LDR      R1,??DataTable1
+   \   00000018   0x7008             STRB     R0,[R1, #+0]
+     87          	WDT_InitStruct.ClkDivider = seWDT2_OSC1_CLKDIV_128;			// 1/128 = 256 Hz
+   \   0000001A   0x2000             MOVS     R0,#+0
+   \   0000001C   0x....             LDR      R1,??DataTable1
+   \   0000001E   0x8048             STRH     R0,[R1, #+2]
+     88                  fResult = seWDT2_Init( &WDT_InitStruct );
+   \   00000020   0x....             LDR      R0,??DataTable1
+   \   00000022   0x.... 0x....      BL       seWDT2_Init
+   \   00000026   0x0004             MOVS     R4,R0
+     89          
+     90                  seWDT2_ChipReset( seWDT2_NMIMode );
+   \   00000028   0x2001             MOVS     R0,#+1
+   \   0000002A   0x.... 0x....      BL       seWDT2_ChipReset
+     91          
+     92          	if ( fResult == seSTATUS_OK ) {
+   \   0000002E   0xB2E4             UXTB     R4,R4
+   \   00000030   0x2C01             CMP      R4,#+1
+   \   00000032   0xD101             BNE      ??wdt_NMI_init_0
+     93          		return 0;
+   \   00000034   0x2000             MOVS     R0,#+0
+   \   00000036   0xE001             B        ??wdt_NMI_init_1
+     94          	}
+     95          	else {
+     96          		return -1;
+   \                     ??wdt_NMI_init_0: (+1)
+   \   00000038   0x2000             MOVS     R0,#+0
+   \   0000003A   0x43C0             MVNS     R0,R0            ;; #-1
+   \                     ??wdt_NMI_init_1: (+1)
+   \   0000003C   0xBD10             POP      {R4,PC}          ;; return
+     97          	}
+     98          }
+     99          
+    100          
+    101          
+    102          /********************************************************************/
+    103          /*!
+    104           * \name	wdt_start
+    105           * \brief	WDT Driverの開始
+    106           * \param	なし
+    107           * \return  なし
+    108           * \note	
+    109           */
+    110          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    111          void wdt_start( void ) 
+    112          {
+   \                     wdt_start: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    113          	seWDT2_Start();
+   \   00000002   0x.... 0x....      BL       seWDT2_Start
+    114          }
+   \   00000006   0xBD01             POP      {R0,PC}          ;; return
+    115          
+    116          
+    117          
+    118          /********************************************************************/
+    119          /*!
+    120           * \name	wdt_start
+    121           * \brief	WDT Driverの停止
+    122           * \param	なし
+    123           * \return  なし
+    124           * \note	
+    125           */
+    126          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    127          void wdt_stop( void ) 
+    128          {
+   \                     wdt_stop: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    129          	seWDT2_Stop();
+   \   00000002   0x.... 0x....      BL       seWDT2_Stop
+    130          }
+   \   00000006   0xBD01             POP      {R0,PC}          ;; return
+    131          
+    132          
+    133          /********************************************************************/
+    134          /*!
+    135           * \name	wdt_resetCounter
+    136           * \brief	WDT Driverのカウンタリセット
+    137           * \param	なし
+    138           * \return  なし
+    139           * \note	
+    140           */
+    141          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    142          void wdt_resetCounter( void ) 
+    143          {
+   \                     wdt_resetCounter: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    144          	seWDT2_ResetCounter();
+   \   00000002   0x.... 0x....      BL       seWDT2_ResetCounter
+    145          }
+   \   00000006   0xBD01             POP      {R0,PC}          ;; return
+    146          
+    147          
+    148          /********************************************************************/
+    149          /*!
+    150           * \name	wdt_reset
+    151           * \brief	WDT Driverを使用してリセット
+    152           * \param	なし
+    153           * \return  なし
+    154           * \note	
+    155           */
+    156          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    157          void wdt_reset( void )
+    158          {
+   \                     wdt_reset: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    159          
+    160          	// リセットを設定します
+    161          	//    seWDT2_NMIMode         : ウォッチドッグタイマは、NMIモードまたはリセットモードで動作します。 
+    162          	//                             オーバーフローNMI割り込みを発生させるには、この動作モードを選択します。
+    163          	//    seWDT2_ResetMode       : ウォッチドッグタイマはリセットモードで動作します。 
+    164          	//                             タイマオーバーフローイベントのリセットを生成するには、この動作モードを選択します。
+    165          	//    seWDT2_ResetAndNMIMode : ウォッチドッグタイマは、リセットおよびNMIモードで動作します。
+    166          	//                             カウンタコンペアマッチによりNMI割り込みが発生した後、STATNMIビットが0にクリアされないと、
+    167          	//                             WDT2は次のコンペアマッチが発生したときにリセットを発行します。
+    168          	seWDT2_ChipReset( seWDT2_ResetMode );
+   \   00000002   0x2000             MOVS     R0,#+0
+   \   00000004   0x.... 0x....      BL       seWDT2_ChipReset
+    169          
+    170          	// リセットするまで待つ
+    171          	while (1) {
+    172          		seSysSleepMS( 100 );
+   \                     ??wdt_reset_0: (+1)
+   \   00000008   0x2064             MOVS     R0,#+100
+   \   0000000A   0x.... 0x....      BL       seSysSleepMS
+   \   0000000E   0xE7FB             B        ??wdt_reset_0
+    173          	};
+    174          }
+    175          
+
+   \                                 In section .text, align 2, keep-with-next
+    176          void NMI_Handler( void )
+    177          {
+   \                     NMI_Handler: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    178             seWDT2_ResetCounter();
+   \   00000002   0x.... 0x....      BL       seWDT2_ResetCounter
+    179          }
+   \   00000006   0xBD01             POP      {R0,PC}          ;; return
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable1:
+   \   00000000   0x........         DC32     WDT_InitStruct
+    180          
+    181          
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       8   NMI_Handler
+         8   -> seWDT2_ResetCounter
+       8   wdt_NMI_init
+         8   -> __aeabi_memset
+         8   -> seWDT2_ChipReset
+         8   -> seWDT2_Init
+         8   -> seWDT2_InitStruct
+       8   wdt_init
+         8   -> __aeabi_memset
+         8   -> seWDT2_ChipReset
+         8   -> seWDT2_Init
+         8   -> seWDT2_InitStruct
+       8   wdt_reset
+         8   -> seSysSleepMS
+         8   -> seWDT2_ChipReset
+       8   wdt_resetCounter
+         8   -> seWDT2_ResetCounter
+       8   wdt_start
+         8   -> seWDT2_Start
+       8   wdt_stop
+         8   -> seWDT2_Stop
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable1
+       8  NMI_Handler
+       8  WDT_InitStruct
+      62  wdt_NMI_init
+      62  wdt_init
+      16  wdt_reset
+       8  wdt_resetCounter
+       8  wdt_start
+       8  wdt_stop
+
+ 
+   8 bytes in section .bss
+ 176 bytes in section .text
+ 
+ 176 bytes of CODE memory
+   8 bytes of DATA memory
+
+Errors: none
+Warnings: none

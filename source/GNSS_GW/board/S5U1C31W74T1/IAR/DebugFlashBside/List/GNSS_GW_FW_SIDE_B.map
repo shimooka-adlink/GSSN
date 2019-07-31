@@ -1,0 +1,2364 @@
+###############################################################################
+#
+# IAR ELF Linker V7.80.4.12462/W32 for ARM                21/May/2019  17:01:29
+# Copyright 2007-2017 IAR Systems AB.
+#
+#    Output file  =  
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Exe\GNSS_GW_FW_SIDE_B.out
+#    Map file     =  
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\List\GNSS_GW_FW_SIDE_B.map
+#    Command line =  
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\board.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\ctrl_BQ24160A.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\ctrl_BQ28Z610.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\ctrl_CXD5600GF.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\ctrl_GPIO.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\ctrl_I2C0.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\ctrl_I2C1.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\ctrl_LSM6DSL.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\ctrl_MPL3115A2.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\ctrl_SLEEP.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\ctrl_SM7500JE.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\ctrl_USB.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\ctrl_W25Q.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\drv_clg.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\drv_flash.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\drv_gpio.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\drv_i2c_0.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\drv_i2c_1.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\drv_rtc.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\drv_spi_0.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\drv_t16_3.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\drv_uart2_0.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\drv_uart2_1.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\drv_usb_main.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\drv_usbd_user_cdc_acm.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\drv_wdt.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\fixed.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\gnss_gw_common.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\main.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\man_battery.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\man_charge.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\man_cmd.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\man_data.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\man_error.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\man_flash.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\man_gpio.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\man_gps.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\man_gyro.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\man_http.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\man_lte.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\man_memory.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\man_msg.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\man_net.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\man_ope.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\man_ota.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\man_press.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\man_rpt.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\man_rtc.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\man_timer.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\man_usb.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\man_version.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\mid_GPS.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\mid_HTTP.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\read.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\startup_S1C31W74.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\system_S1C31W74.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\usbd_cdc_acm.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\usbd_core.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\usbd_core_cdc.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\usbd_S1C31W74.o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\write.o
+#        -o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Exe\GNSS_GW_FW_SIDE_B.out
+#        --redirect _Scanf=_ScanfFull --map
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\List\GNSS_GW_FW_SIDE_B.map
+#        --config
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\config\S1C31W74_flash_B_Side.icf
+#        --semihosting
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\sePeriphLibrary\Device\S1C31W74\IAR\Debug\Exe\sePeriphLibrary.a
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\seFlashLibrary\Device\S1C31W74\IAR\seFlashLibraryS1C31W74Int.a
+#        --entry __iar_program_start --redirect __write=__write_buffered --vfe
+#
+###############################################################################
+
+*******************************************************************************
+*** RUNTIME MODEL ATTRIBUTES
+***
+
+CppFlavor       = *
+__SystemLibrary = DLib
+
+
+*******************************************************************************
+*** PLACEMENT SUMMARY
+***
+
+"A0":  place at 0x00040000 { ro section .intvec };
+"P1":  place in [from 0x0004010d to 0x0006ffff] { ro };
+"P2":  place in [from 0x0004010d to 0x0006ffff] {
+          section .flash_common_text_init };
+"P3":  place in [from 0x00040100 to 0x0004010c] { block TBL2_BLOCK };
+"P4":  place in [from 0x20000020 to 0x2001ebff] { rw };
+"P5":  place in [from 0x20000020 to 0x2001ebff] { section .flash_common_text };
+"P6":  place in [from 0x2001ec00 to 0x2001fdff] { block CSTACK, block HEAP };
+initialize by copy { rw };
+initialize manually with packing = copy, complex ranges {
+   section .flash_common_text };
+
+  Section                 Kind        Address     Size  Object
+  -------                 ----        -------     ----  ------
+"A0":                                             0x9c
+  .intvec                 ro code  0x00040000     0x9c  startup_S1C31W74.o [1]
+                                 - 0x0004009c     0x9c
+
+"P3":                                              0xc
+  TBL2_BLOCK                       0x00040100      0xc  <Block>
+    .text                 ro code  0x00040100      0xc  cstartup_M.o [4]
+                                 - 0x0004010c      0xc
+
+"P1-P2":                                       0x218f5
+  .text                   ro code  0x00040110   0x3630  man_ota.o [1]
+  .text                   ro code  0x00043740     0x5c  ABImemcpy.o [4]
+  .text                   ro code  0x0004379c    0x484  man_error.o [1]
+  .text                   ro code  0x00043c20    0x1f6  man_flash.o [1]
+  .text                   ro code  0x00043e16     0x7e  lz77_init_single.o [4]
+  .text                   ro code  0x00043e94     0x54  ABImemset.o [4]
+  .text                   ro code  0x00043ee8   0x147c  man_http.o [1]
+  .text                   ro code  0x00045364   0x137c  man_gps.o [1]
+  .text                   ro code  0x000466e0    0x968  man_data.o [1]
+  .text                   ro code  0x00047048    0x204  man_timer.o [1]
+  .text                   ro code  0x0004724c   0x1154  man_rpt.o [1]
+  .text                   ro code  0x000483a0    0x588  main.o [1]
+  .text                   ro code  0x00048928   0x11f4  man_msg.o [1]
+  .text                   ro code  0x00049b1c   0x18f8  man_ope.o [1]
+  .text                   ro code  0x0004b414    0x124  man_battery.o [1]
+  .text                   ro code  0x0004b538    0x372  man_charge.o [1]
+  .text                   ro code  0x0004b8aa      0xa  xsprout.o [3]
+  .text                   ro code  0x0004b8b4    0x6dc  man_usb.o [1]
+  .text                   ro code  0x0004bf90     0xe0  I32DivModFast.o [4]
+  .text                   ro code  0x0004c070      0x8  man_memory.o [1]
+  .text                   ro code  0x0004c078     0x38  sprintf.o [3]
+  .text                   ro code  0x0004c0b0     0x10  strlen.o [4]
+  .text                   ro code  0x0004c0c0    0x170  man_rtc.o [1]
+  .text                   ro code  0x0004c230    0x1c2  ctrl_W25Q.o [1]
+  .text                   ro code  0x0004c3f2     0x28  memcmp.o [4]
+  .rodata                 const    0x0004c41a      0x2  ctrl_BQ24160A.o [1]
+  .text                   ro code  0x0004c41c   0x2c04  mid_HTTP.o [1]
+  .text                   ro code  0x0004f020    0xef8  mid_GPS.o [1]
+  .text                   ro code  0x0004ff18    0x264  man_gpio.o [1]
+  .text                   ro code  0x0005017c     0xe8  system_S1C31W74.o [1]
+  .text                   ro code  0x00050264    0x1ee  gnss_gw_common.o [1]
+  .rodata                 const    0x00050452      0x2  ctrl_BQ24160A.o [1]
+  .text                   ro code  0x00050454     0x68  drv_flash.o [1]
+  .text                   ro code  0x000504bc     0x30  man_version.o [1]
+  .text                   ro code  0x000504ec    0x1d0  man_gyro.o [1]
+  .text                   ro code  0x000506bc    0x1fc  man_press.o [1]
+  .text                   ro code  0x000508b8   0x134c  man_lte.o [1]
+  .text                   ro code  0x00051c04      0x8  abs.o [3]
+  .text                   ro code  0x00051c0c    0x208  drv_t16_3.o [1]
+  .text                   ro code  0x00051e14     0xce  drv_rtc.o [1]
+  .rodata                 const    0x00051ee2      0x2  ctrl_BQ24160A.o [1]
+  .text                   ro code  0x00051ee4     0xb0  drv_wdt.o [1]
+  .text                   ro code  0x00051f94    0x2fc  ctrl_MPL3115A2.o [1]
+  .text                   ro code  0x00052290     0x30  ctrl_SLEEP.o [1]
+  .text                   ro code  0x000522c0     0x24  ctrl_I2C0.o [1]
+  .text                   ro code  0x000522e4      0xc  ctrl_I2C1.o [1]
+  .text                   ro code  0x000522f0   0x27b4  man_cmd.o [1]
+  .text                   ro code  0x00054aa4   0x110c  man_net.o [1]
+  .text                   ro code  0x00055bb0    0x480  se_clg.o [6]
+  .text                   ro code  0x00056030   0x106c  ctrl_CXD5600GF.o [1]
+  .text                   ro code  0x0005709c    0x970  ctrl_SM7500JE.o [1]
+  .text                   ro code  0x00057a0c    0x124  ctrl_USB.o [1]
+  .text                   ro code  0x00057b30    0x256  drv_gpio.o [1]
+  .rodata                 const    0x00057d86      0x2  ctrl_BQ24160A.o [1]
+  .text                   ro code  0x00057d88    0x154  ctrl_BQ28Z610.o [1]
+  .text                   ro code  0x00057edc    0x562  ctrl_BQ24160A.o [1]
+  .rodata                 const    0x0005843e      0x2  ctrl_BQ24160A.o [1]
+  .text                   ro code  0x00058440     0x44  ctrl_GPIO.o [1]
+  .text                   ro code  0x00058484      0x2  IntDivZer.o [4]
+  .rodata                 const    0x00058486      0x2  ctrl_BQ24160A.o [1]
+  .text                   ro code  0x00058488    0x52c  xprintfsmall_nomb.o [3]
+  .text                   ro code  0x000589b4    0x124  drv_spi_0.o [1]
+  .text                   ro code  0x00058ad8     0x10  strcpy.o [4]
+  .text                   ro code  0x00058ae8     0x94  board.o [1]
+  .text                   ro code  0x00058b7c    0x264  ctrl_LSM6DSL.o [1]
+  .text                   ro code  0x00058de0    0x23a  se_t16.o [6]
+  .rodata                 const    0x0005901a      0x2  ctrl_BQ24160A.o [1]
+  .text                   ro code  0x0005901c    0x770  se_rtca.o [6]
+  .text                   ro code  0x0005978c    0x250  se_wdt2.o [6]
+  .text                   ro code  0x000599dc    0x150  drv_i2c_0.o [1]
+  .text                   ro code  0x00059b2c    0x73c  drv_clg.o [1]
+  .text                   ro code  0x0005a268    0x120  drv_i2c_1.o [1]
+  .text                   ro code  0x0005a388    0x2a8  drv_uart2_0.o [1]
+  .text                   ro code  0x0005a630     0xda  drv_usb_main.o [1]
+  .rodata                 const    0x0005a70a      0x2  ctrl_BQ24160A.o [1]
+  .text                   ro code  0x0005a70c    0x29c  drv_uart2_1.o [1]
+  .text                   ro code  0x0005a9a8      0xc  atoi.o [3]
+  .text                   ro code  0x0005a9b4     0x20  se_common.o [6]
+  .text                   ro code  0x0005a9d4    0x474  se_pport.o [6]
+  .text                   ro code  0x0005ae48     0x14  strchr.o [4]
+  .text                   ro code  0x0005ae5c     0x18  memchr.o [4]
+  .text                   ro code  0x0005ae74    0x38e  se_spia.o [6]
+  .rodata                 const    0x0005b202      0x2  ctrl_BQ24160A.o [1]
+  .text                   ro code  0x0005b204    0x508  se_i2c.o [6]
+  .text                   ro code  0x0005b70c    0xd3c  se_usb.o [6]
+  .text                   ro code  0x0005c448    0x8ec  usbd_S1C31W74.o [1]
+  .text                   ro code  0x0005cd34    0x23c  se_svd2.o [6]
+  .text                   ro code  0x0005cf70    0x306  se_uart2.o [6]
+  .rodata                 const    0x0005d276      0x2  ctrl_BQ24160A.o [1]
+  .text                   ro code  0x0005d278    0xb10  usbd_core.o [1]
+  .text                   ro code  0x0005dd88    0x418  usbd_cdc_acm.o [1]
+  .text                   ro code  0x0005e1a0     0xcc  usbd_cdc_acm.o [1]
+  .text                   ro code  0x0005e26c     0x80  drv_usbd_user_cdc_acm.o [1]
+  .text                   ro code  0x0005e2ec    0x180  xstoul.o [3]
+  .text                   ro code  0x0005e46c     0x24  printf.o [3]
+  .text                   ro code  0x0005e490    0x130  usbd_core_cdc.o [1]
+  .text                   ro code  0x0005e5c0     0x80  usbd_core_cdc.o [1]
+  .text                   ro code  0x0005e640      0x4  usbd_cdc_acm.o [1]
+  .text                   ro code  0x0005e644     0x16  uread4.o [4]
+  .rodata                 const    0x0005e65a      0x2  ctrl_BQ24160A.o [1]
+  .text                   ro code  0x0005e65c     0x14  uwrite4.o [4]
+  .text                   ro code  0x0005e670     0x10  errno.o [3]
+  .text                   ro code  0x0005e680     0x5c  usbd_cdc_acm.o [1]
+  .text                   ro code  0x0005e6dc     0x14  usbd_cdc_acm.o [1]
+  .text                   ro code  0x0005e6f0     0x4c  usbd_cdc_acm.o [1]
+  .text                   ro code  0x0005e73c      0x2  xtls.o [3]
+  .rodata                 const    0x0005e73e      0x2  ctrl_BQ28Z610.o [1]
+  .rodata                 const    0x0005e740    0x700  mid_HTTP.o [1]
+  .flash_common_text_init
+                                   0x0005ee40    0x50c  <Block>
+    Initializer bytes     const    0x0005ee40    0x50c  <for .flash_common_text-1>
+  .rodata                 const    0x0005f34c    0x440  mid_GPS.o [1]
+  .rodata                 const    0x0005f78c    0x230  man_cmd.o [1]
+  .rodata                 const    0x0005f9bc    0x1e0  man_data.o [1]
+  .rodata                 const    0x0005fb9c    0x198  man_ope.o [1]
+  .rodata                 const    0x0005fd34    0x140  man_cmd.o [1]
+  Veneer                  ro code  0x0005fe74     0x10  - Linker created -
+  Veneer                  ro code  0x0005fe84     0x10  - Linker created -
+  Veneer                  ro code  0x0005fe94     0x10  - Linker created -
+  .text                   ro code  0x0005fea4     0xdc  Driver_Flash.o [5]
+  .text                   ro code  0x0005ff80     0xb0  FlashS1C31W74.o [5]
+  .text                   ro code  0x00060030     0xcc  xxwritebuffered.o [3]
+  .text                   ro code  0x000600fc     0x1e  dwrite.o [7]
+  .text                   ro code  0x0006011a     0x20  iarwstd.o [7]
+  .text                   ro code  0x0006013a     0x22  iarwrite.o [7]
+  .text                   ro code  0x0006015c     0x6c  iarttio.o [7]
+  .text                   ro code  0x000601c8      0x8  XShttio.o [3]
+  .rodata                 const    0x000601d0     0xbc  man_msg.o [1]
+  .rodata                 const    0x0006028c     0x78  man_data.o [1]
+  .rodata                 const    0x00060304     0x6c  mid_HTTP.o [1]
+  .rodata                 const    0x00060370     0x6c  usbd_S1C31W74.o [1]
+  .rodata                 const    0x000603dc     0x68  mid_HTTP.o [1]
+  .rodata                 const    0x00060444     0x58  man_error.o [1]
+  .rodata                 const    0x0006049c     0x58  system_S1C31W74.o [1]
+  .rodata                 const    0x000604f4     0x48  man_rpt.o [1]
+  .rodata                 const    0x0006053c     0x44  man_msg.o [1]
+  .rodata                 const    0x00060580     0x44  usbd_S1C31W74.o [1]
+  .rodata                 const    0x000605c4     0x40  ctrl_BQ24160A.o [1]
+  .rodata                 const    0x00060604     0x40  man_msg.o [1]
+  .rodata                 const    0x00060644     0x40  man_rpt.o [1]
+  .rodata                 const    0x00060684     0x40  usbd_S1C31W74.o [1]
+  .rodata                 const    0x000606c4     0x3c  man_lte.o [1]
+  .text                   ro code  0x00060700     0x3c  zero_init3.o [4]
+  .rodata                 const    0x0006073c     0x34  board.o [1]
+  .rodata                 const    0x00060770     0x34  man_charge.o [1]
+  .rodata                 const    0x000607a4     0x34  man_charge.o [1]
+  .rodata                 const    0x000607d8     0x34  man_charge.o [1]
+  .rodata                 const    0x0006080c     0x34  man_http.o [1]
+  .rodata                 const    0x00060840     0x34  Driver_Flash.o [5]
+  .rodata                 const    0x00060874     0x30  se_i2c.o [6]
+  .rodata                 const    0x000608a4     0x2c  man_data.o [1]
+  .rodata                 const    0x000608d0     0x2c  man_http.o [1]
+  .rodata                 const    0x000608fc     0x2c  man_rtc.o [1]
+  .rodata                 const    0x00060928     0x28  ctrl_BQ24160A.o [1]
+  .rodata                 const    0x00060950     0x28  ctrl_BQ24160A.o [1]
+  .rodata                 const    0x00060978     0x28  man_data.o [1]
+  .rodata                 const    0x000609a0     0x28  man_error.o [1]
+  .rodata                 const    0x000609c8     0x28  man_http.o [1]
+  .text                   ro code  0x000609f0     0x28  data_init.o [4]
+  .rodata                 const    0x00060a18     0x24  ctrl_BQ24160A.o [1]
+  .rodata                 const    0x00060a3c     0x24  ctrl_BQ24160A.o [1]
+  .rodata                 const    0x00060a60     0x24  ctrl_BQ24160A.o [1]
+  .rodata                 const    0x00060a84     0x24  main.o [1]
+  .rodata                 const    0x00060aa8     0x24  man_charge.o [1]
+  .text                   ro code  0x00060acc     0x24  fixed.o [1]
+  .text                   ro code  0x00060af0     0x24  putchar.o [3]
+  .iar.init_table         const    0x00060b14     0x20  - Linker created -
+  .rodata                 const    0x00060b34     0x20  man_battery.o [1]
+  .rodata                 const    0x00060b54     0x20  man_http.o [1]
+  .rodata                 const    0x00060b74     0x20  mid_HTTP.o [1]
+  .rodata                 const    0x00060b94     0x1c  gnss_gw_common.o [1]
+  .rodata                 const    0x00060bb0     0x1c  man_data.o [1]
+  .rodata                 const    0x00060bcc     0x1c  man_press.o [1]
+  .rodata                 const    0x00060be8     0x1c  man_usb.o [1]
+  .rodata                 const    0x00060c04     0x1c  mid_GPS.o [1]
+  .rodata                 const    0x00060c20     0x1c  mid_HTTP.o [1]
+  .rodata                 const    0x00060c3c     0x1c  mid_HTTP.o [1]
+  .rodata                 const    0x00060c58     0x1c  mid_HTTP.o [1]
+  .rodata                 const    0x00060c74     0x1c  mid_HTTP.o [1]
+  .rodata                 const    0x00060c90     0x1c  mid_HTTP.o [1]
+  .rodata                 const    0x00060cac     0x1c  mid_HTTP.o [1]
+  .rodata                 const    0x00060cc8     0x1c  mid_HTTP.o [1]
+  .text                   ro code  0x00060ce4     0x1a  cmain.o [4]
+  .text                   ro code  0x00060cfe      0x4  low_level_init.o [3]
+  .text                   ro code  0x00060d02      0x8  exit.o [3]
+  .rodata                 const    0x00060d0a      0x2  ctrl_LSM6DSL.o [1]
+  .text                   ro code  0x00060d0c      0xe  cexit.o [4]
+  .text                   ro code  0x00060d1a     0x10  xcloseall.o [3]
+  .rodata                 const    0x00060d2a      0x2  ctrl_LSM6DSL.o [1]
+  .text                   ro code  0x00060d2c     0x14  exit.o [7]
+  .rodata                 const    0x00060d40     0x18  man_http.o [1]
+  .rodata                 const    0x00060d58     0x18  man_usb.o [1]
+  .rodata                 const    0x00060d70     0x18  man_usb.o [1]
+  .rodata                 const    0x00060d88     0x18  man_usb.o [1]
+  .rodata                 const    0x00060da0     0x18  man_version.o [1]
+  .rodata                 const    0x00060db8     0x18  mid_HTTP.o [1]
+  .rodata                 const    0x00060dd0     0x18  mid_HTTP.o [1]
+  .rodata                 const    0x00060de8     0x18  mid_HTTP.o [1]
+  .rodata                 const    0x00060e00     0x18  mid_HTTP.o [1]
+  .rodata                 const    0x00060e18     0x18  se_common.o [6]
+  .text                   ro code  0x00060e30     0x16  xprout.o [3]
+  .rodata                 const    0x00060e46      0x2  ctrl_LSM6DSL.o [1]
+  .rodata                 const    0x00060e48     0x14  ctrl_GPIO.o [1]
+  .rodata                 const    0x00060e5c     0x14  main.o [1]
+  .rodata                 const    0x00060e70     0x14  man_cmd.o [1]
+  .rodata                 const    0x00060e84     0x14  man_usb.o [1]
+  .rodata                 const    0x00060e98     0x14  mid_HTTP.o [1]
+  .rodata                 const    0x00060eac     0x14  mid_HTTP.o [1]
+  .rodata                 const    0x00060ec0     0x14  mid_HTTP.o [1]
+  .rodata                 const    0x00060ed4     0x14  mid_HTTP.o [1]
+  .rodata                 const    0x00060ee8     0x14  mid_HTTP.o [1]
+  .rodata                 const    0x00060efc     0x14  mid_HTTP.o [1]
+  .rodata                 const    0x00060f10     0x14  mid_HTTP.o [1]
+  .rodata                 const    0x00060f24     0x14  mid_HTTP.o [1]
+  .rodata                 const    0x00060f38     0x14  mid_HTTP.o [1]
+  .rodata                 const    0x00060f4c     0x14  usbd_S1C31W74.o [1]
+  .rodata                 const    0x00060f60     0x10  ctrl_GPIO.o [1]
+  .rodata                 const    0x00060f70     0x10  drv_gpio.o [1]
+  .rodata                 const    0x00060f80     0x10  drv_gpio.o [1]
+  .rodata                 const    0x00060f90     0x10  drv_gpio.o [1]
+  .rodata                 const    0x00060fa0     0x10  man_cmd.o [1]
+  .rodata                 const    0x00060fb0     0x10  man_cmd.o [1]
+  .rodata                 const    0x00060fc0     0x10  man_cmd.o [1]
+  .rodata                 const    0x00060fd0     0x10  man_cmd.o [1]
+  .rodata                 const    0x00060fe0     0x10  man_cmd.o [1]
+  .rodata                 const    0x00060ff0     0x10  man_data.o [1]
+  .rodata                 const    0x00061000     0x10  man_data.o [1]
+  .rodata                 const    0x00061010     0x10  man_http.o [1]
+  .rodata                 const    0x00061020     0x10  man_http.o [1]
+  .rodata                 const    0x00061030     0x10  mid_GPS.o [1]
+  .rodata                 const    0x00061040     0x10  mid_GPS.o [1]
+  .rodata                 const    0x00061050     0x10  mid_HTTP.o [1]
+  .rodata                 const    0x00061060     0x10  mid_HTTP.o [1]
+  .rodata                 const    0x00061070     0x10  mid_HTTP.o [1]
+  .rodata                 const    0x00061080     0x10  mid_HTTP.o [1]
+  .rodata                 const    0x00061090     0x10  mid_HTTP.o [1]
+  .rodata                 const    0x000610a0     0x10  mid_HTTP.o [1]
+  .rodata                 const    0x000610b0     0x10  mid_HTTP.o [1]
+  .rodata                 const    0x000610c0     0x10  mid_HTTP.o [1]
+  .rodata                 const    0x000610d0     0x10  mid_HTTP.o [1]
+  .rodata                 const    0x000610e0     0x10  mid_HTTP.o [1]
+  .rodata                 const    0x000610f0     0x10  mid_HTTP.o [1]
+  .rodata                 const    0x00061100     0x10  mid_HTTP.o [1]
+  .rodata                 const    0x00061110     0x10  mid_HTTP.o [1]
+  .rodata                 const    0x00061120     0x10  mid_HTTP.o [1]
+  .rodata                 const    0x00061130     0x10  mid_HTTP.o [1]
+  .rodata                 const    0x00061140     0x10  mid_HTTP.o [1]
+  .rodata                 const    0x00061150     0x10  mid_HTTP.o [1]
+  .rodata                 const    0x00061160     0x10  mid_HTTP.o [1]
+  .rodata                 const    0x00061170     0x10  mid_HTTP.o [1]
+  .rodata                 const    0x00061180     0x10  system_S1C31W74.o [1]
+  .rodata                 const    0x00061190     0x10  se_rtca.o [6]
+  .text                   ro code  0x000611a0     0x10  startup_S1C31W74.o [1]
+  .rodata                 const    0x000611b0      0xc  man_cmd.o [1]
+  .rodata                 const    0x000611bc      0xc  man_cmd.o [1]
+  .rodata                 const    0x000611c8      0xc  man_cmd.o [1]
+  .rodata                 const    0x000611d4      0xc  man_cmd.o [1]
+  .rodata                 const    0x000611e0      0xc  man_cmd.o [1]
+  .rodata                 const    0x000611ec      0xc  man_cmd.o [1]
+  .rodata                 const    0x000611f8      0xc  man_cmd.o [1]
+  .rodata                 const    0x00061204      0xc  man_cmd.o [1]
+  .rodata                 const    0x00061210      0xc  man_cmd.o [1]
+  .rodata                 const    0x0006121c      0xc  man_cmd.o [1]
+  .rodata                 const    0x00061228      0xc  man_cmd.o [1]
+  .rodata                 const    0x00061234      0xc  man_cmd.o [1]
+  .rodata                 const    0x00061240      0xc  man_cmd.o [1]
+  .rodata                 const    0x0006124c      0xc  man_lte.o [1]
+  .rodata                 const    0x00061258      0xc  man_usb.o [1]
+  .rodata                 const    0x00061264      0xc  man_usb.o [1]
+  .rodata                 const    0x00061270      0xc  man_version.o [1]
+  .rodata                 const    0x0006127c      0xc  man_version.o [1]
+  .rodata                 const    0x00061288      0xc  mid_GPS.o [1]
+  .rodata                 const    0x00061294      0xc  mid_GPS.o [1]
+  .rodata                 const    0x000612a0      0xc  mid_GPS.o [1]
+  .rodata                 const    0x000612ac      0xc  mid_GPS.o [1]
+  .rodata                 const    0x000612b8      0xc  mid_GPS.o [1]
+  .rodata                 const    0x000612c4      0xc  mid_GPS.o [1]
+  .rodata                 const    0x000612d0      0xc  mid_GPS.o [1]
+  .rodata                 const    0x000612dc      0xc  mid_GPS.o [1]
+  .rodata                 const    0x000612e8      0xc  mid_GPS.o [1]
+  .rodata                 const    0x000612f4      0xc  mid_GPS.o [1]
+  .rodata                 const    0x00061300      0xc  mid_GPS.o [1]
+  .rodata                 const    0x0006130c      0xc  mid_GPS.o [1]
+  .rodata                 const    0x00061318      0xc  mid_GPS.o [1]
+  .rodata                 const    0x00061324      0xc  mid_GPS.o [1]
+  .rodata                 const    0x00061330      0xc  mid_GPS.o [1]
+  .rodata                 const    0x0006133c      0xc  mid_GPS.o [1]
+  .rodata                 const    0x00061348      0xc  mid_GPS.o [1]
+  .rodata                 const    0x00061354      0xc  mid_GPS.o [1]
+  .rodata                 const    0x00061360      0xc  mid_GPS.o [1]
+  .rodata                 const    0x0006136c      0xc  mid_GPS.o [1]
+  .rodata                 const    0x00061378      0xc  mid_GPS.o [1]
+  .rodata                 const    0x00061384      0xc  mid_GPS.o [1]
+  .rodata                 const    0x00061390      0xc  mid_GPS.o [1]
+  .rodata                 const    0x0006139c      0xc  mid_GPS.o [1]
+  .rodata                 const    0x000613a8      0xc  mid_GPS.o [1]
+  .rodata                 const    0x000613b4      0xc  mid_GPS.o [1]
+  .rodata                 const    0x000613c0      0xc  mid_GPS.o [1]
+  .rodata                 const    0x000613cc      0xc  mid_GPS.o [1]
+  .rodata                 const    0x000613d8      0xc  mid_GPS.o [1]
+  .rodata                 const    0x000613e4      0xc  mid_GPS.o [1]
+  .rodata                 const    0x000613f0      0xc  mid_GPS.o [1]
+  .rodata                 const    0x000613fc      0xc  mid_GPS.o [1]
+  .rodata                 const    0x00061408      0xc  mid_GPS.o [1]
+  .rodata                 const    0x00061414      0xc  mid_GPS.o [1]
+  .rodata                 const    0x00061420      0xc  mid_GPS.o [1]
+  .rodata                 const    0x0006142c      0xc  mid_GPS.o [1]
+  .rodata                 const    0x00061438      0xc  mid_HTTP.o [1]
+  .rodata                 const    0x00061444      0xc  mid_HTTP.o [1]
+  .rodata                 const    0x00061450      0xc  mid_HTTP.o [1]
+  .rodata                 const    0x0006145c      0xc  mid_HTTP.o [1]
+  .rodata                 const    0x00061468      0xc  mid_HTTP.o [1]
+  .rodata                 const    0x00061474      0xc  mid_HTTP.o [1]
+  .rodata                 const    0x00061480      0xc  mid_HTTP.o [1]
+  .rodata                 const    0x0006148c      0xc  mid_HTTP.o [1]
+  .rodata                 const    0x00061498      0xc  mid_HTTP.o [1]
+  .rodata                 const    0x000614a4      0xc  mid_HTTP.o [1]
+  .rodata                 const    0x000614b0      0xc  mid_HTTP.o [1]
+  .rodata                 const    0x000614bc      0xc  mid_HTTP.o [1]
+  .rodata                 const    0x000614c8      0xc  mid_HTTP.o [1]
+  .rodata                 const    0x000614d4      0xc  mid_HTTP.o [1]
+  .rodata                 const    0x000614e0      0xc  mid_HTTP.o [1]
+  .rodata                 const    0x000614ec      0xc  mid_HTTP.o [1]
+  .rodata                 const    0x000614f8      0xc  mid_HTTP.o [1]
+  .rodata                 const    0x00061504      0xc  mid_HTTP.o [1]
+  .rodata                 const    0x00061510      0xc  mid_HTTP.o [1]
+  .rodata                 const    0x0006151c      0xc  mid_HTTP.o [1]
+  .rodata                 const    0x00061528      0xc  mid_HTTP.o [1]
+  .rodata                 const    0x00061534      0xc  mid_HTTP.o [1]
+  .rodata                 const    0x00061540      0xc  mid_HTTP.o [1]
+  .rodata                 const    0x0006154c      0xc  mid_HTTP.o [1]
+  .rodata                 const    0x00061558      0xc  mid_HTTP.o [1]
+  .rodata                 const    0x00061564      0xc  mid_HTTP.o [1]
+  .rodata                 const    0x00061570      0xc  mid_HTTP.o [1]
+  .rodata                 const    0x0006157c      0xc  mid_HTTP.o [1]
+  .rodata                 const    0x00061588      0xc  mid_HTTP.o [1]
+  .rodata                 const    0x00061594      0xc  mid_HTTP.o [1]
+  .rodata                 const    0x000615a0      0xc  mid_HTTP.o [1]
+  .rodata                 const    0x000615ac      0xc  mid_HTTP.o [1]
+  .rodata                 const    0x000615b8      0x8  man_cmd.o [1]
+  .rodata                 const    0x000615c0      0x8  man_cmd.o [1]
+  .rodata                 const    0x000615c8      0x8  man_cmd.o [1]
+  .rodata                 const    0x000615d0      0x8  man_cmd.o [1]
+  .rodata                 const    0x000615d8      0x8  man_cmd.o [1]
+  .rodata                 const    0x000615e0      0x8  man_cmd.o [1]
+  .rodata                 const    0x000615e8      0x8  man_cmd.o [1]
+  .rodata                 const    0x000615f0      0x8  man_cmd.o [1]
+  .rodata                 const    0x000615f8      0x8  man_cmd.o [1]
+  .rodata                 const    0x00061600      0x8  man_cmd.o [1]
+  .rodata                 const    0x00061608      0x8  man_cmd.o [1]
+  .rodata                 const    0x00061610      0x8  man_cmd.o [1]
+  .rodata                 const    0x00061618      0x8  man_error.o [1]
+  .rodata                 const    0x00061620      0x8  man_error.o [1]
+  .rodata                 const    0x00061628      0x8  man_error.o [1]
+  .rodata                 const    0x00061630      0x8  man_error.o [1]
+  .rodata                 const    0x00061638      0x8  man_error.o [1]
+  .rodata                 const    0x00061640      0x8  man_error.o [1]
+  .rodata                 const    0x00061648      0x8  man_error.o [1]
+  .rodata                 const    0x00061650      0x8  man_error.o [1]
+  .rodata                 const    0x00061658      0x8  man_error.o [1]
+  .rodata                 const    0x00061660      0x8  man_error.o [1]
+  .rodata                 const    0x00061668      0x8  man_error.o [1]
+  .rodata                 const    0x00061670      0x8  man_error.o [1]
+  .rodata                 const    0x00061678      0x8  man_error.o [1]
+  .rodata                 const    0x00061680      0x8  man_error.o [1]
+  .rodata                 const    0x00061688      0x8  man_error.o [1]
+  .rodata                 const    0x00061690      0x8  man_error.o [1]
+  .rodata                 const    0x00061698      0x8  man_error.o [1]
+  .rodata                 const    0x000616a0      0x8  man_error.o [1]
+  .rodata                 const    0x000616a8      0x8  man_error.o [1]
+  .rodata                 const    0x000616b0      0x8  man_error.o [1]
+  .rodata                 const    0x000616b8      0x8  man_error.o [1]
+  .rodata                 const    0x000616c0      0x8  man_error.o [1]
+  .rodata                 const    0x000616c8      0x8  man_error.o [1]
+  .rodata                 const    0x000616d0      0x8  man_error.o [1]
+  .rodata                 const    0x000616d8      0x8  man_error.o [1]
+  .rodata                 const    0x000616e0      0x8  man_error.o [1]
+  .rodata                 const    0x000616e8      0x8  man_error.o [1]
+  .rodata                 const    0x000616f0      0x8  man_error.o [1]
+  .rodata                 const    0x000616f8      0x8  man_error.o [1]
+  .rodata                 const    0x00061700      0x8  man_error.o [1]
+  .rodata                 const    0x00061708      0x8  man_error.o [1]
+  .rodata                 const    0x00061710      0x8  man_error.o [1]
+  .rodata                 const    0x00061718      0x8  man_error.o [1]
+  .rodata                 const    0x00061720      0x8  man_error.o [1]
+  .rodata                 const    0x00061728      0x8  man_error.o [1]
+  .rodata                 const    0x00061730      0x8  man_http.o [1]
+  .rodata                 const    0x00061738      0x8  man_usb.o [1]
+  .rodata                 const    0x00061740      0x8  man_version.o [1]
+  .rodata                 const    0x00061748      0x8  man_version.o [1]
+  .rodata                 const    0x00061750      0x8  mid_GPS.o [1]
+  .rodata                 const    0x00061758      0x8  mid_GPS.o [1]
+  .rodata                 const    0x00061760      0x8  mid_GPS.o [1]
+  .rodata                 const    0x00061768      0x8  mid_GPS.o [1]
+  .rodata                 const    0x00061770      0x8  mid_GPS.o [1]
+  .rodata                 const    0x00061778      0x8  mid_GPS.o [1]
+  .rodata                 const    0x00061780      0x8  mid_GPS.o [1]
+  .rodata                 const    0x00061788      0x8  mid_GPS.o [1]
+  .rodata                 const    0x00061790      0x8  mid_GPS.o [1]
+  .rodata                 const    0x00061798      0x8  mid_GPS.o [1]
+  .rodata                 const    0x000617a0      0x8  mid_GPS.o [1]
+  .rodata                 const    0x000617a8      0x8  mid_HTTP.o [1]
+  .rodata                 const    0x000617b0      0x8  mid_HTTP.o [1]
+  .rodata                 const    0x000617b8      0x8  mid_HTTP.o [1]
+  .rodata                 const    0x000617c0      0x8  mid_HTTP.o [1]
+  .rodata                 const    0x000617c8      0x8  mid_HTTP.o [1]
+  .rodata                 const    0x000617d0      0x8  mid_HTTP.o [1]
+  .rodata                 const    0x000617d8      0x8  mid_HTTP.o [1]
+  .rodata                 const    0x000617e0      0x8  mid_HTTP.o [1]
+  .rodata                 const    0x000617e8      0x8  mid_HTTP.o [1]
+  .rodata                 const    0x000617f0      0x8  mid_HTTP.o [1]
+  .rodata                 const    0x000617f8      0x8  mid_HTTP.o [1]
+  .rodata                 const    0x00061800      0x8  system_S1C31W74.o [1]
+  .rodata                 const    0x00061808      0x8  system_S1C31W74.o [1]
+  .text                   ro code  0x00061810      0x8  usbd_S1C31W74.o [1]
+  .rodata                 const    0x00061818      0x4  man_error.o [1]
+  .rodata                 const    0x0006181c      0x4  man_error.o [1]
+  .rodata                 const    0x00061820      0x4  man_usb.o [1]
+  .rodata                 const    0x00061824      0x4  mid_HTTP.o [1]
+  .rodata                 const    0x00061828      0x4  mid_HTTP.o [1]
+  .rodata                 const    0x0006182c      0x4  system_S1C31W74.o [1]
+  .rodata                 const    0x00061830      0x4  usbd_S1C31W74.o [1]
+  .rodata                 const    0x00061834      0x4  usbd_S1C31W74.o [1]
+  .rodata                 const    0x00061838      0x4  usbd_S1C31W74.o [1]
+  .rodata                 const    0x0006183c      0x4  usbd_S1C31W74.o [1]
+  .rodata                 const    0x00061840      0x4  usbd_S1C31W74.o [1]
+  .rodata                 const    0x00061844      0x4  usbd_S1C31W74.o [1]
+  .rodata                 const    0x00061848      0x4  usbd_S1C31W74.o [1]
+  .rodata                 const    0x0006184c      0x4  usbd_S1C31W74.o [1]
+  .rodata                 const    0x00061850      0x2  ctrl_MPL3115A2.o [1]
+  .rodata                 const    0x00061852      0x2  ctrl_MPL3115A2.o [1]
+  .rodata                 const    0x00061854      0x2  ctrl_MPL3115A2.o [1]
+  .rodata                 const    0x00061856      0x2  mid_HTTP.o [1]
+  .rodata                 const    0x00061858      0x2  usbd_S1C31W74.o [1]
+  .rodata                 const    0x0006185a      0x2  usbd_S1C31W74.o [1]
+  .rodata                 const    0x0006185c      0x2  usbd_S1C31W74.o [1]
+  .text                   ro code  0x0006185e      0x2  startup_S1C31W74.o [1]
+  .text                   ro code  0x00061860      0x2  startup_S1C31W74.o [1]
+  .text                   ro code  0x00061862      0x2  startup_S1C31W74.o [1]
+  .text                   ro code  0x00061864      0x2  startup_S1C31W74.o [1]
+  .text                   ro code  0x00061866      0x2  startup_S1C31W74.o [1]
+  .text                   ro code  0x00061868      0x2  startup_S1C31W74.o [1]
+  .text                   ro code  0x0006186a      0x2  startup_S1C31W74.o [1]
+  .text                   ro code  0x0006186c      0x2  startup_S1C31W74.o [1]
+  .text                   ro code  0x0006186e      0x2  startup_S1C31W74.o [1]
+  .text                   ro code  0x00061870      0x2  startup_S1C31W74.o [1]
+  .text                   ro code  0x00061872      0x2  startup_S1C31W74.o [1]
+  .text                   ro code  0x00061874      0x2  startup_S1C31W74.o [1]
+  .text                   ro code  0x00061876      0x2  startup_S1C31W74.o [1]
+  .text                   ro code  0x00061878      0x2  startup_S1C31W74.o [1]
+  .text                   ro code  0x0006187a      0x2  startup_S1C31W74.o [1]
+  .text                   ro code  0x0006187c      0x2  startup_S1C31W74.o [1]
+  .text                   ro code  0x0006187e      0x2  startup_S1C31W74.o [1]
+  .text                   ro code  0x00061880      0x2  startup_S1C31W74.o [1]
+  .text                   ro code  0x00061882      0x2  startup_S1C31W74.o [1]
+  .text                   ro code  0x00061884      0x2  startup_S1C31W74.o [1]
+  .text                   ro code  0x00061886      0x2  startup_S1C31W74.o [1]
+  .text                   ro code  0x00061888      0x2  startup_S1C31W74.o [1]
+  .text                   ro code  0x0006188a      0x2  startup_S1C31W74.o [1]
+  .rodata                 const    0x0006188c      0x1  board.o [1]
+  .rodata                 const    0x0006188d      0x1  board.o [1]
+  .rodata                 const    0x0006188e      0x1  board.o [1]
+  .rodata                 const    0x0006188f      0x1  board.o [1]
+  .rodata                 const    0x00061890      0x1  ctrl_BQ28Z610.o [1]
+  .rodata                 const    0x00061891      0x1  ctrl_BQ28Z610.o [1]
+  .rodata                 const    0x00061892      0x1  ctrl_LSM6DSL.o [1]
+  .rodata                 const    0x00061893      0x1  ctrl_LSM6DSL.o [1]
+  .rodata                 const    0x00061894      0x1  ctrl_MPL3115A2.o [1]
+  .rodata                 const    0x00061895      0x1  ctrl_MPL3115A2.o [1]
+  .rodata                 const    0x00061896      0x1  ctrl_MPL3115A2.o [1]
+  .rodata                 const    0x00061897      0x1  ctrl_MPL3115A2.o [1]
+  .rodata                 const    0x00061898      0x1  system_S1C31W74.o [1]
+  .rodata                 const    0x00061899      0x1  usbd_S1C31W74.o [1]
+  .rodata                 const    0x0006189a      0x1  usbd_S1C31W74.o [1]
+  .rodata                 const    0x0006189b      0x1  usbd_S1C31W74.o [1]
+  .rodata                 const    0x0006189c      0x1  usbd_S1C31W74.o [1]
+  .rodata                 const    0x0006189d      0x1  usbd_S1C31W74.o [1]
+  .rodata                 const    0x0006189e      0x1  usbd_S1C31W74.o [1]
+  .rodata                 const    0x0006189f      0x1  usbd_S1C31W74.o [1]
+  .rodata                 const    0x000618a0      0x1  usbd_S1C31W74.o [1]
+  .rodata                 const    0x000618a1      0x1  usbd_S1C31W74.o [1]
+  .rodata                 const    0x000618a2      0x1  usbd_S1C31W74.o [1]
+  .rodata                 const    0x000618a3      0x1  usbd_S1C31W74.o [1]
+  .rodata                 const    0x000618a4      0x1  usbd_S1C31W74.o [1]
+  .text                   ro code  0x000618a8      0x0  cstart_closeall.o [4]
+  .rodata                 const    0x000618a8      0x0  zero_init3.o [4]
+  .rodata                 const    0x000618a8      0x0  lz77_init_single.o [4]
+  Initializer bytes       const    0x000618a8    0x15d  <for P4-P5-1>
+                                 - 0x00061a05  0x218f5
+
+"P4-P5", part 1 of 3:                            0x6d8
+  .flash_common_text               0x20000020    0x50c  <Block>
+    .flash_common_text-1           0x20000020    0x50c  <Init block>
+      .flash_common_text  inited   0x20000020    0x50c  FlashS1C31W74.o [5]
+  P4-P5-1                          0x2000052c    0x1cc  <Init block>
+    .data                 inited   0x2000052c      0xc  board.o [1]
+    .data                 inited   0x20000538      0xc  board.o [1]
+    .data                 inited   0x20000544     0x18  board.o [1]
+    .data                 inited   0x2000055c      0x8  board.o [1]
+    .data                 inited   0x20000564      0xc  board.o [1]
+    .data                 inited   0x20000570      0xc  board.o [1]
+    .data                 inited   0x2000057c     0x24  man_data.o [1]
+    .data                 inited   0x200005a0     0x7c  man_error.o [1]
+    .data                 inited   0x2000061c     0x2c  man_error.o [1]
+    .data                 inited   0x20000648     0x18  man_error.o [1]
+    .data                 inited   0x20000660      0x8  man_rtc.o [1]
+    .data                 inited   0x20000668      0x4  system_S1C31W74.o [1]
+    .data                 inited   0x2000066c      0x4  se_clg.o [6]
+    .data                 inited   0x20000670     0x48  FlashS1C31W74.o [5]
+    .data                 inited   0x200006b8      0x8  FlashS1C31W74.o [5]
+    .data                 inited   0x200006c0     0x10  FlashS1C31W74.o [5]
+    .data                 inited   0x200006d0      0xc  FlashS1C31W74.o [5]
+    .data                 inited   0x200006dc      0xc  FlashS1C31W74.o [5]
+    .data                 inited   0x200006e8      0x8  XShttio.o [3]
+    __DLIB_PERTHREAD      inited   0x200006f0      0x4  errno.o [3]
+    .data                 inited   0x200006f4      0x1  ctrl_BQ24160A.o [1]
+    .data                 inited   0x200006f5      0x1  ctrl_BQ28Z610.o [1]
+    .data                 inited   0x200006f6      0x1  ctrl_LSM6DSL.o [1]
+    .data                 inited   0x200006f7      0x1  ctrl_MPL3115A2.o [1]
+                                 - 0x200006f8    0x6d8
+
+"P4-P5", part 2 of 3:                              0x6
+  .noinit                 uninit   0x200006f8      0x6  FlashS1C31W74.o [5]
+                                 - 0x200006fe      0x6
+
+"P4-P5", part 3 of 3:                          0x1ce78
+  .bss                    zero     0x20000700   0x6524  man_msg.o [1]
+  .bss                    zero     0x20006c24   0x38bc  man_error.o [1]
+  .bss                    zero     0x2000a4e0   0x38ac  man_data.o [1]
+  .bss                    zero     0x2000dd8c   0x2388  main.o [1]
+  .bss                    zero     0x20010114   0x1e08  mid_HTTP.o [1]
+  .bss                    zero     0x20011f1c   0x16b8  man_rpt.o [1]
+  .bss                    zero     0x200135d4   0x158c  drv_uart2_0.o [1]
+  .bss                    zero     0x20014b60   0x14f8  man_usb.o [1]
+  .bss                    zero     0x20016058   0x1474  ctrl_SM7500JE.o [1]
+  .bss                    zero     0x200174cc   0x1178  ctrl_CXD5600GF.o [1]
+  .bss                    zero     0x20018644   0x1014  ctrl_USB.o [1]
+  .bss                    zero     0x20019658    0x810  drv_uart2_1.o [1]
+  .bss                    zero     0x20019e68    0x800  man_memory.o [1]
+  .bss                    zero     0x2001a668    0x800  usbd_S1C31W74.o [1]
+  .bss                    zero     0x2001ae68    0x800  usbd_S1C31W74.o [1]
+  .bss                    zero     0x2001b668    0x694  man_http.o [1]
+  .bss                    zero     0x2001bcfc    0x65c  man_cmd.o [1]
+  .bss                    zero     0x2001c358    0x328  man_ota.o [1]
+  .bss                    zero     0x2001c680    0x2a0  man_usb.o [1]
+  .bss                    zero     0x2001c920    0x20c  man_ope.o [1]
+  .bss                    zero     0x2001cb2c    0x190  man_timer.o [1]
+  .bss                    zero     0x2001ccbc    0x160  man_gps.o [1]
+  .bss                    zero     0x2001ce1c    0x10c  man_lte.o [1]
+  .bss                    zero     0x2001cf28    0x10c  man_net.o [1]
+  .bss                    zero     0x2001d034     0x80  main.o [1]
+  .bss                    zero     0x2001d0b4     0x6c  man_rtc.o [1]
+  .bss                    zero     0x2001d120     0x64  man_gyro.o [1]
+  .bss                    zero     0x2001d184     0x54  mid_GPS.o [1]
+  .bss                    zero     0x2001d1d8     0x54  xxwritebuffered.o [3]
+  .bss                    zero     0x2001d22c     0x40  ctrl_BQ24160A.o [1]
+  .bss                    zero     0x2001d26c     0x40  man_battery.o [1]
+  .bss                    zero     0x2001d2ac     0x40  man_charge.o [1]
+  .bss                    zero     0x2001d2ec     0x40  usbd_S1C31W74.o [1]
+  .bss                    zero     0x2001d32c     0x34  man_charge.o [1]
+  .bss                    zero     0x2001d360     0x20  man_flash.o [1]
+  .bss                    zero     0x2001d380     0x20  man_press.o [1]
+  .bss                    zero     0x2001d3a0     0x20  mid_HTTP.o [1]
+  .bss                    zero     0x2001d3c0     0x20  se_pport.o [6]
+  .bss                    zero     0x2001d3e0     0x1c  drv_t16_3.o [1]
+  .bss                    zero     0x2001d3fc     0x14  main.o [1]
+  .bss                    zero     0x2001d410     0x14  man_battery.o [1]
+  .bss                    zero     0x2001d424     0x14  man_gpio.o [1]
+  .bss                    zero     0x2001d438     0x10  main.o [1]
+  .bss                    zero     0x2001d448      0xc  drv_i2c_0.o [1]
+  .bss                    zero     0x2001d454      0xc  drv_i2c_1.o [1]
+  .bss                    zero     0x2001d460      0xc  main.o [1]
+  .bss                    zero     0x2001d46c      0x8  drv_spi_0.o [1]
+  .bss                    zero     0x2001d474      0x8  drv_spi_0.o [1]
+  .bss                    zero     0x2001d47c      0x8  drv_t16_3.o [1]
+  .bss                    zero     0x2001d484      0x8  drv_uart2_0.o [1]
+  .bss                    zero     0x2001d48c      0x8  drv_uart2_1.o [1]
+  .bss                    zero     0x2001d494      0x8  drv_usbd_user_cdc_acm.o [1]
+  .bss                    zero     0x2001d49c      0x8  drv_wdt.o [1]
+  .bss                    zero     0x2001d4a4      0x8  gnss_gw_common.o [1]
+  .bss                    zero     0x2001d4ac      0x8  gnss_gw_common.o [1]
+  .bss                    zero     0x2001d4b4      0x8  usbd_cdc_acm.o [1]
+  .bss                    zero     0x2001d4bc      0x8  usbd_core.o [1]
+  .bss                    zero     0x2001d4c4      0x8  usbd_core.o [1]
+  .bss                    zero     0x2001d4cc      0x4  ctrl_BQ24160A.o [1]
+  .bss                    zero     0x2001d4d0      0x4  ctrl_BQ24160A.o [1]
+  .bss                    zero     0x2001d4d4      0x4  ctrl_BQ24160A.o [1]
+  .bss                    zero     0x2001d4d8      0x4  drv_i2c_0.o [1]
+  .bss                    zero     0x2001d4dc      0x4  drv_i2c_1.o [1]
+  .bss                    zero     0x2001d4e0      0x4  drv_rtc.o [1]
+  .bss                    zero     0x2001d4e4      0x4  drv_usb_main.o [1]
+  .bss                    zero     0x2001d4e8      0x4  main.o [1]
+  .bss                    zero     0x2001d4ec      0x4  man_press.o [1]
+  .bss                    zero     0x2001d4f0      0x4  man_press.o [1]
+  .bss                    zero     0x2001d4f4      0x4  man_press.o [1]
+  .bss                    zero     0x2001d4f8      0x4  man_press.o [1]
+  .bss                    zero     0x2001d4fc      0x4  man_usb.o [1]
+  .bss                    zero     0x2001d500      0x4  man_usb.o [1]
+  .bss                    zero     0x2001d504      0x4  system_S1C31W74.o [1]
+  .bss                    zero     0x2001d508      0x4  usbd_cdc_acm.o [1]
+  .bss                    zero     0x2001d50c      0x4  usbd_cdc_acm.o [1]
+  .bss                    zero     0x2001d510      0x4  usbd_cdc_acm.o [1]
+  .bss                    zero     0x2001d514      0x4  usbd_cdc_acm.o [1]
+  .bss                    zero     0x2001d518      0x4  usbd_cdc_acm.o [1]
+  .bss                    zero     0x2001d51c      0x4  usbd_cdc_acm.o [1]
+  .bss                    zero     0x2001d520      0x4  usbd_cdc_acm.o [1]
+  .bss                    zero     0x2001d524      0x4  usbd_cdc_acm.o [1]
+  .bss                    zero     0x2001d528      0x4  usbd_cdc_acm.o [1]
+  .bss                    zero     0x2001d52c      0x4  usbd_cdc_acm.o [1]
+  .bss                    zero     0x2001d530      0x4  usbd_cdc_acm.o [1]
+  .bss                    zero     0x2001d534      0x4  usbd_cdc_acm.o [1]
+  .bss                    zero     0x2001d538      0x4  usbd_cdc_acm.o [1]
+  .bss                    zero     0x2001d53c      0x4  usbd_core.o [1]
+  .bss                    zero     0x2001d540      0x4  usbd_core.o [1]
+  .bss                    zero     0x2001d544      0x4  usbd_core.o [1]
+  .bss                    zero     0x2001d548      0x4  usbd_S1C31W74.o [1]
+  .bss                    zero     0x2001d54c      0x4  usbd_S1C31W74.o [1]
+  .bss                    zero     0x2001d550      0x4  se_usb.o [6]
+  .bss                    zero     0x2001d554      0x4  Driver_Flash.o [5]
+  .bss                    zero     0x2001d558      0x2  drv_clg.o [1]
+  .bss                    zero     0x2001d55a      0x2  drv_clg.o [1]
+  .bss                    zero     0x2001d55c      0x2  drv_clg.o [1]
+  .bss                    zero     0x2001d55e      0x2  drv_clg.o [1]
+  .bss                    zero     0x2001d560      0x2  drv_clg.o [1]
+  .bss                    zero     0x2001d562      0x2  drv_clg.o [1]
+  .bss                    zero     0x2001d564      0x2  usbd_cdc_acm.o [1]
+  .bss                    zero     0x2001d566      0x2  usbd_core.o [1]
+  .bss                    zero     0x2001d568      0x2  usbd_S1C31W74.o [1]
+  .bss                    zero     0x2001d56a      0x2  usbd_S1C31W74.o [1]
+  .bss                    zero     0x2001d56c      0x2  usbd_S1C31W74.o [1]
+  .bss                    zero     0x2001d56e      0x1  main.o [1]
+  .bss                    zero     0x2001d56f      0x1  usbd_cdc_acm.o [1]
+  .bss                    zero     0x2001d570      0x1  usbd_core.o [1]
+  .bss                    zero     0x2001d571      0x1  usbd_core.o [1]
+  .bss                    zero     0x2001d572      0x1  usbd_core.o [1]
+  .bss                    zero     0x2001d573      0x1  usbd_core.o [1]
+  .bss                    zero     0x2001d574      0x1  usbd_core.o [1]
+                                 - 0x2001d575  0x1ce75
+
+"P6":                                           0x1000
+  CSTACK                           0x2001ec00   0x1000  <Block>
+    CSTACK                uninit   0x2001ec00   0x1000  <Block tail>
+                                 - 0x2001fc00   0x1000
+
+
+*******************************************************************************
+*** INIT TABLE
+***
+
+          Address     Size
+          -------     ----
+Zero (__iar_zero_init3)
+    1 destination range, total size 0x1ce75:
+          0x20000700  0x1ce75
+
+Copy/lz77 (__iar_lz77_init_single3)
+    1 source range, total size 0x15d (75% of destination):
+          0x000618a8    0x15d
+    1 destination range, total size 0x1cc:
+          0x2000052c    0x1cc
+
+
+
+*******************************************************************************
+*** MODULE SUMMARY
+***
+
+    Module                   ro code  rw code  ro data  rw data
+    ------                   -------  -------  -------  -------
+C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj: [1]
+    board.o                      148               116       80
+    ctrl_BQ24160A.o            1 378               275       77
+    ctrl_BQ28Z610.o              340                 5        1
+    ctrl_CXD5600GF.o           4 204                      4 472
+    ctrl_GPIO.o                   68                36
+    ctrl_I2C0.o                   36
+    ctrl_I2C1.o                   12
+    ctrl_LSM6DSL.o               612                 9        1
+    ctrl_MPL3115A2.o             764                11        1
+    ctrl_SLEEP.o                  48
+    ctrl_SM7500JE.o            2 416                      5 236
+    ctrl_USB.o                   292                      4 116
+    ctrl_W25Q.o                  450
+    drv_clg.o                  1 852                         12
+    drv_flash.o                  104
+    drv_gpio.o                   598                48
+    drv_i2c_0.o                  336                         16
+    drv_i2c_1.o                  288                         16
+    drv_rtc.o                    206                          4
+    drv_spi_0.o                  292                         16
+    drv_t16_3.o                  520                         36
+    drv_uart2_0.o                680                      5 524
+    drv_uart2_1.o                668                      2 072
+    drv_usb_main.o               218                          4
+    drv_usbd_user_cdc_acm.o      128                          8
+    drv_wdt.o                    176                          8
+    fixed.o                       36
+    gnss_gw_common.o             494                28       16
+    main.o                     1 416                56    9 277
+    man_battery.o                292                32       84
+    man_charge.o                 882               192      116
+    man_cmd.o                 10 164             1 232    1 628
+    man_data.o                 2 408               772   14 544
+    man_error.o                1 156               561   14 716
+    man_flash.o                  502                         32
+    man_gpio.o                   612                         20
+    man_gps.o                  4 988                        352
+    man_gyro.o                   464                        100
+    man_http.o                 5 244               232    1 684
+    man_lte.o                  4 940                72      268
+    man_memory.o                   8                      2 048
+    man_msg.o                  4 596               320   25 892
+    man_net.o                  4 364                        268
+    man_ope.o                  6 392               408      524
+    man_ota.o                 13 872                        808
+    man_press.o                  508                28       48
+    man_rpt.o                  4 436               136    5 816
+    man_rtc.o                    368                50      116
+    man_timer.o                  516                        400
+    man_usb.o                  1 756               156    6 048
+    man_version.o                 48                64
+    mid_GPS.o                  3 832             1 668       84
+    mid_HTTP.o                11 268             3 294    7 720
+    startup_S1C31W74.o           218
+    system_S1C31W74.o            232               128        8
+    usbd_S1C31W74.o            2 292               310    4 174
+    usbd_cdc_acm.o             1 444                         63
+    usbd_core.o                2 832                         35
+    usbd_core_cdc.o              432
+    -----------------------------------------------------------
+    Total:                   109 846            10 239  118 589
+
+command line: [2]
+    -----------------------------------------------------------
+    Total:
+
+dl6M_tln.a: [3]
+    XShttio.o                      8                 6        8
+    abs.o                          8
+    atoi.o                        12
+    errno.o                       16                 3        4
+    exit.o                         8
+    low_level_init.o               4
+    printf.o                      36
+    putchar.o                     36
+    sprintf.o                     56
+    xcloseall.o                   16
+    xprintfsmall_nomb.o        1 324
+    xprout.o                      22
+    xsprout.o                     10
+    xstoul.o                     384
+    xtls.o                         2
+    xxwritebuffered.o            204                         84
+    -----------------------------------------------------------
+    Total:                     2 146                 9       96
+
+rt6M_tl.a: [4]
+    ABImemcpy.o                   92
+    ABImemset.o                   84
+    I32DivModFast.o              224
+    IntDivZer.o                    2
+    cexit.o                       14
+    cmain.o                       26
+    cstart_closeall.o
+    cstartup_M.o                  12
+    data_init.o                   40
+    lz77_init_single.o           126
+    memchr.o                      24
+    memcmp.o                      40
+    strchr.o                      20
+    strcpy.o                      16
+    strlen.o                      16
+    uread4.o                      22
+    uwrite4.o                     20
+    zero_init3.o                  60
+    -----------------------------------------------------------
+    Total:                       838
+
+seFlashLibraryS1C31W74Int.a: [5]
+    Driver_Flash.o               220                52        4
+    FlashS1C31W74.o              176    1 292    1 383      126
+    -----------------------------------------------------------
+    Total:                       396    1 292    1 435      130
+
+sePeriphLibrary.a: [6]
+    se_clg.o                   1 152                 3        4
+    se_common.o                   32                24
+    se_i2c.o                   1 288                48
+    se_pport.o                 1 140                         32
+    se_rtca.o                  1 904                16
+    se_spia.o                    910
+    se_svd2.o                    572
+    se_t16.o                     570
+    se_uart2.o                   774
+    se_usb.o                   3 388                          4
+    se_wdt2.o                    592
+    -----------------------------------------------------------
+    Total:                    12 322                91       40
+
+shb_l.a: [7]
+    dwrite.o                      30
+    exit.o                        20
+    iarttio.o                    108
+    iarwrite.o                    34
+    iarwstd.o                     32
+    -----------------------------------------------------------
+    Total:                       224
+
+    Gaps                           3
+    Linker created                48                32    4 096
+---------------------------------------------------------------
+    Grand Total:             125 823    1 292   11 806  122 951
+
+
+*******************************************************************************
+*** ENTRY LIST
+***
+
+Entry                      Address    Size  Type      Object
+-----                      -------    ----  ----      ------
+.flash_common_text$$Base
+                        0x20000020           --   Gb  - Linker created -
+.flash_common_text$$Limit
+                        0x2000052c           --   Gb  - Linker created -
+.flash_common_text_init$$Base
+                        0x0005ee40           --   Gb  - Linker created -
+.flash_common_text_init$$Length
+                        0x0000050c           --   Gb  - Linker created -
+.flash_common_text_init$$Limit
+                        0x0005f34c           --   Gb  - Linker created -
+.iar.init_table$$Base   0x00060b14           --   Gb  - Linker created -
+.iar.init_table$$Limit  0x00060b34           --   Gb  - Linker created -
+?main                   0x00060ce5          Code  Gb  cmain.o [4]
+ARM_Flash_EraseChip     0x0005ff47     0x6  Code  Gb  Driver_Flash.o [5]
+ARM_Flash_EraseSector   0x0005ff15    0x32  Code  Gb  Driver_Flash.o [5]
+ARM_Flash_GetCapabilities
+                        0x0005fead     0x6  Code  Gb  Driver_Flash.o [5]
+ARM_Flash_GetInfo       0x0005ff5d     0x4  Code  Gb  Driver_Flash.o [5]
+ARM_Flash_GetStatus     0x0005ff4d     0x6  Code  Gb  Driver_Flash.o [5]
+ARM_Flash_GetVersion    0x0005fea5     0x6  Code  Gb  Driver_Flash.o [5]
+ARM_Flash_Initialize    0x0005feb3     0xc  Code  Gb  Driver_Flash.o [5]
+ARM_Flash_PowerControl  0x0005fec9     0x6  Code  Gb  Driver_Flash.o [5]
+ARM_Flash_ProgramData   0x0005fef5    0x20  Code  Gb  Driver_Flash.o [5]
+ARM_Flash_ReadData      0x0005fecf    0x26  Code  Gb  Driver_Flash.o [5]
+ARM_Flash_Uninitialize  0x0005febf     0xa  Code  Gb  Driver_Flash.o [5]
+AlarmOccured            0x2001d558     0x2  Data  Lc  drv_clg.o [1]
+BQ24160A_set_batt_reg   0x00058075    0x56  Code  Lc  ctrl_BQ24160A.o [1]
+BQ24160A_set_charge_reg
+                        0x000580cb    0x56  Code  Lc  ctrl_BQ24160A.o [1]
+BQ24160A_set_ctrl_reg   0x00057edd    0x88  Code  Lc  ctrl_BQ24160A.o [1]
+BQ24160A_set_ctrl_reg_charge_disable
+                        0x00057fed    0x88  Code  Lc  ctrl_BQ24160A.o [1]
+BQ24160A_set_ctrl_reg_teoff
+                        0x00057f65    0x88  Code  Lc  ctrl_BQ24160A.o [1]
+BQ24160A_set_ctrl_wdt   0x00058389    0x34  Code  Gb  ctrl_BQ24160A.o [1]
+BQ24160A_set_dppm_reg   0x00058129    0x56  Code  Lc  ctrl_BQ24160A.o [1]
+BQ24160A_set_safety_reg
+                        0x0005818d    0x56  Code  Lc  ctrl_BQ24160A.o [1]
+BoardInit               0x00058ae9    0x7c  Code  Gb  board.o [1]
+CSTACK$$Base            0x2001ec00           --   Gb  - Linker created -
+CSTACK$$Limit           0x2001fc00           --   Gb  - Linker created -
+CXD5600_console         0x00053849    0x92  Code  Gb  man_cmd.o [1]
+CXD5600_reset           0x000538dd    0x40  Code  Gb  man_cmd.o [1]
+CellWriteMain           0x200001dd    0xec  Code  Gb  FlashS1C31W74.o [5]
+ClkSrc                  0x2001d56e     0x1  Data  Gb  main.o [1]
+ConfigurePortsForI2C    0x0005b6b1    0x5c  Code  Gb  se_i2c.o [6]
+ConfigurePortsForOSC3   0x00055fdd    0x24  Code  Gb  se_clg.o [6]
+ConfigurePortsForSPI    0x0005b147    0xbc  Code  Gb  se_spia.o [6]
+ConfigurePortsForSVD2   0x0005cf5b    0x16  Code  Gb  se_svd2.o [6]
+ConfigurePortsForUart   0x0005d20d    0x6a  Code  Gb  se_uart2.o [6]
+DriverCapabilities      0x0005ff7c     0x4  Data  Lc  Driver_Flash.o [5]
+DriverVersion           0x0005ff78     0x4  Data  Lc  Driver_Flash.o [5]
+Driver_Flash            0x00060848    0x2c  Data  Gb  Driver_Flash.o [5]
+EraseArea               0x20000694     0xc  Data  Gb  FlashS1C31W74.o [5]
+EraseVerifyArea         0x200006a0     0xc  Data  Gb  FlashS1C31W74.o [5]
+FLASH_SECTOR_INFO       0x00060840     0x8  Data  Lc  Driver_Flash.o [5]
+FlashFinalize           0x0005ffd7    0x36  Code  Gb  FlashS1C31W74.o [5]
+FlashInfo               0x0005ff60    0x18  Data  Lc  Driver_Flash.o [5]
+FlashInitialize         0x0005ff81    0x56  Code  Gb  FlashS1C31W74.o [5]
+FlashStatus             0x2001d554     0x4  Data  Lc  Driver_Flash.o [5]
+FuseErase               0x20000439    0x26  Code  Gb  FlashS1C31W74.o [5]
+FuseEraseArea           0x200006d0     0xc  Data  Gb  FlashS1C31W74.o [5]
+FuseMain                0x20000351    0xe8  Code  Gb  FlashS1C31W74.o [5]
+FuseProgramArea         0x200006dc     0xc  Data  Gb  FlashS1C31W74.o [5]
+FuseRead                0x20000461    0x4e  Code  Gb  FlashS1C31W74.o [5]
+FuseRegistry            0x20000339    0x16  Code  Gb  FlashS1C31W74.o [5]
+FuseWrite               0x200004af    0x44  Code  Gb  FlashS1C31W74.o [5]
+I2C_CH0                 0x2000052c     0xc  Data  Gb  board.o [1]
+I2C_CH1                 0x20000538     0xc  Data  Gb  board.o [1]
+InitStruct              0x2001d448     0xc  Data  Lc  drv_i2c_0.o [1]
+InitStruct              0x2001d454     0xc  Data  Lc  drv_i2c_1.o [1]
+InitStruct              0x2001d4e0     0x4  Data  Lc  drv_rtc.o [1]
+InitStruct              0x2001d484     0x8  Data  Lc  drv_uart2_0.o [1]
+InitStruct              0x2001d48c     0x8  Data  Lc  drv_uart2_1.o [1]
+LSM6DSL_ctrl1           0x00058b7d    0x34  Code  Lc  ctrl_LSM6DSL.o [1]
+LSM6DSL_ctrl2           0x00058bb1    0x34  Code  Lc  ctrl_LSM6DSL.o [1]
+LSM6DSL_int1_ctrl       0x00058be5    0x34  Code  Lc  ctrl_LSM6DSL.o [1]
+LSM6DSL_read_data_status
+                        0x00058c19    0x5e  Code  Lc  ctrl_LSM6DSL.o [1]
+LoadInt                 0x00058841    0x4c  Code  Lc  xprintfsmall_nomb.o [3]
+MPL3115A2_pt_data_cfg   0x00051f95    0x34  Code  Lc  ctrl_MPL3115A2.o [1]
+MPL3115A2_read_data_status
+                        0x00051fc9    0x5c  Code  Lc  ctrl_MPL3115A2.o [1]
+NMI_Handler             0x00051f8d     0x8  Code  Gb  drv_wdt.o [1]
+NVIC_ClearPendingIRQ    0x0005c491    0x16  Code  Lc  usbd_S1C31W74.o [1]
+NVIC_DisableIRQ         0x00059b61    0x16  Code  Lc  drv_clg.o [1]
+NVIC_DisableIRQ         0x0005c47b    0x16  Code  Lc  usbd_S1C31W74.o [1]
+NVIC_EnableIRQ          0x00059b2d    0x16  Code  Lc  drv_clg.o [1]
+NVIC_EnableIRQ          0x00051c0d    0x16  Code  Lc  drv_t16_3.o [1]
+NVIC_EnableIRQ          0x0005a389    0x16  Code  Lc  drv_uart2_0.o [1]
+NVIC_EnableIRQ          0x0005a70d    0x16  Code  Lc  drv_uart2_1.o [1]
+NVIC_EnableIRQ          0x0005c465    0x16  Code  Lc  usbd_S1C31W74.o [1]
+NVIC_EnableIRQ          0x0005b70d    0x16  Code  Lc  se_usb.o [6]
+NVIC_GetEnableIRQ       0x00059b43    0x1e  Code  Lc  drv_clg.o [1]
+NVIC_SetPriority        0x00059b77    0x84  Code  Lc  drv_clg.o [1]
+NVIC_SetPriority        0x00051c23    0x84  Code  Lc  drv_t16_3.o [1]
+NVIC_SetPriority        0x0005a39f    0x84  Code  Lc  drv_uart2_0.o [1]
+NVIC_SetPriority        0x0005a723    0x84  Code  Lc  drv_uart2_1.o [1]
+NVIC_SetPriority        0x0005c4a7    0x84  Code  Lc  usbd_S1C31W74.o [1]
+NVIC_SetPriority        0x0005b723    0x84  Code  Lc  se_usb.o [6]
+NmiIntOccured           0x2001d562     0x2  Data  Lc  drv_clg.o [1]
+OSC3INV_val             0x2000066c     0x4  Data  Gb  se_clg.o [6]
+OSC3_ALTFUNC            0x0006188d     0x1  Data  Gb  board.o [1]
+OSC3_PORTID             0x0006188c     0x1  Data  Gb  board.o [1]
+OSC4_ALTFUNC            0x0006188f     0x1  Data  Gb  board.o [1]
+OSC4_PORTID             0x0006188e     0x1  Data  Gb  board.o [1]
+PORT_IRQHandler         0x0005a18d    0x8c  Code  Gb  drv_clg.o [1]
+PRG_main                0x00048735   0x1d4  Code  Gb  main.o [1]
+PreProgramArea          0x2000067c     0xc  Data  Gb  FlashS1C31W74.o [5]
+Process                 0x200000ad    0x26  Code  Gb  FlashS1C31W74.o [5]
+ProgramArea             0x20000688     0xc  Data  Gb  FlashS1C31W74.o [5]
+ProgramReadVerify       0x200006ac     0xc  Data  Gb  FlashS1C31W74.o [5]
+RTCA_IRQHandler         0x0005a221    0x22  Code  Gb  drv_clg.o [1]
+Region$$Table$$Base     0x00060b14           --   Gb  - Linker created -
+Region$$Table$$Limit    0x00060b34           --   Gb  - Linker created -
+Revision_number         0x00061748     0x8  Data  Gb  man_version.o [1]
+SIM7500_cfotaswitch     0x000537fb    0x4c  Code  Gb  man_cmd.o [1]
+SIM7500_console         0x0005368d    0x6e  Code  Gb  man_cmd.o [1]
+SIM7500_set_date_time   0x00053701    0xfa  Code  Gb  man_cmd.o [1]
+SPIA_CH0                0x20000544    0x18  Data  Gb  board.o [1]
+SPI_InitStruct          0x2001d474     0x8  Data  Lc  drv_spi_0.o [1]
+SVD2_1_IRQHandler       0x0005cb35    0x3a  Code  Gb  usbd_S1C31W74.o [1]
+SVD2_CH1                0x2000055c     0x8  Data  Gb  board.o [1]
+SectorEraseMain         0x200000d3   0x10a  Code  Gb  FlashS1C31W74.o [5]
+SequenceRun             0x2000006b    0x42  Code  Gb  FlashS1C31W74.o [5]
+SetFuseEraseTimeTable   0x20000021    0x26  Code  Gb  FlashS1C31W74.o [5]
+SetPINwithWait          0x200002d1    0x40  Code  Gb  FlashS1C31W74.o [5]
+SetWriteTimeTable       0x20000047    0x24  Code  Gb  FlashS1C31W74.o [5]
+StartIosc               0x00055e95    0x42  Code  Lc  se_clg.o [6]
+StartOsc1               0x00055d8b    0x7a  Code  Lc  se_clg.o [6]
+StartOsc3               0x00055e09    0x84  Code  Lc  se_clg.o [6]
+SwitchSysClkIosc        0x00055f45    0x48  Code  Lc  se_clg.o [6]
+SwitchSysClkOsc1        0x00055ef5    0x50  Code  Lc  se_clg.o [6]
+SwitchSysClkOsc3        0x00055f8d    0x50  Code  Lc  se_clg.o [6]
+SysClk                  0x2001d4e8     0x4  Data  Gb  main.o [1]
+SysTick_Handler         0x0005023d     0xc  Code  Gb  system_S1C31W74.o [1]
+SystemCoreClock         0x20000668     0x4  Data  Gb  system_S1C31W74.o [1]
+SystemCoreClockUpdate   0x0005017d     0xc  Code  Gb  system_S1C31W74.o [1]
+SystemInit              0x00050189     0xe  Code  Gb  system_S1C31W74.o [1]
+T16_3_IRQHandler        0x00051d71    0x80  Code  Gb  drv_t16_3.o [1]
+T16_InitStruct          0x2001d46c     0x8  Data  Lc  drv_spi_0.o [1]
+T16_InitStruct          0x2001d47c     0x8  Data  Lc  drv_t16_3.o [1]
+TBL2_BLOCK$$Base        0x00040100           --   Gb  - Linker created -
+TBL2_BLOCK$$Limit       0x0004010c           --   Gb  - Linker created -
+UART2_0_CheckErrorCount
+                        0x0005a563     0xc  Code  Gb  drv_uart2_0.o [1]
+UART2_0_GetChar         0x0005a515    0x4e  Code  Gb  drv_uart2_0.o [1]
+UART2_0_IRQHandler      0x0005a56f    0x74  Code  Gb  drv_uart2_0.o [1]
+UART2_1_GetChar         0x0005a89b    0x50  Code  Gb  drv_uart2_1.o [1]
+UART2_1_IRQHandler      0x0005a8eb    0x78  Code  Gb  drv_uart2_1.o [1]
+UART2_CH0               0x20000564     0xc  Data  Gb  board.o [1]
+UART2_CH1               0x20000570     0xc  Data  Gb  board.o [1]
+UART_Config             0x2001d494     0x8  Data  Gb  drv_usbd_user_cdc_acm.o [1]
+USBD_AltSetting         0x2001d568     0x2  Data  Gb  usbd_S1C31W74.o [1]
+USBD_CDC_ACM_ClearCommFeature
+                        0x0005a703     0x4  Code  Gb  drv_usb_main.o [1]
+USBD_CDC_ACM_DataFree   0x0005dd89    0x12  Code  Gb  usbd_cdc_acm.o [1]
+USBD_CDC_ACM_DataRead   0x0005de4b    0x40  Code  Gb  usbd_cdc_acm.o [1]
+USBD_CDC_ACM_DataReceived
+                        0x0005e641     0x4  Code  Wk  usbd_cdc_acm.o [1]
+USBD_CDC_ACM_DataSend   0x0005dd9b    0x96  Code  Gb  usbd_cdc_acm.o [1]
+USBD_CDC_ACM_EP_BULKIN_Event
+                        0x0005e139    0x12  Code  Gb  usbd_cdc_acm.o [1]
+USBD_CDC_ACM_EP_BULKIN_HandleData
+                        0x0005dfe9    0xf2  Code  Lc  usbd_cdc_acm.o [1]
+USBD_CDC_ACM_EP_BULKOUT_Event
+                        0x0005e0e5    0x4e  Code  Gb  usbd_cdc_acm.o [1]
+USBD_CDC_ACM_EP_BULKOUT_HandleData
+                        0x0005df67    0x6c  Code  Lc  usbd_cdc_acm.o [1]
+USBD_CDC_ACM_EP_INTIN_Event
+                        0x0005df65     0x2  Code  Gb  usbd_cdc_acm.o [1]
+USBD_CDC_ACM_GetChar    0x0005de8b    0x1a  Code  Gb  usbd_cdc_acm.o [1]
+USBD_CDC_ACM_GetCommFeature
+                        0x0005a6ff     0x4  Code  Gb  drv_usb_main.o [1]
+USBD_CDC_ACM_GetEncapsulatedResponse
+                        0x0005a6f7     0x4  Code  Gb  drv_usb_main.o [1]
+USBD_CDC_ACM_GetLineCoding
+                        0x0005e681    0x5c  Code  Wk  usbd_cdc_acm.o [1]
+USBD_CDC_ACM_Initialize
+                        0x0005a6e5     0xe  Code  Gb  drv_usb_main.o [1]
+USBD_CDC_ACM_PortGetLineCoding
+                        0x0005e2bd    0x24  Code  Gb  drv_usbd_user_cdc_acm.o [1]
+USBD_CDC_ACM_PortInitialize
+                        0x0005e26d    0x22  Code  Gb  drv_usbd_user_cdc_acm.o [1]
+USBD_CDC_ACM_PortReset  0x0005e28f     0x4  Code  Gb  drv_usbd_user_cdc_acm.o [1]
+USBD_CDC_ACM_PortSetControlLineState
+                        0x0005e2e9     0x4  Code  Gb  drv_usbd_user_cdc_acm.o [1]
+USBD_CDC_ACM_PortSetLineCoding
+                        0x0005e293    0x2a  Code  Gb  drv_usbd_user_cdc_acm.o [1]
+USBD_CDC_ACM_ReceiveBuf
+                        0x2001ae68   0x800  Data  Gb  usbd_S1C31W74.o [1]
+USBD_CDC_ACM_Reset      0x0005e1a1    0xcc  Code  Wk  usbd_cdc_acm.o [1]
+USBD_CDC_ACM_SOF_Event  0x0005dea5    0xb2  Code  Gb  usbd_cdc_acm.o [1]
+USBD_CDC_ACM_SendBreak  0x0005a707     0x4  Code  Gb  drv_usb_main.o [1]
+USBD_CDC_ACM_SendBuf    0x2001a668   0x800  Data  Gb  usbd_S1C31W74.o [1]
+USBD_CDC_ACM_SendEncapsulatedCommand
+                        0x0005a6f3     0x4  Code  Gb  drv_usb_main.o [1]
+USBD_CDC_ACM_SetCommFeature
+                        0x0005a6fb     0x4  Code  Gb  drv_usb_main.o [1]
+USBD_CDC_ACM_SetControlLineState
+                        0x0005e6dd    0x14  Code  Wk  usbd_cdc_acm.o [1]
+USBD_CDC_ACM_SetLineCoding
+                        0x0005e6f1    0x4c  Code  Wk  usbd_cdc_acm.o [1]
+USBD_CDC_ACM_WaitSendCompletion
+                        0x0005de31    0x1a  Code  Gb  usbd_cdc_acm.o [1]
+USBD_ClrStallEP         0x0005c5fd    0x16  Code  Gb  usbd_S1C31W74.o [1]
+USBD_ConfigDescriptor   0x00060580    0x44  Data  Wk  usbd_S1C31W74.o [1]
+USBD_ConfigDescriptor_HS
+                        0x000618a2     0x1  Data  Wk  usbd_S1C31W74.o [1]
+USBD_ConfigEP           0x0005c593    0x32  Code  Gb  usbd_S1C31W74.o [1]
+USBD_Configuration      0x2001d571     0x1  Data  Gb  usbd_core.o [1]
+USBD_Configure          0x0005c591     0x2  Code  Gb  usbd_S1C31W74.o [1]
+USBD_Configure_Event    0x0005a6df     0x2  Code  Gb  drv_usb_main.o [1]
+USBD_DataInStage        0x0005d2d5    0x46  Code  Gb  usbd_core.o [1]
+USBD_DataOutStage       0x0005d31b    0x22  Code  Gb  usbd_core.o [1]
+USBD_DeviceAddress      0x2001d570     0x1  Data  Gb  usbd_core.o [1]
+USBD_DeviceDescriptor   0x00060f4c    0x14  Data  Wk  usbd_S1C31W74.o [1]
+USBD_DeviceQualifier    0x000618a0     0x1  Data  Wk  usbd_S1C31W74.o [1]
+USBD_DeviceQualifier_HS
+                        0x000618a1     0x1  Data  Wk  usbd_S1C31W74.o [1]
+USBD_DeviceStatus       0x2001d566     0x2  Data  Gb  usbd_core.o [1]
+USBD_DirCtrlEP          0x0005c5c5     0x8  Code  Gb  usbd_S1C31W74.o [1]
+USBD_DisableEP          0x0005c5d9     0xc  Code  Gb  usbd_S1C31W74.o [1]
+USBD_EP0Buf             0x2001d2ec    0x40  Data  Gb  usbd_S1C31W74.o [1]
+USBD_EP0Data            0x2001d4bc     0x8  Data  Gb  usbd_core.o [1]
+USBD_EnableEP           0x0005c5cd     0xc  Code  Gb  usbd_S1C31W74.o [1]
+USBD_EndPoint0          0x0005daf9   0x272  Code  Gb  usbd_core.o [1]
+USBD_EndPoint0_Out_CDC_ReqToIF
+                        0x0005e5c1    0x80  Code  Wk  usbd_core_cdc.o [1]
+USBD_EndPoint0_Out_HID_ReqToIF
+                        0x0005c451     0x4  Code  Gb  usbd_S1C31W74.o [1]
+USBD_EndPoint0_Setup_CDC_ReqToIF
+                        0x0005e491   0x130  Code  Wk  usbd_core_cdc.o [1]
+USBD_EndPoint0_Setup_HID_ReqToIF
+                        0x0005c44d     0x4  Code  Gb  usbd_S1C31W74.o [1]
+USBD_EndPoint0_Setup_MSC_ReqToIF
+                        0x0005c457     0x4  Code  Gb  usbd_S1C31W74.o [1]
+USBD_EndPointHalt       0x2001d540     0x4  Data  Gb  usbd_core.o [1]
+USBD_EndPointMask       0x2001d53c     0x4  Data  Gb  usbd_core.o [1]
+USBD_EndPointStall      0x2001d544     0x4  Data  Gb  usbd_core.o [1]
+USBD_Feature_Event      0x0005a6e3     0x2  Code  Gb  drv_usb_main.o [1]
+USBD_HighSpeed          0x2001d573     0x1  Data  Gb  usbd_core.o [1]
+USBD_Init               0x0005c52b    0x22  Code  Gb  usbd_S1C31W74.o [1]
+USBD_Interface_Event    0x0005a6e1     0x2  Code  Gb  drv_usb_main.o [1]
+USBD_NumInterfaces      0x2001d572     0x1  Data  Gb  usbd_core.o [1]
+USBD_OtherSpeedConfigDescriptor
+                        0x000618a3     0x1  Data  Wk  usbd_S1C31W74.o [1]
+USBD_OtherSpeedConfigDescriptor_HS
+                        0x000618a4     0x1  Data  Wk  usbd_S1C31W74.o [1]
+USBD_P_Configure_Event  0x00061830     0x4  Data  Gb  usbd_S1C31W74.o [1]
+USBD_P_EP               0x00060684    0x40  Data  Gb  usbd_S1C31W74.o [1]
+USBD_P_Feature_Event    0x00061838     0x4  Data  Gb  usbd_S1C31W74.o [1]
+USBD_P_Interface_Event  0x00061834     0x4  Data  Gb  usbd_S1C31W74.o [1]
+USBD_P_Reset_Event      0x00061840     0x4  Data  Gb  usbd_S1C31W74.o [1]
+USBD_P_Resume_Event     0x00061848     0x4  Data  Gb  usbd_S1C31W74.o [1]
+USBD_P_SOF_Event        0x0006184c     0x4  Data  Gb  usbd_S1C31W74.o [1]
+USBD_P_Suspend_Event    0x00061844     0x4  Data  Gb  usbd_S1C31W74.o [1]
+USBD_RTX_TaskInit       0x0005c463     0x2  Code  Gb  usbd_S1C31W74.o [1]
+USBD_ReadEP             0x0005c613    0x36  Code  Gb  usbd_S1C31W74.o [1]
+USBD_ReqClrFeature_MSC  0x0005c455     0x2  Code  Gb  usbd_S1C31W74.o [1]
+USBD_ReqGetConfiguration
+                        0x0005d707    0x1c  Code  Gb  usbd_core.o [1]
+USBD_ReqGetDescriptor   0x0005d541   0x1c6  Code  Gb  usbd_core.o [1]
+USBD_ReqGetDescriptor_HID
+                        0x0005c449     0x4  Code  Gb  usbd_S1C31W74.o [1]
+USBD_ReqGetInterface    0x0005d90d    0x3a  Code  Gb  usbd_core.o [1]
+USBD_ReqGetStatus       0x0005d357    0xaa  Code  Gb  usbd_core.o [1]
+USBD_ReqSetAddress      0x0005d4f5    0x22  Code  Gb  usbd_core.o [1]
+USBD_ReqSetClrFeature   0x0005d405    0xdc  Code  Gb  usbd_core.o [1]
+USBD_ReqSetConfiguration
+                        0x0005d75d   0x1ac  Code  Gb  usbd_core.o [1]
+USBD_ReqSetInterface    0x0005d975   0x14e  Code  Gb  usbd_core.o [1]
+USBD_Reset              0x0005c54d    0x26  Code  Gb  usbd_S1C31W74.o [1]
+USBD_ResetEP            0x0005c5e5     0xc  Code  Gb  usbd_S1C31W74.o [1]
+USBD_Reset_Event        0x0005a6d9     0x2  Code  Gb  drv_usb_main.o [1]
+USBD_Resume             0x0005c57b     0x8  Code  Gb  usbd_S1C31W74.o [1]
+USBD_Resume_Event       0x0005a6dd     0x2  Code  Gb  drv_usb_main.o [1]
+USBD_SOF_Event          0x00061811     0x8  Code  Wk  usbd_S1C31W74.o [1]
+USBD_SetAddress         0x0005c589     0x8  Code  Gb  usbd_S1C31W74.o [1]
+USBD_SetStallEP         0x0005c5f1     0xc  Code  Gb  usbd_S1C31W74.o [1]
+USBD_SetupPacket        0x2001d4c4     0x8  Data  Gb  usbd_core.o [1]
+USBD_SetupStage         0x0005d2c9     0xc  Code  Gb  usbd_core.o [1]
+USBD_StatusInStage      0x0005d33d     0xe  Code  Gb  usbd_core.o [1]
+USBD_StatusOutStage     0x0005d34b     0xc  Code  Gb  usbd_core.o [1]
+USBD_StringDescriptor   0x00060370    0x6c  Data  Wk  usbd_S1C31W74.o [1]
+USBD_Suspend            0x0005c573     0x8  Code  Gb  usbd_S1C31W74.o [1]
+USBD_Suspend_Event      0x0005a6db     0x2  Code  Gb  drv_usb_main.o [1]
+USBD_WakeUpCfg          0x0005c583     0x6  Code  Gb  usbd_S1C31W74.o [1]
+USBD_WriteEP            0x0005c649    0x14  Code  Gb  usbd_S1C31W74.o [1]
+USBD_ZLP                0x2001d574     0x1  Data  Gb  usbd_core.o [1]
+USB_IRQHandler          0x0005c681   0x23e  Code  Gb  usbd_S1C31W74.o [1]
+UpMuxInUseTable         0x2001d3c0    0x20  Data  Gb  se_pport.o [6]
+UsbOccured              0x2001d55e     0x2  Data  Lc  drv_clg.o [1]
+ValidAltFunctionTable   0x0006049c    0x58  Data  Gb  system_S1C31W74.o [1]
+ValidPortTable          0x00061180    0x10  Data  Gb  system_S1C31W74.o [1]
+ValidUpMuxChannelTbl    0x00061800     0x8  Data  Gb  system_S1C31W74.o [1]
+ValidUpMuxPeriph        0x00061898     0x1  Data  Gb  system_S1C31W74.o [1]
+ValidUpMuxPinFuncTbl    0x00061808     0x8  Data  Gb  system_S1C31W74.o [1]
+ValidUpMuxPortTbl       0x0006182c     0x4  Data  Gb  system_S1C31W74.o [1]
+Version_date            0x00061270     0xc  Data  Gb  man_version.o [1]
+Version_number          0x00061740     0x8  Data  Gb  man_version.o [1]
+Version_time            0x0006127c     0xc  Data  Gb  man_version.o [1]
+WDT_InitStruct          0x2001d49c     0x8  Data  Lc  drv_wdt.o [1]
+_Close_all              0x00060d1b    0x10  Code  Gb  xcloseall.o [3]
+_LitobSmallNoMb         0x0005888d    0xf2  Code  Lc  xprintfsmall_nomb.o [3]
+_PrintfSmallNoMb        0x00058489   0x3ac  Code  Gb  xprintfsmall_nomb.o [3]
+_Prout                  0x00060e31    0x16  Code  Gb  xprout.o [3]
+_PutcharsSmallNoMb      0x00058985    0x30  Code  Lc  xprintfsmall_nomb.o [3]
+_SProut                 0x0004b8ab     0xa  Code  Gb  xsprout.o [3]
+__Vectors               0x00040000           --   Gb  startup_S1C31W74.o [1]
+__Vectors_End           0x0004009c          Data  Gb  startup_S1C31W74.o [1]
+__Vectors_Size {Abs}    0x0000009c           --   Gb  startup_S1C31W74.o [1]
+__aeabi_errno_addr      0x0005e671     0xa  Code  Gb  errno.o [3]
+__aeabi_idiv            0x0004bfbd          Code  Gb  I32DivModFast.o [4]
+__aeabi_idiv0           0x00058485          Code  Gb  IntDivZer.o [4]
+__aeabi_idivmod         0x0004bfbd          Code  Gb  I32DivModFast.o [4]
+__aeabi_memclr4         0x00043ee5          Code  Gb  ABImemset.o [4]
+__aeabi_memclr8         0x00043ee5          Code  Gb  ABImemset.o [4]
+__aeabi_memcpy          0x00043741          Code  Gb  ABImemcpy.o [4]
+__aeabi_memcpy4         0x00043769          Code  Wk  ABImemcpy.o [4]
+__aeabi_memset          0x00043e95          Code  Gb  ABImemset.o [4]
+__aeabi_uidiv           0x0004bfc3          Code  Gb  I32DivModFast.o [4]
+__aeabi_uidivmod        0x0004bfc3          Code  Gb  I32DivModFast.o [4]
+__aeabi_uread4          0x0005e645          Code  Gb  uread4.o [4]
+__aeabi_uwrite4         0x0005e65d          Code  Gb  uwrite4.o [4]
+__cexit_closeall        0x00060d0f          Code  Gb  cexit.o [4]
+__cmain                 0x00060ce5          Code  Gb  cmain.o [4]
+__cstart_closeall       0x000618a8          Data  Gb  cstart_closeall.o [4]
+__dwrite                0x000600fd    0x1e  Code  Gb  dwrite.o [7]
+__exit                  0x00060d2d    0x14  Code  Gb  exit.o [7]
+__iar_Errno             0x200006f0     0x4  Data  Gb  errno.o [3]
+__iar_Memchr            0x0005ae5d    0x18  Code  Gb  memchr.o [4]
+__iar_Memset4_word      0x00043eb5          Code  Gb  ABImemset.o [4]
+__iar_Memset_word       0x00043ea1          Code  Gb  ABImemset.o [4]
+__iar_Stoul             0x0005e413     0xa  Code  Gb  xstoul.o [3]
+__iar_Stoulx            0x0005e2ed   0x126  Code  Gb  xstoul.o [3]
+__iar_Strchr            0x0005ae49    0x14  Code  Gb  strchr.o [4]
+__iar_close_ttio        0x0006015d    0x2e  Code  Gb  iarttio.o [7]
+__iar_data_init3        0x000609f1    0x28  Code  Gb  data_init.o [4]
+__iar_dlib_perthread_access
+                        0x0005e73d     0x2  Code  Gb  xtls.o [3]
+__iar_get_ttio          0x0006018d    0x38  Code  Gb  iarttio.o [7]
+__iar_lookup_ttioh      0x000601c9     0x8  Code  Gb  XShttio.o [3]
+__iar_lz77_init_single3
+                        0x00043e17    0x7e  Code  Gb  lz77_init_single.o [4]
+__iar_program_start     0x00040101          Code  Gb  cstartup_M.o [4]
+__iar_sh_stdout         0x0006011b    0x20  Code  Gb  iarwstd.o [7]
+__iar_sh_write          0x0006013b    0x22  Code  Gb  iarwrite.o [7]
+__iar_ttio_handles      0x200006e8     0x8  Data  Lc  XShttio.o [3]
+__iar_zero_init3        0x00060701    0x3c  Code  Gb  zero_init3.o [4]
+__low_level_init        0x00060cff     0x4  Code  Gb  low_level_init.o [3]
+__vector_table          0x00040000          Data  Gb  startup_S1C31W74.o [1]
+__vector_table_0x1c     0x0004001c          Data  Gb  startup_S1C31W74.o [1]
+__write_buffered        0x00060031    0xcc  Code  Gb  xxwritebuffered.o [3]
+_call_main              0x00060cf1          Code  Gb  cmain.o [4]
+_exit                   0x00060d0d          Code  Gb  cexit.o [4]
+_main                   0x00060cfb          Code  Gb  cmain.o [4]
+abs                     0x00051c05     0x8  Code  Gb  abs.o [3]
+atoi                    0x0005a9a9     0xc  Code  Gb  atoi.o [3]
+atoi_local              0x000502a9    0x1e  Code  Gb  gnss_gw_common.o [1]
+b0flag                  0x2001d4cc     0x4  Data  Gb  ctrl_BQ24160A.o [1]
+b6flag                  0x2001d4d0     0x4  Data  Gb  ctrl_BQ24160A.o [1]
+backupCLGIOSC           0x200006fc     0x2  Data  Lc  FlashS1C31W74.o [5]
+backupCLGOSC            0x200006fa     0x2  Data  Lc  FlashS1C31W74.o [5]
+backupCLKSCLK           0x200006f8     0x2  Data  Lc  FlashS1C31W74.o [5]
+bcd_to_num              0x0005028f    0x1a  Code  Gb  gnss_gw_common.o [1]
+clock_ini_tbl           0x20000660     0x8  Data  Lc  man_rtc.o [1]
+clrl_W25Q_WriteEnable   0x0004c385    0x3c  Code  Gb  ctrl_W25Q.o [1]
+cmd_tbl                 0x0005f34c   0x440  Data  Lc  mid_GPS.o [1]
+cmd_tbl                 0x0005e740   0x700  Data  Lc  mid_HTTP.o [1]
+control_line_state      0x2001d564     0x2  Data  Gb  usbd_cdc_acm.o [1]
+ctrc_LSM6DSL_get_gyro   0x00058c8f   0x134  Code  Gb  ctrl_LSM6DSL.o [1]
+ctrc_LSM6DSL_start      0x00058c77    0x18  Code  Gb  ctrl_LSM6DSL.o [1]
+ctrc_MPL3115A2_get_altitude
+                        0x000521c1    0xb0  Code  Gb  ctrl_MPL3115A2.o [1]
+ctrc_MPL3115A2_get_press
+                        0x0005209d   0x120  Code  Gb  ctrl_MPL3115A2.o [1]
+ctrc_MPL3115A2_start    0x0005208d    0x10  Code  Gb  ctrl_MPL3115A2.o [1]
+ctrl_BQ24160A_get_charge_status
+                        0x00058237   0x152  Code  Gb  ctrl_BQ24160A.o [1]
+ctrl_BQ24160A_get_charge_status_buf
+                        0x2001d22c    0x40  Data  Gb  ctrl_BQ24160A.o [1]
+ctrl_BQ24160A_init_setting
+                        0x000583f5    0x4a  Code  Gb  ctrl_BQ24160A.o [1]
+ctrl_BQ24160A_start     0x00058205    0x32  Code  Gb  ctrl_BQ24160A.o [1]
+ctrl_BQ28Z610_get_current
+                        0x00057df7    0x6a  Code  Gb  ctrl_BQ28Z610.o [1]
+ctrl_BQ28Z610_get_remaining
+                        0x00057e61    0x6c  Code  Gb  ctrl_BQ28Z610.o [1]
+ctrl_BQ28Z610_get_voltage
+                        0x00057d8d    0x6a  Code  Gb  ctrl_BQ28Z610.o [1]
+ctrl_BQ28Z610_start     0x00057d89     0x4  Code  Gb  ctrl_BQ28Z610.o [1]
+ctrl_CXD5600GF_check_nmea_recv
+                        0x00056f59    0x1a  Code  Gb  ctrl_CXD5600GF.o [1]
+ctrl_CXD5600GF_clear_buffer
+                        0x00056f21    0x38  Code  Gb  ctrl_CXD5600GF.o [1]
+ctrl_CXD5600GF_cmd      0x00056dd9    0x4c  Code  Gb  ctrl_CXD5600GF.o [1]
+ctrl_CXD5600GF_cmd2     0x00056e35    0x4c  Code  Gb  ctrl_CXD5600GF.o [1]
+ctrl_CXD5600GF_data     0x00056e81    0x3c  Code  Gb  ctrl_CXD5600GF.o [1]
+ctrl_CXD5600GF_data_non_ack
+                        0x00056ed1    0x30  Code  Gb  ctrl_CXD5600GF.o [1]
+ctrl_CXD5600GF_get_char
+                        0x000564e1   0x56c  Code  Lc  ctrl_CXD5600GF.o [1]
+ctrl_CXD5600GF_init     0x00056a61    0x22  Code  Gb  ctrl_CXD5600GF.o [1]
+ctrl_CXD5600GF_main     0x00056aed   0x282  Code  Gb  ctrl_CXD5600GF.o [1]
+ctrl_CXD5600GF_nmea_result
+                        0x00056f01     0xc  Code  Gb  ctrl_CXD5600GF.o [1]
+ctrl_CXD5600GF_nmea_start
+                        0x00056d75    0x1c  Code  Gb  ctrl_CXD5600GF.o [1]
+ctrl_CXD5600GF_nmea_stop
+                        0x00056d9d    0x1e  Code  Gb  ctrl_CXD5600GF.o [1]
+ctrl_CXD5600GF_req_PowerOff
+                        0x00056f79     0xa  Code  Gb  ctrl_CXD5600GF.o [1]
+ctrl_CXD5600GF_req_PowerOn
+                        0x00056f83     0xa  Code  Gb  ctrl_CXD5600GF.o [1]
+ctrl_CXD5600GF_req_out_rcv
+                        0x00056fad    0x7a  Code  Gb  ctrl_CXD5600GF.o [1]
+ctrl_CXD5600GF_set_noti
+                        0x00056f8d    0x1a  Code  Gb  ctrl_CXD5600GF.o [1]
+ctrl_GPIO_init          0x00058441     0x8  Code  Gb  ctrl_GPIO.o [1]
+ctrl_I2C0_end           0x000522cd     0xc  Code  Gb  ctrl_I2C0.o [1]
+ctrl_I2C0_init          0x000522c1     0xc  Code  Gb  ctrl_I2C0.o [1]
+ctrl_I2C0_re_start      0x000522d9     0xc  Code  Gb  ctrl_I2C0.o [1]
+ctrl_I2C1_init          0x000522e5     0xc  Code  Gb  ctrl_I2C1.o [1]
+ctrl_NMEA_data_check    0x00056393   0x11c  Code  Lc  ctrl_CXD5600GF.o [1]
+ctrl_NMEA_get_GSA_sentence
+                        0x000562b9    0xda  Code  Lc  ctrl_CXD5600GF.o [1]
+ctrl_NMEA_get_IMP_sentence
+                        0x00056213    0xa6  Code  Lc  ctrl_CXD5600GF.o [1]
+ctrl_NMEA_get_ZDA_sentence
+                        0x00056031   0x1e2  Code  Lc  ctrl_CXD5600GF.o [1]
+ctrl_SLEEP_extsw        0x0005229b     0x8  Code  Gb  ctrl_SLEEP.o [1]
+ctrl_SLEEP_extsw_exton  0x000522a3     0x8  Code  Gb  ctrl_SLEEP.o [1]
+ctrl_SLEEP_extsw_exton_alarm
+                        0x000522ab     0xe  Code  Gb  ctrl_SLEEP.o [1]
+ctrl_SLEEP_init         0x00052291     0xa  Code  Gb  ctrl_SLEEP.o [1]
+ctrl_SLEEP_system_error
+                        0x000522b9     0x8  Code  Gb  ctrl_SLEEP.o [1]
+ctrl_SM7500JE_cmd       0x00057525    0xe0  Code  Gb  ctrl_SM7500JE.o [1]
+ctrl_SM7500JE_cmd0      0x00057615    0xb4  Code  Gb  ctrl_SM7500JE.o [1]
+ctrl_SM7500JE_cmd2      0x000576e5    0xe0  Code  Gb  ctrl_SM7500JE.o [1]
+ctrl_SM7500JE_cmda      0x000577e1    0xe0  Code  Gb  ctrl_SM7500JE.o [1]
+ctrl_SM7500JE_get_char  0x0005709d   0x36c  Code  Lc  ctrl_SM7500JE.o [1]
+ctrl_SM7500JE_init      0x000574c1    0x14  Code  Gb  ctrl_SM7500JE.o [1]
+ctrl_SM7500JE_main      0x000574dd    0x20  Code  Gb  ctrl_SM7500JE.o [1]
+ctrl_SM7500JE_req_out_rcv
+                        0x000578e5    0x72  Code  Gb  ctrl_SM7500JE.o [1]
+ctrl_SM7500JE_req_out_snd
+                        0x00057965    0x72  Code  Gb  ctrl_SM7500JE.o [1]
+ctrl_SM7500JE_set_noti  0x000578c1    0x1a  Code  Gb  ctrl_SM7500JE.o [1]
+ctrl_SM7500JE_timeout   0x0005742d    0x94  Code  Lc  ctrl_SM7500JE.o [1]
+ctrl_SPIA_end           0x0004c3db     0xc  Code  Gb  ctrl_W25Q.o [1]
+ctrl_SPIA_re_start      0x0004c3e7     0xc  Code  Gb  ctrl_W25Q.o [1]
+ctrl_USB_chk_config     0x00057b21     0x8  Code  Gb  ctrl_USB.o [1]
+ctrl_USB_init           0x00057a0d    0x18  Code  Gb  ctrl_USB.o [1]
+ctrl_USB_main           0x00057a25    0x94  Code  Gb  ctrl_USB.o [1]
+ctrl_USB_recv_start     0x00057ab9    0x1c  Code  Gb  ctrl_USB.o [1]
+ctrl_USB_send           0x00057af9    0x28  Code  Gb  ctrl_USB.o [1]
+ctrl_W25Q_IsBusy        0x0004c3c1    0x1a  Code  Gb  ctrl_W25Q.o [1]
+ctrl_W25Q_erase_64k_block_req
+                        0x0004c281    0x34  Code  Gb  ctrl_W25Q.o [1]
+ctrl_W25Q_erase_all_req
+                        0x0004c261    0x20  Code  Gb  ctrl_W25Q.o [1]
+ctrl_W25Q_init          0x0004c259     0x8  Code  Gb  ctrl_W25Q.o [1]
+ctrl_W25Q_read          0x0004c343    0x42  Code  Gb  ctrl_W25Q.o [1]
+ctrl_W25Q_readStatusReg1
+                        0x0004c231    0x28  Code  Lc  ctrl_W25Q.o [1]
+ctrl_W25Q_write_page    0x0004c2b5    0x8e  Code  Gb  ctrl_W25Q.o [1]
+ctrl_cxd5600_work       0x200174cc  0x1178  Data  Lc  ctrl_CXD5600GF.o [1]
+ctrl_get_port           0x00058449    0x18  Code  Gb  ctrl_GPIO.o [1]
+ctrl_set_port_high      0x00058461     0xe  Code  Gb  ctrl_GPIO.o [1]
+ctrl_set_port_low       0x0005846f     0xe  Code  Gb  ctrl_GPIO.o [1]
+ctrl_sm7500_work        0x20016058  0x1474  Data  Lc  ctrl_SM7500JE.o [1]
+ctrl_usb_req_reset      0x00057b29     0x8  Code  Gb  ctrl_USB.o [1]
+ctrl_usb_work           0x20018644  0x1014  Data  Lc  ctrl_USB.o [1]
+data_no_space_for_receive
+                        0x2001d530     0x4  Data  Gb  usbd_cdc_acm.o [1]
+data_read_access        0x2001d524     0x4  Data  Gb  usbd_cdc_acm.o [1]
+data_receive_int_access
+                        0x2001d528     0x4  Data  Gb  usbd_cdc_acm.o [1]
+data_received_pending_pckts
+                        0x2001d52c     0x4  Data  Gb  usbd_cdc_acm.o [1]
+data_send_ACK_rev       0x2001d56f     0x1  Data  Gb  usbd_cdc_acm.o [1]
+data_send_access        0x2001d508     0x4  Data  Gb  usbd_cdc_acm.o [1]
+data_send_active        0x2001d50c     0x4  Data  Gb  usbd_cdc_acm.o [1]
+data_send_zlp           0x2001d510     0x4  Data  Gb  usbd_cdc_acm.o [1]
+data_tbl                0x00061040    0x10  Data  Lc  mid_GPS.o [1]
+data_to_send_rd         0x2001d518     0x4  Data  Gb  usbd_cdc_acm.o [1]
+data_to_send_wr         0x2001d514     0x4  Data  Gb  usbd_cdc_acm.o [1]
+dbg_cmd_module_tbl      0x200005a0    0x7c  Data  Lc  man_error.o [1]
+dbg_cmd_seq_tbl         0x2000061c    0x2c  Data  Lc  man_error.o [1]
+dbg_cmd_type_tbl        0x20000648    0x18  Data  Lc  man_error.o [1]
+digits                  0x0005e41c    0x28  Data  Lc  xstoul.o [3]
+drv_clg_init            0x00059bfb    0x1c  Code  Gb  drv_clg.o [1]
+drv_t16_3_work          0x2001d3e0    0x1c  Data  Lc  drv_t16_3.o [1]
+drv_uart0_work          0x200135d4  0x158c  Data  Lc  drv_uart2_0.o [1]
+drv_uart1_work          0x20019658   0x810  Data  Lc  drv_uart2_1.o [1]
+drv_uart2_0_init        0x0005a423    0xb0  Code  Gb  drv_uart2_0.o [1]
+drv_uart2_0_send        0x0005a4d3    0x42  Code  Gb  drv_uart2_0.o [1]
+drv_uart2_1_init        0x0005a7a7    0xb2  Code  Gb  drv_uart2_1.o [1]
+drv_uart2_1_send        0x0005a859    0x42  Code  Gb  drv_uart2_1.o [1]
+drv_usb_GetChar         0x0005a6b5     0x8  Code  Gb  drv_usb_main.o [1]
+drv_usb_chk_config      0x0005a6bd    0x14  Code  Gb  drv_usb_main.o [1]
+drv_usb_exec_reset      0x0005a6d1     0x8  Code  Gb  drv_usb_main.o [1]
+eraseReload             0x20000674     0x8  Data  Gb  FlashS1C31W74.o [5]
+exit                    0x00060d03     0x8  Code  Gb  exit.o [3]
+extOnOccured            0x2001d55a     0x2  Data  Lc  drv_clg.o [1]
+extSwOccured            0x2001d55c     0x2  Data  Lc  drv_clg.o [1]
+factory_tbl             0x0005f9bc   0x1e0  Data  Lc  man_data.o [1]
+fixed_tbl               0x00060bb0    0x1c  Data  Lc  man_data.o [1]
+flash_end               0x00050465     0xe  Code  Gb  drv_flash.o [1]
+flash_erase_sector      0x00050475    0x1e  Code  Gb  drv_flash.o [1]
+flash_read              0x000504af     0xa  Code  Gb  drv_flash.o [1]
+flash_start             0x00050455    0x10  Code  Gb  drv_flash.o [1]
+flash_write             0x00050495    0x1a  Code  Gb  drv_flash.o [1]
+fuseAddressTable        0x200006c0    0x10  Data  Gb  FlashS1C31W74.o [5]
+fuseeraseReload         0x200006b8     0x8  Data  Gb  FlashS1C31W74.o [5]
+g1msSysTicks            0x2001d504     0x4  Data  Gb  system_S1C31W74.o [1]
+gEpSize                 0x2001d54c     0x4  Data  Gb  usbd_S1C31W74.o [1]
+gFrameNumber            0x2001d548     0x4  Data  Gb  usbd_S1C31W74.o [1]
+gRemoteWakeUpConfigured
+                        0x2001d56c     0x2  Data  Gb  usbd_S1C31W74.o [1]
+gSetupToken             0x2001d56a     0x2  Data  Gb  usbd_S1C31W74.o [1]
+gm_time                 0x000502c7    0xa4  Code  Gb  gnss_gw_common.o [1]
+gpio_get_port           0x00057d7d     0xa  Code  Gb  drv_gpio.o [1]
+gpio_init               0x00057b31   0x1ac  Code  Gb  drv_gpio.o [1]
+gpio_set_port           0x00057cdd    0x8c  Code  Gb  drv_gpio.o [1]
+handleEpaInt            0x0005c8dd    0xbc  Code  Lc  usbd_S1C31W74.o [1]
+handleEpbInt            0x0005c9b9    0xd4  Code  Lc  usbd_S1C31W74.o [1]
+handleEpcInt            0x0005ca91    0xa4  Code  Lc  usbd_S1C31W74.o [1]
+http_cmd_enable_tbl     0x0005f78c   0x230  Data  Lc  man_cmd.o [1]
+http_cmd_tbl            0x0005fd34   0x140  Data  Lc  man_cmd.o [1]
+i2c0_Disable            0x00059a59     0xe  Code  Gb  drv_i2c_0.o [1]
+i2c0_Enable             0x00059a3f    0x1a  Code  Gb  drv_i2c_0.o [1]
+i2c0_ReceiveData        0x00059ac3    0x5c  Code  Gb  drv_i2c_0.o [1]
+i2c0_SendData           0x00059a67    0x5c  Code  Gb  drv_i2c_0.o [1]
+i2c0_end                0x00059a21    0x14  Code  Gb  drv_i2c_0.o [1]
+i2c0_init               0x000599dd    0x44  Code  Gb  drv_i2c_0.o [1]
+i2c0_re_start           0x00059a35     0xa  Code  Gb  drv_i2c_0.o [1]
+i2c0_timer_max          0x2001d4d8     0x4  Data  Gb  drv_i2c_0.o [1]
+i2c1_Enable             0x0005a2a7    0x1a  Code  Gb  drv_i2c_1.o [1]
+i2c1_ReceiveData        0x0005a31d    0x5e  Code  Gb  drv_i2c_1.o [1]
+i2c1_SendData           0x0005a2c1    0x5c  Code  Gb  drv_i2c_1.o [1]
+i2c1_init               0x0005a269    0x3e  Code  Gb  drv_i2c_1.o [1]
+i2c1_timer_max          0x2001d4dc     0x4  Data  Gb  drv_i2c_1.o [1]
+in_port_tbl             0x00060e48    0x14  Data  Lc  ctrl_GPIO.o [1]
+jst                     0x2001d4ac     0x8  Data  Lc  gnss_gw_common.o [1]
+line_coding             0x2001d4b4     0x8  Data  Gb  usbd_cdc_acm.o [1]
+local_atoi              0x00050421    0x32  Code  Gb  gnss_gw_common.o [1]
+local_time              0x0005036b    0xa6  Code  Gb  gnss_gw_common.o [1]
+magic_number_prg_tbl    0x00060ff0    0x10  Data  Lc  man_data.o [1]
+magic_number_set_tbl    0x00061000    0x10  Data  Lc  man_data.o [1]
+main                    0x00060acd    0x24  Code  Gb  fixed.o [1]
+main_init               0x00048665    0xc0  Code  Lc  main.o [1]
+main_work               0x2001d460     0xc  Data  Gb  main.o [1]
+man_battery_500ms_main  0x0004b433    0x70  Code  Gb  man_battery.o [1]
+man_battery_active      0x0004b4c3     0xa  Code  Gb  man_battery.o [1]
+man_battery_get_data    0x0004b4a3    0x20  Code  Gb  man_battery.o [1]
+man_battery_init        0x0004b415    0x1e  Code  Gb  man_battery.o [1]
+man_battery_standby     0x0004b4cd     0xa  Code  Gb  man_battery.o [1]
+man_battery_status_log  0x0004b4d7    0x52  Code  Gb  man_battery.o [1]
+man_battery_status_log_buf
+                        0x2001d26c    0x40  Data  Gb  man_battery.o [1]
+man_battery_work        0x2001d410    0x14  Data  Gb  man_battery.o [1]
+man_charge_1000ms_main  0x0004b557   0x182  Code  Gb  man_charge.o [1]
+man_charge_active       0x0004b6f9    0x16  Code  Gb  man_charge.o [1]
+man_charge_dbg_log      0x2001d2ac    0x40  Data  Gb  man_charge.o [1]
+man_charge_disp_info    0x0004b737    0x52  Code  Gb  man_charge.o [1]
+man_charge_expow_get    0x0004b859    0x2a  Code  Gb  man_charge.o [1]
+man_charge_expow_usb_get
+                        0x0004b883    0x28  Code  Gb  man_charge.o [1]
+man_charge_get_data     0x0004b6d9    0x20  Code  Gb  man_charge.o [1]
+man_charge_init         0x0004b539    0x1e  Code  Gb  man_charge.o [1]
+man_charge_noti_voltage
+                        0x0004b719    0x1e  Code  Gb  man_charge.o [1]
+man_charge_standby      0x0004b70f     0xa  Code  Gb  man_charge.o [1]
+man_charge_status_log   0x0004b78d    0xa0  Code  Gb  man_charge.o [1]
+man_charge_work         0x2001d32c    0x34  Data  Gb  man_charge.o [1]
+man_cmd_analyze         0x000548ed   0x16c  Code  Gb  man_cmd.o [1]
+man_cmd_analyze_alarmtime
+                        0x00052a69    0xd4  Code  Lc  man_cmd.o [1]
+man_cmd_analyze_almtftime
+                        0x00052b41    0xd6  Code  Lc  man_cmd.o [1]
+man_cmd_analyze_batalarm
+                        0x000528bd    0xd4  Code  Lc  man_cmd.o [1]
+man_cmd_analyze_confupdate
+                        0x000545c9    0xb2  Code  Lc  man_cmd.o [1]
+man_cmd_analyze_console
+                        0x00054421   0x1a0  Code  Lc  man_cmd.o [1]
+man_cmd_analyze_debugcmd
+                        0x0005351b   0x16a  Code  Lc  man_cmd.o [1]
+man_cmd_analyze_factoryreset
+                        0x00053441    0xda  Code  Lc  man_cmd.o [1]
+man_cmd_analyze_forcedgps
+                        0x00053945   0x350  Code  Lc  man_cmd.o [1]
+man_cmd_analyze_getbat  0x00052dd1    0xce  Code  Lc  man_cmd.o [1]
+man_cmd_analyze_getgps  0x00052cfd    0xce  Code  Lc  man_cmd.o [1]
+man_cmd_analyze_gprs    0x00052585   0x1be  Code  Lc  man_cmd.o [1]
+man_cmd_analyze_gpsota  0x000530ed   0x350  Code  Lc  man_cmd.o [1]
+man_cmd_analyze_gpssleeptime
+                        0x0005274d   0x168  Code  Lc  man_cmd.o [1]
+man_cmd_analyze_mente   0x00054215   0x1fe  Code  Lc  man_cmd.o [1]
+man_cmd_analyze_otastart
+                        0x00052e9f   0x244  Code  Lc  man_cmd.o [1]
+man_cmd_analyze_sensor  0x00052991    0xd4  Code  Lc  man_cmd.o [1]
+man_cmd_analyze_setting
+                        0x00052c17    0xe6  Code  Lc  man_cmd.o [1]
+man_cmd_analyze_usbforcedgps
+                        0x00053ff9   0x218  Code  Lc  man_cmd.o [1]
+man_cmd_analyze_usbgpsota
+                        0x00053ddd   0x218  Code  Lc  man_cmd.o [1]
+man_cmd_analyze_usbota  0x00053c99   0x13a  Code  Lc  man_cmd.o [1]
+man_cmd_cid_set         0x000524f1    0x18  Code  Lc  man_cmd.o [1]
+man_cmd_init            0x000546a5    0x20  Code  Gb  man_cmd.o [1]
+man_cmd_main            0x000546d1   0x1ce  Code  Gb  man_cmd.o [1]
+man_cmd_noti_error      0x00054a65    0x1a  Code  Gb  man_cmd.o [1]
+man_cmd_number_set      0x00052509    0x3c  Code  Lc  man_cmd.o [1]
+man_cmd_number_str_set  0x00052545    0x40  Code  Lc  man_cmd.o [1]
+man_cmd_receive_start   0x0005489f    0x10  Code  Gb  man_cmd.o [1]
+man_cmd_receive_stop    0x000548b5    0x10  Code  Gb  man_cmd.o [1]
+man_cmd_req_cmd_analyze
+                        0x00052373    0x46  Code  Lc  man_cmd.o [1]
+man_cmd_req_cmd_resp_send
+                        0x000523b9    0x3c  Code  Lc  man_cmd.o [1]
+man_cmd_req_http        0x000523f5    0xb6  Code  Lc  man_cmd.o [1]
+man_cmd_req_state       0x00054a59     0x6  Code  Gb  man_cmd.o [1]
+man_cmd_resp_callback   0x0005231f    0x10  Code  Lc  man_cmd.o [1]
+man_cmd_return_callback
+                        0x0005467b    0x2a  Code  Lc  man_cmd.o [1]
+man_cmd_server_callback
+                        0x000522f1    0x2e  Code  Lc  man_cmd.o [1]
+man_cmd_set_sequense    0x0005232f    0x44  Code  Lc  man_cmd.o [1]
+man_cmd_work            0x2001bcfc   0x65c  Data  Gb  man_cmd.o [1]
+man_data_1000ms_main    0x0004689d     0x8  Code  Gb  man_data.o [1]
+man_data_chk_program    0x000468a5     0x6  Code  Gb  man_data.o [1]
+man_data_collect_sensor
+                        0x00046c8d   0x1ba  Code  Gb  man_data.o [1]
+man_data_disp_info      0x00046f71    0x5c  Code  Gb  man_data.o [1]
+man_data_flash_erase_sector
+                        0x00046af9    0x26  Code  Gb  man_data.o [1]
+man_data_flash_write_sector
+                        0x00046b1f    0x52  Code  Gb  man_data.o [1]
+man_data_get_SIM7500_cfotaswitch
+                        0x00046ecb     0xe  Code  Gb  man_data.o [1]
+man_data_get_SIM7500_debug_flag
+                        0x00046ee3     0x6  Code  Gb  man_data.o [1]
+man_data_get_fixed      0x00046aed     0x4  Code  Gb  man_data.o [1]
+man_data_get_ftp_info   0x00046ae5     0x4  Code  Gb  man_data.o [1]
+man_data_get_gnss_no_fix_pos_time
+                        0x00046f2d     0x6  Code  Gb  man_data.o [1]
+man_data_get_other      0x00046ae9     0x4  Code  Gb  man_data.o [1]
+man_data_get_sensor     0x00046f5d     0x4  Code  Gb  man_data.o [1]
+man_data_get_setting_alarmtime
+                        0x000469cf     0x4  Code  Gb  man_data.o [1]
+man_data_get_setting_gprs
+                        0x00046979     0x4  Code  Gb  man_data.o [1]
+man_data_get_setting_gpsota
+                        0x00046a95     0x4  Code  Gb  man_data.o [1]
+man_data_get_setting_gpssleeptime
+                        0x0004698f     0x4  Code  Gb  man_data.o [1]
+man_data_get_setting_otastart
+                        0x00046a7d     0x4  Code  Gb  man_data.o [1]
+man_data_get_setting_other
+                        0x000469d9     0x4  Code  Gb  man_data.o [1]
+man_data_get_setting_sensor
+                        0x000469bf     0x4  Code  Gb  man_data.o [1]
+man_data_get_setting_usbgpsota
+                        0x00046acb     0x4  Code  Gb  man_data.o [1]
+man_data_get_setting_usbota
+                        0x00046aad     0x4  Code  Gb  man_data.o [1]
+man_data_init           0x0004683d    0x60  Code  Gb  man_data.o [1]
+man_data_main           0x00046b8d    0xae  Code  Gb  man_data.o [1]
+man_data_program_chk_flash
+                        0x0004670b    0x2e  Code  Lc  man_data.o [1]
+man_data_program_mrg_set_flash
+                        0x000468b9    0x78  Code  Gb  man_data.o [1]
+man_data_req_factory_reset
+                        0x00046943    0x16  Code  Gb  man_data.o [1]
+man_data_return_callback
+                        0x000466e1    0x2a  Code  Lc  man_data.o [1]
+man_data_set_SIM7500_cfotaswitch
+                        0x00046ec1     0xa  Code  Gb  man_data.o [1]
+man_data_set_SIM7500_debug_flag
+                        0x00046edd     0x6  Code  Gb  man_data.o [1]
+man_data_set_cid        0x00046a11    0x10  Code  Gb  man_data.o [1]
+man_data_set_default_vals_to_extended_area
+                        0x00046ef1    0x30  Code  Gb  man_data.o [1]
+man_data_set_ftp_info   0x00046acf    0x16  Code  Gb  man_data.o [1]
+man_data_set_gnss_no_fix_pos_time
+                        0x00046f21     0x6  Code  Gb  man_data.o [1]
+man_data_set_gps_version
+                        0x00046a35    0x20  Code  Gb  man_data.o [1]
+man_data_set_imei       0x000469dd    0x10  Code  Gb  man_data.o [1]
+man_data_set_ipaddr     0x000469fd    0x10  Code  Gb  man_data.o [1]
+man_data_set_nmea       0x00046e4d    0x1e  Code  Gb  man_data.o [1]
+man_data_set_nmea_fix   0x00046e75    0x48  Code  Gb  man_data.o [1]
+man_data_set_revision   0x000469ed    0x10  Code  Gb  man_data.o [1]
+man_data_set_rssi_sts   0x00046f3d    0x1c  Code  Gb  man_data.o [1]
+man_data_set_setting_alarmtime
+                        0x000469c3     0x6  Code  Gb  man_data.o [1]
+man_data_set_setting_almtrtime
+                        0x000469c9     0x6  Code  Gb  man_data.o [1]
+man_data_set_setting_batalarm
+                        0x00046993    0x18  Code  Gb  man_data.o [1]
+man_data_set_setting_gprs
+                        0x0004695d    0x14  Code  Gb  man_data.o [1]
+man_data_set_setting_gpsota
+                        0x00046a81    0x14  Code  Gb  man_data.o [1]
+man_data_set_setting_gpssleeptime
+                        0x0004697d    0x12  Code  Gb  man_data.o [1]
+man_data_set_setting_otastart
+                        0x00046a5d    0x16  Code  Gb  man_data.o [1]
+man_data_set_setting_sensor
+                        0x000469b9     0x6  Code  Gb  man_data.o [1]
+man_data_set_setting_usbgpsota
+                        0x00046ab5    0x16  Code  Gb  man_data.o [1]
+man_data_set_setting_usbota
+                        0x00046a99    0x14  Code  Gb  man_data.o [1]
+man_data_setting_get_flash
+                        0x000467d5    0x68  Code  Lc  man_data.o [1]
+man_data_setting_set_flash
+                        0x00046739    0x9c  Code  Lc  man_data.o [1]
+man_data_work           0x2000a4e0  0x38ac  Data  Gb  man_data.o [1]
+man_data_write_flash    0x00046931    0x12  Code  Gb  man_data.o [1]
+man_dbglog_setting      0x00043af5    0x72  Code  Gb  man_error.o [1]
+man_error_1000ms_main   0x00043b99    0x56  Code  Gb  man_error.o [1]
+man_error_init          0x00043a25    0x10  Code  Gb  man_error.o [1]
+man_error_out_dbglog    0x000438df   0x146  Code  Lc  man_error.o [1]
+man_error_out_errlog    0x0004379d   0x142  Code  Lc  man_error.o [1]
+man_error_req_out_dbglog
+                        0x00043b79     0xe  Code  Gb  man_error.o [1]
+man_error_req_out_errlog
+                        0x00043b67     0xe  Code  Gb  man_error.o [1]
+man_error_set           0x00043a3d    0xb4  Code  Gb  man_error.o [1]
+man_error_work          0x20006c24  0x38bc  Data  Lc  man_error.o [1]
+man_flash_erase_block   0x00043d81    0x3c  Code  Gb  man_flash.o [1]
+man_flash_init          0x00043c4b     0x8  Code  Gb  man_flash.o [1]
+man_flash_main          0x00043c53   0x12e  Code  Gb  man_flash.o [1]
+man_flash_read          0x00043e07    0x10  Code  Gb  man_flash.o [1]
+man_flash_return_callback
+                        0x00043c21    0x2a  Code  Lc  man_flash.o [1]
+man_flash_work          0x2001d360    0x20  Data  Gb  man_flash.o [1]
+man_flash_write_page    0x00043dc5    0x42  Code  Gb  man_flash.o [1]
+man_gpio_3p3v_power     0x0004ffb9    0x16  Code  Gb  man_gpio.o [1]
+man_gpio_expow_get      0x00050105    0x16  Code  Gb  man_gpio.o [1]
+man_gpio_expow_usb_get  0x0005011b    0x16  Code  Gb  man_gpio.o [1]
+man_gpio_gps_power      0x0004ff8d    0x16  Code  Gb  man_gpio.o [1]
+man_gpio_gps_reset      0x0004ffa3    0x16  Code  Gb  man_gpio.o [1]
+man_gpio_init           0x0004ff19    0x18  Code  Gb  man_gpio.o [1]
+man_gpio_led_bat        0x00050009    0x3a  Code  Gb  man_gpio.o [1]
+man_gpio_led_gns        0x0005007d    0x3a  Code  Gb  man_gpio.o [1]
+man_gpio_led_lte        0x0004ffcf    0x3a  Code  Gb  man_gpio.o [1]
+man_gpio_led_pow        0x00050043    0x3a  Code  Gb  man_gpio.o [1]
+man_gpio_lte_power      0x0004ff31    0x1a  Code  Gb  man_gpio.o [1]
+man_gpio_lte_power_get  0x0004ff77    0x16  Code  Gb  man_gpio.o [1]
+man_gpio_lte_pwrkey     0x0004ff4b    0x16  Code  Gb  man_gpio.o [1]
+man_gpio_lte_reset      0x0004ff61    0x16  Code  Gb  man_gpio.o [1]
+man_gpio_main_500ms     0x00050131    0x46  Code  Gb  man_gpio.o [1]
+man_gpio_switch_get     0x000500b7    0x4e  Code  Gb  man_gpio.o [1]
+man_gpio_work           0x2001d424    0x14  Data  Gb  man_gpio.o [1]
+man_gps_100ms_main      0x00045521    0x4c  Code  Gb  man_gps.o [1]
+man_gps_check_effect_nmea
+                        0x0004658d    0x4a  Code  Gb  man_gps.o [1]
+man_gps_ctrl_msg_42_43  0x00046641    0x74  Code  Gb  man_gps.o [1]
+man_gps_get_clock       0x000465eb     0xa  Code  Gb  man_gps.o [1]
+man_gps_get_nmea_cnt    0x00046579     0x6  Code  Gb  man_gps.o [1]
+man_gps_get_nmea_status
+                        0x000465dd     0xe  Code  Gb  man_gps.o [1]
+man_gps_get_state       0x0004662d     0x6  Code  Gb  man_gps.o [1]
+man_gps_init            0x000454f1    0x30  Code  Gb  man_gps.o [1]
+man_gps_main            0x00045595   0xf1c  Code  Gb  man_gps.o [1]
+man_gps_nmea_callback   0x00045377    0xa4  Code  Lc  man_gps.o [1]
+man_gps_noti_callback   0x000454cd    0x24  Code  Lc  man_gps.o [1]
+man_gps_ota_resp_end    0x00046613    0x1a  Code  Gb  man_gps.o [1]
+man_gps_recv_callback   0x0004541b    0x16  Code  Lc  man_gps.o [1]
+man_gps_req_callback    0x00045365    0x12  Code  Lc  man_gps.o [1]
+man_gps_req_close       0x000464cd     0x8  Code  Gb  man_gps.o [1]
+man_gps_req_erase       0x000464d5    0x10  Code  Gb  man_gps.o [1]
+man_gps_req_fdl         0x00046505    0x10  Code  Gb  man_gps.o [1]
+man_gps_req_noti        0x000465f9    0x1a  Code  Gb  man_gps.o [1]
+man_gps_req_off         0x000464c5     0x8  Code  Gb  man_gps.o [1]
+man_gps_req_open        0x000464b9     0x8  Code  Gb  man_gps.o [1]
+man_gps_req_packet_end  0x00046535    0x1c  Code  Gb  man_gps.o [1]
+man_gps_req_packet_next
+                        0x00046519    0x1c  Code  Gb  man_gps.o [1]
+man_gps_req_reset       0x00046569    0x10  Code  Gb  man_gps.o [1]
+man_gps_req_retry_ota   0x00046559    0x10  Code  Gb  man_gps.o [1]
+man_gps_req_udl         0x000464ed    0x10  Code  Gb  man_gps.o [1]
+man_gps_return_callback
+                        0x000454a3    0x2a  Code  Lc  man_gps.o [1]
+man_gps_set_finish_ota  0x000466b5     0xe  Code  Gb  man_gps.o [1]
+man_gps_set_mode        0x00045475    0x2e  Code  Lc  man_gps.o [1]
+man_gps_set_sequense    0x00045431    0x44  Code  Lc  man_gps.o [1]
+man_gps_work            0x2001ccbc   0x160  Data  Gb  man_gps.o [1]
+man_gyro_get_data       0x00050673    0x1a  Code  Gb  man_gyro.o [1]
+man_gyro_init           0x000504ed    0x22  Code  Gb  man_gyro.o [1]
+man_gyro_main           0x0005050f   0x164  Code  Gb  man_gyro.o [1]
+man_gyro_off            0x0005068d     0xa  Code  Gb  man_gyro.o [1]
+man_gyro_on             0x00050697    0x12  Code  Gb  man_gyro.o [1]
+man_gyro_work           0x2001d120    0x64  Data  Gb  man_gyro.o [1]
+man_http_check_FQDN     0x0004c41d    0x8c  Code  Gb  mid_HTTP.o [1]
+man_http_client_close   0x00044e05    0x48  Code  Gb  man_http.o [1]
+man_http_client_open    0x00044dad    0x54  Code  Gb  man_http.o [1]
+man_http_client_send_recv
+                        0x00044e55    0xa4  Code  Gb  man_http.o [1]
+man_http_client_state   0x00044d89    0x1a  Code  Gb  man_http.o [1]
+man_http_disp_info      0x000452d1    0x26  Code  Gb  man_http.o [1]
+man_http_file_get       0x000451e5    0x50  Code  Gb  man_http.o [1]
+man_http_ftp_get        0x0004513d    0x50  Code  Gb  man_http.o [1]
+man_http_ftp_init       0x00045095    0x48  Code  Gb  man_http.o [1]
+man_http_ftp_open       0x000450e9    0x48  Code  Gb  man_http.o [1]
+man_http_ftp_recovery   0x00045195    0x48  Code  Gb  man_http.o [1]
+man_http_ftp_state      0x00045071    0x1a  Code  Gb  man_http.o [1]
+man_http_get_clock      0x00045305     0x4  Code  Gb  man_http.o [1]
+man_http_get_rsrp       0x000452f7     0xe  Code  Gb  man_http.o [1]
+man_http_get_rtc        0x00045239    0x48  Code  Gb  man_http.o [1]
+man_http_get_sequense   0x00043f21     0x6  Code  Lc  man_http.o [1]
+man_http_get_status     0x00045289    0x26  Code  Gb  man_http.o [1]
+man_http_get_status2    0x000452b5    0x1c  Code  Gb  man_http.o [1]
+man_http_init           0x000448b1    0x28  Code  Gb  man_http.o [1]
+man_http_lte_close      0x00044aed    0x48  Code  Gb  man_http.o [1]
+man_http_lte_exec_reset
+                        0x00044bd9    0x4a  Code  Gb  man_http.o [1]
+man_http_lte_get_cpsi   0x00044c2d    0x48  Code  Gb  man_http.o [1]
+man_http_lte_init       0x000449f1    0x48  Code  Gb  man_http.o [1]
+man_http_lte_open       0x00044a99    0x48  Code  Gb  man_http.o [1]
+man_http_lte_ota_off    0x00044999    0x48  Code  Gb  man_http.o [1]
+man_http_lte_ready      0x00044a45    0x48  Code  Gb  man_http.o [1]
+man_http_lte_state      0x0004496d    0x1a  Code  Gb  man_http.o [1]
+man_http_lte_stby_in    0x00044b39    0x48  Code  Gb  man_http.o [1]
+man_http_lte_stby_out   0x00044b8d    0x48  Code  Gb  man_http.o [1]
+man_http_main           0x000448e1    0x8c  Code  Gb  man_http.o [1]
+man_http_recv_callback  0x00043fb5   0x3a4  Code  Lc  man_http.o [1]
+man_http_recv_cmd       0x00044891    0x16  Code  Lc  man_http.o [1]
+man_http_req_callback   0x00043f27    0x3c  Code  Lc  man_http.o [1]
+man_http_res_callback   0x00043f63    0x24  Code  Lc  man_http.o [1]
+man_http_resp_cmd       0x00044399   0x4e6  Code  Lc  man_http.o [1]
+man_http_server_close   0x00044f85    0x48  Code  Gb  man_http.o [1]
+man_http_server_noti    0x00044f19    0x1a  Code  Gb  man_http.o [1]
+man_http_server_open    0x00044f35    0x48  Code  Gb  man_http.o [1]
+man_http_server_send    0x00044fd9    0x92  Code  Gb  man_http.o [1]
+man_http_server_state   0x00044ef9    0x1a  Code  Gb  man_http.o [1]
+man_http_set_rssi_ng    0x00045309    0x16  Code  Gb  man_http.o [1]
+man_http_set_sequense   0x00043ee9    0x38  Code  Lc  man_http.o [1]
+man_http_udp_close      0x00044ce1    0x48  Code  Gb  man_http.o [1]
+man_http_udp_open       0x00044c95    0x48  Code  Gb  man_http.o [1]
+man_http_udp_send       0x00044d2d    0x58  Code  Gb  man_http.o [1]
+man_http_udp_state      0x00044c75    0x1a  Code  Gb  man_http.o [1]
+man_http_work           0x2001b668   0x694  Data  Gb  man_http.o [1]
+man_let_get_data        0x00051b7b     0x8  Code  Gb  man_lte.o [1]
+man_lte_1000ms_main     0x00051b83    0x28  Code  Gb  man_lte.o [1]
+man_lte_disp_info       0x00051bbd    0x30  Code  Gb  man_lte.o [1]
+man_lte_init            0x00050939    0x1c  Code  Gb  man_lte.o [1]
+man_lte_main            0x00050961  0x1108  Code  Gb  man_lte.o [1]
+man_lte_noti_state      0x00051b55    0x1a  Code  Gb  man_lte.o [1]
+man_lte_req_callback    0x000508b9    0x12  Code  Lc  man_lte.o [1]
+man_lte_req_init        0x00051a79    0x18  Code  Gb  man_lte.o [1]
+man_lte_req_off         0x00051b3d    0x18  Code  Gb  man_lte.o [1]
+man_lte_req_ready       0x00051a95    0x18  Code  Gb  man_lte.o [1]
+man_lte_req_reset       0x00051b21    0x18  Code  Gb  man_lte.o [1]
+man_lte_req_start       0x00051ab1    0x18  Code  Gb  man_lte.o [1]
+man_lte_req_state       0x00051b75     0x6  Code  Gb  man_lte.o [1]
+man_lte_req_stby        0x00051ae9    0x18  Code  Gb  man_lte.o [1]
+man_lte_req_stop        0x00051acd    0x18  Code  Gb  man_lte.o [1]
+man_lte_req_wakeup      0x00051b05    0x18  Code  Gb  man_lte.o [1]
+man_lte_return_callback
+                        0x0005090f    0x2a  Code  Lc  man_lte.o [1]
+man_lte_set_sequense    0x000508cb    0x44  Code  Lc  man_lte.o [1]
+man_lte_work            0x2001ce1c   0x10c  Data  Gb  man_lte.o [1]
+man_memory_alloc        0x0004c071     0x8  Code  Gb  man_memory.o [1]
+man_memory_work         0x20019e68   0x800  Data  Gb  man_memory.o [1]
+man_msg_check_led_send_state
+                        0x00049ac1    0x34  Code  Gb  man_msg.o [1]
+man_msg_check_msg       0x0004897f    0x18  Code  Lc  man_msg.o [1]
+man_msg_check_send_state
+                        0x00049a85    0x3c  Code  Gb  man_msg.o [1]
+man_msg_del_save        0x000489c9    0x38  Code  Lc  man_msg.o [1]
+man_msg_get_save        0x00048997    0x32  Code  Lc  man_msg.o [1]
+man_msg_init            0x00048e65    0x18  Code  Gb  man_msg.o [1]
+man_msg_main            0x00048eb9   0x876  Code  Gb  man_msg.o [1]
+man_msg_make_info_sensor
+                        0x00048a01   0x130  Code  Lc  man_msg.o [1]
+man_msg_make_info_setting
+                        0x00048b31    0xa4  Code  Lc  man_msg.o [1]
+man_msg_make_message    0x00048c0d   0x204  Code  Lc  man_msg.o [1]
+man_msg_noti_error      0x00049a59    0x1a  Code  Gb  man_msg.o [1]
+man_msg_req_callback    0x00048929    0x12  Code  Lc  man_msg.o [1]
+man_msg_req_start       0x0004999d    0x22  Code  Gb  man_msg.o [1]
+man_msg_req_state       0x00049a01    0x4e  Code  Gb  man_msg.o [1]
+man_msg_req_stop        0x000499c5    0x22  Code  Gb  man_msg.o [1]
+man_msg_return_callback
+                        0x00048e41    0x24  Code  Lc  man_msg.o [1]
+man_msg_send_message    0x00048e19    0x20  Code  Lc  man_msg.o [1]
+man_msg_set_mode_seq    0x0004893b    0x44  Code  Lc  man_msg.o [1]
+man_msg_set_type        0x0004974d   0x1be  Code  Gb  man_msg.o [1]
+man_msg_set_usb_type    0x00049915    0x72  Code  Gb  man_msg.o [1]
+man_msg_work            0x20000700  0x6524  Data  Gb  man_msg.o [1]
+man_net_init            0x00054b2f    0x3e  Code  Gb  man_net.o [1]
+man_net_main            0x00054b85   0xfac  Code  Gb  man_net.o [1]
+man_net_noti_callback   0x00054b0b    0x24  Code  Lc  man_net.o [1]
+man_net_req_callback    0x00054aa5    0x12  Code  Lc  man_net.o [1]
+man_net_req_close       0x00055b3f     0xe  Code  Gb  man_net.o [1]
+man_net_req_noti        0x00055b75    0x1a  Code  Gb  man_net.o [1]
+man_net_req_off         0x00055b67     0xe  Code  Gb  man_net.o [1]
+man_net_req_open        0x00055b31     0xe  Code  Gb  man_net.o [1]
+man_net_req_reset       0x00055b5f     0x8  Code  Gb  man_net.o [1]
+man_net_req_stby        0x00055b51     0xe  Code  Gb  man_net.o [1]
+man_net_set_cmd_end     0x00054afb    0x10  Code  Lc  man_net.o [1]
+man_net_set_sequense    0x00054ab7    0x44  Code  Lc  man_net.o [1]
+man_net_work            0x2001cf28   0x10c  Data  Gb  man_net.o [1]
+man_ope_100ms_main      0x0004b2dd     0x2  Code  Gb  man_ope.o [1]
+man_ope_10ms_main       0x0004b2b3    0x24  Code  Gb  man_ope.o [1]
+man_ope_500ms_main      0x0004b2df     0x8  Code  Gb  man_ope.o [1]
+man_ope_alarm_callback  0x00049b6d     0x8  Code  Lc  man_ope.o [1]
+man_ope_chk_noise       0x0004af21    0x84  Code  Lc  man_ope.o [1]
+man_ope_ctrl_led        0x0004b01d   0x17c  Code  Lc  man_ope.o [1]
+man_ope_ext_sts         0x0004aed1    0x48  Code  Lc  man_ope.o [1]
+man_ope_get_ext_status  0x0004afa9    0x66  Code  Lc  man_ope.o [1]
+man_ope_get_reset_mode  0x0004b349    0x10  Code  Gb  man_ope.o [1]
+man_ope_get_switch_pos  0x0004b343     0x6  Code  Gb  man_ope.o [1]
+man_ope_init            0x0004b241    0x40  Code  Gb  man_ope.o [1]
+man_ope_main            0x0004b281    0x32  Code  Gb  man_ope.o [1]
+man_ope_mode_man_proc   0x00049f99   0xf32  Code  Lc  man_ope.o [1]
+man_ope_mode_man_recv   0x00049d91   0x180  Code  Lc  man_ope.o [1]
+man_ope_mode_req_callback
+                        0x00049b4b    0x12  Code  Lc  man_ope.o [1]
+man_ope_mode_switch     0x00049d1b    0x50  Code  Lc  man_ope.o [1]
+man_ope_mode_system_error
+                        0x00049d6b     0xa  Code  Lc  man_ope.o [1]
+man_ope_noti_callback   0x00049b1d    0x2e  Code  Lc  man_ope.o [1]
+man_ope_noti_state_recv
+                        0x00049f1d    0x5a  Code  Lc  man_ope.o [1]
+man_ope_out_led         0x0004b1a9    0x74  Code  Lc  man_ope.o [1]
+man_ope_out_led_off     0x0004b221    0x20  Code  Lc  man_ope.o [1]
+man_ope_req_ota_end     0x0004b30f    0x34  Code  Gb  man_ope.o [1]
+man_ope_req_ota_start   0x0004b2f5    0x1a  Code  Gb  man_ope.o [1]
+man_ope_req_reset       0x0004b2e7     0xa  Code  Gb  man_ope.o [1]
+man_ope_return_callback
+                        0x00049c8f    0x2a  Code  Lc  man_ope.o [1]
+man_ope_set_mode_seq    0x00049c4b    0x44  Code  Lc  man_ope.o [1]
+man_ope_set_msg_charge  0x0004b361    0x90  Code  Gb  man_ope.o [1]
+man_ope_set_switch_pos  0x00049b75    0xd6  Code  Lc  man_ope.o [1]
+man_ope_sleep_callback  0x00049b5d    0x10  Code  Lc  man_ope.o [1]
+man_ope_sleep_conv_alarm
+                        0x00049cb9    0x62  Code  Lc  man_ope.o [1]
+man_ope_work            0x2001c920   0x20c  Data  Gb  man_ope.o [1]
+man_ota_check_summ_data
+                        0x0004020f    0x60  Code  Lc  man_ota.o [1]
+man_ota_data_callback   0x00040133    0x34  Code  Lc  man_ota.o [1]
+man_ota_get_data        0x00043721     0x8  Code  Gb  man_ota.o [1]
+man_ota_init            0x0004026f    0x30  Code  Gb  man_ota.o [1]
+man_ota_main            0x000402e5  0x33ba  Code  Gb  man_ota.o [1]
+man_ota_noti_callback   0x00040123    0x10  Code  Lc  man_ota.o [1]
+man_ota_noti_error      0x00043703    0x1a  Code  Gb  man_ota.o [1]
+man_ota_recv_callback   0x00040167    0x64  Code  Lc  man_ota.o [1]
+man_ota_req_callback    0x00040111    0x12  Code  Lc  man_ota.o [1]
+man_ota_req_gps_forced_start
+                        0x000436bf    0x10  Code  Gb  man_ota.o [1]
+man_ota_req_gps_start   0x000436af    0x10  Code  Gb  man_ota.o [1]
+man_ota_req_state       0x000436fd     0x6  Code  Gb  man_ota.o [1]
+man_ota_req_term_start  0x000436a5     0xa  Code  Gb  man_ota.o [1]
+man_ota_req_usb_gps_forced_start
+                        0x000436ed    0x10  Code  Gb  man_ota.o [1]
+man_ota_req_usb_gps_start
+                        0x000436d9    0x10  Code  Gb  man_ota.o [1]
+man_ota_req_usb_term_start
+                        0x000436cf     0xa  Code  Gb  man_ota.o [1]
+man_ota_set_sequense    0x000401cb    0x44  Code  Lc  man_ota.o [1]
+man_ota_work            0x2001c358   0x328  Data  Gb  man_ota.o [1]
+man_press_get_data      0x00050817    0x2a  Code  Gb  man_press.o [1]
+man_press_init          0x000506bd    0x22  Code  Gb  man_press.o [1]
+man_press_main          0x000506df   0x138  Code  Gb  man_press.o [1]
+man_press_off           0x00050841     0xa  Code  Gb  man_press.o [1]
+man_press_on            0x0005084b    0x16  Code  Gb  man_press.o [1]
+man_press_work          0x2001d380    0x20  Data  Gb  man_press.o [1]
+man_rpt_1000ms_main     0x00048131   0x120  Code  Gb  man_rpt.o [1]
+man_rpt_check_send_state
+                        0x00048333    0x32  Code  Gb  man_rpt.o [1]
+man_rpt_check_setting   0x0004782b    0x28  Code  Lc  man_rpt.o [1]
+man_rpt_get_data        0x000482db     0x8  Code  Gb  man_rpt.o [1]
+man_rpt_init            0x00047859    0x1e  Code  Gb  man_rpt.o [1]
+man_rpt_init_cycle_counter
+                        0x00048325     0xe  Code  Gb  man_rpt.o [1]
+man_rpt_main            0x000478ad   0x850  Code  Gb  man_rpt.o [1]
+man_rpt_make_body_sensor
+                        0x00047467   0x116  Code  Lc  man_rpt.o [1]
+man_rpt_make_info_sensor
+                        0x000472c7   0x1a0  Code  Lc  man_rpt.o [1]
+man_rpt_noti_error      0x000482c1    0x1a  Code  Gb  man_rpt.o [1]
+man_rpt_req_callback    0x0004724d    0x10  Code  Lc  man_rpt.o [1]
+man_rpt_req_park_interval
+                        0x000482ed    0x38  Code  Gb  man_rpt.o [1]
+man_rpt_req_send_start  0x000482a7     0x8  Code  Gb  man_rpt.o [1]
+man_rpt_req_send_stop   0x000482af     0x8  Code  Gb  man_rpt.o [1]
+man_rpt_req_state       0x000482b7     0x6  Code  Gb  man_rpt.o [1]
+man_rpt_req_udp_start   0x00048255     0xe  Code  Gb  man_rpt.o [1]
+man_rpt_req_udp_stop    0x00048281    0x1e  Code  Gb  man_rpt.o [1]
+man_rpt_req_usb_start   0x00048269     0xe  Code  Gb  man_rpt.o [1]
+man_rpt_req_usb_stop    0x0004829f     0x8  Code  Gb  man_rpt.o [1]
+man_rpt_return_callback
+                        0x0004729d    0x2a  Code  Lc  man_rpt.o [1]
+man_rpt_send_body_sensor
+                        0x000475a5   0x156  Code  Lc  man_rpt.o [1]
+man_rpt_set_sequense    0x0004725d    0x40  Code  Lc  man_rpt.o [1]
+man_rpt_usb_send_body_sensor
+                        0x00047709   0x122  Code  Lc  man_rpt.o [1]
+man_rpt_work            0x20011f1c  0x16b8  Data  Gb  man_rpt.o [1]
+man_rtc_disp_sts        0x0004c1e5    0x36  Code  Gb  man_rtc.o [1]
+man_rtc_get_clock       0x0004c1d7     0x8  Code  Gb  man_rtc.o [1]
+man_rtc_get_status      0x0004c1df     0x6  Code  Gb  man_rtc.o [1]
+man_rtc_init            0x0004c0c1    0x1a  Code  Gb  man_rtc.o [1]
+man_rtc_set_clock       0x0004c0db    0xe6  Code  Gb  man_rtc.o [1]
+man_rtc_set_clock_direct
+                        0x0004c1c1    0x16  Code  Gb  man_rtc.o [1]
+man_rtc_work            0x2001d0b4    0x6c  Data  Gb  man_rtc.o [1]
+man_temp_status_log     0x00050861    0x28  Code  Gb  man_press.o [1]
+man_timer_cancel_wait   0x000470d1    0x6c  Code  Gb  man_timer.o [1]
+man_timer_chk_1000ms    0x00047245     0x8  Code  Gb  man_timer.o [1]
+man_timer_chk_100ms     0x00047235     0x8  Code  Gb  man_timer.o [1]
+man_timer_chk_10ms      0x0004722d     0x8  Code  Gb  man_timer.o [1]
+man_timer_chk_500ms     0x0004723d     0x8  Code  Gb  man_timer.o [1]
+man_timer_get_1ms_count
+                        0x00047209     0x8  Code  Gb  man_timer.o [1]
+man_timer_get_elapsed_time
+                        0x00047211    0x12  Code  Gb  man_timer.o [1]
+man_timer_init          0x00047049    0x1a  Code  Gb  man_timer.o [1]
+man_timer_main          0x0004714d    0xbc  Code  Gb  man_timer.o [1]
+man_timer_start         0x00047145     0x8  Code  Gb  man_timer.o [1]
+man_timer_start_wait    0x00047063    0x6e  Code  Gb  man_timer.o [1]
+man_timer_stop          0x0004713d     0x8  Code  Gb  man_timer.o [1]
+man_timer_work          0x2001cb2c   0x190  Data  Lc  man_timer.o [1]
+man_usb_100ms_main      0x0004bd99     0x8  Code  Gb  man_usb.o [1]
+man_usb_callback        0x0004b8b5    0x36  Code  Lc  man_usb.o [1]
+man_usb_chk_config      0x0004b965    0x1a  Code  Lc  man_usb.o [1]
+man_usb_data_send       0x0004bdbd    0x18  Code  Gb  man_usb.o [1]
+man_usb_data_send_crlf  0x0004bdd5    0x18  Code  Gb  man_usb.o [1]
+man_usb_get_data        0x0004be7d    0x2a  Code  Gb  man_usb.o [1]
+man_usb_get_file_info   0x0004be75     0x4  Code  Gb  man_usb.o [1]
+man_usb_init            0x0004b97f    0x38  Code  Gb  man_usb.o [1]
+man_usb_main            0x0004b9f5   0x39a  Code  Gb  man_usb.o [1]
+man_usb_ota_close       0x0004be11     0x8  Code  Gb  man_usb.o [1]
+man_usb_ota_open        0x0004be09     0x8  Code  Gb  man_usb.o [1]
+man_usb_req_cmd_start   0x0004bded     0x8  Code  Gb  man_usb.o [1]
+man_usb_req_cmd_stop    0x0004bdf9     0x8  Code  Gb  man_usb.o [1]
+man_usb_req_reset       0x0004be01     0x8  Code  Gb  man_usb.o [1]
+man_usb_return_callback
+                        0x0004b90b    0x2a  Code  Lc  man_usb.o [1]
+man_usb_return_callback_data
+                        0x0004b935    0x30  Code  Lc  man_usb.o [1]
+man_usb_rpt_send        0x0004bda1    0x1c  Code  Gb  man_usb.o [1]
+man_usb_send_file_info  0x0004be3d    0x32  Code  Gb  man_usb.o [1]
+man_usb_send_usbgpsota_result
+                        0x0004befd    0x48  Code  Gb  man_usb.o [1]
+man_usb_send_usbota_result
+                        0x0004bea7    0x48  Code  Gb  man_usb.o [1]
+man_usb_set_file_info   0x0004be21    0x14  Code  Gb  man_usb.o [1]
+man_usb_set_sequense    0x0004b8eb    0x20  Code  Lc  man_usb.o [1]
+man_usb_work            0x20014b60  0x14f8  Data  Gb  man_usb.o [1]
+man_version_get_data    0x000504bd    0x30  Code  Gb  man_version.o [1]
+memcmp                  0x0004c3f3    0x28  Code  Gb  memcmp.o [4]
+mid_GPS_callback        0x0004f021    0x28  Code  Lc  mid_GPS.o [1]
+mid_GPS_callback2       0x0004f049    0x20  Code  Lc  mid_GPS.o [1]
+mid_GPS_callback4       0x0004f069    0x18  Code  Lc  mid_GPS.o [1]
+mid_GPS_callback_noti   0x0004f081    0x50  Code  Lc  mid_GPS.o [1]
+mid_GPS_get_NmeaResult  0x0004fe7d     0x8  Code  Gb  mid_GPS.o [1]
+mid_GPS_get_errcode     0x0004f0d1    0x28  Code  Lc  mid_GPS.o [1]
+mid_GPS_get_status      0x0004feb9    0x1c  Code  Gb  mid_GPS.o [1]
+mid_GPS_get_version     0x0004fe85    0x30  Code  Gb  mid_GPS.o [1]
+mid_GPS_init            0x0004f8eb    0x1c  Code  Gb  mid_GPS.o [1]
+mid_GPS_main            0x0004f911   0x11a  Code  Gb  mid_GPS.o [1]
+mid_GPS_req_ColdSart    0x0004fa2b    0x46  Code  Gb  mid_GPS.o [1]
+mid_GPS_req_Config      0x0004fcd7    0x4e  Code  Gb  mid_GPS.o [1]
+mid_GPS_req_Erase       0x0004fbad    0x46  Code  Gb  mid_GPS.o [1]
+mid_GPS_req_Exec        0x0004fb5d    0x46  Code  Gb  mid_GPS.o [1]
+mid_GPS_req_FDL         0x0004fc91    0x46  Code  Gb  mid_GPS.o [1]
+mid_GPS_req_Firmware    0x0004fd29    0x4e  Code  Gb  mid_GPS.o [1]
+mid_GPS_req_HotSart     0x0004fa75    0x48  Code  Gb  mid_GPS.o [1]
+mid_GPS_req_Idle        0x0004fb0d    0x46  Code  Gb  mid_GPS.o [1]
+mid_GPS_req_NmeaStart   0x0004fe6d     0x8  Code  Gb  mid_GPS.o [1]
+mid_GPS_req_NmeaStop    0x0004fe75     0x8  Code  Gb  mid_GPS.o [1]
+mid_GPS_req_OtaRetry    0x0004fe21    0x46  Code  Gb  mid_GPS.o [1]
+mid_GPS_req_Packet_end  0x0004fdc9    0x4e  Code  Gb  mid_GPS.o [1]
+mid_GPS_req_Packet_next
+                        0x0004fd79    0x4e  Code  Gb  mid_GPS.o [1]
+mid_GPS_req_PowerOff    0x0004fabd    0x46  Code  Gb  mid_GPS.o [1]
+mid_GPS_req_UDL         0x0004fc47    0x46  Code  Gb  mid_GPS.o [1]
+mid_GPS_req_Updater     0x0004fbf9    0x4e  Code  Gb  mid_GPS.o [1]
+mid_GPS_res_callbacl    0x0004f507    0x1e  Code  Lc  mid_GPS.o [1]
+mid_GPS_resp_check      0x0004f0f9   0x14e  Code  Lc  mid_GPS.o [1]
+mid_GPS_resp_check2     0x0004f24d   0x138  Code  Lc  mid_GPS.o [1]
+mid_GPS_resp_check4     0x0004f385    0x20  Code  Lc  mid_GPS.o [1]
+mid_GPS_response        0x0004f541   0x3aa  Code  Lc  mid_GPS.o [1]
+mid_GPS_send_command    0x0004f3b5   0x152  Code  Lc  mid_GPS.o [1]
+mid_GPS_set_RecvNotiResp
+                        0x0004fed5    0x1a  Code  Gb  mid_GPS.o [1]
+mid_HTTP_callback       0x0004c4a9    0x3a  Code  Lc  mid_HTTP.o [1]
+mid_HTTP_callback2      0x0004c4e3    0x32  Code  Lc  mid_HTTP.o [1]
+mid_HTTP_callback3      0x0004c525   0x52e  Code  Lc  mid_HTTP.o [1]
+mid_HTTP_disp_info      0x0004ef91    0x26  Code  Gb  mid_HTTP.o [1]
+mid_HTTP_get_data       0x0004ef3d     0x4  Code  Gb  mid_HTTP.o [1]
+mid_HTTP_get_errcode    0x0004ca69    0x28  Code  Lc  mid_HTTP.o [1]
+mid_HTTP_get_info       0x0004ef39     0x4  Code  Gb  mid_HTTP.o [1]
+mid_HTTP_get_status     0x0004ef41    0x10  Code  Gb  mid_HTTP.o [1]
+mid_HTTP_init           0x0004e679    0x28  Code  Gb  mid_HTTP.o [1]
+mid_HTTP_main           0x0004e6a1   0x110  Code  Gb  mid_HTTP.o [1]
+mid_HTTP_req_ClientClose
+                        0x0004ec59    0x44  Code  Gb  mid_HTTP.o [1]
+mid_HTTP_req_ClientOpen
+                        0x0004ebf5    0x5a  Code  Gb  mid_HTTP.o [1]
+mid_HTTP_req_ClientSend
+                        0x0004eca1    0x5c  Code  Gb  mid_HTTP.o [1]
+mid_HTTP_req_FileGet    0x0004eee1    0x3e  Code  Gb  mid_HTTP.o [1]
+mid_HTTP_req_FtpDel     0x0004eded    0x38  Code  Gb  mid_HTTP.o [1]
+mid_HTTP_req_FtpGet     0x0004ee65    0x3e  Code  Gb  mid_HTTP.o [1]
+mid_HTTP_req_FtpOpen    0x0004ee29    0x38  Code  Gb  mid_HTTP.o [1]
+mid_HTTP_req_FtpRecovery
+                        0x0004eea9    0x38  Code  Gb  mid_HTTP.o [1]
+mid_HTTP_req_GetClk     0x0004ef51    0x38  Code  Gb  mid_HTTP.o [1]
+mid_HTTP_req_GetIpAddress
+                        0x0004e9e9    0x38  Code  Gb  mid_HTTP.o [1]
+mid_HTTP_req_InitCmd    0x0004e821    0x38  Code  Gb  mid_HTTP.o [1]
+mid_HTTP_req_LTE_PowerOFF
+                        0x0004efc1    0x32  Code  Gb  mid_HTTP.o [1]
+mid_HTTP_req_LteClose   0x0004e8dd    0x38  Code  Gb  mid_HTTP.o [1]
+mid_HTTP_req_LteCpsi    0x0004e9a9    0x38  Code  Gb  mid_HTTP.o [1]
+mid_HTTP_req_LteOpen    0x0004e895    0x38  Code  Gb  mid_HTTP.o [1]
+mid_HTTP_req_LteReady   0x0004e859    0x38  Code  Gb  mid_HTTP.o [1]
+mid_HTTP_req_LteReset   0x0004ea25    0x38  Code  Gb  mid_HTTP.o [1]
+mid_HTTP_req_LteStbyIn  0x0004e91d    0x38  Code  Gb  mid_HTTP.o [1]
+mid_HTTP_req_LteStbyOut
+                        0x0004e95d    0x38  Code  Gb  mid_HTTP.o [1]
+mid_HTTP_req_OtaOffCmd  0x0004e7b5    0x66  Code  Gb  mid_HTTP.o [1]
+mid_HTTP_req_ServerClose
+                        0x0004ed3d    0x38  Code  Gb  mid_HTTP.o [1]
+mid_HTTP_req_ServerOpen
+                        0x0004ecfd    0x38  Code  Gb  mid_HTTP.o [1]
+mid_HTTP_req_ServerSend
+                        0x0004ed8d    0x5c  Code  Gb  mid_HTTP.o [1]
+mid_HTTP_req_UdpClose   0x0004eaa1    0x44  Code  Gb  mid_HTTP.o [1]
+mid_HTTP_req_UdpOpen    0x0004ea5d    0x44  Code  Gb  mid_HTTP.o [1]
+mid_HTTP_req_UdpSend    0x0004eae5   0x10c  Code  Gb  mid_HTTP.o [1]
+mid_HTTP_res_callback   0x0004df85    0x24  Code  Lc  mid_HTTP.o [1]
+mid_HTTP_resp_check     0x0004ca91   0x178  Code  Lc  mid_HTTP.o [1]
+mid_HTTP_resp_check2    0x0004cc3d   0xde0  Code  Lc  mid_HTTP.o [1]
+mid_HTTP_response       0x0004e021   0x652  Code  Lc  mid_HTTP.o [1]
+mid_HTTP_send_command   0x0004da61   0x4e8  Code  Lc  mid_HTTP.o [1]
+mid_HTTP_set_RecvNoti   0x0004ef1f    0x1a  Code  Gb  mid_HTTP.o [1]
+mid_gps_work            0x2001d184    0x54  Data  Lc  mid_GPS.o [1]
+mid_http_udpsend_work   0x2001d3a0    0x20  Data  Lc  mid_HTTP.o [1]
+mid_http_work           0x20010114  0x1e08  Data  Lc  mid_HTTP.o [1]
+mode_seq_tbl            0x0005fb9c   0x198  Data  Lc  man_ope.o [1]
+month_code              0x00061190    0x10  Data  Gb  se_rtca.o [6]
+month_day_tbl           0x00060b94    0x1c  Data  Lc  gnss_gw_common.o [1]
+ndigs                   0x0005e444    0x28  Data  Lc  xstoul.o [3]
+num_to_bcd              0x00050265    0x2a  Code  Gb  gnss_gw_common.o [1]
+offSwOccured            0x2001d560     0x2  Data  Lc  drv_clg.o [1]
+other_tbl               0x0006028c    0x78  Data  Lc  man_data.o [1]
+out_port_tbl            0x00060f60    0x10  Data  Lc  ctrl_GPIO.o [1]
+print_buf               0x2001d034    0x80  Data  Gb  main.o [1]
+printf                  0x0005e46d    0x24  Code  Gb  printf.o [3]
+protect                 0x0005976f     0xe  Code  Lc  se_rtca.o [6]
+ptr_data_read           0x2001d538     0x4  Data  Gb  usbd_cdc_acm.o [1]
+ptr_data_received       0x2001d534     0x4  Data  Gb  usbd_cdc_acm.o [1]
+ptr_data_sent           0x2001d520     0x4  Data  Gb  usbd_cdc_acm.o [1]
+ptr_data_to_send        0x2001d51c     0x4  Data  Gb  usbd_cdc_acm.o [1]
+putchar                 0x00060af1    0x24  Code  Gb  putchar.o [3]
+recv_cmd_tbl            0x000603dc    0x68  Data  Lc  mid_HTTP.o [1]
+recv_tbl                0x00060d40    0x18  Data  Lc  man_http.o [1]
+respons                 0x2001c680   0x2a0  Data  Gb  man_usb.o [1]
+rtc_get_clock           0x00051eaf    0x34  Code  Gb  drv_rtc.o [1]
+rtc_init                0x00051e15    0x3a  Code  Gb  drv_rtc.o [1]
+rtc_set_clock           0x00051e55    0x5a  Code  Gb  drv_rtc.o [1]
+seAssert                0x0005a9bf     0xe  Code  Gb  se_common.o [6]
+seCLG_ClearIntFlag      0x00055d85     0x6  Code  Gb  se_clg.o [6]
+seCLG_GetIoscFreqSel    0x00055c83    0x42  Code  Gb  se_clg.o [6]
+seCLG_GetSysClk         0x00055bb1    0x92  Code  Gb  se_clg.o [6]
+seCLG_GetSysClkSrc      0x00055c43     0xa  Code  Gb  se_clg.o [6]
+seCLG_SetOperInSlp      0x00055d01    0x6c  Code  Gb  se_clg.o [6]
+seCLG_Start             0x00055cc9    0x2e  Code  Gb  se_clg.o [6]
+seCLG_SwitchSysClkSrc   0x00055c4d    0x36  Code  Gb  se_clg.o [6]
+seI2C_ClearIntFlag      0x0005b641     0x4  Code  Gb  se_i2c.o [6]
+seI2C_Disable           0x0005b403     0xa  Code  Gb  se_i2c.o [6]
+seI2C_Enable            0x0005b3db    0x28  Code  Gb  se_i2c.o [6]
+seI2C_Init              0x0005b205   0x1b4  Code  Gb  se_i2c.o [6]
+seI2C_MstReceiveData    0x0005b519   0x10c  Code  Gb  se_i2c.o [6]
+seI2C_MstSendData       0x0005b411    0xf0  Code  Gb  se_i2c.o [6]
+seI2C_Reset             0x0005b3b9    0x22  Code  Gb  se_i2c.o [6]
+sePPORT_ClearIntFlag    0x0005ab45    0x30  Code  Gb  se_pport.o [6]
+sePPORT_DisableInt      0x0005aacf    0x34  Code  Gb  se_pport.o [6]
+sePPORT_EnableChatteringFilter
+                        0x0005ac15    0x3c  Code  Gb  se_pport.o [6]
+sePPORT_EnableInt       0x0005aa73    0x5c  Code  Gb  se_pport.o [6]
+sePPORT_GetInput        0x0005abc5    0x4c  Code  Gb  se_pport.o [6]
+sePPORT_GetIntFlag      0x0005ab03    0x42  Code  Gb  se_pport.o [6]
+sePPORT_InitAsAltFunction
+                        0x0005ada1    0x80  Code  Gb  se_pport.o [6]
+sePPORT_InitAsHiZ       0x0005ac51    0x46  Code  Gb  se_pport.o [6]
+sePPORT_InitAsInput     0x0005a9d5    0x54  Code  Gb  se_pport.o [6]
+sePPORT_InitAsOutput    0x0005aa29    0x4a  Code  Gb  se_pport.o [6]
+sePPORT_SetOutput       0x0005ab75    0x4c  Code  Gb  se_pport.o [6]
+sePPORT_UpMuxFunction   0x0005ac97   0x10a  Code  Gb  se_pport.o [6]
+seProtectSys            0x0005a9b5     0xa  Code  Gb  se_common.o [6]
+seRTCA_CalcWeekDay      0x000596a5    0x8a  Code  Gb  se_rtca.o [6]
+seRTCA_ClearIntFlag     0x00059143     0x6  Code  Gb  se_rtca.o [6]
+seRTCA_DisableInt       0x00059137     0xc  Code  Gb  se_rtca.o [6]
+seRTCA_EnableInt        0x0005912b     0xc  Code  Gb  se_rtca.o [6]
+seRTCA_Get12_24Mode     0x00059335    0x1e  Code  Gb  se_rtca.o [6]
+seRTCA_GetHourMinuteSecond
+                        0x000594b9    0x80  Code  Gb  se_rtca.o [6]
+seRTCA_GetYearMonthDayWeek
+                        0x0005928d    0xa8  Code  Gb  se_rtca.o [6]
+seRTCA_Init             0x0005901d    0xc4  Code  Gb  se_rtca.o [6]
+seRTCA_Set12_24Mode     0x00059359    0x28  Code  Gb  se_rtca.o [6]
+seRTCA_SetAlarm         0x00059549   0x132  Code  Gb  se_rtca.o [6]
+seRTCA_SetHourMinuteSecond
+                        0x00059395   0x124  Code  Gb  se_rtca.o [6]
+seRTCA_SetYearMonthDayWeek
+                        0x0005914d   0x112  Code  Gb  se_rtca.o [6]
+seRTCA_Start            0x000590e1    0x3c  Code  Gb  se_rtca.o [6]
+seRTCA_Stop             0x0005911d     0xe  Code  Gb  se_rtca.o [6]
+seSPIA_Init             0x0005ae75    0xb6  Code  Gb  se_spia.o [6]
+seSPIA_InitStructForMaster
+                        0x0005af2b    0x1e  Code  Gb  se_spia.o [6]
+seSPIA_Reset            0x0005afcf    0x22  Code  Gb  se_spia.o [6]
+seSPIA_RxBytes          0x0005b06d    0x98  Code  Gb  se_spia.o [6]
+seSPIA_SetBusSpeed      0x0005b109    0x3e  Code  Gb  se_spia.o [6]
+seSPIA_Start            0x0005af49    0x48  Code  Gb  se_spia.o [6]
+seSPIA_Stop             0x0005af91    0x3e  Code  Gb  se_spia.o [6]
+seSPIA_TxBytes          0x0005aff1    0x5e  Code  Gb  se_spia.o [6]
+seSVD2_ClearIntLowVoltage
+                        0x0005cf55     0x6  Code  Gb  se_svd2.o [6]
+seSVD2_Init             0x0005cd35   0x156  Code  Gb  se_svd2.o [6]
+seSVD2_IsIntLowVoltage  0x0005cf39    0x1c  Code  Gb  se_svd2.o [6]
+seSVD2_SetComparisonVoltage
+                        0x0005ced7    0x3a  Code  Gb  se_svd2.o [6]
+seSVD2_Start            0x0005ce8b    0x26  Code  Gb  se_svd2.o [6]
+seSVD2_Stop             0x0005ceb1    0x26  Code  Gb  se_svd2.o [6]
+seSysSleepMS            0x000501ef    0x4e  Code  Gb  system_S1C31W74.o [1]
+seSysTickInit           0x000501c3    0x2c  Code  Gb  system_S1C31W74.o [1]
+seSysTickStart          0x000501a7     0xe  Code  Gb  system_S1C31W74.o [1]
+seSysTickStop           0x000501b5     0xe  Code  Gb  system_S1C31W74.o [1]
+seT16_ClearIntFlag      0x00059015     0x6  Code  Gb  se_t16.o [6]
+seT16_ConfigureClock    0x00058eeb    0x30  Code  Gb  se_t16.o [6]
+seT16_ConfigureCounterMode
+                        0x00058f99    0x14  Code  Gb  se_t16.o [6]
+seT16_Disable           0x00058ee1     0xa  Code  Gb  se_t16.o [6]
+seT16_DisableInt        0x00058fe7     0xa  Code  Gb  se_t16.o [6]
+seT16_Enable            0x00058ed7     0xa  Code  Gb  se_t16.o [6]
+seT16_EnableInt         0x00058fdd     0xa  Code  Gb  se_t16.o [6]
+seT16_GetClk            0x00058f1b    0x7e  Code  Gb  se_t16.o [6]
+seT16_Init              0x00058df3    0xb8  Code  Gb  se_t16.o [6]
+seT16_InitStruct        0x00058de1    0x12  Code  Gb  se_t16.o [6]
+seT16_SetCounter        0x00058fad    0x30  Code  Gb  se_t16.o [6]
+seT16_Start             0x00058eb9    0x1e  Code  Gb  se_t16.o [6]
+seT16_Stop              0x00058eab     0xe  Code  Gb  se_t16.o [6]
+seUART2_ClearIntFlag    0x0005d1b5     0x6  Code  Gb  se_uart2.o [6]
+seUART2_ConfigureClock  0x0005d07b    0x30  Code  Gb  se_uart2.o [6]
+seUART2_ConfigureMode   0x0005d107     0xc  Code  Gb  se_uart2.o [6]
+seUART2_Disable         0x0005d057    0x24  Code  Gb  se_uart2.o [6]
+seUART2_DisableInt      0x0005d189     0xa  Code  Gb  se_uart2.o [6]
+seUART2_Enable          0x0005d035    0x22  Code  Gb  se_uart2.o [6]
+seUART2_EnableInt       0x0005d17f     0xa  Code  Gb  se_uart2.o [6]
+seUART2_GetIntFlag      0x0005d193    0x22  Code  Gb  se_uart2.o [6]
+seUART2_GetUartClk      0x0005d0ab    0x5c  Code  Gb  se_uart2.o [6]
+seUART2_Init            0x0005cf71    0xc4  Code  Gb  se_uart2.o [6]
+seUART2_Send            0x0005d1bb    0x30  Code  Gb  se_uart2.o [6]
+seUART2_SetBaudRate     0x0005d113    0x46  Code  Gb  se_uart2.o [6]
+seUART2_SetBaudRateReg  0x0005d159    0x26  Code  Gb  se_uart2.o [6]
+seUSB_ActivateUSBCLK    0x0005c3ad    0x64  Code  Gb  se_usb.o [6]
+seUSB_Attach            0x0005b939    0x4e  Code  Gb  se_usb.o [6]
+seUSB_ClearAllIntFlags  0x0005b81d    0x2c  Code  Gb  se_usb.o [6]
+seUSB_ClearEPmFifo      0x0005bf5d    0x44  Code  Gb  se_usb.o [6]
+seUSB_ClearEPnFifos     0x0005bf41     0xe  Code  Gb  se_usb.o [6]
+seUSB_ClrStall          0x0005c2f5    0x40  Code  Gb  se_usb.o [6]
+seUSB_ConfSvdDetectDisconnect
+                        0x0005cb75    0x4c  Code  Gb  usbd_S1C31W74.o [1]
+seUSB_ConfigureDefaultEndpoints
+                        0x0005b9f9   0x112  Code  Gb  se_usb.o [6]
+seUSB_ConfigureEPm      0x0005bc09   0x104  Code  Gb  se_usb.o [6]
+seUSB_ConfigurePortsForUsb
+                        0x0005cbd1   0x12a  Code  Gb  usbd_S1C31W74.o [1]
+seUSB_DataInStage       0x0005bbad    0x1a  Code  Gb  se_usb.o [6]
+seUSB_DataOutStage      0x0005bbcd    0x1a  Code  Gb  se_usb.o [6]
+seUSB_DeactivateUSBCLK  0x0005c389    0x16  Code  Gb  se_usb.o [6]
+seUSB_Detach            0x0005b987    0x34  Code  Gb  se_usb.o [6]
+seUSB_Disable           0x0005b80f     0xe  Code  Gb  se_usb.o [6]
+seUSB_DisableAllInt     0x0005b849    0x48  Code  Gb  se_usb.o [6]
+seUSB_DisableEPm        0x0005be21    0x82  Code  Gb  se_usb.o [6]
+seUSB_Enable            0x0005b801     0xe  Code  Gb  se_usb.o [6]
+seUSB_EnableEPm         0x0005bd95    0x88  Code  Gb  se_usb.o [6]
+seUSB_GetSetupPacket    0x0005c33d    0x4c  Code  Gb  se_usb.o [6]
+seUSB_Init              0x0005b7a7    0x5a  Code  Gb  se_usb.o [6]
+seUSB_InitEp0           0x0005bb19    0x26  Code  Gb  se_usb.o [6]
+seUSB_InitUsbModule     0x0005b8cd    0x66  Code  Gb  se_usb.o [6]
+seUSB_IsVbusConnected   0x0005b891    0x3c  Code  Gb  se_usb.o [6]
+seUSB_ReadFifo          0x0005bfb5   0x11c  Code  Gb  se_usb.o [6]
+seUSB_Reset             0x0005bea3     0xe  Code  Gb  se_usb.o [6]
+seUSB_ResetEPm          0x0005bd1d    0x74  Code  Gb  se_usb.o [6]
+seUSB_Resume            0x0005becd    0x1e  Code  Gb  se_usb.o [6]
+seUSB_SetAddress        0x0005bf2d    0x14  Code  Gb  se_usb.o [6]
+seUSB_SetEp0Dir         0x0005bb3f    0x1e  Code  Gb  se_usb.o [6]
+seUSB_SetStall          0x0005c2a9    0x40  Code  Gb  se_usb.o [6]
+seUSB_Snooze            0x0005bef5    0x30  Code  Gb  se_usb.o [6]
+seUSB_StatusInStage     0x0005bb81    0x26  Code  Gb  se_usb.o [6]
+seUSB_Suspend           0x0005beb5    0x14  Code  Gb  se_usb.o [6]
+seUSB_WriteFifo         0x0005c0f1   0x1aa  Code  Gb  se_usb.o [6]
+seWDT2_ChipReset        0x00059949    0x68  Code  Gb  se_wdt2.o [6]
+seWDT2_ConfigureClock   0x000598bd    0x4a  Code  Gb  se_wdt2.o [6]
+seWDT2_Init             0x0005979f    0x90  Code  Gb  se_wdt2.o [6]
+seWDT2_InitStruct       0x0005978d    0x12  Code  Gb  se_wdt2.o [6]
+seWDT2_ResetCounter     0x00059907    0x1c  Code  Gb  se_wdt2.o [6]
+seWDT2_SetCMP           0x00059923    0x26  Code  Gb  se_wdt2.o [6]
+seWDT2_SetMode          0x00059893    0x2a  Code  Gb  se_wdt2.o [6]
+seWDT2_Start            0x0005984f    0x44  Code  Gb  se_wdt2.o [6]
+seWDT2_Stop             0x0005982f    0x20  Code  Gb  se_wdt2.o [6]
+serial_usb_get_size_sbuff
+                        0x0005a641     0x8  Code  Gb  drv_usb_main.o [1]
+serial_usb_init         0x0005a631    0x10  Code  Gb  drv_usb_main.o [1]
+serial_usb_send         0x0005a649    0x64  Code  Gb  drv_usb_main.o [1]
+seseUSB_StatusOutStage  0x0005bb61    0x1a  Code  Gb  se_usb.o [6]
+setI2cMstStartCondition
+                        0x0005b645    0x34  Code  Lc  se_i2c.o [6]
+setI2cMstStopCondition  0x0005b679    0x34  Code  Lc  se_i2c.o [6]
+setSleep                0x00050197    0x10  Code  Gb  system_S1C31W74.o [1]
+sim_cpin_tbl            0x00060304    0x6c  Data  Lc  mid_HTTP.o [1]
+slave_addr              0x200006f4     0x1  Data  Lc  ctrl_BQ24160A.o [1]
+slave_addr              0x200006f5     0x1  Data  Lc  ctrl_BQ28Z610.o [1]
+slave_addr              0x200006f6     0x1  Data  Lc  ctrl_LSM6DSL.o [1]
+slave_addr              0x200006f7     0x1  Data  Lc  ctrl_MPL3115A2.o [1]
+sleep_mode              0x00059c17   0x13c  Code  Gb  drv_clg.o [1]
+sleep_mode_alarm        0x00059eb5   0x18a  Code  Gb  drv_clg.o [1]
+sleep_mode_exton        0x00059d59   0x13c  Code  Gb  drv_clg.o [1]
+sleep_mode_system_error
+                        0x0005a045   0x142  Code  Gb  drv_clg.o [1]
+spi_init                0x000589b5    0x52  Code  Gb  drv_spi_0.o [1]
+spia_ASSERT_MST_CS      0x00058a59    0x10  Code  Gb  drv_spi_0.o [1]
+spia_ENABLE_MST_CS      0x00058a43    0x16  Code  Gb  drv_spi_0.o [1]
+spia_NEGATE_MST_CS      0x00058a69    0x10  Code  Gb  drv_spi_0.o [1]
+spia_ReceiveData        0x00058a25    0x1e  Code  Gb  drv_spi_0.o [1]
+spia_SendData           0x00058a07    0x1e  Code  Gb  drv_spi_0.o [1]
+spia_Start              0x00058a79     0xc  Code  Gb  drv_spi_0.o [1]
+spia_Stop               0x00058a85     0xc  Code  Gb  drv_spi_0.o [1]
+spia_end                0x00058a91    0x24  Code  Gb  drv_spi_0.o [1]
+spia_re_start           0x00058ab5    0x12  Code  Gb  drv_spi_0.o [1]
+sprintf                 0x0004c079    0x38  Code  Gb  sprintf.o [3]
+store                   0x2001d1d8    0x50  Data  Lc  xxwritebuffered.o [3]
+storeLen                0x2001d228     0x4  Data  Lc  xxwritebuffered.o [3]
+strcpy                  0x00058ad9          Code  Gb  strcpy.o [4]
+strlen                  0x0004c0b1    0x10  Code  Gb  strlen.o [4]
+switch_altitude         0x00052057    0x32  Code  Lc  ctrl_MPL3115A2.o [1]
+switch_temp_press       0x00052025    0x32  Code  Lc  ctrl_MPL3115A2.o [1]
+sysmgr_buf              0x2000dd8c  0x2388  Data  Gb  main.o [1]
+sysmgr_buf_lock         0x000483a1     0x6  Code  Gb  main.o [1]
+sysmgr_error_sleep      0x000485b7    0x96  Code  Gb  main.o [1]
+sysmgr_get_log          0x00048487    0x72  Code  Gb  main.o [1]
+sysmgr_init             0x000484f9    0x60  Code  Gb  main.o [1]
+sysmgr_log              0x000483a7    0xe0  Code  Gb  main.o [1]
+sysmgr_log_tbl          0x2001d438    0x10  Data  Gb  main.o [1]
+sysmgr_reset_table      0x0004857f    0x36  Code  Gb  main.o [1]
+sysmgr_set_error        0x00048559    0x26  Code  Gb  main.o [1]
+system_manager          0x2001d3fc    0x14  Data  Gb  main.o [1]
+t16_3_check_1000ms      0x00051d5b    0x16  Code  Gb  drv_t16_3.o [1]
+t16_3_check_100ms       0x00051d2f    0x16  Code  Gb  drv_t16_3.o [1]
+t16_3_check_10ms        0x00051d19    0x16  Code  Gb  drv_t16_3.o [1]
+t16_3_check_500ms       0x00051d45    0x16  Code  Gb  drv_t16_3.o [1]
+t16_3_get_counter       0x00051d13     0x6  Code  Gb  drv_t16_3.o [1]
+t16_3_init              0x00051ca7    0x58  Code  Gb  drv_t16_3.o [1]
+t16_3_start             0x00051cff     0xa  Code  Gb  drv_t16_3.o [1]
+t16_3_stop              0x00051d09     0xa  Code  Gb  drv_t16_3.o [1]
+testflag                0x2001d4d4     0x4  Data  Gb  ctrl_BQ24160A.o [1]
+timer_diff              0x2001d4f4     0x4  Data  Lc  man_press.o [1]
+timer_end               0x2001d4f0     0x4  Data  Lc  man_press.o [1]
+timer_max               0x2001d4f8     0x4  Data  Lc  man_press.o [1]
+timer_start             0x2001d4ec     0x4  Data  Lc  man_press.o [1]
+tmp_tbl                 0x2000057c    0x24  Data  Gb  man_data.o [1]
+unprotect               0x0005972f    0x40  Code  Lc  se_rtca.o [6]
+usb_console_flag        0x2001d500     0x4  Data  Gb  man_usb.o [1]
+usb_log_flag            0x2001d4fc     0x4  Data  Gb  man_usb.o [1]
+usb_send_cnt            0x2001d550     0x4  Data  Gb  se_usb.o [6]
+usb_timer_max           0x2001d4e4     0x4  Data  Lc  drv_usb_main.o [1]
+usbd_cdc_acm_cif_num    0x0006189c     0x1  Data  Gb  usbd_S1C31W74.o [1]
+usbd_cdc_acm_dif_num    0x0006189d     0x1  Data  Gb  usbd_S1C31W74.o [1]
+usbd_cdc_acm_ep_bulkin  0x0006189e     0x1  Data  Gb  usbd_S1C31W74.o [1]
+usbd_cdc_acm_ep_bulkout
+                        0x0006189f     0x1  Data  Gb  usbd_S1C31W74.o [1]
+usbd_cdc_acm_maxpacketsize1
+                        0x0006183c     0x4  Data  Gb  usbd_S1C31W74.o [1]
+usbd_cdc_acm_receivebuf_sz
+                        0x0006185c     0x2  Data  Gb  usbd_S1C31W74.o [1]
+usbd_cdc_acm_sendbuf_sz
+                        0x0006185a     0x2  Data  Gb  usbd_S1C31W74.o [1]
+usbd_class_init         0x0005c45b     0x8  Code  Gb  usbd_S1C31W74.o [1]
+usbd_configured         0x0005d2b7    0x12  Code  Gb  usbd_core.o [1]
+usbd_hs_enable          0x0006189a     0x1  Data  Gb  usbd_S1C31W74.o [1]
+usbd_if_num             0x00061858     0x2  Data  Gb  usbd_S1C31W74.o [1]
+usbd_init               0x0005d279    0x16  Code  Gb  usbd_core.o [1]
+usbd_max_packet0        0x0006189b     0x1  Data  Gb  usbd_S1C31W74.o [1]
+usbd_power              0x00061899     0x1  Data  Gb  usbd_S1C31W74.o [1]
+usbd_reset_core         0x0005d28f    0x28  Code  Gb  usbd_core.o [1]
+utc                     0x2001d4a4     0x8  Data  Lc  gnss_gw_common.o [1]
+wdt_NMI_init            0x00051f23    0x3e  Code  Gb  drv_wdt.o [1]
+wdt_init                0x00051ee5    0x3e  Code  Gb  drv_wdt.o [1]
+wdt_reset               0x00051f7d    0x10  Code  Gb  drv_wdt.o [1]
+wdt_resetCounter        0x00051f75     0x8  Code  Gb  drv_wdt.o [1]
+wdt_start               0x00051f65     0x8  Code  Gb  drv_wdt.o [1]
+wdt_stop                0x00051f6d     0x8  Code  Gb  drv_wdt.o [1]
+writeReload             0x20000670     0x2  Data  Gb  FlashS1C31W74.o [5]
+
+
+[1] = C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj
+[2] = command line
+[3] = dl6M_tln.a
+[4] = rt6M_tl.a
+[5] = seFlashLibraryS1C31W74Int.a
+[6] = sePeriphLibrary.a
+[7] = shb_l.a
+
+  125 823 bytes of readonly  code memory
+    1 292 bytes of readwrite code memory
+   11 806 bytes of readonly  data memory
+  122 951 bytes of readwrite data memory
+
+Errors: none
+Warnings: none

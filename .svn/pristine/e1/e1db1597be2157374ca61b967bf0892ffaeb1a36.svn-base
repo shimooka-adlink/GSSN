@@ -1,0 +1,295 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V7.80.4.12462/W32 for ARM       17/May/2019  13:32:02
+# Copyright 1999-2017 IAR Systems AB.
+#
+#    Cpu mode     =  thumb
+#    Endian       =  little
+#    Source file  =  
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\driver\flash\drv_flash.c
+#    Command line =  
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\driver\flash\drv_flash.c -D
+#        __TARGET_ARCH_7_M -D S1C31W74 -D GNSS_GW_SIDE_B -lCN
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\List
+#        -lA
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\List
+#        --diag_suppress Pe177,Pe111,Pa082 -o
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj
+#        --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa
+#        --no_clustering --no_scheduling --debug --endian=little
+#        --cpu=Cortex-M0+ -e --fpu=None --dlib_config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench
+#        7.5\arm\INC\c\DLib_Config_Normal.h" -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\ -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\
+#        -I "C:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        7.5\arm\CMSIS\Include\" -I "C:\Program Files (x86)\IAR
+#        Systems\Embedded Workbench 7.5\arm\inc\Epson\" -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\CMSIS\Device\S1C31W74\Include\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\CMSIS\Driver\Include\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\sePeriphLibrary\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\board\S5U1C31W74T1\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\USBStack\INC\
+#        -I
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\include\
+#        -Ol
+#    Locale       =  Japanese_Japan.932
+#    List file    =  
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\List\drv_flash.lst
+#    Object file  =  
+#        C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\drv_flash.o
+#
+###############################################################################
+
+C:\GNSS\Software\rJ104_rc2\source\GNSS_GW\driver\flash\drv_flash.c
+      1          /***********************************************************
+      2          *
+      3          *	drv_flash.c
+      4          *
+      5          *	FLASHを制御するソフトウェア.
+      6          *
+      7          *	history : 2016/11/17	start
+      8          *
+      9          *	COPYRIGHT (C) 2016, SEIKO EPSON CORP. All Rights Reserved
+     10          *
+     11              $Id: drv_flash.c 201 2018-06-15 06:10:56Z shitaoka $
+     12          ************************************************************/
+     13          /* include */
+     14          #include <stdio.h>
+     15          #include <string.h>
+     16          #include "Driver_Flash.h"
+     17          
+     18          
+     19          #pragma section = "DRV_PRG_BLOCK"
+     20          
+     21          extern  ARM_DRIVER_FLASH Driver_Flash;
+     22          
+     23          //ARM_FLASH_INFO *Info;
+     24          
+     25          /********************************************************************/
+     26          /*!
+     27           * \name	flash_start
+     28           * \brief	FLASH Driver使用開始
+     29           * \param	なし
+     30           * \return  なし
+     31           * \note	
+     32           */
+     33          /********************************************************************/
+
+   \                                 In section .text, align 4, keep-with-next
+     34          void flash_start( void ) 
+     35          {
+   \                     flash_start: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+     36          	//disable Interrupt
+     37          	__asm("CPSID i");
+   \   00000002   0xB672             CPSID i
+     38          
+     39          //	Info = Driver_Flash.GetInfo();
+     40          
+     41          	// Initialize
+     42          	Driver_Flash.Initialize(NULL);
+   \   00000004   0x2000             MOVS     R0,#+0
+   \   00000006   0x....             LDR      R1,??DataTable4
+   \   00000008   0x6889             LDR      R1,[R1, #+8]
+   \   0000000A   0x4788             BLX      R1
+     43          
+     44          	//enable Interrupt
+     45          	__asm("CPSIE i");
+   \   0000000C   0xB662             CPSIE i
+     46          }
+   \   0000000E   0xBD01             POP      {R0,PC}          ;; return
+     47          
+     48          
+     49          /********************************************************************/
+     50          /*!
+     51           * \name	flash_init
+     52           * \brief	FLASH Driver終了処理
+     53           * \param	なし
+     54           * \return  なし
+     55           * \note	
+     56           */
+     57          /********************************************************************/
+
+   \                                 In section .text, align 4, keep-with-next
+     58          void flash_end( void ) 
+     59          {
+   \                     flash_end: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+     60          	//disable Interrupt
+     61          	__asm("CPSID i");
+   \   00000002   0xB672             CPSID i
+     62          
+     63          	
+     64          	// Uninitialize
+     65          	Driver_Flash.Uninitialize();
+   \   00000004   0x....             LDR      R0,??DataTable4
+   \   00000006   0x68C0             LDR      R0,[R0, #+12]
+   \   00000008   0x4780             BLX      R0
+     66          
+     67          	//enable Interrupt
+     68          	__asm("CPSIE i");
+   \   0000000A   0xB662             CPSIE i
+     69          }
+   \   0000000C   0xBD01             POP      {R0,PC}          ;; return
+     70          
+     71          
+     72          /********************************************************************/
+     73          /*!
+     74           * \name	flash_erase_sector
+     75           * \brief	FLASH Sector ERASE処理
+     76           * \param	なし
+     77           * \return   0: 成功
+     78           *          -1: 失敗
+     79           * \note	
+     80           */
+     81          /********************************************************************/
+
+   \                                 In section .text, align 4, keep-with-next
+     82          int32_t flash_erase_sector( uint32_t addr ) 
+     83          {
+   \                     flash_erase_sector: (+1)
+   \   00000000   0xB510             PUSH     {R4,LR}
+     84          	int32_t		ret=-1;
+   \   00000002   0x2400             MOVS     R4,#+0
+   \   00000004   0x43E4             MVNS     R4,R4            ;; #-1
+     85          
+     86          	//disable Interrupt
+     87          	__asm("CPSID i");
+   \   00000006   0xB672             CPSID i
+     88          
+     89          	addr &= 0xfffff000;
+   \   00000008   0x0B00             LSRS     R0,R0,#+12
+   \   0000000A   0x0300             LSLS     R0,R0,#+12
+     90          	if (Driver_Flash.EraseSector(addr)==ARM_DRIVER_OK) {
+   \   0000000C   0x....             LDR      R1,??DataTable4
+   \   0000000E   0x69C9             LDR      R1,[R1, #+28]
+   \   00000010   0x4788             BLX      R1
+   \   00000012   0x2800             CMP      R0,#+0
+   \   00000014   0xD100             BNE      ??flash_erase_sector_0
+     91          		ret=0;
+   \   00000016   0x2400             MOVS     R4,#+0
+     92          	}
+     93          
+     94          	//enable Interrupt
+     95          	__asm("CPSIE i");
+   \                     ??flash_erase_sector_0: (+1)
+   \   00000018   0xB662             CPSIE i
+     96          
+     97          	return ret;
+   \   0000001A   0x0020             MOVS     R0,R4
+   \   0000001C   0xBD10             POP      {R4,PC}          ;; return
+     98          }
+     99          
+    100          
+    101          /********************************************************************/
+    102          /*!
+    103           * \name	flash_write
+    104           * \brief	FLASH WRITE処理
+    105           * \param	なし
+    106           * \return   0: 成功
+    107           *          -1: 失敗
+    108           * \note	
+    109           */
+    110          /********************************************************************/
+
+   \                                 In section .text, align 4, keep-with-next
+    111          int32_t flash_write( uint32_t addr, const void *data, uint32_t cnt ) 
+    112          {
+   \                     flash_write: (+1)
+   \   00000000   0xB510             PUSH     {R4,LR}
+    113          	int32_t		ret=-1;
+   \   00000002   0x2400             MOVS     R4,#+0
+   \   00000004   0x43E4             MVNS     R4,R4            ;; #-1
+    114          
+    115          	//disable Interrupt
+    116          	__asm("CPSID i");
+   \   00000006   0xB672             CPSID i
+    117          
+    118          	if (Driver_Flash.ProgramData(addr, data, cnt)==ARM_DRIVER_OK) {
+   \   00000008   0x....             LDR      R3,??DataTable4
+   \   0000000A   0x699B             LDR      R3,[R3, #+24]
+   \   0000000C   0x4798             BLX      R3
+   \   0000000E   0x2800             CMP      R0,#+0
+   \   00000010   0xD100             BNE      ??flash_write_0
+    119          		ret=0;
+   \   00000012   0x2400             MOVS     R4,#+0
+    120          	}
+    121          
+    122          	//enable Interrupt
+    123          	__asm("CPSIE i");
+   \                     ??flash_write_0: (+1)
+   \   00000014   0xB662             CPSIE i
+    124          
+    125          	return ret;
+   \   00000016   0x0020             MOVS     R0,R4
+   \   00000018   0xBD10             POP      {R4,PC}          ;; return
+    126          }
+    127          
+    128          
+    129          /********************************************************************/
+    130          /*!
+    131           * \name	flash_read
+    132           * \brief	FLASH READ処理
+    133           * \param	なし
+    134           * \return  なし
+    135           * \note	
+    136           */
+    137          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    138          void flash_read( uint32_t addr, uint8_t *data, uint32_t cnt ) 
+    139          {
+   \                     flash_read: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    140          	Driver_Flash.ReadData(addr, data, cnt);
+   \   00000002   0x....             LDR      R3,??DataTable4
+   \   00000004   0x695B             LDR      R3,[R3, #+20]
+   \   00000006   0x4798             BLX      R3
+    141          }
+   \   00000008   0xBD01             POP      {R0,PC}          ;; return
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable4:
+   \   00000000   0x........         DC32     Driver_Flash
+    142          
+    143          
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       8   flash_end
+         8   -- Indirect call
+       8   flash_erase_sector
+         8   -- Indirect call
+       8   flash_read
+         8   -- Indirect call
+       8   flash_start
+         8   -- Indirect call
+       8   flash_write
+         8   -- Indirect call
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable4
+      14  flash_end
+      30  flash_erase_sector
+      10  flash_read
+      16  flash_start
+      26  flash_write
+
+ 
+ 100 bytes in section .text
+ 
+ 100 bytes of CODE memory
+
+Errors: none
+Warnings: none

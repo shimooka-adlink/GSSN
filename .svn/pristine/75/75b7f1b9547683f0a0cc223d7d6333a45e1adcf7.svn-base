@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<workspace>
+  <project>
+    <path>$WS_DIR$\..\..\..\..\..\sePeriphLibrary\Device\S1C31W74\IAR\sePeriphLibrary.ewp</path>
+  </project>
+  <project>
+    <path>$WS_DIR$\GNSS_GW.ewp</path>
+  </project>
+  <batchBuild>
+    <batchDefinition>
+      <name>all_Debug</name>
+      <member>
+        <project>sePeriphLibrary</project>
+        <configuration>Debug</configuration>
+      </member>
+      <member>
+        <project>GNSS_GW</project>
+        <configuration>Debug</configuration>
+      </member>
+    </batchDefinition>
+    <batchDefinition>
+      <name>all_DebugFlash</name>
+      <member>
+        <project>sePeriphLibrary</project>
+        <configuration>Debug</configuration>
+      </member>
+      <member>
+        <project>GNSS_GW</project>
+        <configuration>DebugFlash</configuration>
+      </member>
+    </batchDefinition>
+    <batchDefinition>
+      <name>all_ReleaseFlash</name>
+      <member>
+        <project>sePeriphLibrary</project>
+        <configuration>Release</configuration>
+      </member>
+      <member>
+        <project>GNSS_GW</project>
+        <configuration>ReleaseFlash</configuration>
+      </member>
+    </batchDefinition>
+  </batchBuild>
+</workspace>
+
+

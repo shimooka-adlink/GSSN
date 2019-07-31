@@ -1,0 +1,521 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V7.80.4.12462/W32 for ARM       21/May/2019  17:01:19
+# Copyright 1999-2017 IAR Systems AB.
+#
+#    Cpu mode     =  thumb
+#    Endian       =  little
+#    Source file  =  
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\driver\spi\drv_spi_0.c
+#    Command line =  
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\driver\spi\drv_spi_0.c -D
+#        __TARGET_ARCH_7_M -D S1C31W74 -D GNSS_GW_SIDE_B -lCN
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\List
+#        -lA
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\List
+#        --diag_suppress Pe177,Pe111,Pa082 -o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj
+#        --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa
+#        --no_clustering --no_scheduling --debug --endian=little
+#        --cpu=Cortex-M0+ -e --fpu=None --dlib_config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench
+#        7.5\arm\INC\c\DLib_Config_Normal.h" -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\ -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\
+#        -I "C:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        7.5\arm\CMSIS\Include\" -I "C:\Program Files (x86)\IAR
+#        Systems\Embedded Workbench 7.5\arm\inc\Epson\" -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\CMSIS\Device\S1C31W74\Include\
+#        -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\CMSIS\Driver\Include\
+#        -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\sePeriphLibrary\
+#        -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\board\S5U1C31W74T1\
+#        -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\USBStack\INC\
+#        -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\include\
+#        -Ol
+#    Locale       =  Japanese_Japan.932
+#    List file    =  
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\List\drv_spi_0.lst
+#    Object file  =  
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\drv_spi_0.o
+#
+###############################################################################
+
+C:\GNSS\Software\rJ105\source\GNSS_GW\driver\spi\drv_spi_0.c
+      1          
+      2          /**
+      3            ******************************************************************************
+      4            * @file    drv_spia_0.c
+      5            * @author  コア
+      6            * @version V1.0
+      7            * @date    2017.10.2
+      8            * @brief   P12, P13を使用してSPI Ch0 を制御をおこなう。
+      9            *          MASTERモード, 400000bpsで使用する。
+     10            ******************************************************************************
+     11            * @attention
+     12            *
+     13            *  PORT
+     14            *    P12        : SCL
+     15            *    P13        : SDA
+     16            *
+     17            *  SPI_mode     : seSPIA_MODE_MASTER
+     18            *  transfer rate: 400000 bps
+     19            *
+     20            *****************************************************************************
+     21          */ 
+     22          
+     23          /* include */
+     24          #include <stdio.h>
+     25          #include <string.h>
+     26          
+     27          #include "board.h"
+     28          #include "se_common.h"
+     29          #include "se_pport.h"
+     30          #include "se_clg.h"
+     31          #include "drv_gpio.h"
+     32          #include "drv_spi.h"
+     33          #include "se_spia.h"
+     34          #include "se_t16.h"
+     35          
+     36          
+     37          #pragma section = "DRV_PRG_BLOCK"
+     38          
+     39          //(3)
+
+   \                                 In section .bss, align 4
+     40          static seT16_InitTypeDef T16_InitStruct;
+   \                     T16_InitStruct:
+   \   00000000                      DS8 8
+
+   \                                 In section .bss, align 4
+     41          static seSPIA_InitTypeDef SPI_InitStruct;
+   \                     SPI_InitStruct:
+   \   00000000                      DS8 8
+     42          
+     43          /********************************************************************/
+     44          /*	extern関数                                                      */
+     45          /********************************************************************/
+     46          
+     47          
+     48          
+     49          
+     50          
+     51          /********************************************************************/
+     52          /*!
+     53           * \name	spi_init
+     54           * \brief	SPI Driverの初期化
+     55           * \param	なし
+     56           * \return  なし
+     57           * \note	
+     58           */
+     59          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+     60          void spi_init( void ) 
+     61          {
+   \                     spi_init: (+1)
+   \   00000000   0xB510             PUSH     {R4,LR}
+     62          	// 変数の初期化
+     63          	memset( &T16_InitStruct, 0, sizeof( T16_InitStruct ) );
+   \   00000002   0x2108             MOVS     R1,#+8
+   \   00000004   0x2200             MOVS     R2,#+0
+   \   00000006   0x....             LDR      R4,??DataTable9
+   \   00000008   0x0020             MOVS     R0,R4
+   \   0000000A   0x.... 0x....      BL       __aeabi_memset
+     64          	memset( &SPI_InitStruct, 0, sizeof( SPI_InitStruct ) );
+   \   0000000E   0x2107             MOVS     R1,#+7
+   \   00000010   0x2200             MOVS     R2,#+0
+   \   00000012   0x....             LDR      R4,??DataTable9_1
+   \   00000014   0x0020             MOVS     R0,R4
+   \   00000016   0x.... 0x....      BL       __aeabi_memset
+     65          
+     66          	// Init T16
+     67          	seT16_InitStruct(&T16_InitStruct);
+   \   0000001A   0x....             LDR      R0,??DataTable9
+   \   0000001C   0x.... 0x....      BL       seT16_InitStruct
+     68          	T16_InitStruct.Period = 0x80;
+   \   00000020   0x2080             MOVS     R0,#+128
+   \   00000022   0x....             LDR      R1,??DataTable9
+   \   00000024   0x80C8             STRH     R0,[R1, #+6]
+     69          	seT16_Init( SPIA_CH0.T16x, &T16_InitStruct );
+   \   00000026   0x....             LDR      R1,??DataTable9
+   \   00000028   0x....             LDR      R0,??DataTable9_2
+   \   0000002A   0x6840             LDR      R0,[R0, #+4]
+   \   0000002C   0x.... 0x....      BL       seT16_Init
+     70          
+     71          	// Init Spi as Master
+     72          	seSPIA_InitStructForMaster(&SPI_InitStruct);
+   \   00000030   0x....             LDR      R0,??DataTable9_1
+   \   00000032   0x.... 0x....      BL       seSPIA_InitStructForMaster
+     73          	seSPIA_Init( &SPIA_CH0, &SPI_InitStruct );
+   \   00000036   0x....             LDR      R1,??DataTable9_1
+   \   00000038   0x....             LDR      R0,??DataTable9_2
+   \   0000003A   0x.... 0x....      BL       seSPIA_Init
+     74          	spia_ENABLE_MST_CS(); // Configure GPIO for SS use
+   \   0000003E   0x.... 0x....      BL       spia_ENABLE_MST_CS
+     75          
+     76          	uint32_t busspeed = 10000000;
+   \   00000042   0x....             LDR      R1,??DataTable9_3  ;; 0x989680
+     77          	seSPIA_SetBusSpeed( &SPIA_CH0, busspeed );
+   \   00000044   0x....             LDR      R0,??DataTable9_2
+   \   00000046   0x.... 0x....      BL       seSPIA_SetBusSpeed
+     78          
+     79          	// Start SPI
+     80          	seSPIA_Start( &SPIA_CH0 );
+   \   0000004A   0x....             LDR      R0,??DataTable9_2
+   \   0000004C   0x.... 0x....      BL       seSPIA_Start
+     81          }
+   \   00000050   0xBD10             POP      {R4,PC}          ;; return
+     82          
+     83          
+     84          
+     85          /********************************************************************/
+     86          /*!
+     87           * \name	spia_SendData
+     88           * \brief	SPI CH0 にデータを送信する
+     89           * \param	uint8_t   data         : 送信データ
+     90           *          uint32_t  size         : 送信データ数
+     91           * \return   0: 成功
+     92           *          -1: 失敗
+     93           * \note	なし
+     94           */
+     95          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+     96          int32_t spia_SendData( uint8_t *data, uint32_t size )
+     97          {
+   \                     spia_SendData: (+1)
+   \   00000000   0xB510             PUSH     {R4,LR}
+     98          	int32_t		ret = -1;
+   \   00000002   0x2400             MOVS     R4,#+0
+   \   00000004   0x43E4             MVNS     R4,R4            ;; #-1
+     99          	seStatus	fStatus; 
+    100          
+    101          	
+    102          	fStatus = seSPIA_TxBytes( SPIA_CH0.SPIx, data, size );
+   \   00000006   0x000A             MOVS     R2,R1
+   \   00000008   0x0001             MOVS     R1,R0
+   \   0000000A   0x....             LDR      R0,??DataTable9_2
+   \   0000000C   0x6800             LDR      R0,[R0, #+0]
+   \   0000000E   0x.... 0x....      BL       seSPIA_TxBytes
+    103          
+    104          	if ( fStatus == seSTATUS_OK ) {
+   \   00000012   0xB2C0             UXTB     R0,R0
+   \   00000014   0x2801             CMP      R0,#+1
+   \   00000016   0xD100             BNE      ??spia_SendData_0
+    105          		ret = 0;
+   \   00000018   0x2400             MOVS     R4,#+0
+    106          	}
+    107          
+    108          	return ret;
+   \                     ??spia_SendData_0: (+1)
+   \   0000001A   0x0020             MOVS     R0,R4
+   \   0000001C   0xBD10             POP      {R4,PC}          ;; return
+    109          }
+    110          
+    111          
+    112          
+    113          /********************************************************************/
+    114          /*!
+    115           * \name	spia_ReceiveData
+    116           * \brief	SPI CH0 からデータを取得する
+    117           * \param	uint8_t   data    : 受信データ格納アドレス
+    118           *          uint32_t  size    : 受信データ数
+    119           * \return   0: 成功
+    120           *          -1: 失敗
+    121           * \note	なし
+    122           */
+    123          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    124          int32_t spia_ReceiveData(uint8_t *data, uint32_t size)
+    125          {
+   \                     spia_ReceiveData: (+1)
+   \   00000000   0xB510             PUSH     {R4,LR}
+    126          	seStatus	fStatus; 
+    127          	int32_t		ret = -1;
+   \   00000002   0x2400             MOVS     R4,#+0
+   \   00000004   0x43E4             MVNS     R4,R4            ;; #-1
+    128          
+    129          
+    130          	fStatus = seSPIA_RxBytes( SPIA_CH0.SPIx, data, size);
+   \   00000006   0x000A             MOVS     R2,R1
+   \   00000008   0x0001             MOVS     R1,R0
+   \   0000000A   0x....             LDR      R0,??DataTable9_2
+   \   0000000C   0x6800             LDR      R0,[R0, #+0]
+   \   0000000E   0x.... 0x....      BL       seSPIA_RxBytes
+    131          	if ( fStatus == seSTATUS_OK ) {
+   \   00000012   0xB2C0             UXTB     R0,R0
+   \   00000014   0x2801             CMP      R0,#+1
+   \   00000016   0xD100             BNE      ??spia_ReceiveData_0
+    132          		ret = 0;
+   \   00000018   0x2400             MOVS     R4,#+0
+    133          	}
+    134          
+    135          	return ret;
+   \                     ??spia_ReceiveData_0: (+1)
+   \   0000001A   0x0020             MOVS     R0,R4
+   \   0000001C   0xBD10             POP      {R4,PC}          ;; return
+    136          }
+    137          
+    138          
+
+   \                                 In section .text, align 2, keep-with-next
+    139          void spia_ENABLE_MST_CS( void )
+    140          {
+   \                     spia_ENABLE_MST_CS: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    141          	sePPORT_InitAsOutput( SPIA_CH0.SPISS.portID );
+   \   00000002   0x....             LDR      R0,??DataTable9_2
+   \   00000004   0x7A40             LDRB     R0,[R0, #+9]
+   \   00000006   0x.... 0x....      BL       sePPORT_InitAsOutput
+    142          	sePPORT_SetOutput( SPIA_CH0.SPISS.portID, sePPORT_DATA_HIGH );
+   \   0000000A   0x2101             MOVS     R1,#+1
+   \   0000000C   0x....             LDR      R0,??DataTable9_2
+   \   0000000E   0x7A40             LDRB     R0,[R0, #+9]
+   \   00000010   0x.... 0x....      BL       sePPORT_SetOutput
+    143          }
+   \   00000014   0xBD01             POP      {R0,PC}          ;; return
+    144          
+
+   \                                 In section .text, align 2, keep-with-next
+    145          void spia_ASSERT_MST_CS( void )
+    146          {
+   \                     spia_ASSERT_MST_CS: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    147          	sePPORT_SetOutput( SPIA_CH0.SPISS.portID, sePPORT_DATA_LOW );
+   \   00000002   0x2100             MOVS     R1,#+0
+   \   00000004   0x....             LDR      R0,??DataTable9_2
+   \   00000006   0x7A40             LDRB     R0,[R0, #+9]
+   \   00000008   0x.... 0x....      BL       sePPORT_SetOutput
+    148          	// Wait...
+    149          	__NOP();
+   \   0000000C   0xBF00             Nop      
+    150          }
+   \   0000000E   0xBD01             POP      {R0,PC}          ;; return
+    151          
+
+   \                                 In section .text, align 2, keep-with-next
+    152          void spia_NEGATE_MST_CS( void )
+    153          {
+   \                     spia_NEGATE_MST_CS: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    154          	sePPORT_SetOutput( SPIA_CH0.SPISS.portID, sePPORT_DATA_HIGH );
+   \   00000002   0x2101             MOVS     R1,#+1
+   \   00000004   0x....             LDR      R0,??DataTable9_2
+   \   00000006   0x7A40             LDRB     R0,[R0, #+9]
+   \   00000008   0x.... 0x....      BL       sePPORT_SetOutput
+    155          	// Wait...
+    156          	__NOP();
+   \   0000000C   0xBF00             Nop      
+    157          }
+   \   0000000E   0xBD01             POP      {R0,PC}          ;; return
+    158          
+    159          
+    160          /********************************************************************/
+    161          /*!
+    162           * \name	spia_Start
+    163           * \brief	SPIA CH0 Driverを開始する
+    164           * \param	なし
+    165           * \return   0: 成功
+    166           *          -1: 失敗
+    167           * \note	なし
+    168           */
+    169          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    170          int32_t spia_Start( void ) 
+    171          {
+   \                     spia_Start: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    172          	// Start SPI
+    173          	seSPIA_Start( &SPIA_CH0 );
+   \   00000002   0x....             LDR      R0,??DataTable9_2
+   \   00000004   0x.... 0x....      BL       seSPIA_Start
+    174          	
+    175          	return 0;
+   \   00000008   0x2000             MOVS     R0,#+0
+   \   0000000A   0xBD02             POP      {R1,PC}          ;; return
+    176          }
+    177          
+    178          
+    179          /********************************************************************/
+    180          /*!
+    181           * \name	spia_Stop
+    182           * \brief	SPIA CH0 Driverを停止する
+    183           * \param	なし
+    184           * \return   0: 成功
+    185           * \note	なし
+    186           */
+    187          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    188          int32_t spia_Stop( void ) 
+    189          {
+   \                     spia_Stop: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    190          	// Stop SPI
+    191          	seSPIA_Stop( &SPIA_CH0 );
+   \   00000002   0x....             LDR      R0,??DataTable9_2
+   \   00000004   0x.... 0x....      BL       seSPIA_Stop
+    192          
+    193          	return 0;
+   \   00000008   0x2000             MOVS     R0,#+0
+   \   0000000A   0xBD02             POP      {R1,PC}          ;; return
+    194          }
+    195          
+    196          
+    197          
+    198          /********************************************************************/
+    199          /*!
+    200           * \name	spia_end
+    201           * \brief	SPIA CH0 Driverの使用終了
+    202           *            CS, SDI, SDO, CLK端子をHi-Z stateとする
+    203           * \param	なし
+    204           * \return  なし
+    205           * \note	再開はspia_re_startを呼ぶこと。
+    206           */
+    207          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    208          void spia_end( void )
+    209          {
+   \                     spia_end: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    210          	// CS端子をHi-Z stateとする
+    211          	sePPORT_InitAsHiZ( SPIA_CH0.SPISS.portID );
+   \   00000002   0x....             LDR      R0,??DataTable9_2
+   \   00000004   0x7A40             LDRB     R0,[R0, #+9]
+   \   00000006   0x.... 0x....      BL       sePPORT_InitAsHiZ
+    212          	// SDI端子をHi-Z stateとする
+    213          	sePPORT_InitAsHiZ( SPIA_CH0.SDI.portID );
+   \   0000000A   0x....             LDR      R0,??DataTable9_2
+   \   0000000C   0x7B00             LDRB     R0,[R0, #+12]
+   \   0000000E   0x.... 0x....      BL       sePPORT_InitAsHiZ
+    214          	// SDO端子をHi-Z stateとする
+    215          	sePPORT_InitAsHiZ( SPIA_CH0.SDO.portID );
+   \   00000012   0x....             LDR      R0,??DataTable9_2
+   \   00000014   0x7BC0             LDRB     R0,[R0, #+15]
+   \   00000016   0x.... 0x....      BL       sePPORT_InitAsHiZ
+    216          	// CLK端子をHi-Z stateとする
+    217          	sePPORT_InitAsHiZ( SPIA_CH0.SPICLK.portID );
+   \   0000001A   0x....             LDR      R0,??DataTable9_2
+   \   0000001C   0x7C80             LDRB     R0,[R0, #+18]
+   \   0000001E   0x.... 0x....      BL       sePPORT_InitAsHiZ
+    218          
+    219          
+    220          }
+   \   00000022   0xBD01             POP      {R0,PC}          ;; return
+    221          
+    222          /********************************************************************/
+    223          /*!
+    224           * \name	spia_re_start
+    225           * \brief	SPIA CH0 Driverの使用再開
+    226           *            CS, SDI, SDO, CLK端子を再設定する
+    227           * \param	なし
+    228           * \return  なし
+    229           * \note	spia_end後に呼ぶこと。
+    230           */
+    231          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    232          void spia_re_start( void )
+    233          {
+   \                     spia_re_start: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    234          	ConfigurePortsForSPI( &SPIA_CH0 , SPI_InitStruct.MST );
+   \   00000002   0x....             LDR      R0,??DataTable9_1
+   \   00000004   0x7981             LDRB     R1,[R0, #+6]
+   \   00000006   0x....             LDR      R0,??DataTable9_2
+   \   00000008   0x.... 0x....      BL       ConfigurePortsForSPI
+    235          	spia_ENABLE_MST_CS(); // Configure GPIO for SS use
+   \   0000000C   0x.... 0x....      BL       spia_ENABLE_MST_CS
+    236          }
+   \   00000010   0xBD01             POP      {R0,PC}          ;; return
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable9:
+   \   00000000   0x........         DC32     T16_InitStruct
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable9_1:
+   \   00000000   0x........         DC32     SPI_InitStruct
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable9_2:
+   \   00000000   0x........         DC32     SPIA_CH0
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable9_3:
+   \   00000000   0x00989680         DC32     0x989680
+    237          
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       8   spi_init
+         8   -> __aeabi_memset
+         8   -> seSPIA_Init
+         8   -> seSPIA_InitStructForMaster
+         8   -> seSPIA_SetBusSpeed
+         8   -> seSPIA_Start
+         8   -> seT16_Init
+         8   -> seT16_InitStruct
+         8   -> spia_ENABLE_MST_CS
+       8   spia_ASSERT_MST_CS
+         8   -> sePPORT_SetOutput
+       8   spia_ENABLE_MST_CS
+         8   -> sePPORT_InitAsOutput
+         8   -> sePPORT_SetOutput
+       8   spia_NEGATE_MST_CS
+         8   -> sePPORT_SetOutput
+       8   spia_ReceiveData
+         8   -> seSPIA_RxBytes
+       8   spia_SendData
+         8   -> seSPIA_TxBytes
+       8   spia_Start
+         8   -> seSPIA_Start
+       8   spia_Stop
+         8   -> seSPIA_Stop
+       8   spia_end
+         8   -> sePPORT_InitAsHiZ
+       8   spia_re_start
+         8   -> ConfigurePortsForSPI
+         8   -> spia_ENABLE_MST_CS
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable9
+       4  ??DataTable9_1
+       4  ??DataTable9_2
+       4  ??DataTable9_3
+       8  SPI_InitStruct
+       8  T16_InitStruct
+      82  spi_init
+      16  spia_ASSERT_MST_CS
+      22  spia_ENABLE_MST_CS
+      16  spia_NEGATE_MST_CS
+      30  spia_ReceiveData
+      30  spia_SendData
+      12  spia_Start
+      12  spia_Stop
+      36  spia_end
+      18  spia_re_start
+
+ 
+  16 bytes in section .bss
+ 290 bytes in section .text
+ 
+ 290 bytes of CODE memory
+  16 bytes of DATA memory
+
+Errors: none
+Warnings: none

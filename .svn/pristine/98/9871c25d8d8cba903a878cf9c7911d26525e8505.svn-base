@@ -1,0 +1,1113 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V7.80.4.12462/W32 for ARM       21/May/2019  17:01:22
+# Copyright 1999-2017 IAR Systems AB.
+#
+#    Cpu mode     =  thumb
+#    Endian       =  little
+#    Source file  =  C:\GNSS\Software\rJ105\source\GNSS_GW\apl\man_gpio.c
+#    Command line =  
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\apl\man_gpio.c -D
+#        __TARGET_ARCH_7_M -D S1C31W74 -D GNSS_GW_SIDE_B -lCN
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\List
+#        -lA
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\List
+#        --diag_suppress Pe177,Pe111,Pa082 -o
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj
+#        --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa
+#        --no_clustering --no_scheduling --debug --endian=little
+#        --cpu=Cortex-M0+ -e --fpu=None --dlib_config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench
+#        7.5\arm\INC\c\DLib_Config_Normal.h" -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\ -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\
+#        -I "C:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        7.5\arm\CMSIS\Include\" -I "C:\Program Files (x86)\IAR
+#        Systems\Embedded Workbench 7.5\arm\inc\Epson\" -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\CMSIS\Device\S1C31W74\Include\
+#        -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\CMSIS\Driver\Include\
+#        -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\sePeriphLibrary\
+#        -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\board\S5U1C31W74T1\
+#        -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\USBStack\INC\
+#        -I
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\include\
+#        -Ol
+#    Locale       =  Japanese_Japan.932
+#    List file    =  
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\List\man_gpio.lst
+#    Object file  =  
+#        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlashBside\Obj\man_gpio.o
+#
+###############################################################################
+
+C:\GNSS\Software\rJ105\source\GNSS_GW\apl\man_gpio.c
+      1          /**
+      2            ******************************************************************************
+      3            * @file    man_gpio.c
+      4            * @author  コア
+      5            * @version V1.0
+      6            * @date    2017.10.2
+      7            * @brief   GPIOを管理する
+      8            ******************************************************************************
+      9            $Id: man_gpio.c 221 2018-07-17 06:38:06Z shitaoka $
+     10            * @attention
+     11            *
+     12            *****************************************************************************
+     13          */
+     14          
+     15          #include <string.h>
+     16          #include <stdio.h>
+     17          #include <stdlib.h>
+     18          
+     19          #include "system_manager.h"
+     20          #include "board.h"
+     21          #include "ctrl_GPIO.h"
+     22          #include "man_gpio.h"
+     23          #include "man_timer.h"
+     24          #include "gnss_gw_common.h"
+     25          
+     26          
+     27          #pragma section = "APL_PRG_BLOCK"
+     28          
+     29          /************************************************************************/
+     30          /* declaration of structure                                             */
+     31          /************************************************************************/
+     32          
+     33          
+     34          // GPIO管理ワーク
+     35          typedef struct _man_gpio_work_t {
+     36          	uint32_t				led_lte;
+     37          	uint32_t				led_bat;
+     38          	uint32_t				led_pow;
+     39          	uint32_t				led_gns;
+     40          
+     41          	uint32_t				led_flash;			// LED点滅状態
+     42          } man_gpio_work_t;
+     43          
+     44          
+     45          /************************************************************************/
+     46          /* definition of variables                                              */
+     47          /************************************************************************/
+     48          
+
+   \                                 In section .bss, align 4
+     49          man_gpio_work_t			man_gpio_work;
+   \                     man_gpio_work:
+   \   00000000                      DS8 20
+     50          
+     51          
+     52          
+     53          /********************************************************************/
+     54          /*	callback関数                                                    */
+     55          /********************************************************************/
+     56          
+     57          /********************************************************************/
+     58          /*	static関数                                                      */
+     59          /********************************************************************/
+     60          
+     61          /********************************************************************/
+     62          /*!
+     63           * \name	man_gpio_led_flash_hdl
+     64          * \brief	LED点滅処理(割り込み制御)
+     65           * \param	なし
+     66           * \return  なし
+     67           * \note	500ms毎に呼ばれること
+     68           */
+     69          /********************************************************************/
+     70          static void man_gpio_led_flash_hdl(void)
+     71          {
+     72          	man_gpio_work.led_flash++;
+     73          
+     74          	if ( (man_gpio_work.led_flash % 2) == 0 ) {
+     75          		if (man_gpio_work.led_lte == MAN_GPIO_CTRL_FLASH) {
+     76          			ctrl_set_port_high(OUT_PORT9);
+     77          		}
+     78          		if (man_gpio_work.led_bat == MAN_GPIO_CTRL_FLASH) {
+     79          			ctrl_set_port_high(OUT_PORT10);
+     80          		}
+     81          		if (man_gpio_work.led_pow == MAN_GPIO_CTRL_FLASH) {
+     82          			ctrl_set_port_high(OUT_PORT11);
+     83          		}
+     84          		if (man_gpio_work.led_gns == MAN_GPIO_CTRL_FLASH) {
+     85          			ctrl_set_port_high(OUT_PORT12);
+     86          		}
+     87          	}
+     88          	else {
+     89          		if (man_gpio_work.led_lte == MAN_GPIO_CTRL_FLASH) {
+     90          			ctrl_set_port_low(OUT_PORT9);
+     91          		}
+     92          		if (man_gpio_work.led_bat == MAN_GPIO_CTRL_FLASH) {
+     93          			ctrl_set_port_low(OUT_PORT10);
+     94          		}
+     95          		if (man_gpio_work.led_pow == MAN_GPIO_CTRL_FLASH) {
+     96          			ctrl_set_port_low(OUT_PORT11);
+     97          		}
+     98          		if (man_gpio_work.led_gns == MAN_GPIO_CTRL_FLASH) {
+     99          			ctrl_set_port_low(OUT_PORT12);
+    100          		}
+    101          	}
+    102          }
+    103          
+    104          
+    105          /********************************************************************/
+    106          /*	extern関数                                                      */
+    107          /********************************************************************/
+    108          
+    109          /********************************************************************/
+    110          /*!
+    111           * \name	man_gpio_init
+    112           * \brief	GPIO管理の初期化処理
+    113           * \param	なし
+    114           * \return   0: 正常
+    115           * \note	起動時に、呼ばれること
+    116           */
+    117          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    118          int32_t man_gpio_init(void)
+    119          {
+   \                     man_gpio_init: (+1)
+   \   00000000   0xB538             PUSH     {R3-R5,LR}
+    120          	int	ret=0;
+   \   00000002   0x2400             MOVS     R4,#+0
+    121          
+    122          	// GPIO初期化
+    123          	ctrl_GPIO_init();
+   \   00000004   0x.... 0x....      BL       ctrl_GPIO_init
+    124          
+    125          	// 内部変数を初期化する
+    126          	memset(&man_gpio_work, 0, sizeof(man_gpio_work_t));
+   \   00000008   0x2114             MOVS     R1,#+20
+   \   0000000A   0x2200             MOVS     R2,#+0
+   \   0000000C   0x....             LDR      R5,??DataTable5
+   \   0000000E   0x0028             MOVS     R0,R5
+   \   00000010   0x.... 0x....      BL       __aeabi_memset
+    127          
+    128          	// 500ms毎に呼ばれる割り込み関数を登録する
+    129          //	man_timer_set_500ms_hdl(man_gpio_led_flash_hdl);
+    130          
+    131          	return ret;
+   \   00000014   0x0020             MOVS     R0,R4
+   \   00000016   0xBD32             POP      {R1,R4,R5,PC}    ;; return
+    132          }
+    133          
+    134          
+    135          /********************************************************************/
+    136          /*!
+    137           * \name	man_gpio_lte_power
+    138           * \brief	LTEの電源のON/OFFを切り替えます
+    139           * \param	ctrl    : MAN_GPIO_CTRL_ON  : POWER ON
+    140           *                    MAN_GPIO_CTRL_OFF : POWER OFF
+    141           * \return  なし
+    142           * \note	入力端子のため出力禁止
+    143           */
+    144          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    145          void man_gpio_lte_power(int32_t  ctrl)
+    146          {
+   \                     man_gpio_lte_power: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    147          	if (ctrl == MAN_GPIO_CTRL_ON) {
+   \   00000002   0x2801             CMP      R0,#+1
+   \   00000004   0xD103             BNE      ??man_gpio_lte_power_0
+    148          		ctrl_set_port_high(OUT_PORT6);
+   \   00000006   0x2005             MOVS     R0,#+5
+   \   00000008   0x.... 0x....      BL       ctrl_set_port_high
+   \   0000000C   0xE004             B        ??man_gpio_lte_power_1
+    149          	}
+    150          	else if (ctrl == MAN_GPIO_CTRL_OFF) {
+   \                     ??man_gpio_lte_power_0: (+1)
+   \   0000000E   0x2800             CMP      R0,#+0
+   \   00000010   0xD102             BNE      ??man_gpio_lte_power_1
+    151          		ctrl_set_port_low(OUT_PORT6);
+   \   00000012   0x2005             MOVS     R0,#+5
+   \   00000014   0x.... 0x....      BL       ctrl_set_port_low
+    152          	}
+    153          }
+   \                     ??man_gpio_lte_power_1: (+1)
+   \   00000018   0xBD01             POP      {R0,PC}          ;; return
+    154          
+    155          
+    156          /********************************************************************/
+    157          /*!
+    158           * \name	man_gpio_lte_pwrkey
+    159           * \brief	LTEのPWRKEYを切り替えます
+    160           * \param	ctrl    : MAN_GPIO_CTRL_ON  : PWRKEY ON
+    161           *                    MAN_GPIO_CTRL_OFF : PWRKEY OFF
+    162           * \return  なし
+    163           * \note	必要時に呼ばれること
+    164           */
+    165          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    166          void man_gpio_lte_pwrkey(int32_t  ctrl)
+    167          {
+   \                     man_gpio_lte_pwrkey: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    168          	if (ctrl == MAN_GPIO_CTRL_ON) {
+   \   00000002   0x2801             CMP      R0,#+1
+   \   00000004   0xD103             BNE      ??man_gpio_lte_pwrkey_0
+    169          		ctrl_set_port_high(OUT_PORT13);		// PWRKEY ON
+   \   00000006   0x200C             MOVS     R0,#+12
+   \   00000008   0x.... 0x....      BL       ctrl_set_port_high
+   \   0000000C   0xE002             B        ??man_gpio_lte_pwrkey_1
+    170          	}
+    171          	else {
+    172          		ctrl_set_port_low(OUT_PORT13);		// PWRKEY OFF
+   \                     ??man_gpio_lte_pwrkey_0: (+1)
+   \   0000000E   0x200C             MOVS     R0,#+12
+   \   00000010   0x.... 0x....      BL       ctrl_set_port_low
+    173          	}
+    174          }
+   \                     ??man_gpio_lte_pwrkey_1: (+1)
+   \   00000014   0xBD01             POP      {R0,PC}          ;; return
+    175          
+    176          /********************************************************************/
+    177          /*!
+    178           * \name	man_gpio_lte_reset
+    179           * \brief	LTEのRESETのON/OFFを切り替えます
+    180           * \param	ctrl    : MAN_GPIO_CTRL_ON  : リセットを発生
+    181           *                    MAN_GPIO_CTRL_OFF : リセットを解除
+    182           * \return  なし
+    183           * \note	必要時に呼ばれること
+    184           */
+    185          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    186          void man_gpio_lte_reset(int32_t  ctrl)
+    187          {
+   \                     man_gpio_lte_reset: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    188          	if (ctrl == MAN_GPIO_CTRL_ON) {
+   \   00000002   0x2801             CMP      R0,#+1
+   \   00000004   0xD103             BNE      ??man_gpio_lte_reset_0
+    189          		ctrl_set_port_high(OUT_PORT4);
+   \   00000006   0x2003             MOVS     R0,#+3
+   \   00000008   0x.... 0x....      BL       ctrl_set_port_high
+   \   0000000C   0xE002             B        ??man_gpio_lte_reset_1
+    190          	}
+    191          	else {
+    192          		ctrl_set_port_low(OUT_PORT4);
+   \                     ??man_gpio_lte_reset_0: (+1)
+   \   0000000E   0x2003             MOVS     R0,#+3
+   \   00000010   0x.... 0x....      BL       ctrl_set_port_low
+    193          	}
+    194          }
+   \                     ??man_gpio_lte_reset_1: (+1)
+   \   00000014   0xBD01             POP      {R0,PC}          ;; return
+    195          
+    196          /********************************************************************/
+    197          /*!
+    198           * \name	man_gpio_lte_stby
+    199           * \brief	LTEのスタンバイのON/OFFを切り替えます
+    200           * \param	ctrl    : MAN_GPIO_CTRL_ON  : スタンバイIN
+    201           *                    MAN_GPIO_CTRL_OFF : スタンバイOUT
+    202           * \return  なし
+    203           * \note	必要時に呼ばれること
+    204           */
+    205          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    206          void man_gpio_lte_stby(int32_t  ctrl)
+    207          {
+   \                     man_gpio_lte_stby: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    208          	if (ctrl == MAN_GPIO_CTRL_ON) {
+   \   00000002   0x2801             CMP      R0,#+1
+   \   00000004   0xD103             BNE      ??man_gpio_lte_stby_0
+    209          		ctrl_set_port_low(OUT_PORT3);		// スタンバイIN
+   \   00000006   0x2002             MOVS     R0,#+2
+   \   00000008   0x.... 0x....      BL       ctrl_set_port_low
+   \   0000000C   0xE002             B        ??man_gpio_lte_stby_1
+    210          	}
+    211          	else {
+    212          		ctrl_set_port_high(OUT_PORT3);		// スタンバイOUT
+   \                     ??man_gpio_lte_stby_0: (+1)
+   \   0000000E   0x2002             MOVS     R0,#+2
+   \   00000010   0x.... 0x....      BL       ctrl_set_port_high
+    213          	}
+    214          }
+   \                     ??man_gpio_lte_stby_1: (+1)
+   \   00000014   0xBD01             POP      {R0,PC}          ;; return
+    215          
+    216          
+    217          /********************************************************************/
+    218          /*!
+    219           * \name	man_gpio_lte_power_get
+    220           * \brief	LTEの電源ON/OFF情報を取得します
+    221           * \param	なし
+    222           * \return  LTE電源ON/OFF情報
+    223           * \note	必要時に呼ばれること
+    224           */
+    225          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    226          man_gpio_ltepow_def man_gpio_lte_power_get( void )
+    227          {
+   \                     man_gpio_lte_power_get: (+1)
+   \   00000000   0xB510             PUSH     {R4,LR}
+    228          	man_gpio_ltepow_def	get_sw=MAN_GPIO_LTEPOW_ON;
+   \   00000002   0x2401             MOVS     R4,#+1
+    229          	
+    230          	if (ctrl_get_port(IN_PORT16) == 0) {
+   \   00000004   0x200F             MOVS     R0,#+15
+   \   00000006   0x.... 0x....      BL       ctrl_get_port
+   \   0000000A   0x2800             CMP      R0,#+0
+   \   0000000C   0xD100             BNE      ??man_gpio_lte_power_get_0
+    231          		get_sw=MAN_GPIO_LTEPOW_OFF;
+   \   0000000E   0x2400             MOVS     R4,#+0
+    232          	}
+    233          	return get_sw;
+   \                     ??man_gpio_lte_power_get_0: (+1)
+   \   00000010   0x0020             MOVS     R0,R4
+   \   00000012   0xB2C0             UXTB     R0,R0
+   \   00000014   0xBD10             POP      {R4,PC}          ;; return
+    234          }
+    235          
+    236          /********************************************************************/
+    237          /*!
+    238           * \name	man_gpio_lte_fmode
+    239           * \brief	LTEのF MODEのON/OFFを切り替えます
+    240           * \param	ctrl    : MAN_GPIO_CTRL_ON  : High
+    241           *                    MAN_GPIO_CTRL_OFF : Low
+    242           * \return  なし
+    243           * \note	必要時に呼ばれること
+    244           */
+    245          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    246          void man_gpio_lte_fmode(int32_t  ctrl)
+    247          {
+   \                     man_gpio_lte_fmode: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    248          	if (ctrl == MAN_GPIO_CTRL_ON) {
+   \   00000002   0x2801             CMP      R0,#+1
+   \   00000004   0xD103             BNE      ??man_gpio_lte_fmode_0
+    249          		ctrl_set_port_low(OUT_PORT5);
+   \   00000006   0x2004             MOVS     R0,#+4
+   \   00000008   0x.... 0x....      BL       ctrl_set_port_low
+   \   0000000C   0xE002             B        ??man_gpio_lte_fmode_1
+    250          	}
+    251          	else {
+    252          		ctrl_set_port_high(OUT_PORT5);
+   \                     ??man_gpio_lte_fmode_0: (+1)
+   \   0000000E   0x2004             MOVS     R0,#+4
+   \   00000010   0x.... 0x....      BL       ctrl_set_port_high
+    253          	}
+    254          }
+   \                     ??man_gpio_lte_fmode_1: (+1)
+   \   00000014   0xBD01             POP      {R0,PC}          ;; return
+    255          
+    256          
+    257          /********************************************************************/
+    258          /*!
+    259           * \name	man_gpio_gps_power
+    260           * \brief	GPSの電源のON/OFFを切り替えます
+    261           * \param	ctrl    : MAN_GPIO_CTRL_ON  : POWER ON
+    262           *                    MAN_GPIO_CTRL_OFF : POWER OFF
+    263           * \return  なし
+    264           * \note	必要時に呼ばれること
+    265           */
+    266          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    267          void man_gpio_gps_power(int32_t  ctrl)
+    268          {
+   \                     man_gpio_gps_power: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    269          	if (ctrl == MAN_GPIO_CTRL_ON) {
+   \   00000002   0x2801             CMP      R0,#+1
+   \   00000004   0xD103             BNE      ??man_gpio_gps_power_0
+    270          		ctrl_set_port_high(OUT_PORT2);
+   \   00000006   0x2001             MOVS     R0,#+1
+   \   00000008   0x.... 0x....      BL       ctrl_set_port_high
+   \   0000000C   0xE002             B        ??man_gpio_gps_power_1
+    271          	}
+    272          	else {
+    273          		ctrl_set_port_low(OUT_PORT2);
+   \                     ??man_gpio_gps_power_0: (+1)
+   \   0000000E   0x2001             MOVS     R0,#+1
+   \   00000010   0x.... 0x....      BL       ctrl_set_port_low
+    274          	}
+    275          }
+   \                     ??man_gpio_gps_power_1: (+1)
+   \   00000014   0xBD01             POP      {R0,PC}          ;; return
+    276          
+    277          /********************************************************************/
+    278          /*!
+    279           * \name	man_gpio_gps_reset
+    280           * \brief	GPSのRESETのON/OFFを切り替えます
+    281           * \param	ctrl    : MAN_GPIO_CTRL_ON  : リセットを発生
+    282           *                    MAN_GPIO_CTRL_OFF : リセットを解除
+    283           * \return  なし
+    284           * \note	必要時に呼ばれること
+    285           */
+    286          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    287          void man_gpio_gps_reset(int32_t  ctrl)
+    288          {
+   \                     man_gpio_gps_reset: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    289          	if (ctrl == MAN_GPIO_CTRL_ON) {
+   \   00000002   0x2801             CMP      R0,#+1
+   \   00000004   0xD103             BNE      ??man_gpio_gps_reset_0
+    290          		ctrl_set_port_low(OUT_PORT1);
+   \   00000006   0x2000             MOVS     R0,#+0
+   \   00000008   0x.... 0x....      BL       ctrl_set_port_low
+   \   0000000C   0xE002             B        ??man_gpio_gps_reset_1
+    291          	}
+    292          	else {
+    293          		ctrl_set_port_high(OUT_PORT1);
+   \                     ??man_gpio_gps_reset_0: (+1)
+   \   0000000E   0x2000             MOVS     R0,#+0
+   \   00000010   0x.... 0x....      BL       ctrl_set_port_high
+    294          	}
+    295          }
+   \                     ??man_gpio_gps_reset_1: (+1)
+   \   00000014   0xBD01             POP      {R0,PC}          ;; return
+    296          
+    297          /********************************************************************/
+    298          /*!
+    299           * \name	man_gpio_3p3v_power
+    300           * \brief	3.3V電源のON/OFFを切り替えます
+    301           *            3.3V関連デバイス
+    302           *              ・LSM6DSL(加速度)
+    303           *              ・MPL3115A2(気圧)
+    304           *              ・W25Q16FWZPIG(FLASH)
+    305           *              ・USB_DP
+    306           * \param	ctrl    : MAN_GPIO_CTRL_ON  : 電源ON
+    307           *                    MAN_GPIO_CTRL_OFF : 電源OFF
+    308           * \return  なし
+    309           * \note	必要時に呼ばれること
+    310           */
+    311          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    312          void man_gpio_3p3v_power(int32_t  ctrl)
+    313          {
+   \                     man_gpio_3p3v_power: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    314          	if (ctrl == MAN_GPIO_CTRL_ON) {
+   \   00000002   0x2801             CMP      R0,#+1
+   \   00000004   0xD103             BNE      ??man_gpio_3p3v_power_0
+    315          		ctrl_set_port_high(OUT_PORT14);
+   \   00000006   0x200D             MOVS     R0,#+13
+   \   00000008   0x.... 0x....      BL       ctrl_set_port_high
+   \   0000000C   0xE002             B        ??man_gpio_3p3v_power_1
+    316          	}
+    317          	else {
+    318          		ctrl_set_port_low(OUT_PORT14);
+   \                     ??man_gpio_3p3v_power_0: (+1)
+   \   0000000E   0x200D             MOVS     R0,#+13
+   \   00000010   0x.... 0x....      BL       ctrl_set_port_low
+    319          	}
+    320          }
+   \                     ??man_gpio_3p3v_power_1: (+1)
+   \   00000014   0xBD01             POP      {R0,PC}          ;; return
+    321          
+    322          /********************************************************************/
+    323          /*!
+    324           * \name	man_gpio_led_lte
+    325           * \brief	LED(LTE)のON/OFFを切り替えます
+    326           * \param	ctrl    : MAN_GPIO_CTRL_ON    : 点灯
+    327           *                    MAN_GPIO_CTRL_OFF   : 消灯
+    328           *                    MAN_GPIO_CTRL_FLASH : 点滅
+    329           * \return  なし
+    330           * \note	必要時に呼ばれること
+    331           */
+    332          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    333          void man_gpio_led_lte(int32_t  ctrl)
+    334          {
+   \                     man_gpio_led_lte: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    335          	man_gpio_work.led_lte = ctrl;
+   \   00000002   0x....             LDR      R1,??DataTable5
+   \   00000004   0x6008             STR      R0,[R1, #+0]
+    336          	
+    337          	if (ctrl == MAN_GPIO_CTRL_ON) {
+   \   00000006   0x2801             CMP      R0,#+1
+   \   00000008   0xD103             BNE      ??man_gpio_led_lte_0
+    338          		ctrl_set_port_low(OUT_PORT9);
+   \   0000000A   0x2008             MOVS     R0,#+8
+   \   0000000C   0x.... 0x....      BL       ctrl_set_port_low
+   \   00000010   0xE012             B        ??man_gpio_led_lte_1
+    339          	}
+    340          	else if (ctrl == MAN_GPIO_CTRL_OFF) {
+   \                     ??man_gpio_led_lte_0: (+1)
+   \   00000012   0x2800             CMP      R0,#+0
+   \   00000014   0xD103             BNE      ??man_gpio_led_lte_2
+    341          		ctrl_set_port_high(OUT_PORT9);
+   \   00000016   0x2008             MOVS     R0,#+8
+   \   00000018   0x.... 0x....      BL       ctrl_set_port_high
+   \   0000001C   0xE00C             B        ??man_gpio_led_lte_1
+    342          	}
+    343          	else if (ctrl == MAN_GPIO_CTRL_FLASH) {
+   \                     ??man_gpio_led_lte_2: (+1)
+   \   0000001E   0x2802             CMP      R0,#+2
+   \   00000020   0xD10A             BNE      ??man_gpio_led_lte_1
+    344          		if ( (man_gpio_work.led_flash % 2) == 0 ) {
+   \   00000022   0x....             LDR      R0,??DataTable5
+   \   00000024   0x7C00             LDRB     R0,[R0, #+16]
+   \   00000026   0x07C0             LSLS     R0,R0,#+31
+   \   00000028   0xD403             BMI      ??man_gpio_led_lte_3
+    345          			ctrl_set_port_high(OUT_PORT9);
+   \   0000002A   0x2008             MOVS     R0,#+8
+   \   0000002C   0x.... 0x....      BL       ctrl_set_port_high
+   \   00000030   0xE002             B        ??man_gpio_led_lte_1
+    346          		}
+    347          		else {
+    348          			ctrl_set_port_low(OUT_PORT9);
+   \                     ??man_gpio_led_lte_3: (+1)
+   \   00000032   0x2008             MOVS     R0,#+8
+   \   00000034   0x.... 0x....      BL       ctrl_set_port_low
+    349          		}
+    350          	}
+    351          }
+   \                     ??man_gpio_led_lte_1: (+1)
+   \   00000038   0xBD01             POP      {R0,PC}          ;; return
+    352          
+    353          
+    354          /********************************************************************/
+    355          /*!
+    356           * \name	man_gpio_led_bat
+    357           * \brief	LED(BAT)のON/OFFを切り替えます
+    358           * \param	ctrl    : MAN_GPIO_CTRL_ON    : 点灯
+    359           *                    MAN_GPIO_CTRL_OFF   : 消灯
+    360           *                    MAN_GPIO_CTRL_FLASH : 点滅
+    361           * \return  なし
+    362           * \note	必要時に呼ばれること
+    363           */
+    364          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    365          void man_gpio_led_bat(int32_t  ctrl)
+    366          {
+   \                     man_gpio_led_bat: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    367          	man_gpio_work.led_bat = ctrl;
+   \   00000002   0x....             LDR      R1,??DataTable5
+   \   00000004   0x6048             STR      R0,[R1, #+4]
+    368          
+    369          	if (ctrl == MAN_GPIO_CTRL_ON) {
+   \   00000006   0x2801             CMP      R0,#+1
+   \   00000008   0xD103             BNE      ??man_gpio_led_bat_0
+    370          		ctrl_set_port_low(OUT_PORT10);
+   \   0000000A   0x2009             MOVS     R0,#+9
+   \   0000000C   0x.... 0x....      BL       ctrl_set_port_low
+   \   00000010   0xE012             B        ??man_gpio_led_bat_1
+    371          	}
+    372          	else if (ctrl == MAN_GPIO_CTRL_OFF) {
+   \                     ??man_gpio_led_bat_0: (+1)
+   \   00000012   0x2800             CMP      R0,#+0
+   \   00000014   0xD103             BNE      ??man_gpio_led_bat_2
+    373          		ctrl_set_port_high(OUT_PORT10);
+   \   00000016   0x2009             MOVS     R0,#+9
+   \   00000018   0x.... 0x....      BL       ctrl_set_port_high
+   \   0000001C   0xE00C             B        ??man_gpio_led_bat_1
+    374          	}
+    375          	else if (ctrl == MAN_GPIO_CTRL_FLASH) {
+   \                     ??man_gpio_led_bat_2: (+1)
+   \   0000001E   0x2802             CMP      R0,#+2
+   \   00000020   0xD10A             BNE      ??man_gpio_led_bat_1
+    376          		if ( (man_gpio_work.led_flash % 2) == 0 ) {
+   \   00000022   0x....             LDR      R0,??DataTable5
+   \   00000024   0x7C00             LDRB     R0,[R0, #+16]
+   \   00000026   0x07C0             LSLS     R0,R0,#+31
+   \   00000028   0xD403             BMI      ??man_gpio_led_bat_3
+    377          			ctrl_set_port_high(OUT_PORT10);
+   \   0000002A   0x2009             MOVS     R0,#+9
+   \   0000002C   0x.... 0x....      BL       ctrl_set_port_high
+   \   00000030   0xE002             B        ??man_gpio_led_bat_1
+    378          		}
+    379          		else {
+    380          			ctrl_set_port_low(OUT_PORT10);
+   \                     ??man_gpio_led_bat_3: (+1)
+   \   00000032   0x2009             MOVS     R0,#+9
+   \   00000034   0x.... 0x....      BL       ctrl_set_port_low
+    381          		}
+    382          	}
+    383          }
+   \                     ??man_gpio_led_bat_1: (+1)
+   \   00000038   0xBD01             POP      {R0,PC}          ;; return
+    384          
+    385          
+    386          /********************************************************************/
+    387          /*!
+    388           * \name	man_gpio_led_pow
+    389           * \brief	LED(POWER)のON/OFFを切り替えます
+    390           * \param	ctrl    : MAN_GPIO_CTRL_ON    : 点灯
+    391           *                    MAN_GPIO_CTRL_OFF   : 消灯
+    392           *                    MAN_GPIO_CTRL_FLASH : 点滅
+    393           * \return  なし
+    394           * \note	必要時に呼ばれること
+    395           */
+    396          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    397          void man_gpio_led_pow(int32_t  ctrl)
+    398          {
+   \                     man_gpio_led_pow: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    399          	man_gpio_work.led_pow = ctrl;
+   \   00000002   0x....             LDR      R1,??DataTable5
+   \   00000004   0x6088             STR      R0,[R1, #+8]
+    400          
+    401          	if (ctrl == MAN_GPIO_CTRL_ON) {
+   \   00000006   0x2801             CMP      R0,#+1
+   \   00000008   0xD103             BNE      ??man_gpio_led_pow_0
+    402          		ctrl_set_port_low(OUT_PORT11);
+   \   0000000A   0x200A             MOVS     R0,#+10
+   \   0000000C   0x.... 0x....      BL       ctrl_set_port_low
+   \   00000010   0xE012             B        ??man_gpio_led_pow_1
+    403          	}
+    404          	else if (ctrl == MAN_GPIO_CTRL_OFF) {
+   \                     ??man_gpio_led_pow_0: (+1)
+   \   00000012   0x2800             CMP      R0,#+0
+   \   00000014   0xD103             BNE      ??man_gpio_led_pow_2
+    405          		ctrl_set_port_high(OUT_PORT11);
+   \   00000016   0x200A             MOVS     R0,#+10
+   \   00000018   0x.... 0x....      BL       ctrl_set_port_high
+   \   0000001C   0xE00C             B        ??man_gpio_led_pow_1
+    406          	}
+    407          	else if (ctrl == MAN_GPIO_CTRL_FLASH) {
+   \                     ??man_gpio_led_pow_2: (+1)
+   \   0000001E   0x2802             CMP      R0,#+2
+   \   00000020   0xD10A             BNE      ??man_gpio_led_pow_1
+    408          		if ( (man_gpio_work.led_flash % 2) == 0 ) {
+   \   00000022   0x....             LDR      R0,??DataTable5
+   \   00000024   0x7C00             LDRB     R0,[R0, #+16]
+   \   00000026   0x07C0             LSLS     R0,R0,#+31
+   \   00000028   0xD403             BMI      ??man_gpio_led_pow_3
+    409          			ctrl_set_port_high(OUT_PORT11);
+   \   0000002A   0x200A             MOVS     R0,#+10
+   \   0000002C   0x.... 0x....      BL       ctrl_set_port_high
+   \   00000030   0xE002             B        ??man_gpio_led_pow_1
+    410          		}
+    411          		else {
+    412          			ctrl_set_port_low(OUT_PORT11);
+   \                     ??man_gpio_led_pow_3: (+1)
+   \   00000032   0x200A             MOVS     R0,#+10
+   \   00000034   0x.... 0x....      BL       ctrl_set_port_low
+    413          		}
+    414          	}
+    415          }
+   \                     ??man_gpio_led_pow_1: (+1)
+   \   00000038   0xBD01             POP      {R0,PC}          ;; return
+    416          
+    417          
+    418          /********************************************************************/
+    419          /*!
+    420           * \name	man_gpio_led_gns
+    421           * \brief	LED(GNS)のON/OFFを切り替えます
+    422           * \param	ctrl    : MAN_GPIO_CTRL_ON    : 点灯
+    423           *                    MAN_GPIO_CTRL_OFF   : 消灯
+    424           *                    MAN_GPIO_CTRL_FLASH : 点滅
+    425           * \return  なし
+    426           * \note	必要時に呼ばれること
+    427           */
+    428          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    429          void man_gpio_led_gns(int32_t  ctrl)
+    430          {
+   \                     man_gpio_led_gns: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    431          	man_gpio_work.led_gns = ctrl;
+   \   00000002   0x....             LDR      R1,??DataTable5
+   \   00000004   0x60C8             STR      R0,[R1, #+12]
+    432          
+    433          	if (ctrl == MAN_GPIO_CTRL_ON) {
+   \   00000006   0x2801             CMP      R0,#+1
+   \   00000008   0xD103             BNE      ??man_gpio_led_gns_0
+    434          		ctrl_set_port_low(OUT_PORT12);
+   \   0000000A   0x200B             MOVS     R0,#+11
+   \   0000000C   0x.... 0x....      BL       ctrl_set_port_low
+   \   00000010   0xE012             B        ??man_gpio_led_gns_1
+    435          	}
+    436          	else if (ctrl == MAN_GPIO_CTRL_OFF) {
+   \                     ??man_gpio_led_gns_0: (+1)
+   \   00000012   0x2800             CMP      R0,#+0
+   \   00000014   0xD103             BNE      ??man_gpio_led_gns_2
+    437          		ctrl_set_port_high(OUT_PORT12);
+   \   00000016   0x200B             MOVS     R0,#+11
+   \   00000018   0x.... 0x....      BL       ctrl_set_port_high
+   \   0000001C   0xE00C             B        ??man_gpio_led_gns_1
+    438          	}
+    439          	else if (ctrl == MAN_GPIO_CTRL_FLASH) {
+   \                     ??man_gpio_led_gns_2: (+1)
+   \   0000001E   0x2802             CMP      R0,#+2
+   \   00000020   0xD10A             BNE      ??man_gpio_led_gns_1
+    440          		if ( (man_gpio_work.led_flash % 2) == 0 ) {
+   \   00000022   0x....             LDR      R0,??DataTable5
+   \   00000024   0x7C00             LDRB     R0,[R0, #+16]
+   \   00000026   0x07C0             LSLS     R0,R0,#+31
+   \   00000028   0xD403             BMI      ??man_gpio_led_gns_3
+    441          			ctrl_set_port_high(OUT_PORT12);
+   \   0000002A   0x200B             MOVS     R0,#+11
+   \   0000002C   0x.... 0x....      BL       ctrl_set_port_high
+   \   00000030   0xE002             B        ??man_gpio_led_gns_1
+    442          		}
+    443          		else {
+    444          			ctrl_set_port_low(OUT_PORT12);
+   \                     ??man_gpio_led_gns_3: (+1)
+   \   00000032   0x200B             MOVS     R0,#+11
+   \   00000034   0x.... 0x....      BL       ctrl_set_port_low
+    445          		}
+    446          	}
+    447          }
+   \                     ??man_gpio_led_gns_1: (+1)
+   \   00000038   0xBD01             POP      {R0,PC}          ;; return
+    448          
+    449          /********************************************************************/
+    450          /*!
+    451           * \name	man_gpio_switch_get
+    452           * \brief	スイッチ情報を取得する
+    453           * \param	なし
+    454           * \return  スイッチ情報
+    455           * \note	必要時、呼ばれること
+    456           */
+    457          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    458          man_gpio_switch_def man_gpio_switch_get( void )
+    459          {
+   \                     man_gpio_switch_get: (+1)
+   \   00000000   0xB5F8             PUSH     {R3-R7,LR}
+    460          	man_gpio_switch_def		get_sw = MAN_GPIO_SWITCH_OTHER;
+   \   00000002   0x2404             MOVS     R4,#+4
+    461          	uint8_t					in_dir = ctrl_get_port(IN_PORT6);
+   \   00000004   0x2005             MOVS     R0,#+5
+   \   00000006   0x.... 0x....      BL       ctrl_get_port
+   \   0000000A   0x0007             MOVS     R7,R0
+    462          	uint8_t					in_bat = ctrl_get_port(IN_PORT7);
+   \   0000000C   0x2006             MOVS     R0,#+6
+   \   0000000E   0x.... 0x....      BL       ctrl_get_port
+   \   00000012   0x0005             MOVS     R5,R0
+    463          	uint8_t					in_ext = ctrl_get_port(IN_PORT8);
+   \   00000014   0x2007             MOVS     R0,#+7
+   \   00000016   0x.... 0x....      BL       ctrl_get_port
+   \   0000001A   0x0006             MOVS     R6,R0
+    464          	uint8_t					in_off = ctrl_get_port(IN_PORT9);
+   \   0000001C   0x2008             MOVS     R0,#+8
+   \   0000001E   0x.... 0x....      BL       ctrl_get_port
+    465          
+    466          	if (in_dir == 0) {
+   \   00000022   0xB2FF             UXTB     R7,R7
+   \   00000024   0x2F00             CMP      R7,#+0
+   \   00000026   0xD101             BNE      ??man_gpio_switch_get_0
+    467          		get_sw = MAN_GPIO_SWITCH_DIRECT;
+   \   00000028   0x2403             MOVS     R4,#+3
+   \   0000002A   0xE00D             B        ??man_gpio_switch_get_1
+    468          	}
+    469          	else if (in_bat == 0) {
+   \                     ??man_gpio_switch_get_0: (+1)
+   \   0000002C   0xB2ED             UXTB     R5,R5
+   \   0000002E   0x2D00             CMP      R5,#+0
+   \   00000030   0xD101             BNE      ??man_gpio_switch_get_2
+    470          		get_sw = MAN_GPIO_SWITCH_BATTERY;
+   \   00000032   0x2402             MOVS     R4,#+2
+   \   00000034   0xE008             B        ??man_gpio_switch_get_1
+    471          	}
+    472          	else if (in_ext == 0) {
+   \                     ??man_gpio_switch_get_2: (+1)
+   \   00000036   0xB2F6             UXTB     R6,R6
+   \   00000038   0x2E00             CMP      R6,#+0
+   \   0000003A   0xD101             BNE      ??man_gpio_switch_get_3
+    473          		get_sw = MAN_GPIO_SWITCH_EXT_POWER;
+   \   0000003C   0x2401             MOVS     R4,#+1
+   \   0000003E   0xE003             B        ??man_gpio_switch_get_1
+    474          	}
+    475          	else if (in_off == 0) {
+   \                     ??man_gpio_switch_get_3: (+1)
+   \   00000040   0xB2C0             UXTB     R0,R0
+   \   00000042   0x2800             CMP      R0,#+0
+   \   00000044   0xD100             BNE      ??man_gpio_switch_get_1
+    476          		get_sw = MAN_GPIO_SWITCH_OFF;
+   \   00000046   0x2400             MOVS     R4,#+0
+    477          	}
+    478          
+    479          	return get_sw;
+   \                     ??man_gpio_switch_get_1: (+1)
+   \   00000048   0x0020             MOVS     R0,R4
+   \   0000004A   0xB2C0             UXTB     R0,R0
+   \   0000004C   0xBDF2             POP      {R1,R4-R7,PC}    ;; return
+    480          }
+    481          
+    482          
+    483          /********************************************************************/
+    484          /*!
+    485           * \name	man_gpio_expow_get
+    486           * \brief	外部電源ON/OFFを取得する
+    487           * \param	なし
+    488           * \return  外部電源ON/OFF状態
+    489           * \note	必要時、呼ばれること
+    490           */
+    491          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    492          man_gpio_expow_def man_gpio_expow_get( void )
+    493          {
+   \                     man_gpio_expow_get: (+1)
+   \   00000000   0xB510             PUSH     {R4,LR}
+    494          	man_gpio_expow_def	get_sw=MAN_GPIO_EXPOW_OFF;
+   \   00000002   0x2400             MOVS     R4,#+0
+    495          	
+    496          	if (ctrl_get_port(IN_PORT5) == 0) {
+   \   00000004   0x2004             MOVS     R0,#+4
+   \   00000006   0x.... 0x....      BL       ctrl_get_port
+   \   0000000A   0x2800             CMP      R0,#+0
+   \   0000000C   0xD100             BNE      ??man_gpio_expow_get_0
+    497          		get_sw=MAN_GPIO_EXPOW_ON;
+   \   0000000E   0x2401             MOVS     R4,#+1
+    498          	}
+    499          	return get_sw;
+   \                     ??man_gpio_expow_get_0: (+1)
+   \   00000010   0x0020             MOVS     R0,R4
+   \   00000012   0xB2C0             UXTB     R0,R0
+   \   00000014   0xBD10             POP      {R4,PC}          ;; return
+    500          
+    501          }
+    502          
+    503          /********************************************************************/
+    504          /*!
+    505           * \name	man_gpio_expow_usb_get
+    506           * \brief	外部電源(USB)ON/OFFを取得する
+    507           * \param	なし
+    508           * \return  外部電源(USB)ON/OFF状態
+    509           * \note	必要時、呼ばれること
+    510           */
+    511          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    512          man_gpio_expow_def man_gpio_expow_usb_get( void )
+    513          {
+   \                     man_gpio_expow_usb_get: (+1)
+   \   00000000   0xB510             PUSH     {R4,LR}
+    514          	man_gpio_expow_def	get_sw=MAN_GPIO_EXPOW_OFF;
+   \   00000002   0x2400             MOVS     R4,#+0
+    515          	
+    516          	if (ctrl_get_port(IN_PORT18) == 0) {
+   \   00000004   0x2011             MOVS     R0,#+17
+   \   00000006   0x.... 0x....      BL       ctrl_get_port
+   \   0000000A   0x2800             CMP      R0,#+0
+   \   0000000C   0xD100             BNE      ??man_gpio_expow_usb_get_0
+    517          		get_sw=MAN_GPIO_EXPOW_ON;
+   \   0000000E   0x2401             MOVS     R4,#+1
+    518          	}
+    519          	return get_sw;
+   \                     ??man_gpio_expow_usb_get_0: (+1)
+   \   00000010   0x0020             MOVS     R0,R4
+   \   00000012   0xB2C0             UXTB     R0,R0
+   \   00000014   0xBD10             POP      {R4,PC}          ;; return
+    520          
+    521          }
+    522          
+    523          /********************************************************************/
+    524          /*!
+    525           * \name	man_gpio_main_500ms
+    526           * \brief	GPIO管理のmain処理
+    527           * \param	なし
+    528           * \return  なし
+    529           * \note	500ms毎に呼ばれること
+    530           */
+    531          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    532          void man_gpio_main_500ms(void)
+    533          {
+   \                     man_gpio_main_500ms: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    534          	man_gpio_work.led_flash++;
+   \   00000002   0x....             LDR      R0,??DataTable5
+   \   00000004   0x6900             LDR      R0,[R0, #+16]
+   \   00000006   0x1C40             ADDS     R0,R0,#+1
+   \   00000008   0x....             LDR      R1,??DataTable5
+   \   0000000A   0x6108             STR      R0,[R1, #+16]
+    535          
+    536          	if (man_gpio_work.led_lte == MAN_GPIO_CTRL_FLASH) {
+   \   0000000C   0x....             LDR      R0,??DataTable5
+   \   0000000E   0x6800             LDR      R0,[R0, #+0]
+   \   00000010   0x2802             CMP      R0,#+2
+   \   00000012   0xD102             BNE      ??man_gpio_main_500ms_0
+    537          		man_gpio_led_lte(MAN_GPIO_CTRL_FLASH);
+   \   00000014   0x2002             MOVS     R0,#+2
+   \   00000016   0x.... 0x....      BL       man_gpio_led_lte
+    538          	}
+    539          
+    540          	if (man_gpio_work.led_bat == MAN_GPIO_CTRL_FLASH) {
+   \                     ??man_gpio_main_500ms_0: (+1)
+   \   0000001A   0x....             LDR      R0,??DataTable5
+   \   0000001C   0x6840             LDR      R0,[R0, #+4]
+   \   0000001E   0x2802             CMP      R0,#+2
+   \   00000020   0xD102             BNE      ??man_gpio_main_500ms_1
+    541          		man_gpio_led_bat(MAN_GPIO_CTRL_FLASH);
+   \   00000022   0x2002             MOVS     R0,#+2
+   \   00000024   0x.... 0x....      BL       man_gpio_led_bat
+    542          	}
+    543          
+    544          	if (man_gpio_work.led_pow == MAN_GPIO_CTRL_FLASH) {
+   \                     ??man_gpio_main_500ms_1: (+1)
+   \   00000028   0x....             LDR      R0,??DataTable5
+   \   0000002A   0x6880             LDR      R0,[R0, #+8]
+   \   0000002C   0x2802             CMP      R0,#+2
+   \   0000002E   0xD102             BNE      ??man_gpio_main_500ms_2
+    545          		man_gpio_led_pow(MAN_GPIO_CTRL_FLASH);
+   \   00000030   0x2002             MOVS     R0,#+2
+   \   00000032   0x.... 0x....      BL       man_gpio_led_pow
+    546          	}
+    547          
+    548          	if (man_gpio_work.led_gns == MAN_GPIO_CTRL_FLASH) {
+   \                     ??man_gpio_main_500ms_2: (+1)
+   \   00000036   0x....             LDR      R0,??DataTable5
+   \   00000038   0x68C0             LDR      R0,[R0, #+12]
+   \   0000003A   0x2802             CMP      R0,#+2
+   \   0000003C   0xD102             BNE      ??man_gpio_main_500ms_3
+    549          		man_gpio_led_gns(MAN_GPIO_CTRL_FLASH);
+   \   0000003E   0x2002             MOVS     R0,#+2
+   \   00000040   0x.... 0x....      BL       man_gpio_led_gns
+    550          	}
+    551          }
+   \                     ??man_gpio_main_500ms_3: (+1)
+   \   00000044   0xBD01             POP      {R0,PC}          ;; return
+    552          
+    553          /********************************************************************/
+    554          /*!
+    555           * \name	man_gpio_switch_OFF
+    556           * \brief	スイッチがOFFか否かを確認する
+    557           * \param	なし
+    558           * \return  スイッチ情報
+    559           * \note	必要時、呼ばれること
+    560           */
+    561          /********************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    562          int man_gpio_switch_OFF( void )
+    563          {
+   \                     man_gpio_switch_OFF: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    564            uint8_t	in_off = ctrl_get_port(IN_PORT9);
+   \   00000002   0x2008             MOVS     R0,#+8
+   \   00000004   0x.... 0x....      BL       ctrl_get_port
+    565            if (in_off == 0) {
+   \   00000008   0xB2C0             UXTB     R0,R0
+   \   0000000A   0x2800             CMP      R0,#+0
+   \   0000000C   0xD101             BNE      ??man_gpio_switch_OFF_0
+    566              return 1;
+   \   0000000E   0x2001             MOVS     R0,#+1
+   \   00000010   0xE000             B        ??man_gpio_switch_OFF_1
+    567            }
+    568          
+    569            return 0;
+   \                     ??man_gpio_switch_OFF_0: (+1)
+   \   00000012   0x2000             MOVS     R0,#+0
+   \                     ??man_gpio_switch_OFF_1: (+1)
+   \   00000014   0xBD02             POP      {R1,PC}          ;; return
+    570          }
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable5:
+   \   00000000   0x........         DC32     man_gpio_work
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       8   man_gpio_3p3v_power
+         8   -> ctrl_set_port_high
+         8   -> ctrl_set_port_low
+       8   man_gpio_expow_get
+         8   -> ctrl_get_port
+       8   man_gpio_expow_usb_get
+         8   -> ctrl_get_port
+       8   man_gpio_gps_power
+         8   -> ctrl_set_port_high
+         8   -> ctrl_set_port_low
+       8   man_gpio_gps_reset
+         8   -> ctrl_set_port_high
+         8   -> ctrl_set_port_low
+      16   man_gpio_init
+        16   -> __aeabi_memset
+        16   -> ctrl_GPIO_init
+       8   man_gpio_led_bat
+         8   -> ctrl_set_port_high
+         8   -> ctrl_set_port_low
+       8   man_gpio_led_gns
+         8   -> ctrl_set_port_high
+         8   -> ctrl_set_port_low
+       8   man_gpio_led_lte
+         8   -> ctrl_set_port_high
+         8   -> ctrl_set_port_low
+       8   man_gpio_led_pow
+         8   -> ctrl_set_port_high
+         8   -> ctrl_set_port_low
+       8   man_gpio_lte_fmode
+         8   -> ctrl_set_port_high
+         8   -> ctrl_set_port_low
+       8   man_gpio_lte_power
+         8   -> ctrl_set_port_high
+         8   -> ctrl_set_port_low
+       8   man_gpio_lte_power_get
+         8   -> ctrl_get_port
+       8   man_gpio_lte_pwrkey
+         8   -> ctrl_set_port_high
+         8   -> ctrl_set_port_low
+       8   man_gpio_lte_reset
+         8   -> ctrl_set_port_high
+         8   -> ctrl_set_port_low
+       8   man_gpio_lte_stby
+         8   -> ctrl_set_port_high
+         8   -> ctrl_set_port_low
+       8   man_gpio_main_500ms
+         8   -> man_gpio_led_bat
+         8   -> man_gpio_led_gns
+         8   -> man_gpio_led_lte
+         8   -> man_gpio_led_pow
+       8   man_gpio_switch_OFF
+         8   -> ctrl_get_port
+      24   man_gpio_switch_get
+        24   -> ctrl_get_port
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable5
+      22  man_gpio_3p3v_power
+      22  man_gpio_expow_get
+      22  man_gpio_expow_usb_get
+      22  man_gpio_gps_power
+      22  man_gpio_gps_reset
+      24  man_gpio_init
+      58  man_gpio_led_bat
+      58  man_gpio_led_gns
+      58  man_gpio_led_lte
+      58  man_gpio_led_pow
+      22  man_gpio_lte_fmode
+      26  man_gpio_lte_power
+      22  man_gpio_lte_power_get
+      22  man_gpio_lte_pwrkey
+      22  man_gpio_lte_reset
+      22  man_gpio_lte_stby
+      70  man_gpio_main_500ms
+      22  man_gpio_switch_OFF
+      78  man_gpio_switch_get
+      20  man_gpio_work
+
+ 
+  20 bytes in section .bss
+ 676 bytes in section .text
+ 
+ 676 bytes of CODE memory
+  20 bytes of DATA memory
+
+Errors: none
+Warnings: none

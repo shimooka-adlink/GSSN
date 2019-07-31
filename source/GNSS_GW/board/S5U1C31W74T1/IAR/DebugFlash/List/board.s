@@ -1,0 +1,822 @@
+///////////////////////////////////////////////////////////////////////////////
+//
+// IAR ANSI C/C++ Compiler V7.80.4.12462/W32 for ARM      21/May/2019  17:00:53
+// Copyright 1999-2017 IAR Systems AB.
+//
+//    Cpu mode     =  thumb
+//    Endian       =  little
+//    Source file  =  C:\GNSS\Software\rJ105\board\S5U1C31W74T1\board.c
+//    Command line =  
+//        C:\GNSS\Software\rJ105\board\S5U1C31W74T1\board.c -D
+//        __TARGET_ARCH_7_M -D S1C31W74 -D GNSS_GW_SIDE_A -lCN
+//        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\List
+//        -lA
+//        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\List
+//        --diag_suppress Pe177,Pe111,Pa082 -o
+//        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\Obj
+//        --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa
+//        --no_clustering --no_scheduling --debug --endian=little
+//        --cpu=Cortex-M0+ -e --fpu=None --dlib_config "C:\Program Files
+//        (x86)\IAR Systems\Embedded Workbench
+//        7.5\arm\INC\c\DLib_Config_Normal.h" -I
+//        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\ -I
+//        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\
+//        -I "C:\Program Files (x86)\IAR Systems\Embedded Workbench
+//        7.5\arm\CMSIS\Include\" -I "C:\Program Files (x86)\IAR
+//        Systems\Embedded Workbench 7.5\arm\inc\Epson\" -I
+//        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\CMSIS\Device\S1C31W74\Include\
+//        -I
+//        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\CMSIS\Driver\Include\
+//        -I
+//        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\sePeriphLibrary\
+//        -I
+//        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\board\S5U1C31W74T1\
+//        -I
+//        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\..\..\USBStack\INC\
+//        -I
+//        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\..\..\..\include\
+//        -Ol
+//    Locale       =  Japanese_Japan.932
+//    List file    =  
+//        C:\GNSS\Software\rJ105\source\GNSS_GW\board\S5U1C31W74T1\IAR\DebugFlash\List\board.s
+//
+///////////////////////////////////////////////////////////////////////////////
+
+        RTMODEL "__SystemLibrary", "DLib"
+        RTMODEL "__dlib_file_descriptor", "0"
+        RTMODEL "__iar_require _Printf", ""
+        AAPCS BASE,INTERWORK
+        PRESERVE8
+        REQUIRE8
+
+        #define SHT_PROGBITS 0x1
+
+        EXTERN SystemCoreClockUpdate
+        EXTERN __Vectors
+        EXTERN g1msSysTicks
+        EXTERN printf
+        EXTERN seAssert
+        EXTERN seCLG_GetSysClk
+        EXTERN seCLG_GetSysClkSrc
+        EXTERN seCLG_Start
+        EXTERN seCLG_SwitchSysClkSrc
+        EXTERN seProtectSys
+
+        PUBLIC BoardInit
+        PUBLIC I2C_CH0
+        PUBLIC I2C_CH1
+        PUBLIC OSC3_ALTFUNC
+        PUBLIC OSC3_PORTID
+        PUBLIC OSC4_ALTFUNC
+        PUBLIC OSC4_PORTID
+        PUBLIC QSPI_CH0
+        PUBLIC QSPI_MMA_START_ADDR
+        PUBLIC REMC2_CH
+        PUBLIC RFC_CH0
+        PUBLIC SNDA_CH
+        PUBLIC SPIA_CH0
+        PUBLIC SVD2_CH0
+        PUBLIC SVD2_CH1
+        PUBLIC ShowRunningClock
+        PUBLIC T16B_CH0
+        PUBLIC T16B_CH1
+        PUBLIC UART2_CH0
+        PUBLIC UART2_CH1
+        
+          CFI Names cfiNames0
+          CFI StackFrame CFA R13 DATA
+          CFI Resource R0:32, R1:32, R2:32, R3:32, R4:32, R5:32, R6:32, R7:32
+          CFI Resource R8:32, R9:32, R10:32, R11:32, R12:32, R13:32, R14:32
+          CFI EndNames cfiNames0
+        
+          CFI Common cfiCommon0 Using cfiNames0
+          CFI CodeAlign 2
+          CFI DataAlign 4
+          CFI ReturnAddress R14 CODE
+          CFI CFA R13+0
+          CFI R0 Undefined
+          CFI R1 Undefined
+          CFI R2 Undefined
+          CFI R3 Undefined
+          CFI R4 SameValue
+          CFI R5 SameValue
+          CFI R6 SameValue
+          CFI R7 SameValue
+          CFI R8 SameValue
+          CFI R9 SameValue
+          CFI R10 SameValue
+          CFI R11 SameValue
+          CFI R12 Undefined
+          CFI R14 SameValue
+          CFI EndCommon cfiCommon0
+        
+// C:\GNSS\Software\rJ105\board\S5U1C31W74T1\board.c
+//    1 /**
+//    2   ******************************************************************************
+//    3   * @file    board.c
+//    4   * @author  Epson
+//    5   * @version V1.1
+//    6   * @date    22-December-2015
+//    7   * @brief   This file contains all the board functions for the C31W74.  
+//    8   *    
+//    9   ******************************************************************************
+//   10   * @attention
+//   11   *
+//   12   * <h2><center>&copy; Copyright(C) SEIKO EPSON CORPORATION 2016. All rights reserved.	</center></h2>
+//   13   ******************************************************************************
+//   14   */
+//   15 #include <stdio.h>
+//   16 #include <string.h>
+//   17 #include "system_S1C31W74.h"
+//   18 #include <settings.h>
+//   19 #include <board.h>
+//   20 #include <handler_id.h>
+//   21 #include "S1C31W74.h"
+//   22 
+//   23 #include "se_common.h"
+//   24 #include "se_clg.h"
+//   25 #include "se_i2c.h"
+//   26 #include "se_qspi.h"
+//   27 #include "se_remc2.h"
+//   28 #include "se_rfc.h"
+//   29 #include "se_snda.h"
+//   30 #include "se_spia.h"
+//   31 #include "se_svd2.h"
+//   32 #include "se_t16b.h"
+//   33 #include "se_uart2.h"
+//   34 
+//   35 
+//   36 extern uint32_t __Vectors;        // Vector table
+//   37 extern volatile unsigned g1msSysTicks;        // Timer tick 
+//   38 
+//   39 #if defined( BOOT_LOADER )
+//   40 static void start_application( uint32_t app_link_location ){
+//   41   void (*pfMainApp)( void );
+//   42   uint32_t *pointer;
+//   43 
+//   44   __disable_interrupt();
+//   45 
+//   46   SCB->VTOR = app_link_location;
+//   47   pointer = (uint32_t *)app_link_location;
+//   48   __set_MSP(*pointer);
+//   49   pointer++;
+//   50   pfMainApp = (void (*)(void))(*pointer);
+//   51   pfMainApp();
+//   52 }
+//   53 #endif // BOOT_LOADER
+//   54 
+//   55 #if  defined( UART_PRINTF ) 
+//   56 void ConfigureDebugUART2_0( seUART2_InitTypeDef* InitStruct )
+//   57 {
+//   58   ///< Stop supplying operating clock
+//   59   seUART2_Disable( UART2_0 );   
+//   60   
+//   61   // Configure the UPMUX directly instead of calling the sePPORT_UpMuxFunction
+//   62   // Since RAM has not been initialized yet
+//   63 
+//   64   // Set the USIN - P16, USOUT - P17
+//   65   PPORT->P1IOEN_b.P1IEN6 = 0;
+//   66   PPORT->P1IOEN_b.P1IEN7 = 0;
+//   67   PPORT->P1IOEN_b.P1OEN6 = 1;
+//   68   PPORT->P1IOEN_b.P1OEN7 = 1;
+//   69   PPORT->P1DAT_b.P1OUT6 = 1;
+//   70   PPORT->P1DAT_b.P1OUT7 = 1;
+//   71   PPORT->P1MODSEL_b.P1SEL6 = 0;
+//   72   PPORT->P1MODSEL_b.P1SEL7 = 0;
+//   73   UPMUX->P1MUX3_b.P16PERISEL = 3;		// UART.
+//   74   UPMUX->P1MUX3_b.P16PPFNC = 1;	        // USIN.
+//   75   UPMUX->P1MUX3_b.P16PERICH = 0;		// Ch.0.
+//   76   UPMUX->P1MUX3_b.P17PERISEL = 3;		// UART.
+//   77   UPMUX->P1MUX3_b.P17PPFNC = 2;	        // USOUT.
+//   78   UPMUX->P1MUX3_b.P17PERICH = 0;		// Ch.0.
+//   79   PPORT->P1FNCSEL_b.P16MUX      = 1;    //  UPMUX.
+//   80   PPORT->P1MODSEL_b.P1SEL6      = 1;    // Enable peripheral I/O function.
+//   81   PPORT->P1FNCSEL_b.P17MUX      = 1;    // UPMUX.
+//   82   PPORT->P1MODSEL_b.P1SEL7      = 1;    // Enable peripheral I/O function.  
+//   83   
+//   84   // Configure the UART Ch.n operating clock.
+//   85   seUART2_ConfigureClock( UART2_0, InitStruct->ClkSrc, InitStruct->ClkDivider );
+//   86              
+//   87   // Select operation mode; 
+//   88   seUART2_ConfigureMode( UART2_0, InitStruct->Mode );
+//   89   
+//   90   // Initialize interrupt.
+//   91   seUART2_DisableInt( UART2_0, seUART2_ALL_INT ); 
+//   92   seUART2_ClearIntFlag( UART2_0, seUART2_ALL_INT );
+//   93 }
+//   94 #endif // UART_PRINTF
+//   95 
+
+        SECTION `.text`:CODE:NOROOT(1)
+          CFI Block cfiBlock0 Using cfiCommon0
+          CFI Function BoardInit
+        THUMB
+//   96 seStatus BoardInit( void ) {
+BoardInit:
+        PUSH     {R7,LR}
+          CFI R14 Frame(CFA, -4)
+          CFI CFA R13+8
+//   97   g1msSysTicks = 0;
+        MOVS     R0,#+0
+        LDR      R1,??DataTable1
+        STR      R0,[R1, #+0]
+//   98 #if  defined( CACHE_ENABLED )
+//   99   /* Disable cache in case of a warm boot */
+//  100   seProtectSys( seWRITE_PROTECT_OFF );
+        MOVS     R0,#+150
+          CFI FunCall seProtectSys
+        BL       seProtectSys
+//  101   CACHE->CTL_b.CACHEEN = 0;
+        LDR      R0,??DataTable1_1  ;; 0x40000080
+        LDRH     R0,[R0, #+0]
+        LDR      R1,??DataTable1_2  ;; 0xfffe
+        ANDS     R1,R1,R0
+        LDR      R0,??DataTable1_1  ;; 0x40000080
+        STRH     R1,[R0, #+0]
+//  102   seProtectSys( seWRITE_PROTECT_ON );
+        MOVS     R0,#+0
+          CFI FunCall seProtectSys
+        BL       seProtectSys
+//  103 #endif // CACHE_ENABLED 
+//  104   
+//  105   /* relocate vector table */    
+//  106   __disable_irq(); 
+        CPSID    I
+//  107   if ( (uint32_t) &__Vectors != 0 ) {
+        LDR      R0,??DataTable1_3
+        CMP      R0,#+0
+        BEQ      ??BoardInit_0
+//  108     SCB->VTOR = (uint32_t)&__Vectors;  
+        LDR      R0,??DataTable1_3
+        LDR      R1,??DataTable1_4  ;; 0xe000ed08
+        STR      R0,[R1, #+0]
+//  109     __DSB();
+        DSB      
+//  110   }
+//  111   __enable_irq();
+??BoardInit_0:
+        CPSIE    I
+//  112   
+//  113 #ifdef EXECUTE_ON_OSC3 
+//  114   seStatus fStatus;
+//  115   seCLG_ClkDiv ClkDiv;
+//  116   seCLG_Start( seCLG_OSC3 ); 
+        MOVS     R0,#+2
+          CFI FunCall seCLG_Start
+        BL       seCLG_Start
+//  117   ClkDiv.OSC3_ClkDiv = seCLG_OSC3_CLKDIV_1;
+        MOVS     R0,#+0
+        MOV      R1,SP
+        STRB     R0,[R1, #+0]
+//  118   fStatus = seCLG_SwitchSysClkSrc( seCLG_OSC3, ClkDiv ); 
+        LDR      R1,[SP, #+0]
+        MOVS     R0,#+2
+          CFI FunCall seCLG_SwitchSysClkSrc
+        BL       seCLG_SwitchSysClkSrc
+//  119   if ( fStatus == seSTATUS_NG ) {
+        UXTB     R0,R0
+        CMP      R0,#+0
+        BNE      ??BoardInit_1
+//  120     seASSERT( fStatus );  
+        UXTB     R0,R0
+        CMP      R0,#+0
+        BNE      ??BoardInit_1
+        MOVS     R1,#+120
+        LDR      R0,??DataTable1_5
+          CFI FunCall seAssert
+        BL       seAssert
+//  121   }
+//  122 #else // EXECUTE_ON_OSC3 
+//  123   
+//  124   seProtectSys( seWRITE_PROTECT_OFF );
+//  125   FLASHC->WAIT_b.RDWAIT = 2;
+//  126   seProtectSys( seWRITE_PROTECT_ON );
+//  127   
+//  128   seCLG_SetIoscFreqSel( seCLG_IOSC_IOSCFQ_20 );
+//  129 
+//  130 #ifdef IOSC_AUTOTRIMMING_ON
+//  131    // Run Autotrimming of IOSC. Temporary switch to OSC3
+//  132   seCLG_Start( seCLG_OSC3 ); 
+//  133   seCLG_RunAutoTrimming( seCLG_IOSC, seCLG_OSC3 );
+//  134   seCLG_ClearIntFlag( seCLG_FLGS(( seCLG_IOSCTERIF | seCLG_IOSCTEDIF )));
+//  135   seCLG_Stop( seCLG_OSC3 );
+//  136 #endif // IOSC_AUTOTRIMMING_ON
+//  137   
+//  138 #endif // EXECUTE_ON_OSC3 
+//  139   
+//  140   SystemCoreClockUpdate();
+??BoardInit_1:
+          CFI FunCall SystemCoreClockUpdate
+        BL       SystemCoreClockUpdate
+//  141   
+//  142 #ifndef TICKLESS_ENABLED  
+//  143   seSysTickInit( SystemCoreClock / TICK_PERSECOND, seENABLE );
+//  144   seSysTickStart();
+//  145 #endif // TICKLESS_ENABLED 
+//  146   
+//  147 #if  defined( UART_PRINTF ) 
+//  148   {
+//  149   seUART2_InitTypeDef InitStruct;
+//  150   memset( &InitStruct, 0, sizeof( InitStruct ) );
+//  151   seCLG_Start( seCLG_OSC3 );
+//  152   seUART2_InitStruct( &InitStruct );
+//  153   InitStruct.ClkSrc = seCLG_OSC3; 
+//  154   InitStruct.ClkDivider = seUART2_OSC3_CLKDIV_1;  
+//  155   InitStruct.Mode.reg_b.puen = seUART2_MOD_PUEN_ENABLE;
+//  156   InitStruct.Mode.reg_b.chln = seUART2_MOD_CHLN_8BIT;
+//  157   InitStruct.Mode.reg_b.stpb = seUART2_MOD_STPB_1BIT;
+//  158   InitStruct.Mode.reg_b.pren = seUART2_MOD_PREN_NO_PARITY;
+//  159   InitStruct.Mode.reg_b.prmd = seUART2_MOD_PRMD_EVEN;
+//  160   InitStruct.Mode.reg_b.irmd = seUART2_MOD_IRMD_NO_IRDA;
+//  161 
+//  162   ConfigureDebugUART2_0( &InitStruct );
+//  163   seUART2_SetBaudRate( UART2_0, seUART2_BAUD_RATE_115200 );
+//  164  
+//  165   seUART2_Enable( UART2_0 );
+//  166   }
+//  167 #endif // UART_PRINTF
+//  168 
+//  169 #if  defined( CACHE_ENABLED )
+//  170   /* Enable/Disable cache if configured */
+//  171   seProtectSys( seWRITE_PROTECT_OFF );
+        MOVS     R0,#+150
+          CFI FunCall seProtectSys
+        BL       seProtectSys
+//  172   CACHE->CTL_b.CACHEEN = seENABLE;
+        LDR      R0,??DataTable1_1  ;; 0x40000080
+        LDRH     R0,[R0, #+0]
+        MOVS     R1,#+1
+        ORRS     R1,R1,R0
+        LDR      R0,??DataTable1_1  ;; 0x40000080
+        STRH     R1,[R0, #+0]
+//  173   seProtectSys( seWRITE_PROTECT_ON );
+        MOVS     R0,#+0
+          CFI FunCall seProtectSys
+        BL       seProtectSys
+//  174 #endif  // CACHE_ENABLED
+//  175 #if defined( BOOT_LOADER )
+//  176   start_application( APPLICATION_LINK_ADDRESS );
+//  177 #endif // BOOT_LOADER
+//  178   
+//  179   return seSTATUS_OK;
+        MOVS     R0,#+1
+        POP      {R1,PC}          ;; return
+//  180 }
+          CFI EndBlock cfiBlock0
+//  181 
+//  182 
+//  183 #if  defined( UART_PRINTF ) 
+//  184 int16_t seUART2_GetCh( void ) {
+//  185  
+//  186   return UART2_0->RXD;
+//  187 }
+//  188 
+//  189 int16_t seUART2_getchar( void ) {
+//  190   
+//  191   while( seINTERRUPT_OCCURRED != seUART2_GetIntFlag( UART2_0,  seUART2_RB1FIE_INT ) ) {
+//  192     ;
+//  193   }
+//  194   return UART2_0->RXD;
+//  195 }
+//  196 
+//  197 int16_t seUART2_putchar ( int16_t character ) {
+//  198   
+//  199   while( seINTERRUPT_OCCURRED != seUART2_GetIntFlag( UART2_0,  seUART2_TBEIE_INT ) ) {
+//  200     ;
+//  201   }
+//  202   UART2_0->TXD = character;
+//  203   
+//  204   return character;
+//  205 }
+//  206 
+//  207 int16_t seUART2_kbhit( void ) {
+//  208 
+//  209   return seUART2_GetIntFlag( UART2_0,  seUART2_RB1FIE_INT ) ;
+//  210 }
+//  211 #endif
+//  212 
+
+        SECTION `.text`:CODE:NOROOT(1)
+          CFI Block cfiBlock1 Using cfiCommon0
+          CFI Function ShowRunningClock
+        THUMB
+//  213 void ShowRunningClock( void ) {
+ShowRunningClock:
+        PUSH     {R7,LR}
+          CFI R14 Frame(CFA, -4)
+          CFI CFA R13+8
+//  214 
+//  215     if ( seCLG_OSC1 == seCLG_GetSysClkSrc() ) {
+          CFI FunCall seCLG_GetSysClkSrc
+        BL       seCLG_GetSysClkSrc
+        CMP      R0,#+1
+        BNE      ??ShowRunningClock_0
+//  216       printf ( " -CPU clock- seCLG_OSC1 (%d)\n", seCLG_GetSysClk() );
+          CFI FunCall seCLG_GetSysClk
+        BL       seCLG_GetSysClk
+        MOVS     R1,R0
+        LDR      R0,??DataTable1_6
+          CFI FunCall printf
+        BL       printf
+        B        ??ShowRunningClock_1
+//  217     } else if ( seCLG_OSC3 == seCLG_GetSysClkSrc() ) {
+??ShowRunningClock_0:
+          CFI FunCall seCLG_GetSysClkSrc
+        BL       seCLG_GetSysClkSrc
+        CMP      R0,#+2
+        BNE      ??ShowRunningClock_2
+//  218       printf ( " -CPU clock- seCLG_OSC3 (%d) \n", seCLG_GetSysClk() );
+          CFI FunCall seCLG_GetSysClk
+        BL       seCLG_GetSysClk
+        MOVS     R1,R0
+        LDR      R0,??DataTable1_7
+          CFI FunCall printf
+        BL       printf
+        B        ??ShowRunningClock_1
+//  219     } else if ( seCLG_IOSC == seCLG_GetSysClkSrc() ) {
+??ShowRunningClock_2:
+          CFI FunCall seCLG_GetSysClkSrc
+        BL       seCLG_GetSysClkSrc
+        CMP      R0,#+0
+        BNE      ??ShowRunningClock_3
+//  220       printf ( " -CPU clock- seCLG_IOSC (%d) \n", seCLG_GetSysClk() );
+          CFI FunCall seCLG_GetSysClk
+        BL       seCLG_GetSysClk
+        MOVS     R1,R0
+        LDR      R0,??DataTable1_8
+          CFI FunCall printf
+        BL       printf
+        B        ??ShowRunningClock_1
+//  221     } else {
+//  222       printf ( " - ??? Not expected state ??? \n" );
+??ShowRunningClock_3:
+        LDR      R0,??DataTable1_9
+          CFI FunCall printf
+        BL       printf
+//  223     }
+//  224 }
+??ShowRunningClock_1:
+        POP      {R0,PC}          ;; return
+          CFI EndBlock cfiBlock1
+
+        SECTION `.text`:CODE:NOROOT(2)
+        SECTION_TYPE SHT_PROGBITS, 0
+        DATA
+??DataTable1:
+        DC32     g1msSysTicks
+
+        SECTION `.text`:CODE:NOROOT(2)
+        SECTION_TYPE SHT_PROGBITS, 0
+        DATA
+??DataTable1_1:
+        DC32     0x40000080
+
+        SECTION `.text`:CODE:NOROOT(2)
+        SECTION_TYPE SHT_PROGBITS, 0
+        DATA
+??DataTable1_2:
+        DC32     0xfffe
+
+        SECTION `.text`:CODE:NOROOT(2)
+        SECTION_TYPE SHT_PROGBITS, 0
+        DATA
+??DataTable1_3:
+        DC32     __Vectors
+
+        SECTION `.text`:CODE:NOROOT(2)
+        SECTION_TYPE SHT_PROGBITS, 0
+        DATA
+??DataTable1_4:
+        DC32     0xe000ed08
+
+        SECTION `.text`:CODE:NOROOT(2)
+        SECTION_TYPE SHT_PROGBITS, 0
+        DATA
+??DataTable1_5:
+        DC32     ?_0
+
+        SECTION `.text`:CODE:NOROOT(2)
+        SECTION_TYPE SHT_PROGBITS, 0
+        DATA
+??DataTable1_6:
+        DC32     ?_1
+
+        SECTION `.text`:CODE:NOROOT(2)
+        SECTION_TYPE SHT_PROGBITS, 0
+        DATA
+??DataTable1_7:
+        DC32     ?_2
+
+        SECTION `.text`:CODE:NOROOT(2)
+        SECTION_TYPE SHT_PROGBITS, 0
+        DATA
+??DataTable1_8:
+        DC32     ?_3
+
+        SECTION `.text`:CODE:NOROOT(2)
+        SECTION_TYPE SHT_PROGBITS, 0
+        DATA
+??DataTable1_9:
+        DC32     ?_4
+
+        SECTION `.rodata`:CONST:REORDER:NOROOT(2)
+        DATA
+?_0:
+        DC8 "C:\\GNSS\\Software\\rJ105\\board\\S5U1C31W74T1\\board.c"
+        DC8 0, 0
+
+        SECTION `.rodata`:CONST:REORDER:NOROOT(2)
+        DATA
+?_1:
+        DC8 " -CPU clock- seCLG_OSC1 (%d)\012"
+        DC8 0, 0
+
+        SECTION `.rodata`:CONST:REORDER:NOROOT(2)
+        DATA
+?_2:
+        DC8 " -CPU clock- seCLG_OSC3 (%d) \012"
+        DC8 0
+
+        SECTION `.rodata`:CONST:REORDER:NOROOT(2)
+        DATA
+?_3:
+        DC8 " -CPU clock- seCLG_IOSC (%d) \012"
+        DC8 0
+
+        SECTION `.rodata`:CONST:REORDER:NOROOT(2)
+        DATA
+?_4:
+        DC8 " - ??? Not expected state ??? \012"
+//  225 
+//  226 
+//  227 //-------------- CLG Ports ---------------------------------------------------
+
+        SECTION `.rodata`:CONST:REORDER:NOROOT(0)
+        DATA
+//  228 const sePPORT_Id      OSC3_PORTID = sePPORT_Pd2;
+OSC3_PORTID:
+        DC8 82
+
+        SECTION `.rodata`:CONST:REORDER:NOROOT(0)
+        DATA
+//  229 const sePPORT_AltFunc OSC3_ALTFUNC = sePPORT_ALT_2;
+OSC3_ALTFUNC:
+        DC8 2
+
+        SECTION `.rodata`:CONST:REORDER:NOROOT(0)
+        DATA
+//  230 const sePPORT_Id      OSC4_PORTID = sePPORT_Pd3;
+OSC4_PORTID:
+        DC8 83
+
+        SECTION `.rodata`:CONST:REORDER:NOROOT(0)
+        DATA
+//  231 const sePPORT_AltFunc OSC4_ALTFUNC = sePPORT_ALT_2;
+OSC4_ALTFUNC:
+        DC8 2
+//  232 
+//  233 
+//  234 //-------------- I2C channels ------------------------------------------------
+//  235 // Channel 0 - P30, P31
+
+        SECTION `.data`:DATA:REORDER:NOROOT(2)
+        DATA
+//  236 seI2C_ChannelDef I2C_CH0 = {
+I2C_CH0:
+        DC32 400003C0H
+        DC8 0, 24, 2, 1, 25, 2, 1, 0
+//  237              I2C_0,            // I2C channel 0 peripheral
+//  238              seUPMUX_CH_0,     // I2C UPMUX channel 0
+//  239              sePPORT_P30, sePPORT_PERIPHPORT_UPMUX, sePPORT_ALT_1,  // SCL
+//  240              sePPORT_P31, sePPORT_PERIPHPORT_UPMUX, sePPORT_ALT_1   // SDA
+//  241 };
+//  242 
+//  243 // Channel 1 - P32, P33
+
+        SECTION `.data`:DATA:REORDER:NOROOT(2)
+        DATA
+//  244 seI2C_ChannelDef I2C_CH1 = {
+I2C_CH1:
+        DC32 400006C0H
+        DC8 1, 26, 2, 1, 27, 2, 1, 0
+//  245              I2C_1,            // I2C channel 1 peripheral
+//  246              seUPMUX_CH_1,     // I2C UPMUX channel 1
+//  247              sePPORT_P32, sePPORT_PERIPHPORT_UPMUX, sePPORT_ALT_1,  // SCL
+//  248              sePPORT_P33, sePPORT_PERIPHPORT_UPMUX, sePPORT_ALT_1   // SDA
+//  249 };
+//  250 
+//  251 
+//  252 
+//  253 //-------------- QSPI channels -----------------------------------------------
+
+        SECTION `.rodata`:CONST:REORDER:NOROOT(2)
+        DATA
+//  254 const uint32_t QSPI_MMA_START_ADDR = 0x00080000U;
+QSPI_MMA_START_ADDR:
+        DC32 524288
+//  255 
+//  256 
+
+        SECTION `.data`:DATA:REORDER:NOROOT(2)
+        DATA
+//  257 seQSPI_ChannelDef QSPI_CH0 = {
+QSPI_CH0:
+        DC32 40000690H, 40000680H
+        DC8 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0
+//  258              QSPI_0,           // QSPI channel 0 peripheral
+//  259              T16_2,            // T16 channel 2 peripheral
+//  260              sePPORT_P00, sePPORT_PERIPHPORT_NOTUPMUX, sePPORT_ALT_1,    // QSPID0
+//  261              sePPORT_P00, sePPORT_PERIPHPORT_NOTUPMUX, sePPORT_ALT_1,    // QSPID1
+//  262              sePPORT_P00, sePPORT_PERIPHPORT_NOTUPMUX, sePPORT_ALT_1,    // QSPID2
+//  263              sePPORT_P00, sePPORT_PERIPHPORT_NOTUPMUX, sePPORT_ALT_1,    // QSPID3
+//  264              sePPORT_P00, sePPORT_PERIPHPORT_NOTUPMUX, sePPORT_ALT_1,    // QSPICLK
+//  265              sePPORT_P00, sePPORT_PERIPHPORT_NOTUPMUX, sePPORT_ALT_1     // QSPISS
+//  266 };
+//  267 
+//  268 
+//  269 
+//  270 //-------------- REMC2 channels ----------------------------------------------
+
+        SECTION `.data`:DATA:REORDER:NOROOT(2)
+        DATA
+//  271 seREMC2_ChannelDef REMC2_CH = {
+REMC2_CH:
+        DC32 40000720H
+        DC8 0, 1, 0, 0, 0, 0, 0, 0
+//  272              REMC2,            // REMC2 peripheral
+//  273              sePPORT_P00, sePPORT_PERIPHPORT_NOTUPMUX, sePPORT_ALT_0,    // REMO
+//  274              sePPORT_P00, sePPORT_PERIPHPORT_NOINIT, sePPORT_ALT_0,      // CLPLS
+//  275 };
+//  276 
+//  277 
+//  278 
+//  279 //-------------- RFC channels ------------------------------------------------
+
+        SECTION `.data`:DATA:REORDER:NOROOT(2)
+        DATA
+//  280 seRFC_ChannelDef RFC_CH0 = {
+RFC_CH0:
+        DC32 40000840H
+        DC8 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0
+//  281              RFC_0,            // RFC channel 0 peripheral
+//  282              sePPORT_P00, sePPORT_PERIPHPORT_NOTUPMUX, sePPORT_ALT_0,  // SENA 
+//  283              sePPORT_P00, sePPORT_PERIPHPORT_NOTUPMUX, sePPORT_ALT_0,  // SENB
+//  284              sePPORT_P00, sePPORT_PERIPHPORT_NOTUPMUX, sePPORT_ALT_0,  // REF
+//  285              sePPORT_P00, sePPORT_PERIPHPORT_NOTUPMUX, sePPORT_ALT_0,   // RFIN
+//  286              sePPORT_P00, sePPORT_PERIPHPORT_NOINIT, sePPORT_ALT_0     // RFCLKO
+//  287 };
+//  288 
+//  289 
+//  290 //-------------- SNDA channels -----------------------------------------------
+
+        SECTION `.data`:DATA:REORDER:NOROOT(2)
+        DATA
+//  291 seSNDA_ChannelDef SNDA_CH = {
+SNDA_CH:
+        DC32 40000700H
+        DC8 0, 1, 0, 1, 0, 0, 0, 0
+//  292              SNDA,             // SNDA peripheral
+//  293              sePPORT_P00, sePPORT_PERIPHPORT_NOTUPMUX, sePPORT_ALT_0,    // BZOUT
+//  294              sePPORT_P01, sePPORT_PERIPHPORT_NOINIT, sePPORT_ALT_0,      // #BZOUT
+//  295 };
+//  296 
+//  297 
+//  298 
+//  299 //-------------- SPIA channels -----------------------------------------------
+//  300 // Channel 0 - 
+
+        SECTION `.data`:DATA:REORDER:NOROOT(2)
+        DATA
+//  301 seSPIA_ChannelDef SPIA_CH0 = {
+SPIA_CH0:
+        DC32 400003B0H, 400003A0H
+        DC8 0, 3, 1, 0, 0, 1, 0, 1, 1, 0, 2, 1, 0, 0, 0, 0
+//  302              SPIA_0,           // SPIA channel 0 peripheral
+//  303              T16_1,            // T16 channel 1 peripheral
+//  304              seUPMUX_CH_0,     // SPIA UPMUX channel 0
+//  305              sePPORT_P03, sePPORT_PERIPHPORT_NOTUPMUX, sePPORT_ALT_0,  // SPISS#
+//  306              sePPORT_P00, sePPORT_PERIPHPORT_NOTUPMUX, sePPORT_ALT_0,  // SDI
+//  307              sePPORT_P01, sePPORT_PERIPHPORT_NOTUPMUX, sePPORT_ALT_0,  // SDO
+//  308              sePPORT_P02, sePPORT_PERIPHPORT_NOTUPMUX, sePPORT_ALT_0   // SPICLK
+//  309 };
+//  310 
+//  311 
+//  312 //-------------- SVD2 channels -----------------------------------------------
+//  313 // Channel 0 - P27, port pin not initialized
+
+        SECTION `.data`:DATA:REORDER:NOROOT(2)
+        DATA
+//  314 seSVD2_ChannelDef SVD2_CH0 = {
+SVD2_CH0:
+        DC32 40000100H
+        DC8 0, 0, 2, 0
+//  315              SVD2_0,           // SVD2 channel 1 peripheral
+//  316              sePPORT_P00, sePPORT_PERIPHPORT_NOINIT, sePPORT_ALT_2   // EXSVD0 is P27, alternate function 2
+//  317 };
+//  318 
+//  319 // Channel 1 - P90
+
+        SECTION `.data`:DATA:REORDER:NOROOT(2)
+        DATA
+//  320 seSVD2_ChannelDef SVD2_CH1 = {
+SVD2_CH1:
+        DC32 40000980H
+        DC8 0, 0, 2, 0
+//  321              SVD2_1,           // SVD2 channel 1 peripheral
+//  322              sePPORT_P00, sePPORT_PERIPHPORT_NOINIT, sePPORT_ALT_2   // EXSVD1 is P90, alternate function 2
+//  323 };
+//  324 
+//  325 
+//  326 //-------------- T16B channels -----------------------------------------------
+//  327 // Channel 0 - P10 and P11 for TOUT0/CAP0 and TOUT1/CAP1
+
+        SECTION `.data`:DATA:REORDER:NOROOT(2)
+        DATA
+//  328 seT16B_ChannelDef T16B_CH0 = {
+T16B_CH0:
+        DC32 40000400H
+        DC8 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+//  329              T16B_0,           // T16B channel peripheral
+//  330              seUPMUX_CH_0,     // T16B UPMUX channel
+//  331              sePPORT_P00, sePPORT_PERIPHPORT_NOINIT, sePPORT_ALT_0,  // TOUT0/CAP0 pin not initialized
+//  332              sePPORT_P00, sePPORT_PERIPHPORT_NOINIT, sePPORT_ALT_0,  // TOUT1/CAP1 pin not initialized
+//  333              sePPORT_P00, sePPORT_PERIPHPORT_NOINIT, sePPORT_ALT_0,  // TOUT2/CAP2 pin not initialized
+//  334              sePPORT_P00, sePPORT_PERIPHPORT_NOINIT, sePPORT_ALT_0,  // TOUT3/CAP3 pin not initialized
+//  335              sePPORT_P00, sePPORT_PERIPHPORT_NOINIT, sePPORT_ALT_0,  // TOUT4/CAP4 pin not initialized
+//  336              sePPORT_P00, sePPORT_PERIPHPORT_NOINIT, sePPORT_ALT_0   // TOUT5/CAP5 pin not initialized
+//  337 };
+//  338 
+//  339 // Channel 1 - Port pins not initialized
+
+        SECTION `.data`:DATA:REORDER:NOROOT(2)
+        DATA
+//  340 seT16B_ChannelDef T16B_CH1 = {
+T16B_CH1:
+        DC32 40000440H
+        DC8 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+//  341              T16B_1,           // T16B channel peripheral
+//  342              seUPMUX_CH_1,     // T16B UPMUX channel
+//  343              sePPORT_P00, sePPORT_PERIPHPORT_NOINIT, sePPORT_ALT_0,  // TOUT0/CAP0 pin not initialized
+//  344              sePPORT_P00, sePPORT_PERIPHPORT_NOINIT, sePPORT_ALT_0,  // TOUT1/CAP1 pin not initialized
+//  345              sePPORT_P00, sePPORT_PERIPHPORT_NOINIT, sePPORT_ALT_0,  // TOUT2/CAP2 pin not initialized
+//  346              sePPORT_P00, sePPORT_PERIPHPORT_NOINIT, sePPORT_ALT_0,  // TOUT3/CAP3 pin not initialized
+//  347              sePPORT_P00, sePPORT_PERIPHPORT_NOINIT, sePPORT_ALT_0,  // TOUT4/CAP4 pin not initialized
+//  348              sePPORT_P00, sePPORT_PERIPHPORT_NOINIT, sePPORT_ALT_0   // TOUT5/CAP5 pin not initialized
+//  349 };
+//  350 
+//  351 
+//  352 //-------------- UART2 channels ----------------------------------------------
+//  353 // Channel 0 - P37, P36
+
+        SECTION `.data`:DATA:REORDER:NOROOT(2)
+        DATA
+//  354 seUART2_ChannelDef UART2_CH0 = {
+UART2_CH0:
+        DC32 40000380H
+        DC8 0, 30, 2, 1, 31, 2, 1, 0
+//  355              UART2_0,          // UART2 channel 0 peripheral
+//  356              seUPMUX_CH_0,     // UART2 UPMUX channel 0
+//  357              sePPORT_P36, sePPORT_PERIPHPORT_UPMUX, sePPORT_ALT_1,    // USIN
+//  358              sePPORT_P37, sePPORT_PERIPHPORT_UPMUX, sePPORT_ALT_1     // USOUT
+//  359 };
+//  360 
+//  361 // Channel 1 - P35, P34
+
+        SECTION `.data`:DATA:REORDER:NOROOT(2)
+        DATA
+//  362 seUART2_ChannelDef UART2_CH1 = {
+UART2_CH1:
+        DC32 40000600H
+        DC8 1, 28, 2, 1, 29, 2, 1, 0
+
+        SECTION `.iar_vfe_header`:DATA:NOALLOC:NOROOT(2)
+        SECTION_TYPE SHT_PROGBITS, 0
+        DATA
+        DC32 0
+
+        SECTION __DLIB_PERTHREAD:DATA:REORDER:NOROOT(0)
+        SECTION_TYPE SHT_PROGBITS, 0
+
+        SECTION __DLIB_PERTHREAD_init:DATA:REORDER:NOROOT(0)
+        SECTION_TYPE SHT_PROGBITS, 0
+
+        END
+//  363              UART2_1,          // UART2 channel 1 peripheral
+//  364              seUPMUX_CH_1,     // UART2 UPMUX channel 1
+//  365              sePPORT_P34, sePPORT_PERIPHPORT_UPMUX, sePPORT_ALT_1,  // USIN
+//  366              sePPORT_P35, sePPORT_PERIPHPORT_UPMUX, sePPORT_ALT_1   // USOUT
+//  367 };
+//  368 
+//  369 
+//  370 
+// 
+// 208 bytes in section .data
+// 188 bytes in section .rodata
+// 240 bytes in section .text
+// 
+// 240 bytes of CODE  memory
+// 188 bytes of CONST memory
+// 208 bytes of DATA  memory
+//
+//Errors: none
+//Warnings: none
